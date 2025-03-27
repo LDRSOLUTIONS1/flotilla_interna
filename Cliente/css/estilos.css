@@ -1,0 +1,536 @@
+/*------------------------------------------------------------------------------ Estilos globales ---------------------------------------------------------------*/
+/*Estilos de las letras*/
+.titulosletras {
+  padding-top: 40px;
+  z-index: 10;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: aliceblue;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .titulosletras {
+    font-size: 1.5rem; /* Tamaño de la fuente */
+  }
+}
+.titulosletraspequeñas {
+  font-size: 1.7rem; /* Tamaño de la fuente */
+  margin-top: -10px; /* Margen superior */
+  color: #0f0f13d0; /* Color de la letra */
+  font-weight: 400; /* Peso de la fuente normal (más liviano) */
+  letter-spacing: 2px; /* Espaciado entre letras */
+  font-family: "Georgia", serif; /* Fuente personalizada  */
+  line-height: 1.4; /* Altura de línea para mejorar la legibilidad */
+}
+.imagenfondo {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(230, 235, 240, 0.753);
+  z-index: -1;
+}
+/*modifica el fondo semitransparente que esta encima de las imagenes*/
+.cuadroblancocontenido {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(102, 102, 102, 0.801);
+  overflow-y: scroll;
+}
+/* Estilo base para los botones */
+.btn {
+  transition: all 0.3s ease; /* Transición suave para todos los efectos */
+}
+/* Efecto cuando el cursor pasa por encima de los botones */
+.btn:hover {
+  transform: scale(1.08); /* Aumenta el tamaño del botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+/* Efectos específicos para cada tipo de botón */
+.btn-primary:hover {
+  background-color: #0069d9; /* Cambia el color de fondo */
+  border-color: #005cbf; /* Cambia el color del borde */
+}
+.btn-success:hover {
+  background-color: #218838; /* Cambia el color de fondo */
+  border-color: #1e7e34; /* Cambia el color del borde */
+}
+.btn-warning:hover {
+  background-color: #e0a800; /* Cambia el color de fondo */
+  border-color: #d39e00; /* Cambia el color del borde */
+}
+/*-----------------------------------------------------------estilos del spinner---------------------------------*/
+.contenedorspinner {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  position: relative;
+}
+.loader:before {
+  content: "";
+  width: 48px;
+  height: 5px;
+  background: #000;
+  opacity: 0.25;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  border-radius: 50%;
+  animation: shadow 0.5s linear infinite;
+}
+.loader:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  animation: bxSpin 0.5s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+}
+@keyframes bxSpin {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
+/*------------------------------------------------------------------------------ Menú superior ---------------------------------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  padding-top: 60px; /* Evita que el contenido se oculte debajo del menú */
+}
+/* Navbar */
+.navbar {
+  width: 100%;
+  height: 100px;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+.icono {
+  width: 70px;
+  height: 70px;
+  background-image: url("../img/Foton_IMG.png");
+  background-size: cover;
+  display: inline-block;
+}
+/* Menú de navegación */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+.menu li {
+  list-style: none;
+}
+.menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.menu a:hover {
+  background: #555;
+  color: white;
+}
+/* Botón menú hamburguesa */
+.menu-toggle {
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+  display: none;
+  z-index: 10;
+}
+/* Responsive */
+@media (max-width: 1082px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+  }
+  .menu.active {
+    display: flex !important; /* Asegura que el menú se muestre */
+  }
+  .menu li {
+    text-align: center;
+    padding: 10px 0;
+  }
+  .menu-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }
+}
+/* ----------------------------- --------------------------------------------------Estilos index -----------------------------------------------------  */
+/* Estilos para el video de fondo */
+#background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Hace que el video cubra toda la pantalla */
+  z-index: -1; /* Asegura que el video quede detrás del contenido */
+}
+.contenedorcamposformularioindex {
+  padding-top: 10px;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+.cuadroblancovideoindex {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(214, 218, 223, 0.404); /*opacidad del fondo*/
+  z-index: 1;
+}
+.contenedorformularioindex {
+  background-color: rgba(
+    87,
+    87,
+    87,
+    0.568
+  ); /*cambio de colores para el contenedor de flotilla interna en el index*/
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+  transition: 0.5s ease;
+}
+.contenedorformularioinicio {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.959);
+  border-radius: 25px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+  transition: 0.5s ease;
+}
+.botoniniciarsesion {
+}
+@media (max-width: 1082px) {
+  .btniniciarsesion {
+    width: 50px;
+    height: 60px;
+  }
+}
+.imagenindex {
+  max-width: 300px;
+  height: auto;
+  animation: animacionlogoindex 2s infinite alternate;
+}
+@keyframes animacionlogoindex {
+  0% {
+    transform: translateY(-10px); /*mover la imagen hacia arriba*/
+  }
+  100% {
+    transform: translateY(30px);
+  }
+}
+@media (max-width: 768px) {
+  .imagenindex {
+    max-width: 200px; /* Reducir el tamaño de la imagen en pantallas pequeñas */
+  }
+}
+/*------------------------------------------------------------------------------------------inicio-------------------------------------------------------------------*/
+.contenedorimageninicio {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 10;
+}
+.contenedorinicioinformación {
+  position: relative;
+  top: 35%;
+  left: 45%;
+  transform: translate(-40%);
+  z-index: 10;
+}
+@media (max-width: 768px) {
+  .contenedorinicioinformación {
+    font-size: 1.5rem; /* Tamaño de la fuente */
+  }
+}
+.letrainicio {
+  position: absolute;
+  padding-top: 40px;
+  z-index: 10;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 4.5rem;
+  color: aliceblue;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .letrainicio {
+    font-size: 1.9rem; /* Tamaño de la fuente */
+  }
+}
+.letrainicio1 {
+  position: absolute;
+  padding-top: 130px;
+  z-index: 10;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 3.5rem;
+  color: aliceblue;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .letrainicio1 {
+    font-size: 1.7rem; /* Tamaño de la fuente */
+  }
+}
+.bienvenida {
+  position: absolute;
+  padding-top: 220px;
+  z-index: 10;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: aliceblue;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .bienvenida {
+    font-size: 1.3rem; /* Tamaño de la fuente */
+  }
+}
+.inicioimgfondo {
+  /*da formato a las imagenes de movimiento*/
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  object-position: top;
+  filter: blur(50);
+  z-index: 1;
+}
+.inicioimg1 {
+  top: 37%;
+  left: 75%;
+  width: 380px;
+  height: 220px;
+  animation: sube-baja 2.4s infinite alternate;
+}
+.inicioimg2 {
+  top: 3%;
+  left: 65%;
+  width: 380px;
+  height: 300px;
+  animation: sube-baja 2.4s infinite alternate;
+}
+.inicioimg3 {
+  top: 75%;
+  left: 65%;
+  width: 370px;
+  height: 170px;
+  animation: sube-baja 2.4s infinite alternate;
+}
+@keyframes sube-baja {
+  0% {
+    transform: translateY(-9px); /*mover la imagen hacia arriba*/
+  }
+  100% {
+    transform: translateY(30px);
+  }
+}
+/*--------------------------------------------------------------------------------------unidades---------------------------------------------------------------------------*/
+/*estilos para el modulo de unidades*/
+.titulosletrasunidades {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: aliceblue;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidades {
+    font-size: 1.6rem;
+  }
+}
+/* Contenedor principal donde está el contenido */
+.contenedoropcionesunidades {
+  padding-top: 90px;
+  position: relative;
+}
+/*botones de la administracion de las unidades*/
+.contenedoropcionunidad {
+  width: 90px;
+  height: 90px;
+  margin: 5px;
+  padding: 10px;
+  color: rgb(5, 5, 5);
+  background-color: #ffffffc7;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: 0.3s;
+  box-shadow: 0.5px 1px 1px rgba(61, 61, 61, 0.733);
+}
+.textobotones {
+  text-align: left;
+  font-size: 0.7rem;
+}
+.centrarunidades {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contendortablaunidades {
+  padding: 50px;
+  width: 100%;
+  height: auto;
+  overflow-x: auto;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 30px;
+}
+.opcionesunidades {
+  width: 100%;
+  padding-top: 30px;
+}
+.tablaunidades {
+  box-shadow: 1px 1px 5px rgba(116, 116, 116, 0.301);
+}
+.table {
+  /*tabla de la administración de las unidades*/
+  background-color: white;
+  vertical-align: inherit;
+}
+/*estilos para la tabla administracion de unidades*/
+.table-responsive {
+  padding-top: 30px;
+}
+/* Estilo para el encabezado (sin fondo negro) */
+.thead {
+  background-color: #f8f9fa; /* Fondo claro para el encabezado */
+  vertical-align: bottom;
+}
+.titulotablaunidades {
+  font-size: 0.75rem;
+}
+.contenedor_botones {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.contenedor_botones .btn {
+  min-width: 240px; /* Puedes ajustar el tamaño mínimo */
+  border-radius: 13px;
+}
+/* Opcional: Estilo de los botones en pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenedor_botones .btn {
+    width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/*----------------------------barra buscadora de la tabla unidades---------------------------------*/
+.buscador {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscador input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+.buscador input:focus {
+  transform: scale(1.05);
+}
+/*---------------------------------------------------------------------------------estilos registro de nuevas unidades---------------------------------------------------------------------------*/
+.contenedoropcionesregistrarunidades {
+  position: relative;
+  padding-top: 90px;
+}
+.contenedorformularioregistrounidades {
+  padding: 80px;
+  width: 100%;
+  height: auto;
+  overflow-x: none;
+  overflow-y: none;
+}
+/*---------------------------------------------------------------------------------estilos edicion de nuevas unidades---------------------------------------------------------------------------*/
+.btneditarunidades {
+  position: relative;
+  border-radius: 10px;
+}
+/*----------------------------------------------------------------------------Estilos tabla de la modal agregar polizas ---------------------------------------------------------------------*/
+.contenedor_tabla_polizas {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+.contenedor_poliza_seguro {
+width: 100%;
+height: auto;
+}
+.contenedor_poliza_tenencia {
+  
+}
