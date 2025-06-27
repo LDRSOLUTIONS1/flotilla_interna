@@ -6,27 +6,36 @@ error_reporting(E_ALL);
 
 include("../../conexion.php");
 
-if (isset($_POST['polizas']) && isset($_POST['identificadorpoliza']) && isset($_POST['fecharegistropoliza']) && isset($_POST['fechavencimientopoliza']) && isset($_FILES['documento_poliza']) && isset($_POST['id_unidad'])) {
+if (isset($_POST['id_unidad']) 
+&& isset($_POST['nombreaseguradora']) 
+&& isset($_POST['identificadopolizaseguro']) 
+&& isset($_POST['fechaaltaseguro']) 
+&& isset($_POST['fechavencimientoaseguradora']) 
+&& isset ($_POST['estadoaseguradora']) 
+&& isset($_POST['estatusaseguradora']) 
+&& isset ($_FILES['documento_poliza'])) {
 
     $valor_idunidad = $_POST['id_unidad'];
     $valordocumento_poliza = $_FILES['documento_poliza']['name'];
-    $valortipopolizas = $_POST['polizas'];
-    $valorfecharegistropoliza = $_POST['fecharegistropoliza'];
-    $valorfechavencimientopoliza = $_POST['fechavencimientopoliza'];
-    $valoridentificadorpoliza = $_POST['identificadorpoliza'];
+
+    $valornombreaseguradora = $_POST['nombreaseguradora'];
+    $valoridentificadopolizaseguro = $_POST['identificadopolizaseguro'];
+    $valorfechaaltaseguro = $_POST['fechaaltaseguro'];
+    $valorfechavencimientoaseguradora = $_POST['fechavencimientoaseguradora'];
+    $valorestadoaseguradora = $_POST['estadoaseguradora'];
+    $valorestatusaseguradora = $_POST['estatusaseguradora'];
 
     echo "id_unidad: " . $valor_idunidad . " ";
     echo "documento_poliza: " . $valordocumento_poliza . " ";
-    echo "polizas: " . $valortipopolizas . " ";
-    echo "identificadorpoliza: " . $valoridentificadorpoliza . " ";
-    echo "fechavencimientopoliza: " . $valorfechavencimientopoliza . " ";
-    echo "fecharegistropoliza: " . $valorfecharegistropoliza . " ";
+    echo "nombreaseguradora: " . $valornombreaseguradora . " ";
+    echo "identificadopolizaseguro: " . $valoridentificadopolizaseguro . " ";
+    echo "fechaaltaseguro: " . $valorfechaaltaseguro . " ";
+    echo "fechavencimientoaseguradora: " . $valorfechavencimientoaseguradora . " ";
+    echo "estadoaseguradora: " . $valorestadoaseguradora . " ";
+    echo "estatusaseguradora: " . $valorestatusaseguradora . " ";
 
-    if ($valortipopolizas == 1) {
+ 
         $rutaarchivo = "../../archivos/files/files_unidades/polizas_seguros/";
-    } else if ($valortipopolizas == 2) {
-        $rutaarchivo = "../../archivos/files/files_unidades/polizas_tenencias/";
-    }
 
     //obtener dcumento poliza
     $documento_poliza = $_FILES['documento_poliza']['tmp_name'];
@@ -35,7 +44,8 @@ if (isset($_POST['polizas']) && isset($_POST['identificadorpoliza']) && isset($_
     if (move_uploaded_file($documento_poliza, $rutaarchivo . $valordocumento_poliza)) {
 
         //insertar la poliza
-        $sql = "INSERT INTO polizas (id_tipo_poliza, id_unidad, identificador_poliza, fecha_registro_poliza, fecha_vencimiento_poliza, documento_poliza) VALUES ($valortipopolizas, $valor_idunidad, '$valoridentificadorpoliza','$valorfecharegistropoliza','$valorfechavencimientopoliza', '$valordocumento_poliza')";
+        $sql = "INSERT INTO asignacion_aseguradora_unidad (id_unidad, id_aseguradora, numero_poliza_aseguradora, fecha_alta, fecha_vencimiento, id_estatus_aseguradora,	id_estado_aseguradora,	documento_aseguradora) 
+                    VALUES ('$valor_idunidad', '$valornombreaseguradora', '$valoridentificadopolizaseguro', '$valorfechaaltaseguro', '$valorfechavencimientoaseguradora', '$valorestatusaseguradora', '$valorestadoaseguradora', '$valordocumento_poliza')";
 
         $ejecutar = mysqli_query($conexion, $sql);
 

@@ -5,26 +5,28 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/x-icon" href="../Cliente/img/logotipo.jpg">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilos.css">
-    <title>Inicio</title>
+    <title>Incidencias</title>
 
 </head>
 
-<body class="cuerpo">
-    <?php
+<body >
+    <!-- Video de fondo -->
+    <img class="imagenfondo" src="../img/fondohexagonal.png" alt="">
+<?php
     include("../include/menu.php");
-    include("../include/bienvenida.php");
     ?>
+    <div class="cuadroblancocontenido">
+
+
+    
     <!-- INICIO BLOQUE PARA EL CUERPO -->
-    <div class="contenido">
         <?php include("../modulos/modulo_incidencias.php"); ?>
+
     </div>
 
     <!--jquery-->
@@ -40,10 +42,14 @@
     <script src="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js"></script>
     <!-- CDN para poder utilizar las Sweet Alert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- CDN para poder utilizar las Sweet Alert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--MENU-->
     <script src="../js/menu.js"></script>
     <!--alertas de js-->
     <script src="../js/alertas/alertas.js"></script>
+    <!--inactividad y cerrar la sesion-->
+    <script src="../js/inactividad.js"></script>
 </body>
 
 </html>

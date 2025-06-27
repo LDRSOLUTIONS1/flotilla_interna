@@ -4,14 +4,41 @@
   padding-top: 40px;
   z-index: 10;
   font-weight: bold;
-  font-style: italic;
-  font-size: 2.5rem;
-  color: aliceblue;
+  font-size: 2.4rem;
+  color: rgba(73, 71, 71, 0.747);
   font-weight: bold;
 }
 @media (max-width: 768px) {
   .titulosletras {
     font-size: 1.5rem; /* Tamaño de la fuente */
+  }
+}
+/*titulo de la letras de inicio.php*/
+.titulosletrasinicio {
+  padding-top: 40px;
+  z-index: 10;
+  font-weight: bold;
+  font-size: 2.7rem;
+  color: rgba(247, 247, 247, 0.747);
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .titulosletrasinicio {
+    font-size: 1.5rem; /* Tamaño de la fuente */
+  }
+}
+/*titulo de la letras de inicio.php nombre*/
+.titulosletrasinicionombre {
+  padding-top: 5px;
+  z-index: 10;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(247, 247, 247, 0.747);
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .titulosletrasinicionombre {
+    font-size: 1.1rem; /* Tamaño de la fuente */
   }
 }
 .titulosletraspequeñas {
@@ -39,12 +66,23 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(102, 102, 102, 0.801);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.966) 75%, rgba(255, 255, 255, 0.884) 100%);
+  overflow-y: scroll;
+}
+/*cuandro blanco del incio*/
+.cuadroblancocontenidoinicio{
+    position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(224, 224, 224, 0.452);
   overflow-y: scroll;
 }
 /* Estilo base para los botones */
 .btn {
   transition: all 0.3s ease; /* Transición suave para todos los efectos */
+  border-radius: 8px; /* Bordes redondeados */
 }
 /* Efecto cuando el cursor pasa por encima de los botones */
 .btn:hover {
@@ -64,6 +102,124 @@
   background-color: #e0a800; /* Cambia el color de fondo */
   border-color: #d39e00; /* Cambia el color del borde */
 }
+/* Estilo personalizado para darle un toque moderno */
+    .form-floating input[type="text"] {
+        border: 2px solid #6c757d; /* Borde gris oscuro */
+        border-radius: 0.5rem;     /* Bordes redondeados */
+        padding: 1rem;
+        font-size: 1rem;
+        background-color: #f8f9fa; /* Fondo gris claro */
+        transition: all 0.3s ease;
+    }
+
+    .form-floating input[type="text"]:focus {
+        border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        background-color: #fff;
+    }
+    .form-select {
+        border: 2px solid #6c757d; /* Borde gris oscuro */
+        border-radius: 0.5rem;     /* Bordes redondeados */
+        padding: 1rem;
+        font-size: 1rem;
+        background-color: #f8f9fa; /* Fondo gris claro */
+        transition: all 0.3s ease;
+    }
+
+    .form-select:focus {
+        border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        background-color: #fff;
+    }
+
+    .form-floating label {
+        font-weight: 500;
+        color: #495057;
+    }
+    /*estilos de los input de tipo date*
+    /* Estilo personalizado para darle un toque moderno */
+    .form-floating input[type="date"] {
+      border: 2px solid #6c757d; /* Borde gris oscuro */
+      border-radius: 0.5rem;     /* Bordes redondeados */
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #f8f9fa; /* Fondo gris claro */
+      transition: all 0.3s ease;
+  }
+
+  .form-floating input[type="date"]:focus {
+      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      background-color: #fff;
+  }
+
+  .form-floating label {
+      font-weight: 500;
+      color: #495057;
+  }
+    /*estilos de los input de tipo number*/
+    /* Estilo personalizado para darle un toque moderno */
+    .form-floating input[type="number"] {
+      border: 2px solid #6c757d; /* Borde gris oscuro */
+      border-radius: 0.5rem;     /* Bordes redondeados */
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #f8f9fa; /* Fondo gris claro */
+      transition: all 0.3s ease;
+  }
+
+  .form-floating input[type="number"]:focus {
+      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      background-color: #fff;
+  }
+
+  .form-floating label {
+      font-weight: 500;
+      color: #495057;
+  }
+    /*estilos de los input de tipo file*/
+    /* Estilo personalizado para darle un toque moderno */
+    .form-floating input[type="file"] {
+      border: 2px solid #6c757d; /* Borde gris oscuro */
+      border-radius: 0.5rem;     /* Bordes redondeados */
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #f8f9fa; /* Fondo gris claro */
+      transition: all 0.3s ease;
+  }
+
+  .form-floating input[type="file"]:focus {
+      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      background-color: #fff;
+  }
+
+  .form-floating label {
+      font-weight: 500;
+      color: #495057;
+  }
+    /*estilos de los select*/
+    /* Estilo personalizado para darle un toque moderno */
+    .form-floating select {
+      border: 2px solid #6c757d; /* Borde gris oscuro */
+      border-radius: 0.5rem;     /* Bordes redondeados */
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #f8f9fa; /* Fondo gris claro */
+      transition: all 0.3s ease;
+  }
+
+  .form-floating select:focus {
+      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      background-color: #fff;
+  }
+
+  .form-floating label {
+      font-weight: 500;
+      color: #495057;
+  }
 /*-----------------------------------------------------------estilos del spinner---------------------------------*/
 .contenedorspinner {
   display: none;
@@ -146,7 +302,7 @@ body {
 /* Navbar */
 .navbar {
   width: 100%;
-  height: 100px;
+  height: 80px;
   background: white;
   position: fixed;
   top: 0;
@@ -158,18 +314,28 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+.icono,
+.txtnombreusuario{
+  position: relative;
+}
 .icono {
-  width: 70px;
-  height: 70px;
-  background-image: url("../img/Foton_IMG.png");
+  width: 55px;
+  height: 50px;
+  background-image: url("../img/LDR_LOGO.png");
   background-size: cover;
   display: inline-block;
+}
+.txtnombreusuario{
+  font-weight: bold;
+  font-size: 0.7rem;
+  padding-left: 80px;
 }
 /* Menú de navegación */
 .menu {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 5px;
+  
 }
 .menu li {
   list-style: none;
@@ -177,7 +343,7 @@ body {
 .menu a {
   text-decoration: none;
   color: black;
-  font-size: 16px;
+  font-size: 0.9rem;
   padding: 10px 15px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -197,7 +363,7 @@ body {
   z-index: 10;
 }
 /* Responsive */
-@media (max-width: 1082px) {
+@media (max-width: 1011px) {
   .menu {
     display: none;
     flex-direction: column;
@@ -223,6 +389,14 @@ body {
     font-size: 30px;
     cursor: pointer;
   }
+.letramenu{
+  font-size: 1.9rem;
+}
+  @media (max-width: 1082px) {
+    .menulist {
+      font-size: 80px;
+    }
+  }
 }
 /* ----------------------------- --------------------------------------------------Estilos index -----------------------------------------------------  */
 /* Estilos para el video de fondo */
@@ -237,8 +411,16 @@ body {
 }
 .contenedorcamposformularioindex {
   padding-top: 10px;
-  padding-left: 70px;
-  padding-right: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+@media screen and (max-width: 768px) {
+  .contenedorcamposformularioindex {
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
 }
 .cuadroblancovideoindex {
   position: fixed;
@@ -246,29 +428,28 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
-  background-color: rgba(214, 218, 223, 0.404); /*opacidad del fondo*/
+  background-color: rgba(214, 218, 223, 0.397); /*opacidad del fondo*/
   z-index: 1;
 }
+.imagenlogo{
+  z-index: 100;
+
+}
 .contenedorformularioindex {
-  background-color: rgba(
-    87,
-    87,
-    87,
-    0.568
-  ); /*cambio de colores para el contenedor de flotilla interna en el index*/
+  background-color: rgba(115, 121, 138, 0.534); /*cambio de colores para el contenedor de flotilla interna en el index*/
   border-radius: 25px;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.555);
   transition: 0.5s ease;
 }
 .contenedorformularioinicio {
   position: absolute;
-  top: 10%;
+  top: 200%;
   left: 50%;
   transform: translate(-50%);
-  z-index: 10;
-  background-color: rgba(255, 255, 255, 0.959);
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.539);
   border-radius: 25px;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.397);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.484);
   transition: 0.5s ease;
 }
 .botoniniciarsesion {
@@ -279,6 +460,7 @@ body {
     height: 60px;
   }
 }
+
 .imagenindex {
   max-width: 300px;
   height: auto;
@@ -296,6 +478,114 @@ body {
   .imagenindex {
     max-width: 200px; /* Reducir el tamaño de la imagen en pantallas pequeñas */
   }
+  @keyframes animacionlogoindex {
+    0% {
+      transform: translateY(-5px); /*mover la imagen hacia arriba*/
+    }
+    100% {
+      transform: translateY(10px);
+    }
+    
+  }
+}
+
+.inicioimg2,
+.inicioimg1,
+.inicioimg3 {
+  position: absolute;
+  max-width: 300px;
+  height: auto;
+  animation: sube-baja 2.4s infinite alternate;
+}
+/*azul*/
+.inicioimg1 {
+  top: 20%;
+  left: 90px;
+  height: 150px;
+  z-index: 10;
+}
+/*roja*/
+.inicioimg2 {
+  top: 20%;
+  left: 10px;
+  height: 150px;
+}
+/*aveo*/
+.inicioimg3 {
+  top: 33%;
+  left: 230px;
+  max-width: 190px;
+  z-index: 10;
+}
+
+@media (max-width: 992px) {
+  .inicioimg1,
+  .inicioimg2,
+  .inicioimg3 {
+    position: absolute;
+    width: 100px;
+  }
+/*azul*/
+  .inicioimg1 {
+    top: 130%;
+    left: 37%;
+    width: auto;
+    height: 140px;
+    z-index: 10;
+  }
+/*roja*/
+  .inicioimg2 {
+    top: 130%;
+    left: 18%;
+    width: auto;
+    height: 140px;
+  }
+/*aveo*/
+  .inicioimg3 {
+    top: 139%;
+    left: 60%;
+    width: auto;
+    height: 90px;
+  }
+}
+@media (max-width: 768px) {
+  .inicioimg1,
+  .inicioimg2,
+  .inicioimg3 {
+    position: absolute;
+    width: 100px;
+  }
+/*azul*/
+  .inicioimg1 {
+    top: 130%;
+    left: 13%;
+    width: auto;
+    height: 140px;
+    z-index: 10;
+  }
+/*roja*/
+  .inicioimg2 {
+    top: 130%;
+    left: -5%;
+    width: auto;
+    height: 140px;
+  }
+/*aveo*/
+  .inicioimg3 {
+    top: 142%;
+    left: 49%;
+    width: auto;
+    height: 90px;
+  }
+}
+
+@keyframes sube-baja {
+  0% {
+    transform: translateY(-5px); /*mover la imagen hacia arriba*/
+  }
+  100% {
+    transform: translateY(20px);
+  }
 }
 /*------------------------------------------------------------------------------------------inicio-------------------------------------------------------------------*/
 .contenedorimageninicio {
@@ -306,11 +596,8 @@ body {
   z-index: 10;
 }
 .contenedorinicioinformación {
+  padding-top: 90px;
   position: relative;
-  top: 35%;
-  left: 45%;
-  transform: translate(-40%);
-  z-index: 10;
 }
 @media (max-width: 768px) {
   .contenedorinicioinformación {
@@ -319,47 +606,46 @@ body {
 }
 .letrainicio {
   position: absolute;
-  padding-top: 40px;
+  padding-top: 250px;
+  padding-left: 30px;
   z-index: 10;
   font-weight: bold;
-  font-style: italic;
-  font-size: 4.5rem;
-  color: aliceblue;
+  font-size: 1.9rem;
+  color: rgb(95, 95, 95);
   font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
 }
 @media (max-width: 768px) {
   .letrainicio {
     font-size: 1.9rem; /* Tamaño de la fuente */
-  }
-}
-.letrainicio1 {
-  position: absolute;
-  padding-top: 130px;
-  z-index: 10;
-  font-weight: bold;
-  font-style: italic;
-  font-size: 3.5rem;
-  color: aliceblue;
-  font-weight: bold;
-}
-@media (max-width: 768px) {
-  .letrainicio1 {
-    font-size: 1.7rem; /* Tamaño de la fuente */
+    animation: slide-in 0.5s ease-out forwards;
   }
 }
 .bienvenida {
   position: absolute;
-  padding-top: 220px;
+  padding-top: 100px;
   z-index: 10;
   font-weight: bold;
-  font-style: italic;
-  font-size: 2.5rem;
-  color: aliceblue;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
   font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
 }
 @media (max-width: 768px) {
   .bienvenida {
     font-size: 1.3rem; /* Tamaño de la fuente */
+    animation: slide-in 0.5s ease-out forwards;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 .inicioimgfondo {
@@ -371,53 +657,12 @@ body {
   filter: blur(50);
   z-index: 1;
 }
-.inicioimg1 {
-  top: 37%;
-  left: 75%;
-  width: 380px;
-  height: 220px;
-  animation: sube-baja 2.4s infinite alternate;
-}
-.inicioimg2 {
-  top: 3%;
-  left: 65%;
-  width: 380px;
-  height: 300px;
-  animation: sube-baja 2.4s infinite alternate;
-}
-.inicioimg3 {
-  top: 75%;
-  left: 65%;
-  width: 370px;
-  height: 170px;
-  animation: sube-baja 2.4s infinite alternate;
-}
-@keyframes sube-baja {
-  0% {
-    transform: translateY(-9px); /*mover la imagen hacia arriba*/
-  }
-  100% {
-    transform: translateY(30px);
-  }
-}
 /*--------------------------------------------------------------------------------------unidades---------------------------------------------------------------------------*/
 /*estilos para el modulo de unidades*/
-.titulosletrasunidades {
-  padding-top: 50px;
-  padding-left: 30px;
-  font-weight: bold;
-  font-size: 2.5rem;
-  color: aliceblue;
-  font-weight: bold;
-}
-@media (max-width: 768px) {
-  .titulosletrasunidades {
-    font-size: 1.6rem;
-  }
-}
+
 /* Contenedor principal donde está el contenido */
 .contenedoropcionesunidades {
-  padding-top: 90px;
+  padding-top: 60px;
   position: relative;
 }
 /*botones de la administracion de las unidades*/
@@ -456,11 +701,10 @@ body {
   padding-top: 30px;
 }
 .tablaunidades {
-  box-shadow: 1px 1px 5px rgba(116, 116, 116, 0.301);
+  box-shadow: 1px 1px 5px rgba(87, 87, 87, 0.349);
 }
 .table {
   /*tabla de la administración de las unidades*/
-  background-color: white;
   vertical-align: inherit;
 }
 /*estilos para la tabla administracion de unidades*/
@@ -469,29 +713,183 @@ body {
 }
 /* Estilo para el encabezado (sin fondo negro) */
 .thead {
-  background-color: #f8f9fa; /* Fondo claro para el encabezado */
+  background-color: #000000; /* Fondo claro para el encabezado */
   vertical-align: bottom;
 }
 .titulotablaunidades {
   font-size: 0.75rem;
+  font-weight: bold;
+  color: #a72727;
+  text-align: center;
+  padding: 5px;
 }
+
+.titulosletrasunidades,
+.contenedor_botones,
+.contenedor_botones_validacion_unidades {
+  position: absolute;
+}
+
+
+/*estilo de los titulos */
+.titulosletrasunidades {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidades {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
+/*estilos de los botones de la administracion de unidades*/
 .contenedor_botones {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 80px;
+  z-index: 10;
 }
 .contenedor_botones .btn {
-  min-width: 240px; /* Puedes ajustar el tamaño mínimo */
+  min-width: auto; /* Puedes ajustar el tamaño mínimo */
   border-radius: 13px;
 }
-/* Opcional: Estilo de los botones en pantallas pequeñas */
+/* botones responsivos*/
 @media (max-width: 768px) {
-  .contenedor_botones .btn {
+  .contenedor_botones{
+    padding-top: 140px;
     width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
   }
 }
+/* Opcional: Estilo de los botones en pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenedor_botones .btn {
+    width: 50%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/*estilos de los botones de la administracion de unidades*/
+.contenedor_botones_validacion_unidades {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 80px;
+}
+.contenedor_botones_validacion_unidades .btn {
+  min-width: auto; /* Puedes ajustar el tamaño mínimo */
+  border-radius: 13px;
+}
+/* botones responsivos*/
+@media (max-width: 768px) {
+  .contenedor_botones_validacion_unidades{
+    padding-top: 190px;
+    width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/* Opcional: Estilo de los botones en pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenedor_botones_validacion_unidades .btn {
+    width: 50%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+.titulosletrasunidadesasignadas{
+  padding-top: 30px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+/*------------------------------------------------------------------------------estilos de los botones de asignacion de unidades*/
+.btn-asignarunidad{
+  background-color: #4ec087; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-agregarunidad{
+  background-color: #4e83c0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-asignarexterno{
+  background-color: #f1ba04c7; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-asignarunidadmoral{
+  background-color: #f17704c7; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-asignarunidadfisica{
+  background-color: #1f9bcce0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+/*----------------------------------------------------------------------------------esilos del los botones de la tabla de unidades registradas*/
+/*btn aseguradora*/
+.btn-aseguradora {
+  background-color: #4e83c0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+
+/*btn tenencias*/
+.btn-tenencias {
+  background-color: #3b9b38; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+
+/*btn verificaciones*/
+.btn-verificaciones {
+  background-color: #ce6b14; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+/*btn editar  unidades*/
+.btn-editarunidades {
+  background-color: #e0bf01ec; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+.btn-mapa{
+  background-color: #2ab8bd; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.6rem;
+}
+.titulostablaunidades{
+  font-size: 0.80rem;
+}
+
 /*----------------------------barra buscadora de la tabla unidades---------------------------------*/
 .buscador {
+  padding-top: 70px;
   margin-bottom: 20px;
   max-width: 500px;
 }
@@ -500,10 +898,120 @@ body {
   padding: 8px;
   font-size: 14px;
   transition: transform 0.2s ease;
+  background-color: #e0e0e0;
 }
 .buscador input:focus {
   transform: scale(1.05);
 }
+@media(max-width: 768px){
+.buscador{
+  padding-top: 250px;
+}
+}
+.buscadoresponsiva {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadoresponsiva input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadoresponsiva input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+.buscadoresponsiva{
+  padding-top: 200px;
+}
+}
+.buscadorcomodato {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorcomodato input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorcomodato input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorcomodato {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+.buscadorunidadesasignadas {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorunidadesasignadas input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorunidadesasignadas input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorunidadesasignadas {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+
+}
+.contenedorbuscador{
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+}
+.contenedorbuscadorvalidacionunidades {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadorvalidacionunidades {
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
+}
+
+/*----------------------------------------------------------------------------------tabla unidades generales-----------------------------------------------*/
+.sticky-left-0 {
+  position: sticky;
+  left: 0;
+  top: 0;
+}
+.sticky-left-25 {
+  position: sticky;
+  left: 70px;
+  top: 0;
+}
+.sticky-left-50 {
+  position: sticky;
+  left: 98px;
+  top: 0;
+  background-color: white;
+}
+.sticky-left-75 {
+  position: sticky;
+  left: 160px;
+  top: 0;
+  background-color: white;
+}
+
 /*---------------------------------------------------------------------------------estilos registro de nuevas unidades---------------------------------------------------------------------------*/
 .contenedoropcionesregistrarunidades {
   position: relative;
@@ -516,11 +1024,41 @@ body {
   overflow-x: none;
   overflow-y: none;
 }
-/*---------------------------------------------------------------------------------estilos edicion de nuevas unidades---------------------------------------------------------------------------*/
-.btneditarunidades {
-  position: relative;
-  border-radius: 10px;
+@media  (max-width: 772px) {
+  .contenedorformularioregistrounidades {
+    padding: 60px;
+  }
+  
 }
+.contenedormarcmodelo{
+  padding-top: 30px;
+  transition: background-color 0.3s ease;
+}
+.contenedormarcmodelo:hover {
+  background-color: rgba(156, 156, 156, 0.541);
+  padding: 40px;
+  border-radius: 18px;
+}
+
+.contenedormarcmodelo:hover .tituloletraunidadmarmodel {
+  color: white;
+}
+.tituloletraunidadmarmodel{
+    padding-left: 30px;
+    font-weight: bold;
+    font-size: 1.6rem;
+    color: rgb(95, 95, 95);
+    font-weight: bold;
+    animation: slide-in 0.5s ease-out forwards;
+}
+  @media (max-width: 768px) {
+    .tituloletraunidadmarmodel {
+      font-size: 1.6rem;
+    }
+  }
+
+/*---------------------------------------------------------------------------------estilos edicion de nuevas unidades---------------------------------------------------------------------------*/
+
 /*----------------------------------------------------------------------------Estilos tabla de la modal agregar polizas ---------------------------------------------------------------------*/
 .contenedor_tabla_polizas {
   width: 100%;
@@ -533,4 +1071,1008 @@ height: auto;
 }
 .contenedor_poliza_tenencia {
   
+}
+/*---------------------------------------------------------------------------Estilos modal de asignacion de unidades--------------------------------------------------------------------------*/
+.contenedorasignacionunidades{
+  padding-top: 20px;
+}
+.tablasignacionunidades{
+  padding: 50px;
+  width: 100%;
+  height: auto;
+  overflow-x: auto;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 30px;
+}
+.contenedorinfounidadasignar{
+  padding-top: 20px;
+  
+}
+.contenedorimgunidadasignacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.imgasignacionunidad{
+  max-width: 300px;
+  max-height: 300px;
+  text-align: center;
+  transition: all 0.2s ease;
+  border-radius: 15px;
+  background-color: rgb(255, 255, 255);
+}
+.imgasignacionunidad:hover{
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .imgasignacionunidad {
+  width: 200px;
+    height: 200px;
+    padding-left: 0px;
+  }
+}
+/*-------------------------------------------------------------------edicion de cards validacion comodato y carta responsiva*/
+.txteatlevalidacioncomodato{
+  font-size: 0.88rem;
+}
+.txtvalidacioncomodato{
+  font-size: 0.8rem;
+}
+.btnmosrarmodalunidadCOMODATO{
+  background-color: #4ec087; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+.btntablaverificarcomodato{
+  background-color: #4ec087; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.6rem;
+}
+.estadocomodato,
+.estadocomodatoimg{
+  position: absolute;
+}
+.imgalertasucces{
+  width: 35px;
+  height: 35px;
+}
+.imgalertasuccestabla{
+  width: 20px;
+  height: 20px;
+
+}
+.contenedorcardunidadescomodatoresponsiva{
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: auto;
+}
+@media (max-width: 768px) {
+  .contenedorcardunidadescomodatoresponsiva {
+    flex-direction: column;
+  }
+}
+.imgcardverificarcomodato{
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 210px;
+    max-height: 240px;
+    border-radius: 15px;
+    transition: all 0.2s ease;
+}
+.imgcardverificarcomodato:hover{
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .imgcardverificarcomodato {
+    width: 200px;
+    height: 200px;
+    padding-left: 0px;
+  }
+}
+.archivocomodato {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+@media (max-width: 768px) {
+  .archivocomodato {
+    padding: 10px;
+  }
+}
+.btn-cambiar_vista{
+  background-color: #4eb8c0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.titulostablaverificarcomodato{
+  font-size: 0.9rem;
+}
+.btnmosrarmodalunidadsolicitud{
+  background-color: #eb7e35; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+.btntablaverificarresponsiva{
+  background-color: #eb7e35; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.6rem;
+}
+/*--------------------------------------------------------------------------ESTILOS MIS UNIDADES CLIENTE-----------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------modulo_mis_unidades-------------------------------------------------------------------*/
+
+.contenedormisunidades{
+  position: relative;
+  padding-top: 100px;
+}
+.titulosletrasunidadescliente{
+  padding-top: 20px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.9rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidadescliente {
+    font-size: 1.2rem;
+  }
+}
+/*--------------------------------------edicion de las cards de las unidades vista del cliente------------------------------------------------------*/
+.contenedorcardunidadescliente{
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .contenedorcardunidadescliente {
+    flex-direction: column;
+  }
+}
+.contenedorcardunidades {
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  overflow-x: auto;
+  max-height: 600px;
+  background-color: rgba(238, 240, 241, 0.671);
+  margin: 10px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+.contenedorcardunidades::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+.contenedorcardunidades::-webkit-scrollbar-thumb {
+  background-color: #b8b8b8;
+  border-radius: 10px;
+}
+
+.contenedorcardunidades::-webkit-scrollbar-thumb:hover {
+  background-color: #cccccc;
+}
+
+@media (max-width: 768px) {
+  .contenedorcardunidades {
+    flex-direction: column;
+  }
+}
+.card{
+  padding: 10px;
+  padding-top: 20px;
+  width: 17rem;
+  height: auto;
+  transition: all 0.2s ease;
+  border-radius: 15px;
+}
+.card-body{
+  transition: all 0.2s ease;
+}
+.card:hover{
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover .imgcard{
+  transform: scale(1.1);
+  animation: respirar 1.5s infinite;
+}
+
+.card:hover .card-body{
+  border-radius: 15px;
+  background-color: #91979e;
+  color: white;
+}
+#vistaCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* o space-between para separación entre tarjetas */
+  gap: 1rem; /* espacio entre tarjetas */
+  padding: 1rem;
+}
+
+.imgcard{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 170px;
+    max-height: 180px;
+    border-radius: 15px;
+}
+#linkpolitica{
+  margin-top: -10px;
+  font-size: 0.75rem;
+  color: #007BFF;
+}
+.card:hover #linkpolitica{
+  color: white;
+}
+@media (max-width: 768px) {
+  .card {
+    width: 280px;
+  }
+}
+
+@keyframes respirar{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+/*------------------------------------------------------estilos mis unidades------------------------------------*/
+.cardmisunidades{
+  padding: 20px;
+  padding-top: 40px;
+  width: 18rem;
+  height: auto;
+  transition: all 0.2s ease;
+  border-radius: 15px;
+  background-color: floralwhite;
+}
+.card-body{
+  transition: all 0.2s ease;
+}
+.cardmisunidades:hover{
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardmisunidades:hover .imgcard{
+  transform: scale(1.1);
+  animation: respirar 1.5s infinite;
+}
+
+.cardmisunidades:hover .card-body{
+  border-radius: 15px;
+  background-color: #91979e;
+  color: white;
+}
+
+.cardmisunidades:hover #linkpolitica{
+  color: white;
+}
+
+@keyframes respirar{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+
+
+/*------------------------------informacion de la unidad, archivo de la responsiva y subir responsiva-------------------------------------*/
+.conetendorsubircartaresponsiva{
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .conetendorsubircartaresponsiva {
+    flex-direction: column;
+  }
+}
+/**------------------------------------estilos Validacion de unidades Administrador-----------------------------------------------*/
+.contenedorvalidacionunidades{
+  padding-top: 60px;
+  position: relative;
+  
+}
+.btn-comodato{
+  background-color: #dbbe3a; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-responsiva{
+  background-color: #298bcc; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.letravalidacionunidad{
+  padding-top: 110px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .letravalidacionunidad {
+    font-size: 0.9rem;
+  }
+}
+.letravalidacionunidadresponsiva{
+  padding-top: 110px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+.contenedormenu{
+  position: relative;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.contenedorcardunidades{
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .contenedorcardunidades {
+    padding: 10px 10px 0 10px;
+  }
+}
+/*-------------------------------------------------------------------denegar carta responsiva------------------------------------------------*/
+.textareamotivodenegacioncartaresponsiva{
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  border: 2px solid #585858;
+  padding: 5px;
+  font-size: 16px;
+}
+.textmotivodenegacioncartaresponsiva{
+  font-size: 1.3rem;
+}
+.descripciondenegacion{
+  font-size: 1.4rem;
+}
+/*---------------------------------------------------estilos validacion comodato-----------------------------------------------*/
+.textformulariocomodatofirmado{
+  padding-left: 150px;
+}
+@media (max-width: 768px) {
+  .textformulariocomodatofirmado {
+    padding-left: 0px;
+  }
+}
+/*-----------------------------------------------------------------estilos juridico*/
+.imgcomodato{
+     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 210px;
+    max-height: 240px;
+    border-radius: 15px;
+    transition: all 0.2s ease;
+}
+.imgcomodato:hover{
+  transform: scale(1.09);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .imgcomodato {
+    width: 200px;
+    height: 200px;
+    padding-left: 0px;
+  }
+}
+.contendortablahistorialcomodato {
+  padding: 50px;
+  width: 100%;
+  height: auto;
+  overflow-x: auto;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+}
+.contenedorbuscadosubircomodato {
+  padding-left: 50px;
+  width: 100%;
+  height: auto;
+  overflow-x: auto;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 5px;
+}
+/*estilos del buscador historial*/
+.buscadorhistorialcomodato {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorhistorialcomodato input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorhistorialcomodato input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+.buscadorhistorialcomodato{
+  padding-top: 250px;
+}
+}
+/*estilos del buscador comodato*/
+.buscadorcomodato {
+  padding-top: 20px;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorcomodato input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorcomodato input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+.buscadorcomodato{
+  padding-top: 250px;
+}
+}
+.letravalidacionunidadjuridico{
+  padding-top: 80px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .letravalidacionunidadjuridico {
+    font-size: 0.9rem;
+  }
+}
+.letrahistorialcomodato{
+  padding-top: 80px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .letrahistorialcomodato {
+    font-size: 0.9rem;
+  }
+}
+/*------------------------------------------------------------estilos de documentos */
+.contenedoropciones{
+  width: 100%;
+    margin-left: 50%;
+    padding-top: 180px;
+    height: auto;
+    transform: translate(-50%);
+    margin-top: 20px;
+}
+.cuadrocontenedoropcionesinicio{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contenedoropcioninicioimagen {
+    background: linear-gradient(135deg, #646a6d, #5c5e5f69);
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contenedoropcioninicioimagen:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.titulocontenedoropcioninicio{
+      text-align: center;
+    font-size: 0.9rem;
+    margin-top: 2px;
+    font-weight: 600;
+    color: rgba(91, 121, 138, 0.721);
+}
+.contenedoropcioninicio{
+      width: 130px;
+    height: 130px;
+    margin: 5px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    color: aliceblue;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: 0.3s ease;
+    overflow: ellipsis;
+}
+.contenedoropcioninicioimagen{
+  background: linear-gradient(135deg, #bbbdbe, #36383869);
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*--------------------------------------------------estilos tabla de documentos licencias, domicilios etc*/
+.titulostabladocumentos{
+  font-size: 0.80rem;
+}
+/*--------------------------------------------------estilos de para unidades pool-------------------------------------*/
+.contenedorsolicitudunidadpool{
+  position: absolute;
+  padding-top: 120px;
+  left: 100px;
+  right: 130px;
+}
+@media (max-width: 768px) {
+  .contenedorsolicitudunidadpool {
+    left: 50px;
+    right: 50px;
+  }
+}
+@media (max-width: 430px) {
+  .contenedorsolicitudunidadpool {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+.contenedorunidadesdisponiblespool{
+  padding-top: 270px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .contenedorunidadesdisponiblespool {
+    padding-top: 650px;
+  }
+}
+.conetenedortarjetaunidadpool{
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.671);
+}
+.conetenedortarjetaunidadpool:hover{
+  background-color: rgba(174, 179, 184, 0.671);
+  transition: all 0.2s ease;
+}
+
+.conetenedortarjetaunidadpool:hover .imgunidadpoolsolicitud{
+  transform: scale(1.1);
+  animation: respirar 1.5s infinite;
+}
+@keyframes respirar{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+/*-------------------------------------------------------estilos para unidades demo Admin asignador de demos*/
+/*btn tenencias*/
+.btn-curp {
+  background-color: #386e9b; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+/*btn ines*/
+.btn-ine{
+  background-color: #709b38; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+/*btn verificaciones*/
+.btn-rfc {
+  background-color: #ce6b14; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+.btn-domicilio{
+  background-color: #868f0b; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+/*btn editar persona fisica*/
+.btn-editar_persona_fisica{
+  background-color: #e6ac10; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.7rem;
+}
+.btn-resgistrar_moral{
+  background-color: #aa6060; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-asignar_demo_moral{
+  background-color: #a00e2d; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.archivodocumentopersonafisica{
+  padding-left: 100px;
+  padding-right: 100px;
+}
+@media (max-width: 768px) {
+  .archivodocumentopersonafisica {
+    padding: 10px;
+  }
+}
+/*contendedor de unidades demo asognadas*/
+.contenedorunidadesdemoasignadas{
+  padding-top: 60px;
+}
+
+/*---------------------------------------------------------------------estilos para solictar unidades demo desde la interfaz de usuario----------*/
+.contenedorsolicitudunidaddemo{
+  position: relative;
+  padding-top: 100px;
+}
+.contenedorsolicitudemo{
+  position: absolute;
+  padding-top: 60px;
+  left: 100px;
+  right: 130px;
+}
+@media (max-width: 768px) {
+  .contenedorsolicitudemo {
+    left: 50px;
+    right: 50px;
+  }
+}
+@media (max-width: 430px) {
+  .contenedorsolicitudemo {
+    left: 20px;
+    right: 20px;
+  }
+}
+.letrasolicitudemo{
+  padding-top: 110px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .letrasolicitudemo {
+    font-size: 0.9rem;
+  }
+}
+.btn-verificar{
+  background-color: #339c7d; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 1px 9px; /* Adjust padding to make the button smaller */
+}
+.btn-asignar_persona_fisica{
+  background-color: #4c8fce; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 4px 9px; /* Adjust padding to make the button smaller */
+}
+.btn-asignar-persona-moral{
+  background-color: #c9b60e; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 4px 9px; /* Adjust padding to make the button smaller */
+}
+/*------------------------------------contenedor de las cards de las unidades DEMO disponibles*/
+.contenedorunidadesdisponiblesdemo{
+  padding-top: 300px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .contenedorunidadesdisponiblesdemo {
+    padding-top: 650px;
+  }
+}
+.conetenedortarjetauniddemo{
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.671);
+}
+.conetenedortarjetauniddemo:hover{
+  background-color: rgba(174, 179, 184, 0.671);
+  transition: all 0.2s ease;
+}
+
+.conetenedortarjetauniddemo:hover .imgunidadpoolsolicitud{
+  transform: scale(1.1);
+  animation: respirar 1.5s infinite;
+}
+@keyframes respirar{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+/*-------------------------------------------------------------estilo para el mapa y ver la unidadcon la api de telematics*/
+#mapaUnidad {
+  width: 100%;
+  height: 400px;
+}
+/*-------------------------------------------------------------estilos para el autorizador de unidades demos personas fisicas------------------------------*/
+.contenedorautorizardemos{
+  padding-top: 60px;
+  position: relative;
+}
+
+.titulosletrasunidademo,
+.contenedor_botones,
+.contenedor_botones_validacion_unidades_demos {
+  position: absolute;
+}
+
+/*estilo de los titulos */
+.titulosletrasunidademo {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidademo {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
+/*estilos de los botones de la administracion de unidades*/
+.contenedor_botones_validacion_unidades_demos {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 80px;
+}
+.contenedor_botones_validacion_unidades_demos .btn {
+  min-width: auto; /* Puedes ajustar el tamaño mínimo */
+  border-radius: 13px;
+}
+.letraautorizaciondemo{
+  padding-top: 110px;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .letraautorizaciondemo {
+    font-size: 0.9rem;
+  }
+}
+/* botones responsivos*/
+@media (max-width: 768px) {
+  .contenedor_botones_validacion_unidades_demos{
+    padding-top: 190px;
+    width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/* Opcional: Estilo de los botones en pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenedor_botones_validacion_unidades_demos .btn {
+    width: 50%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+.btn-persona-fisica{
+  background-color: #49a315; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-persona-moral{
+  background-color: #3615ad; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+/*contnedor para el buscador de las unidades demos*/
+.contenedorbuscadorautorizaciondemosfisicas{
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadorautorizaciondemosfisicas{
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
+}
+/*estilos del buscador*/
+.buscadorautorizaciondemosificas {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorautorizaciondemosificas input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorautorizaciondemosificas input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorautorizaciondemosificas {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+/*boton de cambio de vista cards a tabla*/
+.btn-cambiar_vista_fisicas{
+  background-color: #b5c04e; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+/*boton para verificar la unidad y autorizar*/
+.btn-verunidad_autorizar_fisicas{
+  background-color: #4ea5c0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*-------------------------------------------------------------estilos para el autorizador de unidades demos personas fisicas------------------------------*/
+
+/*contnedor para el buscador de las unidades demos*/
+.contenedorbuscadorautorizaciondemosmorales{
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadorautorizaciondemosmorales{
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
+}
+/*estilos del buscador*/
+.buscadorautorizaciondemosmorales {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorautorizaciondemosmorales input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorautorizaciondemosmorales input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorautorizaciondemosmorales {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+/*boton de cambio de vista cards a tabla*/
+.btn-cambiar_vista_morales{
+  background-color: #4ec090; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+/*boton para verificar la unidad y autorizar*/
+.btn-verunidad_autorizar_morales{
+  background-color: #bd7727; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
 }
