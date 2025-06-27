@@ -33,34 +33,46 @@ document.addEventListener("DOMContentLoaded", function () {
   // Autorizar unidad
   document.body.addEventListener("click", function (event) {
     if (event.target && event.target.id === "btnaprovarunidademofisica") {
-      const formData = new FormData();
-      formData.append("id_unidad", id_unidad);
-      formData.append("id_asignacion_demo", id_asignacion_demo);
-      formData.append("id_persona_fisica", id_persona_fisica);
+      Swal.fire({
+        title: "¿Estás seguro de aprovar esta unidad?",
+        text: "Una vez aprovada, no podrás revertir el proceso.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, asignar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const formData = new FormData();
+          formData.append("id_unidad", id_unidad);
+          formData.append("id_asignacion_demo", id_asignacion_demo);
+          formData.append("id_persona_fisica", id_persona_fisica);
 
-      contenedorspinner.style.display = "flex";
+          contenedorspinner.style.display = "flex";
 
-      $.ajax({
-        type: "POST",
-        url: "../../Servidor/solicitudes/solicitud_unidades_demo/autorizar_unidad_demo_persona_fisica.php",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-          console.log(response);
-          contenedorspinner.style.display = "none";
-          if (response.includes("correctamente")) {
-            window.location.href = "./autorizaciones_demos_personas_fisicas.php?resultado=Autorizacionunidademo";
-          } else {
-            Toastify({
-              text: "Hubo un error en la autorización.",
-              duration: 3000,
-              gravity: "top",
-              position: "right",
-              style: { background: "linear-gradient(to right, #ff5f6d, #ffc371)" },
-            }).showToast();
-          }
-        },
+          $.ajax({
+            type: "POST",
+            url: "../../Servidor/solicitudes/solicitud_unidades_demo/autorizar_unidad_demo_persona_fisica.php",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+              console.log(response);
+              contenedorspinner.style.display = "none";
+              if (response.includes("correctamente")) {
+                window.location.href = "./autorizaciones_demos_personas_fisicas.php?resultado=Autorizacionunidademo";
+              } else {
+                Toastify({
+                  text: "Hubo un error en la autorización.",
+                  duration: 3000,
+                  gravity: "top",
+                  position: "right",
+                  style: { background: "linear-gradient(to right, #ff5f6d, #ffc371)" },
+                }).showToast();
+              }
+            },
+          });
+        }
       });
     }
   });
@@ -110,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(id_unidad);
       console.log(id_asignacion_demo);
       console.log(id_persona_fisica);
-
       contenedorspinner.style.display = "flex";
       $.ajax({
         type: "POST",
@@ -126,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
-
 });
 
 //aqui usams este codigo para realizar el cambio de interfaz cards a tabla 

@@ -23,12 +23,12 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 <div class="contenedorautorizardemos">
     <h5 class="titulosletrasunidademo text-nowrap">Autorización de vehículos demo</h5>
     <h5 class="letraautorizaciondemo text-nowrap">
-        Personas Fisícas
+        Personas Físicas
     </h5>
     <div class="container mt-4">
         <div class="d-flex flex-wrap justify-content-center contenedor_botones_validacion_unidades_demos">
             <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_fisicas.php'" class="btn btn-persona-fisica m-2 "><i class="fa-solid fa-user"></i> Fisicas</button>
+            <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_fisicas.php'" class="btn btn-persona-fisica m-2 "><i class="fa-solid fa-user"></i> Físicas</button>
             <!-- Botón estilizado -->
             <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_morales.php'" class="btn btn-persona-moral m-2 "><i class="fa-solid fa-building-user"></i> Morales</button>
         </div>

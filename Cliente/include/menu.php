@@ -66,8 +66,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES (Francisco Chavez)?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="autorizaciones_demos_personas_fisicas.php">Autorizaciones</a></li>
-            <li ><a class="menulist" href="#">Unidades autorizadas</a></li>
-            <li ><a class="menulist" href="#">Unidades prestadas</a></li>
+            <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
         <?php endif; ?>
         <li ><a class="menulist" href="http://intranet.com/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
     </ul>

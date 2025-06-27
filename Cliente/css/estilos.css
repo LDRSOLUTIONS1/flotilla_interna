@@ -2014,7 +2014,7 @@ height: auto;
 }
 /*boton de cambio de vista cards a tabla*/
 .btn-cambiar_vista_fisicas{
-  background-color: #b5c04e; /* tu color deseado */
+  background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
@@ -2026,7 +2026,7 @@ height: auto;
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-/*-------------------------------------------------------------estilos para el autorizador de unidades demos personas fisicas------------------------------*/
+/*-------------------------------------------------------------estilos para el autorizador de unidades demos personas morales------------------------------*/
 
 /*contnedor para el buscador de las unidades demos*/
 .contenedorbuscadorautorizaciondemosmorales{
@@ -2064,7 +2064,7 @@ height: auto;
 }
 /*boton de cambio de vista cards a tabla*/
 .btn-cambiar_vista_morales{
-  background-color: #4ec090; /* tu color deseado */
+  background-color: #bd7727; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
@@ -2075,4 +2075,75 @@ height: auto;
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
+}
+/*estilos para las unidades autorizadas por parte del ususario que autoriza el prestamo de esas unidades*/
+.contenedorunidadesautorizadasdemos{
+  padding-top: 60px;
+  position: relative;
+}
+/*estilo de los titulos */
+.titulosletrasunidademoautorizada {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidademoautorizada {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
+/*contnedor para el buscador de las unidades demos*/
+.contenedorbuscadorunidadautorizada{
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadorunidadautorizada{
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
+}
+/*estilos del buscador*/
+.buscadorunidadesdemoautorizadas {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorunidadesdemoautorizadas input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorunidadesdemoautorizadas input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorunidadesdemoautorizadas {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+.contenedorcardunidademoautorizada{
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: auto;
+}
+@media (max-width: 768px) {
+  .contenedorcardunidademoautorizada {
+    flex-direction: column;
+  }
 }
