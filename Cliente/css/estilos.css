@@ -1127,6 +1127,12 @@ height: auto;
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
+.btnmosrarmodalunidadcomodato{
+  background-color: #7971e2; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
 .btntablaverificarcomodato{
   background-color: #4ec087; /* tu color deseado */
   color: white; /* color del texto */

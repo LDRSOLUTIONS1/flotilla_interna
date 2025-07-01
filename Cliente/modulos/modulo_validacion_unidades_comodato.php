@@ -10,8 +10,6 @@
             <button onclick="window.location.href='../interfaces/validacion_unidades_comodato.php'" class="btn btn-comodato m-2 "><i class="fa-solid fa-file-contract"></i> Comodato</button>
             <!-- Botón estilizado -->
             <button onclick="window.location.href='../interfaces/validacion_unidades.php'" class="btn btn-responsiva m-2 "><i class="fa-solid fa-file-contract"></i> Carta Responsiva</button>
-
-
         </div>
     </div>
 </div>

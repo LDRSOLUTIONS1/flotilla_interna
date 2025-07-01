@@ -24,6 +24,9 @@ error_reporting(E_ALL);
     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<!---estilos de los botones para descragar archhivos csv pdf excel--->>
+    <link rel="stylesheet" href="../datatable/buttons.dataTables.css">
+    <link rel="stylesheet" href="../datatable/dataTables.dataTables.css">
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -51,7 +54,6 @@ error_reporting(E_ALL);
         <span class="loader"></span>
     </div>
 
-
     
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -74,6 +76,8 @@ error_reporting(E_ALL);
     <script src="../js/alertas/alertas.js"></script>
     <!--inactividad y cerrar la sesion-->
     <script src="../js/inactividad.js"></script>
+
+
 </body>
 
 </html>

@@ -421,10 +421,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 
 
-
-
-
-
 <!--js para mandar a llamar el modal de edicion de unidades-->
 <script src="../js/unidades/editarunidades.js"></script>
 <!--js para mandar a llamar el modal de polizas aseguradoras-->

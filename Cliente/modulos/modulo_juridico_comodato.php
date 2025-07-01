@@ -6,12 +6,17 @@
     <!-- Campo de búsqueda para filtrar la tabla -->
     <div class="contenedorbuscadosubircomodato">
         <div class="buscadorcomodato">
-            <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards()">
+            <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+                <!-- // Botón para alternar vista -->
+    <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
         </div>
     </div>
+    
     <!--contenedor de las cards de las unidades por asignar-->
     <div class="contenedorcardunidadescliente">
         <?php include("../../Servidor/componentes/obtener_unidades_subir_comodato.php"); ?>
+            <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
+
     </div>
 </div>
 
@@ -37,4 +42,4 @@
 <!-------------------------------------js para subir el comodato correspondiente al usuario-------------------------------->
 <script src="../js/juridico/comodato.js"></script>
 <!--js para filtrar las cards de unidades-->
-<script src="../js/unidades/filtrar_cards.js"></script>
+<script src="../js/unidades/filtrar_cards_tabla.js"></script>
