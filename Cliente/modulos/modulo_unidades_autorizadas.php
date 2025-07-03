@@ -90,11 +90,26 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         </div>
     </div>
 </div>
-
-
+<!--------------------------------------------------------------------------Modal para ver el Mapa y saber donde esta la unidad-->
+<!--modal-->
+<div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ultima actualización de la ubicación de la unidad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="mapaUnidad" style="height: 500px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!--js para mandar a llamar el modal de informacion de la unidad y la carta responsiva de las unidades-->
 <script src="../js/unidades_demo_autorizadas/unidades_demo_autorizadas.js"></script>
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards_tabla.js"></script>
+<!--js para poder obtener iinformacion del mapa -->
+<script src="../js/api/obtener_mapa_telematics.js"></script>

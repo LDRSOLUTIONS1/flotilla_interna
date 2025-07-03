@@ -3,12 +3,11 @@ include("../../Servidor/conexion.php");
 if (!isset($_SESSION)) {
     session_start();
 }
-
-        //uda = Unidad Demo Autorizada
-        //pf = Persona Fisica
-        //pm = Persona Moral
-        //ca = Colaborador que Asigna
-            $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
+//uda = Unidad Demo Autorizada
+//pf = Persona Fisica
+//pm = Persona Moral
+//ca = Colaborador que Asigna
+$sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 uda.id_asignacion_unidad_demo,
                 uda.id_unidad,
                 uda.id_colaborador_que_asigna,
@@ -23,7 +22,6 @@ if (!isset($_SESSION)) {
                 pm.organizacion_institucion,
                 model.nombre_modelo,
                 unid.placa,
-                unid.vin,
                 uda.fecha_prestamo,
                 uda.fecha_devolucion,
                 uda.id_colaborador_que_asigna,
@@ -31,7 +29,10 @@ if (!isset($_SESSION)) {
                 ca.nombre_2 AS nombre2colaborador,
                 ca.apellido_paterno AS apellidopcolaborador,
                 ca.apellido_materno AS apellidomcolaborador,
-                usr.avatar AS avatar_colaborador
+                aud.nombre_1 AS nombre1autorizador,
+                aud.nombre_2 AS nombre2autorizador,
+                aud.apellido_paterno AS apellidopautorizador,
+                aud.apellido_materno AS apellidomautorizador
             FROM asignacion_unidad_demo AS uda
             LEFT JOIN unidades AS unid 
             ON uda.id_unidad = unid.id_unidad
@@ -41,10 +42,10 @@ if (!isset($_SESSION)) {
             ON uda.id_persona_fisica = pf.id_persona_fisica
             LEFT JOIN personas_morales AS pm 
             ON uda.id_persona_moral = pm.id_persona_moral
+            LEFT JOIN colaboradores AS aud
+            ON uda.id_autorizador = aud.id_colaborador
             INNER JOIN colaboradores AS ca
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
-            INNER JOIN usuarios AS usr 
-            ON usr.id_colaborador = ca.id_colaborador
             WHERE uda.autorizacion = 'APROVADO'";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
@@ -68,17 +69,13 @@ while ($fila = $resultado->fetch_assoc()) {
         } else {
             echo '<h6 class="card-title text-danger"><b>Sin datos del solicitante</b></h6>';
         }
+
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
-            <h6 class="card-text"><b>Solicitante: </b><br><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
-            class="rounded-circle me-2" style="margin-top: 5px; width: 25px; height: 25px; object-fit: cover;" alt="avatar">
-            ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</h6>
+            <h6 class="card-text" style="font-size: 0.9rem;"><i class="fas fa-user me-2"></i><b>Colaborador que autoriza: </b>' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopautorizador'] . ' ' . $fila['apellidomautorizador'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') .
             '</h6>
-            <button type="button" class="btn btn-primary btn-sm">Pruebas</button>
-            <button type="button" class="btn btn-sm btn-mapa btnubicacionunidad" data-vin="' . $fila['vin'] . '">
-                            <i class="fa-solid fa-location-dot"></i> 
         </div>
         </div>';
     }
@@ -92,14 +89,11 @@ echo '<div id="vistaTabla" style="display: none;">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th></th>
                     <th>Nombre del usuario/empresa</th>
                     <th>Modelo</th>
                     <th>Placa</th>
                     <th>Asignación</th>
                     <th>Devolución</th>
-                    <th>Ubicación</th>
-                    <th>Solicitante</th>
                 </tr>
             </thead>
             <tbody>';
@@ -110,20 +104,11 @@ while ($fila = $resultado->fetch_assoc()) {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">';
         echo '
-            <td></td>
             <td>' . $nombre . '</td>
             <td>' . $fila['nombre_modelo'] . '</td>
             <td>' . $fila['placa'] . '</td>
             <td>' . $fila['fecha_prestamo'] . '</td>
-            <td>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td style="text-align: center;">
-                <button type="button" class="btn btn-sm btn-mapa btnubicacionunidad" data-vin="' . $fila['vin'] . '">
-                            <i class="fa-solid fa-location-dot"></i> 
-                        </button></td>
-            <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
-                class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;" alt="avatar"></td>
-            <td>' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '            </td>
-        </tr>';
+            <td>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>';
         echo '<?php';
 ?>
         </td>

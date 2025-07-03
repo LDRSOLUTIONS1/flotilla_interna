@@ -60,7 +60,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <?php elseif ($id_tipo_usuario == 6): // Cliente solicitar demo?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="mis_unidades.php">Unidades asignadas</a></li>
-            <li ><a class="menulist" href="solicitud_unidades.php">Proceso asignación</a></li>
+            <li ><a class="menulist" href="proceso_asignacion_demo.php">Proceso asignación</a></li>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solictar unidades demo</a></li>
 
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES (Francisco Chavez)?>
