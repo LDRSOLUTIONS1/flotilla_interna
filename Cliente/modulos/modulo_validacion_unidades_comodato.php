@@ -1,4 +1,4 @@
-<!-------------------------------------------aqui comienza el contenedor Validacion de carta responsiva ----------------------------------------------------------->
+<!-------------------------------------------aqui comienza el contenedor Validacion de los comodatos ----------------------------------------------------------->
 <div class="contenedorvalidacionunidades">
     <h5 class="titulosletrasunidades text-nowrap">Vehículos exclusivos</h5>
     <h5 class="letravalidacionunidad text-nowrap">
@@ -15,8 +15,8 @@
 </div>
 
 <!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorvalidacionunidades">
-    <div class="buscadorcomodato">
+<div class="contenedorbuscadorvalidacionunidades ">
+    <div class="buscadorcomodato mb-3 col-md-8">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
     </div>
     <!-- // Botón para alternar vista -->

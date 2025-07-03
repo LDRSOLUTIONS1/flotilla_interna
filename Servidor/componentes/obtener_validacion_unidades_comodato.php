@@ -43,7 +43,7 @@ $resultado = $conexion->query($sqlobtenerunidadvercartaresponsiva);
 echo '<div id="vistaCards">';
 while ($fila = $resultado->fetch_assoc()) {
     if ($fila['id_estatus_comodato'] != 1 && $fila['id_estatus_comodato'] != 4) {
-        echo '<div class="alerta">';
+        echo '<div class="card mb-3">';
         if ($fila['id_estatus_comodato'] == 3) {
             echo '<div class="alerta d-flex align-items-center">
                 <img src="../../Cliente/videos/succes-green.gif" class="me-2 imgalertasucces">

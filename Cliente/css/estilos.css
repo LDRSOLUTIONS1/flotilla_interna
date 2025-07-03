@@ -976,6 +976,10 @@ body {
   padding-left: 30px;
 }
 .contenedorbuscadorvalidacionunidades {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
   padding-top: 10px;
   padding-bottom: 20px;
   padding-left: 80px;
@@ -985,6 +989,12 @@ body {
     padding-top: 100px;
     padding-bottom: 20px;
     padding-left: 30px;
+  }
+
+  .contenedorbuscadorvalidacionunidades {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
   }
 }
 
@@ -1127,14 +1137,26 @@ height: auto;
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
+.btntablaverificarcomodato{
+  background-color: #4ec087; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.6rem;
+}
 .btnmosrarmodalunidadcomodato{
   background-color: #7971e2; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btntablaverificarcomodato{
-  background-color: #4ec087; /* tu color deseado */
+.btnmosrarmodalunidadcomodatodemo{
+  background-color: #078899; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+.btntablaverificarcomodatojuridico{
+  background-color: #7971e2; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.6rem;
@@ -1510,6 +1532,21 @@ height: auto;
   }
 }
 /*-----------------------------------------------------------------estilos juridico*/
+.contenedorcardunidadesjuridico{
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .contenedorcardunidadesjuridico {
+    flex-direction: column;
+  }
+}
 .imgcomodato{
      display: block;
     margin-left: auto;
@@ -1539,14 +1576,19 @@ height: auto;
   margin-right: 0px;
   padding-top: 5px;
 }
+/*estilos del buscador*/
 .contenedorbuscadosubircomodato {
-  padding-left: 50px;
-  width: 100%;
-  height: auto;
-  overflow-x: auto;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-top: 5px;
+  display: flex;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadosubircomodato {
+    padding-top: 100px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+  }
 }
 /*estilos del buscador historial*/
 .buscadorhistorialcomodato {
@@ -1568,39 +1610,33 @@ height: auto;
   padding-top: 250px;
 }
 }
-/*estilos del buscador comodato*/
-.buscadorcomodato {
-  padding-top: 20px;
-  margin-bottom: 20px;
-  max-width: 500px;
+/*estilo del boton*/
+.btn-comodato_interna{
+  background-color: #7971e2; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
 }
-.buscadorcomodato input {
-  width: 100%;
-  padding: 8px;
-  font-size: 14px;
-  transition: transform 0.2s ease;
-  background-color: #e0e0e0;
+.btn-comodato_demo{
+  background-color: #078899; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
 }
-.buscadorcomodato input:focus {
-  transform: scale(1.05);
-}
-@media(max-width: 768px){
-.buscadorcomodato{
-  padding-top: 250px;
-}
-}
-.letravalidacionunidadjuridico{
-  padding-top: 80px;
-  padding-left: 50px;
+/*estilo de los titulos */
+.letravalidacionunidadjuridico {
+  padding-top: 50px;
+  padding-left: 30px;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: rgb(95, 95, 95);
   font-weight: bold;
   animation: slide-in 0.5s ease-out forwards;
 }
 @media (max-width: 768px) {
   .letravalidacionunidadjuridico {
-    font-size: 0.9rem;
+    padding-top: 50px;
+    font-size: 1.6rem;
   }
 }
 .letrahistorialcomodato{
@@ -1617,6 +1653,105 @@ height: auto;
     font-size: 0.9rem;
   }
 }
+/*agrupar los botones con el texto*/
+.letravalidacionunidadjuridico,
+.contenedor_botones_subir_comodato_demo {
+  position: absolute;
+}
+/*ESTILO DE LOS BOTONES SUBIR COMODATO DEMO*/
+.contenedor_botones_subir_comodato_demo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 80px;
+}
+.contenedor_botones_subir_comodato_demo .btn {
+  min-width: auto; /* Puedes ajustar el tamaño mínimo */
+  border-radius: 13px;
+}
+/* botones responsivos*/
+@media (max-width: 768px) {
+  .contenedor_botones_subir_comodato_demo{
+    padding-top: 190px;
+    width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/* Opcional: Estilo de los botones en pantallas pequeñas */
+@media (max-width: 768px) {
+  .contenedor_botones_subir_comodato_demo .btn {
+    width: 50%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
+    margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
+  }
+}
+/* Contenedor que agrupa el buscador y el botón */
+.grupo-buscador-juridico {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 90px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+
+/* Estilos del buscador */
+.buscadorcomodatojuridico {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+.buscadorcomodatojuridico input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+  background-color: #e0e0e0;
+}
+.buscadorcomodatojuridico input:focus {
+  transform: scale(1.05);
+}
+@media(max-width: 768px){
+  .buscadorcomodatojuridico {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    max-width: 300px;
+  }
+}
+
+/* Estilos del botón */
+.btn-cambiar_vista_juridico {
+  background-color: #7971e2; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+}
+/* Estilos del botón */
+.btn-cambiar_vista_juridico_demo {
+  background-color: #078899; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .buscadorcomodatojuridico {
+    padding-top: 150px;
+  }
+
+  .grupo-buscador-juridico {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .btn-cambiar_vista_juridico {
+    width: 100%;
+  }
+}
+
 /*------------------------------------------------------------estilos de documentos */
 .contenedoropciones{
   width: 100%;
@@ -2105,6 +2240,10 @@ height: auto;
 }
 /*contnedor para el buscador de las unidades demos*/
 .contenedorbuscadorunidadautorizada{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 80px;
@@ -2114,9 +2253,12 @@ height: auto;
     padding-top: 100px;
     padding-bottom: 20px;
     padding-left: 30px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
   }
 }
-/*estilos del buscador*/
+/* Estilos del buscador */
 .buscadorunidadesdemoautorizadas {
   margin-bottom: 20px;
   max-width: 500px;
@@ -2136,6 +2278,9 @@ height: auto;
     padding-top: 10px;
     margin-bottom: 10px;
     max-width: 300px;
+  }
+  .btn-cambiar_vista_fisicas{
+    width: 100%;
   }
 }
 .contenedorcardunidademoautorizada{

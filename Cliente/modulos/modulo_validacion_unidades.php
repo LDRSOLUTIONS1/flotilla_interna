@@ -19,7 +19,7 @@
 </div>
 <!-- Campo de búsqueda para filtrar la tabla -->
 <div class="contenedorbuscadorvalidacionunidades">
-    <div class="buscadoresponsiva">
+    <div class="buscadoresponsiva mb-3 col-md-8">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
     </div>
     <!-- // Botón para alternar vista -->

@@ -1,7 +1,7 @@
 <!-------------------------------------------aqui comienza el contenedor Validacion de los comodatos ----------------------------------------------------------->
 <div class="contenedorvalidacionunidades">
     <h5 class="letravalidacionunidadjuridico text-nowrap">
-        Sube el COMODATO correspondiente al usuario.
+        Sube el COMODATO correspondiente a la unidad DEMO.
     </h5>
     <div class="container mt-4">
         <div class="d-flex flex-wrap justify-content-center contenedor_botones_subir_comodato_demo">
@@ -16,14 +16,16 @@
 <div class="grupo-buscador-juridico">
     <div class="buscadorcomodatojuridico mb-3 col-md-8">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
-        <!-- // Botón para alternar vista -->
     </div>
-    <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista_juridico mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
+    <!-- // Botón para alternar vista -->
+    <div class="d-flex justify-center" style="left: 130px;">
+        <button class="btn btn-cambiar_vista_juridico_demo mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button>
+    </div>
 </div>
 
 <!--contenedor de las cards de las unidades por asignar-->
 <div class="contenedorcardunidadesjuridico">
-    <?php include("../../Servidor/componentes/obtener_unidades_subir_comodato.php"); ?>
+    <?php include("../../Servidor/componentes/obtener_unidades_subir_comodato_demo.php"); ?>
 </div>
 
 

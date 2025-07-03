@@ -84,19 +84,18 @@ echo '<div id="vistaTabla" style="display: none;">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th>Nombre del colaborador</th>
+                    <th>Nombre del usuario/empresa</th>
                     <th>Modelo</th>
                     <th>Placa</th>
                     <th>Asignación</th>
                     <th>Devolución</th>
-                    <th>Ver</th>
                 </tr>
             </thead>
             <tbody>';
 
 while ($fila = $resultado->fetch_assoc()) {
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
-        $nombre = $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'];
+        $nombre = $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] . ' ' . $fila['organizacion_institucion'];
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">';
         echo '

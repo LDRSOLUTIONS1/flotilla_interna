@@ -26,14 +26,14 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!-- Campo de búsqueda para filtrar la tabla -->
 <div class="contenedorbuscadorunidadautorizada">
-    <div class="buscadorunidadesdemoautorizadas">
+    <div class="buscadorunidadesdemoautorizadas mb-3 col-md-8">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
     </div>
-    <div class="d-flex justify-content-start mb-3">
-        <!-- // Botón para alternar vista -->
-        <button class="btn btn-cambiar_vista_fisicas me-2" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button>
+    <!-- // Botón para alternar vista -->
+    <div class="d-flex justify-center" style="left: 130px;">
+        <button class="btn btn-cambiar_vista_fisicas mb-3 mx-1" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button>
         <!--boton para filtrar por tipo de solicitante-->
-        <div class="dropdown">
+        <div class="dropdown mx-2">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFiltroSolicitante" data-bs-toggle="dropdown" aria-expanded="false">
                 Filtrar por tipo de solicitante
             </button>
@@ -44,7 +44,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             </ul>
         </div>
     </div>
-
 </div>
 <!--contenedor de las cards de las unidades por asignar-->
 <div class="contenedorcardunidademoautorizada">
