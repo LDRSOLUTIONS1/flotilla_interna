@@ -84,13 +84,13 @@ echo '<div id="vistaTabla" style="display: none;">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th class="titulostablaverificarcomodato">Nombre del colaborador</th>
-                    <th class="titulostablaverificarcomodato">Modelo</th>
-                    <th class="titulostablaverificarcomodato">Placa</th>
-                    <th class="titulostablaverificarcomodato">Asignación</th>
-                    <th class="titulostablaverificarcomodato">Devolución</th>
-                    <th class="titulostablaverificarcomodato">Ver</th>
-                    <th class="titulostablaverificarcomodato">Estado</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-user me-2"></i>Nombre del colaborador</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-car-side me-2"></i>Modelo</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-car me-2"></i>Placa</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-calendar-check me-2"></i>Asignación</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-undo-alt me-2"></i>Devolución</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-eye me-2"></i>Ver</th>
+                    <th class="titulostablaverificarcomodato"><i class="fas fa-file-signature me-2"></i>Estado</th>
                 </tr>
             </thead>
             <tbody>';

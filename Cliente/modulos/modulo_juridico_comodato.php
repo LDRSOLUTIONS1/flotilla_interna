@@ -6,9 +6,9 @@
     <div class="container mt-4">
         <div class="d-flex flex-wrap justify-content-center contenedor_botones_subir_comodato_demo">
             <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/comodatos.php'" class="btn btn-comodato_interna m-2 "><i class="fa-solid fa-file-contract"></i> unidad Interna</button>
+            <button onclick="window.location.href='../interfaces/comodatos.php'" class="btn btn-comodato_interna m-2 "><i class="fa-solid fa-car"></i> Unidad Interna</button>
             <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/comodatos_demos.php'" class="btn btn-comodato_demo m-2 "><i class="fa-solid fa-file-contract"></i> Unidad DEMO</button>
+            <button onclick="window.location.href='../interfaces/comodatos_demos.php'" class="btn btn-comodato_demo m-2 "><i class="fa-solid fa-truck"></i> Unidad DEMO</button>
         </div>
     </div>
 </div>

@@ -34,23 +34,29 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 aud.nombre_1 AS nombre1autorizador,
                 aud.nombre_2 AS nombre2autorizador,
                 aud.apellido_paterno AS apellidopaternoautorizador,
-                aud.apellido_materno AS apellidomaternoautorizador
-        FROM asignacion_unidad_demo AS uda
-            LEFT JOIN unidades AS unid 
-            ON uda.id_unidad = unid.id_unidad
-            LEFT JOIN modelos AS model 
-            ON unid.id_modelo = model.id_modelo 
-            LEFT JOIN estatus_comodato AS estatuscomodato
-            ON uda.id_estatus_comodato_demo = estatuscomodato.id_estatus_comodato
-            LEFT JOIN personas_fisicas AS pf 
-            ON uda.id_persona_fisica = pf.id_persona_fisica
-            LEFT JOIN personas_morales AS pm 
-            ON uda.id_persona_moral = pm.id_persona_moral
-            INNER JOIN colaboradores AS ca
-            ON uda.id_colaborador_que_asigna = ca.id_colaborador
-            INNER JOIN colaboradores AS aud
-            ON uda.id_autorizador = aud.id_colaborador
-            WHERE uda.autorizacion = 'APROVADO'";
+                aud.apellido_materno AS apellidomaternoautorizador,
+                usr.avatar AS avatar_colaborador,
+                usr_aut.avatar AS avatar_autorizador
+            FROM asignacion_unidad_demo AS uda
+                LEFT JOIN unidades AS unid 
+                ON uda.id_unidad = unid.id_unidad
+                LEFT JOIN modelos AS model 
+                ON unid.id_modelo = model.id_modelo 
+                LEFT JOIN estatus_comodato AS estatuscomodato
+                ON uda.id_estatus_comodato_demo = estatuscomodato.id_estatus_comodato
+                LEFT JOIN personas_fisicas AS pf 
+                ON uda.id_persona_fisica = pf.id_persona_fisica
+                LEFT JOIN personas_morales AS pm 
+                ON uda.id_persona_moral = pm.id_persona_moral
+                INNER JOIN colaboradores AS ca
+                ON uda.id_colaborador_que_asigna = ca.id_colaborador
+                INNER JOIN colaboradores AS aud
+                ON uda.id_autorizador = aud.id_colaborador
+                INNER JOIN usuarios AS usr 
+                ON usr.id_colaborador = ca.id_colaborador
+                LEFT JOIN usuarios AS usr_aut
+                ON usr_aut.id_colaborador = aud.id_colaborador
+                WHERE uda.autorizacion = 'APROVADO'";
 $resultado = $conexion->query($sqlobtenerunidadsubircomodato);
 
 
@@ -89,8 +95,18 @@ while ($fila = $resultado->fetch_assoc()) {
             
             echo '
                 <h5 class="card-title txteatlevalidacioncomodato"><strong>' . $fila['nombre_modelo'] . '</strong></h5>
-                <h6 class="card-text" style="font-size: 0.9rem;"><i class="fas fa-user me-2"></i><b>Colaborador que asigna: </b>' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</h6>
-                <h6 class="card-text" style="font-size: 0.9rem;"><i class="fas fa-user me-2"></i><b>Autorizador: </b>' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '</h6>
+                <h6 class="card-text txtvalidacioncomodato"><b>Solicitante: </b><br>
+                    <img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+                        class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
+                    ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '
+                </h6>
+
+                <h6 class="card-text txtvalidacioncomodato"><b>Autorizador: </b><br>
+                    <img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
+                        class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
+                    ' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '
+                </h6>
+
                 <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-car me-2"></i><strong>Placa: </strong>' . $fila['placa'] . '</h6>
                 <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-calendar-check me-2"></i><strong>Asignación: </strong>' . $fila['fecha_prestamo'] . '</h6>
                 <h6 class="text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><strong>Devolución: </strong>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
@@ -110,13 +126,17 @@ echo '<div id="vistaTabla" style="display: none;">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th class="titulostablaverificarcomodato">Nombre del usuario/empresa</th>
-                    <th class="titulostablaverificarcomodato">Modelo</th>
-                    <th class="titulostablaverificarcomodato">Placa</th>
-                    <th class="titulostablaverificarcomodato">Asignación</th>
-                    <th class="titulostablaverificarcomodato">Devolución</th>
-                    <th class="titulostablaverificarcomodato">Ver</th>
-                    <th class="titulostablaverificarcomodato">Estado</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-user me-2"></i>Nombre del usuario/empresa</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-car-side me-2"></i>Modelo</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-car me-2"></i>Placa</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-calendar-check me-2"></i>Asignación</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-undo-alt me-2"></i>Devolución</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-file-contract me-2"></i>Subir comodato</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-file-signature me-2"></i>Estado</th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-user-tie me-2"></i>Solicitante</th>
+                    <th class="titulostablaverificarcomodatodemo"></th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-user-check me-2"></i>Autorizador</th>
+                    <th class="titulostablaverificarcomodatodemo"></th>
                 </tr>
             </thead>
             <tbody>';
@@ -127,13 +147,13 @@ while ($fila = $resultado->fetch_assoc()) {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">';
         echo '
-            <td class="titulostablaverificarcomodato">' . $nombre . '</td>
-            <td class="titulostablaverificarcomodato">' . $fila['nombre_modelo'] . '</td>
-            <td class="titulostablaverificarcomodato">' . $fila['placa'] . '</td>
-            <td class="titulostablaverificarcomodato">' . $fila['fecha_prestamo'] . '</td>
-            <td class="titulostablaverificarcomodato">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td><button type="button" id="btnmosrarmodalunidadcomodato" data-idunidad="' . $fila['id_unidad'] . '" data-id="' . $fila['id_asignacion_unidad_demo'] . '" data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '" class="btn mt-3 btntablaverificarcomodatojuridico btnmosrarmodalunidadcomodato">Subir COMODATO</button></td>
-            <td class="titulostablaverificarcomodato">';
+            <td class="titulostablaverificarcomodatodemo">' . $nombre . '</td>
+            <td class="titulostablaverificarcomodatodemo">' . $fila['nombre_modelo'] . '</td>
+            <td class="titulostablaverificarcomodatodemo">' . $fila['placa'] . '</td>
+            <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
+            <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
+            <td style="text-align: center;"><button type="button" id="btnmosrarmodalunidadcomodato" data-idunidad="' . $fila['id_unidad'] . '" data-id="' . $fila['id_asignacion_unidad_demo'] . '" data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '" class="fas fa-upload btn mt-3 btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodato"></button></td>
+            <td class="titulostablaverificarcomodatodemo">';
         echo '<?php';
         if ($fila['id_estatus_comodato_demo'] == 3) {
             echo '<div>
@@ -152,9 +172,25 @@ while ($fila = $resultado->fetch_assoc()) {
         } else {
             echo $fila['fecha_prestamo'];
         }
-?>
+
+        echo '</td>
+        <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+                class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
         </td>
-        </tr>
+                
+        <td class="titulostablaverificarcomodatodemo">
+    ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '
+        </td>
+
+        <td style="text-align: center;"><img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
+                class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
+        </td>
+        <td class="titulostablaverificarcomodatodemo">
+    ' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '
+        </td>
+                </tr>';
+            ?>
+        
 <?php
     }
 }

@@ -69,8 +69,8 @@ while ($fila = $resultado->fetch_assoc()) {
             echo '<h6 class="card-title text-danger"><b>Sin datos del solicitante</b></h6>';
         }
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
-            <h6 class="card-text"><b>Solicitante: </b><br><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
-            class="rounded-circle me-2" style="margin-top: 5px; width: 25px; height: 25px; object-fit: cover;" alt="avatar">
+            <h6 class="card-text"><b>Solicitante: </b><br><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+            class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
             ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
@@ -121,7 +121,7 @@ while ($fila = $resultado->fetch_assoc()) {
                             <i class="fa-solid fa-location-dot"></i> 
                         </button></td>
             <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
-                class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;" alt="avatar"></td>
+                class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar"></td>
             <td>' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '            </td>
         </tr>';
         echo '<?php';

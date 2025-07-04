@@ -1161,6 +1161,12 @@ height: auto;
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.6rem;
 }
+.btntablaverificarcomodatodemojuridico{
+  background-color: #078899; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
 .estadocomodato,
 .estadocomodatoimg{
   position: absolute;
@@ -1226,6 +1232,9 @@ height: auto;
 }
 .titulostablaverificarcomodato{
   font-size: 0.9rem;
+}
+.titulostablaverificarcomodatodemo{
+  font-size: 0.79rem;
 }
 .btnmosrarmodalunidadsolicitud{
   background-color: #eb7e35; /* tu color deseado */
