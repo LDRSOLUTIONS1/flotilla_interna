@@ -2307,3 +2307,23 @@ height: auto;
     flex-direction: column;
   }
 }
+/*------------------------------------------------------------estilos de las pruebas unidades demos ----------------------------*/
+.contenedorpruebasunidadesdemos{
+  padding-top: 60px;
+  position: relative;
+}
+.titulosletrasunidademopruebas {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasunidademopruebas {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}

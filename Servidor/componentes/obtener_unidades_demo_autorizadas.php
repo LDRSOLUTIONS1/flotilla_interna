@@ -3,7 +3,6 @@ include("../../Servidor/conexion.php");
 if (!isset($_SESSION)) {
     session_start();
 }
-
         //uda = Unidad Demo Autorizada
         //pf = Persona Fisica
         //pm = Persona Moral
