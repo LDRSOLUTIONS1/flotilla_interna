@@ -50,6 +50,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     </select>
                     <label for="marcaunidad">Marca</label>
                 </div>
+                    <label for="marcaunidad"></label>
+
             </div>
 
             <!-- Modelo (vacío inicialmente) -->

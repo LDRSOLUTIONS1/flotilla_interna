@@ -87,7 +87,7 @@ while ($fila = $resultado->fetch_assoc()) {
         echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">';
         echo '
             <td class="text-center">
-                <button type="button" class="fas fa-eye btn btn-sm btn-outline-primary btnmostrarpruebas" data-infodemo="' . $fila['id_asignacion_unidad_demo'] . '"></button>
+                <button type="button" class="fas fa-eye btn btn-sm btn-outline-green btnmostrarinfodemo" data-infodemo="' . $fila['id_unidad'] . '"></button>
             </td>
             <td style="text-align: center;">
                 <button type="button" class="btn btn-sm btn-mapa btnubicacionunidad" data-vin="' . $fila['vin'] . '">
@@ -99,10 +99,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
             <td class="text-center">
-                <button type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodato"
-                    data-idunidad="' . $fila['id_unidad'] . '" 
-                    data-id="' . $fila['id_asignacion_unidad_demo'] . '" 
-                    data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '"></button>
+                <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
             </td>
             <td class="titulostablaverificarcomodatodemo">';
 

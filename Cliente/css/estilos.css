@@ -2327,3 +2327,92 @@ height: auto;
     font-size: 1.6rem;
   }
 }
+/*contnedor para el buscador de las unidades demos*/
+.contenedorbuscadorpruebasunidademo{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+@media(max-width: 768px){
+  .contenedorbuscadorpruebasunidademo{
+    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+}
+/*estilo de los titulos */
+.titulosletrarealizacionpruebademo {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrarealizacionpruebademo {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
+/*estilo de los subtotulo */
+.titulosletrarealizacionpruebademo {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrarealizacionpruebademo {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
+/*estilo del boton eye outline*/
+.btn-outline-green {
+  color: #61996e;
+  border: 1px solid #61996e;
+  background-color: transparent;
+}
+
+.btn-outline-green:hover {
+  background-color: #61996e;
+  color: white;
+}
+.contenedorrealizacionprueba{
+  position: absolute;
+  padding-top: 60px;
+  left: 50px;
+  border-radius: 15px;
+  background-color: rgb(219, 217, 223);
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+.contenedorrealizacionprueba:hover{
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.imgunidadpruebademo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 150px;
+    max-height: 170px;
+    border-radius: 15px;
+}
+.letrasinfounidademoprueba{
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  font-size: 0.9rem;
+}

@@ -76,7 +76,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <th class="titulostablaunidades">Tipo de unidad</th>
         <th class="titulostablaunidades">Sede</th>
         <th class="titulostablaunidades">Kilometraje</th>
-        <th class="titulostablaunidades sticky-left-0">Maps</th>
+        <th class="titulostablaunidades">Maps</th>
         <th class="titulostablaunidades">Seguros</th>
         <th class="titulostablaunidades">Tenencias</th>
         <th class="titulostablaunidades">Verificaciones</th>
@@ -93,7 +93,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <th class="titulostablaunidades">Tipo de unidad</th>
         <th class="titulostablaunidades">Sede</th>
         <th class="titulostablaunidades">Kilometraje</th>
-        <th class="titulostablaunidades sticky-left-0">Maps</th>
+        <th class="titulostablaunidades">Maps</th>
         <th class="titulostablaunidades">Seguros</th>
         <th class="titulostablaunidades">Tenencias</th>
         <th class="titulostablaunidades">Verificaciones</th>
@@ -384,25 +384,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
   </div>
 </div>
 
-
-<!------------------------------------------------------------------------modal para prestar unidad demo---------------------------------------------------->
-<!--modal-->
-<div class="modal fade modalprestarunidademo" id="modalprestarunidademo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Prestar unidad demo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalprestarunidademo"></button>
-      </div>
-      <div class="modal-body" id="modalprestarunidademobody">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="btncerrarmodalprestarunidademo" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btnprestarunidaddemo">Prestar</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!--------------------------------------------------------------------------Modal para ver el Mapa y saber donde esta la unidad-->
 <!--modal-->

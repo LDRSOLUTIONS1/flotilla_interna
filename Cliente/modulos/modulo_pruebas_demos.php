@@ -19,13 +19,13 @@ $resultado = $conexion->query($sql);
 $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
-<!-------------------------------------------aqui comienza el contenedor pruebas de unidades demos por parte del usuario tipo 9 ----------------------------------------------------------->
+<!-------------------------------------------aqui comienza el contenedor pruebas de unidades demos por parte del usuario tipo 9 ---------------------------------->
 <div class="contenedorpruebasunidadesdemos">
     <h5 class="titulosletrasunidademopruebas text-nowrap">Pruebas unidades demos</h5>
 </div>
 
 <!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorunidadautorizada">
+<div class="contenedorbuscadorpruebasunidademo">
     <div class="buscadorunidadesdemoautorizadas mb-3 col-md-8">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
     </div>
@@ -51,7 +51,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 
-<!---------------------------------------modal para ver los detalles del usuario demo del lado del ususario tipo 9 master driver--------------------------------------->
+<!---------------------------------------modal para ver los detalles de la unidad demo del lado del usuario tipo 9 master driver--------------------------------------->
 <!--modal-->
 <div class="modal fade modalinfopruebaunidademo" id="modalinfopruebaunidademo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -64,31 +64,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalinfopruebaunidademo" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnaprovarunidademofisica">Aprovar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Denegar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!--------------------------------------modal para escribir el motivo por el cual se denego el comodato firmado---------------------------------------------->
-<!--modal-->
-<div class="modal fade modaldescripcionnegacionunidademofisica" id="modaldescripcionnegacionunidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Denegar carta responsiva</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodaldescripcionnegacionunidademofisica"></button>
-            </div>
-            <div class="modal-body" id="modaldescripcionnegacionunidademofisicabody">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btncerrarmodaldescripcionnegacionunidademofisica" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarunidaddemofisica">Enviar motivo de denegación</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!--------------------------------------------------------------------------Modal para ver el Mapa y saber donde esta la unidad-->
 <!--modal-->
 <div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">

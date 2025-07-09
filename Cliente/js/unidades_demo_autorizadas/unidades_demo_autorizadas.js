@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  //AQUI USAMOS ESTE CODIGO PARA FILTRAR POR TIPO DE SOLICITANTE
   document.querySelectorAll(".opcion-filtro-solicitante").forEach(opcion => {
     opcion.addEventListener("click", function (e) {
       e.preventDefault();

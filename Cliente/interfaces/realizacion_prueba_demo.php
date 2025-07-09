@@ -33,7 +33,7 @@ error_reporting(E_ALL);
 
 
     
-    <title>Unidades</title>
+    <title>Realización de prueba</title>
 
 </head>
 
@@ -47,7 +47,7 @@ error_reporting(E_ALL);
     <div class="cuadroblancocontenido">
 
 
-        <?php include("../modulos/modulo_unidades.php"); ?>
+        <?php include("../modulos/modulo_realizacion_prueba_demo.php"); ?>
 
     </div>
 
