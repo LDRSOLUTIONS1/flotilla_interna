@@ -313,3 +313,12 @@ if (resultado == "Autorizacionunidademo") {
 
   limpiarparametros();
 }
+//alerta de prueba demo insertada
+if (resultado == "pruebasinsertadas") {
+  Swal.fire({
+    title: "Prueba demo insertada correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+}

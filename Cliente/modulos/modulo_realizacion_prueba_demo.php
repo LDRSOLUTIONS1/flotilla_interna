@@ -1,4 +1,3 @@
-
 <?php
 include("../../Servidor/conexion.php");
 
@@ -8,16 +7,6 @@ if (!isset($_SESSION)) {
 }
 
 $colaborador = $_SESSION['id_colaborador'];
-
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
-
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-- Contenedor -->
@@ -143,6 +132,7 @@ if (isset($_GET['id_unidad'])) {
     $consulta = "SELECT 
                     a.id_asignacion_unidad_demo,
                     a.id_unidad,
+                    a.id_estado_prueba_demo,
                     model.nombre_modelo,
                     unid.placa,
                     unid.vin,
@@ -158,61 +148,130 @@ if (isset($_GET['id_unidad'])) {
     $stmt->bind_param("i", $id_asignacion);
     $stmt->execute();
     $resultado = $stmt->get_result();
-
     echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
-    echo "<table class='table table-bordered'>
-            <thead>
+    while ($fila = $resultado->fetch_assoc()) {
+        if (is_null($fila['id_estado_prueba_demo'])) {
+            echo "<button type='button' id='realizacion_prueba' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar primera prueba</button>";
+        } else if ($fila['id_estado_prueba_demo'] == 1) {
+            echo "<button type='button' id='realizacion_prueba' class='btn btn-segunda_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar segunda prueba</button>";
+        } else if ($fila['id_estado_prueba_demo'] == 2) {
+            echo "<button type='button' id='realizacion_prueba' class='btn btn-tercera_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar tercera prueba</button>";
+        } else if ($fila['id_estado_prueba_demo'] == 3) {
+            // no se muestra el boton
+        }
+    $consulta_pruebas = "SELECT 
+                    p.id_prueba,
+                    p.id_asignacion_unidad_demo,
+                    p.fecha_prueba,
+                    p.nombre_del_conductor,
+                    p.tipo_prueba,
+                    p.temperatura,
+                    p.revoluciones,
+                    p.velocidad,
+                    p.kilometraje,
+                    p.foto_tablero,
+                    p.foto_odometro,
+                    p.foto_unidad,
+                    p.comentarios,
+                    crp.nombre_1,
+                    crp.nombre_2,
+                    crp.apellido_paterno,
+                    crp.apellido_materno
+                FROM pruebas_unidad_demo AS p
+                LEFT JOIN colaboradores AS crp ON p.id_colaborador_registra_prueba = crp.id_colaborador
+                WHERE p.id_asignacion_unidad_demo = ?";
+
+    $stmti = $conexion->prepare($consulta_pruebas);
+    $stmti->bind_param("i", $id_asignacion);
+    $stmti->execute();
+    $resultado = $stmti->get_result();
+    echo "<div class='table-responsive'>
+            <table class='table table-hover tablaunidades' id='tablaUnidades'>
+            <thead class='table-light'>
                 <tr>
-                    <th>Unidad</th>
-                    <th>Placa</th>
-                    <th>VIN</th>
-                    <th>Estado de la Prueba</th>
+                    <th class='letratablapruebademo'>#</th>
+                    <th class='letratablapruebademo'>Fecha y Hora Prueba</th>
+                    <th class='letratablapruebademo'>Nombre del Conductor</th>
+                    <th class='letratablapruebademo'>Tipo Prueba</th>
+                    <th class='letratablapruebademo'>Temperatura</th>
+                    <th class='letratablapruebademo'>Revoluciones</th>
+                    <th class='letratablapruebademo'>Velocidad</th>
+                    <th class='letratablapruebademo'>Kilometraje</th>
+                    <th class='letratablapruebademo'>Tablero</th>
+                    <th class='letratablapruebademo'>OdÃ³metro</th>
+                    <th class='letratablapruebademo'>Unidad</th>
+                    <th class='letratablapruebademo'>Comentarios</th>
+                    <th class='letratablapruebademo'>Registrador de prueba</th>
                 </tr>
             </thead>
             <tbody>";
 
+    $contador = 1;
     while ($fila = $resultado->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . ($fila['nombre_modelo']) . "</td>";
-        echo "<td>" . ($fila['placa']) . "</td>";
-        echo "<td>" . ($fila['vin']) . "</td>";
-        echo "<td>" . ($fila['estado_prueba']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($contador++) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['fecha_prueba']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['revoluciones']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['velocidad']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['kilometraje']) . "</td>";
+        echo "<td class='letratablapruebademo' style='text-align: center;'>
+                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_tablero/" . ($fila['foto_tablero']) . "' target='_blank'>
+                    <button class='btn btn-sm btn-tablero'><i class='fas fa-dashboard'></i></button>
+                </a>
+              </td>";
+        echo "<td class='letratablapruebademo' style='text-align: center;'>
+                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_odometro/" . ($fila['foto_odometro']) . "' target='_blank'>
+                    <button class='btn btn-sm btn-odometro'><i class='fas fa-tachometer-alt'></i></button>
+                </a>
+              </td>";
+        echo "<td class='letratablapruebademo' style='text-align: center;'>
+                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_unidad_exterior/" . ($fila['foto_unidad']) . "' target='_blank'>
+                    <button class='btn btn-sm btn-unidad-exterior'><i class='fas fa-car-side'></i></button>
+                </a>
+              </td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
+        echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
         echo "</tr>";
     }
+
+
+    $stmti->close();
+        }
+    
 
     echo "</tbody></table>";
 
     $stmt->close();
 } else {
-    echo "<h1>ID de asignación no proporcionado.</h1>";
+    echo "<h1>ID de asignaciÃ³n no proporcionado.</h1>";
 }
 ?>
 </div>
 
-
-
-
-
-
-<!--------------------------------------------------------------------------Modal para ver el Mapa y saber donde esta la unidad-->
+<!--------------------------------------------------------------------------modal para registrar las pruebas demos por unidad-------------------->
 <!--modal-->
-<div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Ultima actualización de la ubicación de la unidad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <div id="mapaUnidad" style="height: 500px;"></div>
-      </div>
+<div class="modal fade modalregistrarpruebas" id="modalregistrarpruebas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prueba unidad demo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalpruebademo"></button>
+            </div>
+            <div class="modal-body" id="modalregistrarpruebasbody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalpruebademo" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnregistrarpruebademo">Registrar PRUEBA</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-
-
+<!--pruebas unidades demo-->
+<script src="../js/pruebas_unidades_demo/realizacion_pruebas_demos.js"></script>
 <!--js para filtrar la tabla de unidades-->
 <script src="../js/unidades/filtrar_tabla.js"></script>
-<!--js para poder obtener iinformacion del mapa -->
-<script src="../js/api/obtener_mapa_telematics.js"></script>
+
