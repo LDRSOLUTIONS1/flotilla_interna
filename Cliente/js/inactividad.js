@@ -3,7 +3,7 @@ console.log("Archivo inactividad.js cargado");
 let temporizador;
 
 function redirigir() {
-    window.location.href = "http://intranet.com/LDRHSystem/";
+    window.location.href = "http://localhost/intranet/LDRHSystem/";
 }
 
 function reiniciarTemporizador() {

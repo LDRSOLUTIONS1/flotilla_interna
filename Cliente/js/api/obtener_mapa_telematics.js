@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function mostrarUbicacionUnidad(vin) {
-    fetch(`http://flotillaldr.com/Servidor/solicitudes/unidades/get_ubicacion_por_vin.php?vin=${vin}`)
+    fetch(`http://localhost/flotilla_interna/Servidor/solicitudes/unidades/get_ubicacion_por_vin.php?vin=${vin}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("No se pudo obtener respuesta del servidor");

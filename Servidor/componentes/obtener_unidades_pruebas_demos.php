@@ -25,6 +25,7 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 estatuscomodato.estatus_comodato,
                 uda.fecha_prestamo,
                 uda.fecha_devolucion,
+                uda.id_estado_prueba_demo,
                 ca.nombre_1 AS nombre1colaborador,
                 ca.nombre_2 AS nombre2colaborador,
                 ca.apellido_paterno AS apellidopcolaborador,
@@ -34,7 +35,8 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 aud.apellido_paterno AS apellidopaternoautorizador,
                 aud.apellido_materno AS apellidomaternoautorizador,
                 usr.avatar AS avatar_colaborador,
-                usr_aut.avatar AS avatar_autorizador
+                usr_aut.avatar AS avatar_autorizador,
+                epd.estado_prueba
             FROM asignacion_unidad_demo AS uda
                 LEFT JOIN unidades AS unid 
                 ON uda.id_unidad = unid.id_unidad
@@ -54,6 +56,8 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 ON usr.id_colaborador = ca.id_colaborador
                 LEFT JOIN usuarios AS usr_aut
                 ON usr_aut.id_colaborador = aud.id_colaborador
+                LEFT JOIN estado_pruebas_demos AS epd
+                ON uda.id_estado_prueba_demo = epd.id_estado_prueba_demo
             WHERE uda.autorizacion = 'APROVADO'";
 
 $resultado = $conexion->query($sqlobtenerunidadsubircomodato);
@@ -102,21 +106,13 @@ while ($fila = $resultado->fetch_assoc()) {
                 <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
             </td>
             <td class="titulostablaverificarcomodatodemo">';
-
-        if ($fila['id_estatus_comodato_demo'] == 3) {
-            echo '<div class="d-flex align-items-center">
-                    <img src="../../Cliente/videos/succes-green.gif" class="me-2" style="width:24px;">
-                    <span><b>Comodato subido</b></span>
-                </div>';
-        } elseif ($fila['id_estatus_comodato_demo'] == 7) {
-            echo '<div class="d-flex align-items-center">
-                    <img src="../../Cliente/videos/warning-red.gif" class="me-2" style="width:24px;">
-                    <span><b>Comodato regresado</b></span>  
-                </div>';
+        if (is_null($fila['id_estado_prueba_demo'])) {
+            echo '<span class="text-danger">NO SE HA REALIZADO</span>';
+        } elseif ($fila['id_estado_prueba_demo'] == 3) {
+            echo '<span class="text-success">FINALIZADA</span>';
         } else {
-            echo '';
+            echo $fila['estado_prueba'];
         }
-
         echo '</td>
             <td class="text-center">
                 <img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
@@ -128,9 +124,8 @@ while ($fila = $resultado->fetch_assoc()) {
                     class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
             </td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '</td>
-        </tr>';
+            </tr>';
     }
 }
 
 echo '</tbody></table></div>';
-?>

@@ -73,6 +73,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <li ><a class="menulist" href="pruebas_demos.php">Pruebas</a></li>
             <li ><a class="menulist" href="resultados_finales_pruebas_demos.php">Resultados finales</a></li>
         <?php endif; ?>
-        <li ><a class="menulist" href="http://intranet.com/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
+        <li ><a class="menulist" href="http://localhost/intranet/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
     </ul>
 </nav>

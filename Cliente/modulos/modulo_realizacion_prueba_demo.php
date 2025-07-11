@@ -198,7 +198,7 @@ if (isset($_GET['id_unidad'])) {
                     <th class='letratablapruebademo'>Velocidad</th>
                     <th class='letratablapruebademo'>Kilometraje</th>
                     <th class='letratablapruebademo'>Tablero</th>
-                    <th class='letratablapruebademo'>OdÃ³metro</th>
+                    <th class='letratablapruebademo'>Odómetro</th>
                     <th class='letratablapruebademo'>Unidad</th>
                     <th class='letratablapruebademo'>Comentarios</th>
                     <th class='letratablapruebademo'>Registrador de prueba</th>
@@ -246,7 +246,7 @@ if (isset($_GET['id_unidad'])) {
 
     $stmt->close();
 } else {
-    echo "<h1>ID de asignaciÃ³n no proporcionado.</h1>";
+    echo "<h1>ID de asignación no proporcionado.</h1>";
 }
 ?>
 </div>

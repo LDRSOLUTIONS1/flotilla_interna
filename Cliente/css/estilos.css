@@ -709,7 +709,6 @@ body {
 }
 /*estilos para la tabla administracion de unidades*/
 .table-responsive {
-  padding-top: 30px;
 }
 /* Estilo para el encabezado (sin fondo negro) */
 .thead {
@@ -2534,21 +2533,51 @@ height: auto;
 .btn-tablero{
   background-color: #a87912; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 4px 9px; /* Adjust padding to make the button smaller */
+  padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 
 
 .btn-odometro{
   background-color: #128aa8; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 4px 9px; /* Adjust padding to make the button smaller */
+  padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 
 
 .btn-unidad-exterior{
   background-color: #4846b6; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 4px 9px; /* Adjust padding to make the button smaller */
+  padding: 2px 6px; /* Adjust padding to make the button smaller */
+}
+/*---------------------------------------------estilos de los resultados de las pruebas*/
+.contenedor_grafica{
+  padding-top: 70px;
+}
+
+/* Asegura que el canvas se escale bien */
+#graficaPruebas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Contenedor para mantener aspecto 1:1 y evitar desbordamientos */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Responsive layout para contadores */
+.estado-prueba {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+.estado-prueba .item {
+    flex: 1 1 150px;
+    text-align: center;
 }
 
 

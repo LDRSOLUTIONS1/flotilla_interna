@@ -65,7 +65,7 @@ if (isset($_POST['id_info_unidad_demo'])) {
     }
     echo '<div class="row">
 <div class="contenedorimgunidadasignacion">
-    <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $data['img_unidad'] . '" class="imgasignacionunidad" onerror="this.src=\'../../../Cliente/img/unidades/carro_desconocido.png\'" alt="..." >
+    <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $data['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" class="imgasignacionunidad" alt="..." >
 </div>';
     echo '<input type="hidden" id="id_usuario_pool" name="id_usuario_pool" value="' . $id_usuario_pool . '">';
     // Mostrar los campos sin editar
