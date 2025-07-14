@@ -16,5 +16,5 @@ $resultado = $conexion->query($sql);
 if ($resultado->num_rows > 0) {
     $fila = $resultado->fetch_assoc();
 
-    echo $fila['nombre_fav'] . " " . $fila['apellido_paterno'] . " " . $fila['apellido_materno'];
+    echo $fila['nombre_fav'] ;
 }

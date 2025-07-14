@@ -21,11 +21,11 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="../css/estilos.css?v=1">
     <!--cdn para icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
-    integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-<!---estilos de los botones para descragar archhivos csv pdf excel--->>
+    <!---estilos de los botones para descragar archhivos csv pdf excel--->>
     <link rel="stylesheet" href="../datatable/buttons.dataTables.css">
     <link rel="stylesheet" href="../datatable/dataTables.dataTables.css">
     <!-- Leaflet JS -->
@@ -34,7 +34,7 @@ error_reporting(E_ALL);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-    
+
     <title>Resultados finales</title>
 
 </head>
@@ -49,7 +49,7 @@ error_reporting(E_ALL);
     <div class="cuadroblancocontenido">
 
 
-        <?php include("../modulos/modulo_resultados_finales_pruebas_demos.php"); ?>
+        <?php include("../modulos/modulo_desempeños_unidades_demos.php"); ?>
 
     </div>
 
@@ -57,7 +57,7 @@ error_reporting(E_ALL);
         <span class="loader"></span>
     </div>
 
-    
+
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->

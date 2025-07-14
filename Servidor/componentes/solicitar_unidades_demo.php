@@ -86,11 +86,11 @@
         <button class="btn btn-outline-secondary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFiltros" aria-controls="offcanvasFiltros">
             Mostrar filtros avanzados
         </button>
-    <!--boton para limpiar los campos principales-->
-        <button class="btn btn-outline-danger me-3 fas fa-trash-alt" type="button" onclick="limpiarCamposPrincipales()">
-        </button>
         <!-- Botón para verificar por fuera -->
-        <button class="btn btn-verificar" id="btnsolicitudunidademo">Verificar unidades</button>
+        <button class="btn btn-verificar me-3" id="btnsolicitudunidademo">Verificar unidades</button>
+        <!--boton para limpiar los campos principales-->
+            <button class="btn btn-outline-danger me-3 fas fa-trash-alt" type="button" onclick="limpiarCamposPrincipales()">
+            </button>
     </div>
 
     <!-- Panel lateral de filtros -->

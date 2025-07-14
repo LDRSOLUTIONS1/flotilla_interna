@@ -8,7 +8,7 @@ function redirigir() {
 
 function reiniciarTemporizador() {
     clearTimeout(temporizador);
-    temporizador = setTimeout(redirigir, 600000); // 10 minutos
+    temporizador = setTimeout(redirigir, 1200000); // 20 minutos
 }
 
 // Detectar actividad del usuario

@@ -71,7 +71,7 @@ if (isset($_POST['sederecolecciondemo'])
                 <div class="conetenedortarjetauniddemo d-flex border p-3 mb-3 align-items-start" style="max-width: 700px; padding-top: 820px;">
                     <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" alt="Imagen del vehículo"
                          class="imgunidadpoolsolicitud" style="width: 180px; height: auto; border-radius: 8px; margin-right: 20px;"
-                         onerror="this.src=\'../../../Cliente/img/unidades/carro_desconocido.png\'">
+                         onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'">
 
                     <div>
                         <h5><strong>' . $fila['nombre_marca'] . ' ' . $fila['nombre_modelo'] . '</strong></h5>

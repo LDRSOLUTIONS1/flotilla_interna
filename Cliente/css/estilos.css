@@ -324,11 +324,43 @@ body {
   background-image: url("../img/LDR_LOGO.png");
   background-size: cover;
   display: inline-block;
+  cursor: pointer;
+}
+
+.icono:hover {
+  opacity: 0.8;
+}
+
+.icono:active {
+  transform: scale(0.95);
+}
+
+.icono:link,
+.icono:visited {
+  text-decoration: none;
+}
+
+.icono:link:after,
+.icono:visited:after {
+  content: attr(data-url);
+  display: none;
+}
+
+.icono[data-url]::before {
+  content: attr(data-url);
+  display: none;
 }
 .txtnombreusuario{
   font-weight: bold;
-  font-size: 0.7rem;
-  padding-left: 80px;
+  font-size: 0.8rem;
+  padding-left: 70px;
+  color: black;
+  text-align: center;
+}
+.imgavatar{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
 }
 /* Menú de navegación */
 .menu {
