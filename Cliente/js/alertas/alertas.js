@@ -322,3 +322,12 @@ if (resultado == "pruebasinsertadas") {
     confirmButtonText: "Aceptar",
   });
 }
+//alerta para finalizar pruebas demos
+if (resultado == "pruebafinalizada") {
+  Swal.fire({
+    title: "Pruebas finalizadas correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+} 

@@ -198,6 +198,37 @@ document.body.addEventListener("click", function (event) {
     }
   }
 
+  //finalizamos las pruebas
+  $(document).on('click', '.finalizar_prueba', function () {
+    const id_asignacion = $(this).data('idpruebademo');
+
+    Swal.fire({
+        title: "¿Estás seguro de finalizar las pruebas para esta unidad?",
+        text: "No podrás registrar más.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, finalizar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../../Servidor/solicitudes/pruebas_unidades_demo/finalizar_pruebas_demo.php',
+                type: 'POST',
+                data: { id_asignacion },
+                success: function (response) {
+          console.log("entro a success");
+          console.log(response);
+          if (response.includes("correctamente")) {
+            contenedorspinner.style.display = "none";
+            window.location.href ="./realizacion_prueba_demo.php?id_unidad="+id_asignacion+"&resultado=pruebafinalizada"; //resultado nombre del parametro -> resultado del contenido
+          }
+        },
+            });
+        }
+    });
+});
+
 
 
 

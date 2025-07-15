@@ -73,14 +73,12 @@ if (isset($_POST['id_asignacion_unidad_demo'])
     $fila = mysqli_fetch_assoc($resultadocontarpruebas);
     $totalpruebas = $fila['total'];
 
-    if ($totalpruebas == 0) {
-        $queryactualizarasignacion = "UPDATE asignacion_unidad_demo SET id_estado_prueba_demo = 1 WHERE id_asignacion_unidad_demo = '$valorid_asignacion_unidad_demo'";
-    } else if ($totalpruebas == 1) {
-        $queryactualizarasignacion = "UPDATE asignacion_unidad_demo SET id_estado_prueba_demo = 2 WHERE id_asignacion_unidad_demo = '$valorid_asignacion_unidad_demo'";
-    } else if ($totalpruebas == 2) {
-        $queryactualizarasignacion = "UPDATE asignacion_unidad_demo SET id_estado_prueba_demo = 3 WHERE id_asignacion_unidad_demo = '$valorid_asignacion_unidad_demo'";
-    }
+if ($totalpruebas == 0) {
+    // Primera prueba: se actualiza el estado a EN PROCESO
+    $queryactualizarasignacion = "UPDATE asignacion_unidad_demo SET id_estado_prueba_demo = 2 WHERE id_asignacion_unidad_demo = '$valorid_asignacion_unidad_demo'";
     $resultadoactualizarasignacion = mysqli_query($conexion, $queryactualizarasignacion);
+}
+
 
     //insertar la prueba
     $queryinsertarprueba = "INSERT INTO pruebas_unidad_demo (id_asignacion_unidad_demo,

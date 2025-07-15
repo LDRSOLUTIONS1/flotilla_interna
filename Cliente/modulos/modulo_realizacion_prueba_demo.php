@@ -148,17 +148,41 @@ if (isset($_GET['id_unidad'])) {
     $stmt->bind_param("i", $id_asignacion);
     $stmt->execute();
     $resultado = $stmt->get_result();
+while ($fila = $resultado->fetch_assoc()) {
+    $id_asignacion = $fila['id_asignacion_unidad_demo'];
+    $estado = $fila['id_estado_prueba_demo'];
+
+    // Contar pruebas
+    $sqlTotalPruebas = "SELECT COUNT(*) AS total FROM pruebas_unidad_demo WHERE id_asignacion_unidad_demo = ?";
+    $stmtTotal = $conexion->prepare($sqlTotalPruebas);
+    $stmtTotal->bind_param("i", $id_asignacion);
+    $stmtTotal->execute();
+    $resTotal = $stmtTotal->get_result();
+    $filaTotal = $resTotal->fetch_assoc();
+    $totalPruebas = $filaTotal['total'];
+    $stmtTotal->close();
+
     echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
-    while ($fila = $resultado->fetch_assoc()) {
-        if (is_null($fila['id_estado_prueba_demo'])) {
-            echo "<button type='button' id='realizacion_prueba' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar primera prueba</button>";
-        } else if ($fila['id_estado_prueba_demo'] == 1) {
-            echo "<button type='button' id='realizacion_prueba' class='btn btn-segunda_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar segunda prueba</button>";
-        } else if ($fila['id_estado_prueba_demo'] == 2) {
-            echo "<button type='button' id='realizacion_prueba' class='btn btn-tercera_prueba realizacion_prueba' data-idpruebademo ='" . $fila['id_asignacion_unidad_demo'] . "'>Realizar tercera prueba</button>";
-        } else if ($fila['id_estado_prueba_demo'] == 3) {
-            // no se muestra el boton
-        }
+    echo "<h2 class='titulosletraconteopruebas'><strong>Pruebas realizadas:</strong> $totalPruebas</h2>";
+
+    // Mostrar botón según estado
+    if ($estado == 1 || $estado == null) { // NO SE HA REALIZADO
+        echo "<button type='button' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
+                Realizar primera prueba
+              </button>";
+    } elseif ($estado == 2) { // EN PROCESO
+        echo "<button type='button' class='btn btn-segunda_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
+                Realizar prueba: " . ($totalPruebas + 1) . "
+              </button>";
+        echo "<button type='button' class='btn btn-tercera_prueba finalizar_prueba' data-idpruebademo='$id_asignacion'>
+                Finalizar pruebas
+              </button>";
+    } elseif ($estado == 3) { // FINALIZADA
+        echo "<p class='text-success'><strong>Proceso finalizado.</strong></p>";
+    }
+
+    // código que muestra la tabla de pruebas
+
     $consulta_pruebas = "SELECT 
                     p.id_prueba,
                     p.id_asignacion_unidad_demo,

@@ -34,12 +34,15 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <!--boton para filtrar por tipo de solicitante-->
         <div class="dropdown mx-2">
             <button class="btn btn-secondary dropdown-toggle mb-3 mx-1" type="button" id="dropdownFiltroSolicitante" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrar por tipo de solicitante
+                Filtrar por...
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownFiltroSolicitante">
-                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="todos" href="#">Todas</a></li>
+                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="todos" href="#">Todos</a></li>
                 <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="fisica" href="#">Personas Físicas</a></li>
                 <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="moral" href="#">Personas Morales</a></li>
+                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="norealizado" href="#">No realizado</a></li>
+                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="enproceso" href="#">En proceso</a></li>
+                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="finalizado" href="#">Finalizada</a></li>
             </ul>
         </div>
     </div>

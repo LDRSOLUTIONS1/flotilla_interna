@@ -58,7 +58,7 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 ON usr_aut.id_colaborador = aud.id_colaborador
                 LEFT JOIN estado_pruebas_demos AS epd
                 ON uda.id_estado_prueba_demo = epd.id_estado_prueba_demo
-            WHERE uda.autorizacion = 'APROVADO'";
+            WHERE uda.autorizacion = 'APROVADO' AND uda.id_estado_prueba_demo = 3";
 
 $resultado = $conexion->query($sqlobtenerunidadsubircomodato);
 
@@ -73,30 +73,22 @@ echo '<div class="table-responsive">
                 <th class="titulostablaverificarcomodatodemo">Placa</th>
                 <th class="titulostablaverificarcomodatodemo">Asignación</th>
                 <th class="titulostablaverificarcomodatodemo">Devolución</th>
-                <th class="titulostablaverificarcomodatodemo">Pruebas</th>
                 <th class="titulostablaverificarcomodatodemo">Estado</th>
                 <th class="titulostablaverificarcomodatodemo">Solicitante</th>
                 <th class="titulostablaverificarcomodatodemo"></th>
                 <th class="titulostablaverificarcomodatodemo">Autorizador</th>
-                <th class="titulostablaverificarcomodatodemo"></th>
+                <th class="titulostablaverificarcomodatodemo"></th> 
+                <th class="titulostablaverificarcomodatodemo">Verificar</th>
             </tr>
         </thead>
         <tbody>';
 
 while ($fila = $resultado->fetch_assoc()) {
-    $estado = "norealizado";
-if (!is_null($fila['id_estado_prueba_demo'])) {
-    if ($fila['id_estado_prueba_demo'] == 3) {
-        $estado = "finalizado";
-    } else {
-        $estado = "enproceso";
-    }
-}
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
         $tipo_solicitante = $fila['id_persona_fisica'] ? 'fisica' : 'moral';
 
-        echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . ' tipo-' . $estado . '">';
+        echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">';
         echo '
             <td class="text-center">
                 <button type="button" class="fas fa-eye btn btn-sm btn-outline-green btnmostrarinfodemo" data-infodemo="' . $fila['id_unidad'] . '"></button>
@@ -110,28 +102,26 @@ if (!is_null($fila['id_estado_prueba_demo'])) {
             <td class="titulostablaverificarcomodatodemo">' . $fila['placa'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td class="text-center">
-                <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
-            </td>
             <td class="titulostablaverificarcomodatodemo">';
-        if (is_null($fila['id_estado_prueba_demo'])) {
-            echo '<span class="text-danger">NO SE HA REALIZADO</span>';
-        } elseif ($fila['id_estado_prueba_demo'] == 3) {
-            echo '<span class="text-success">FINALIZADA</span>';
-        } else {
-            echo $fila['estado_prueba'];
-        }
-        echo '</td>
-            <td class="text-center">
-                <img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+            if ($fila['id_estado_prueba_demo'] == 3) {
+                echo '<span class="text-success">FINALIZADA</span>';
+                } else {
+                    echo 'No hay pruebas';
+                    }
+                    echo '</td>
+                    <td class="text-center">
+                    <img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
                     class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
-            </td>
-            <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</td>
-            <td class="text-center">
-                <img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
+                    </td>
+                    <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</td>
+                    <td class="text-center">
+                    <img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
                     class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
-            </td>
-            <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '</td>
+                    </td>
+                    <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '</td>
+                    <td class="text-center">
+                        <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
+                    </td>
             </tr>';
     }
 }

@@ -2519,10 +2519,22 @@ height: auto;
   font-weight: bold;
   animation: slide-in 0.5s ease-out forwards;
 }
+.titulosletraconteopruebas {
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
 @media (max-width: 768px) {
   .titulosletrarealizacionpruebademoestatus {
     padding-top: 10px;
     font-size: 1.6rem;
+  }
+  .titulosletraconteopruebas{
+    padding-top: 10px;
+    font-size: 0.9rem;
   }
 }
 /*estilo de la letra*/
@@ -2543,12 +2555,16 @@ height: auto;
   font-size: 0.9rem;
 }
 .btn-tercera_prueba{
-  background-color: #b1b342; /* tu color deseado */
+  background-color: #e51111; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 .realizacion_prueba {
+  display: inline-block;
+  margin: 10px;
+}
+.finalizar_prueba  {
   display: inline-block;
   margin: 10px;
 }
@@ -2611,6 +2627,24 @@ height: auto;
     flex: 1 1 150px;
     text-align: center;
 }
-
-
-
+/*------------------------------------------------ESTILOS ASMINISTRADOR PRUEBAS DEMOS--------------------------------------------------*/
+/*subir los resultados finales de la prueba por unidad*/
+.contenedordesempeñosdemos{
+  padding-top: 60px;
+  position: relative;
+}
+.titulosletrasdesempeñodemos {
+  padding-top: 50px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+@media (max-width: 768px) {
+  .titulosletrasdesempeñodemos {
+    padding-top: 50px;
+    font-size: 1.6rem;
+  }
+}
