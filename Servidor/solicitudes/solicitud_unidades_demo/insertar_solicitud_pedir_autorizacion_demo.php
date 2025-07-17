@@ -18,7 +18,8 @@ if (
     isset($_POST['id_unidad']) &&
     isset($_POST['id_colaborador']) &&
     isset($_POST['fechasolicitudunidademo']) &&
-    isset($_POST['fechadevolucionunidademo'])
+    isset($_POST['fechadevolucionunidademo']) &&
+    isset($_POST['requiere_master_driver'])
 ) {
     $valoridunidad = mysqli_real_escape_string($conexion, $_POST['id_unidad']);
     $id_colaborador_que_asigna = mysqli_real_escape_string($conexion, $_POST['id_colaborador']);
@@ -31,30 +32,50 @@ if (
 
     $fechasolicitudunidademo = mysqli_real_escape_string($conexion, $_POST['fechasolicitudunidademo']);
     $fechadevolucionunidademo = mysqli_real_escape_string($conexion, $_POST['fechadevolucionunidademo']);
+    $requiere_master_driver = isset($_POST['requiere_master_driver']) && $_POST['requiere_master_driver'] == '1' ? 1 : 0;
+    $objetivo_prueba_demo = mysqli_real_escape_string($conexion, $_POST['objetivo_prueba_demo']);
+    $comentarios_pruebas_demo = mysqli_real_escape_string($conexion, $_POST['comentarios_pruebas_demo']);
 
+echo "requiere_master_driver: $requiere_master_driver";
 
     // Insertamos la unidad
-    $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo 
-    (id_unidad, id_colaborador_que_asigna, fecha_prestamo, fecha_devolucion";
+$columnas = [
+    "id_unidad",
+    "id_colaborador_que_asigna",
+    "fecha_prestamo",
+    "fecha_devolucion",
+    "objetivo_prestamo",
+    "comentarios",
+    "solicitar_master_driver"
+];
 
-$valores = "'$valoridunidad', '$id_colaborador_que_asigna', '$fechasolicitudunidademo', '$fechadevolucionunidademo'";
+$valores = [
+    "'$valoridunidad'",
+    "'$id_colaborador_que_asigna'",
+    "'$fechasolicitudunidademo'",
+    "'$fechadevolucionunidademo'",
+    "'$objetivo_prueba_demo'",
+    "'$comentarios_pruebas_demo'",
+    "'$requiere_master_driver'"
+];
 
 if ($id_persona_fisica !== null) {
-    $queryinsertarsolicitudunidademo .= ", id_persona_fisica";
-    $valores .= ", '$id_persona_fisica'";
+    $columnas[] = "id_persona_fisica";
+    $valores[] = "'$id_persona_fisica'";
 } elseif ($id_persona_moral !== null) {
-    $queryinsertarsolicitudunidademo .= ", id_persona_moral";
-    $valores .= ", '$id_persona_moral'";
+    $columnas[] = "id_persona_moral";
+    $valores[] = "'$id_persona_moral'";
 } else {
     echo "❌ Error: No se proporcionó persona física ni moral.";
     exit;
 }
 
-$queryinsertarsolicitudunidademo .= ") VALUES ($valores)";
+$queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . implode(", ", $columnas) . ") VALUES (" . implode(", ", $valores) . ")";
 
 
     if ($ejecutar = mysqli_query($conexion, $queryinsertarsolicitudunidademo)) {
         $queryActualizarEstadoUnidad = "UPDATE unidades SET id_estado_unidad = 4 WHERE id_unidad = '$valoridunidad'";
+
         if (mysqli_query($conexion, $queryActualizarEstadoUnidad)) {
             echo "Registro y actualización exitosos.";
 

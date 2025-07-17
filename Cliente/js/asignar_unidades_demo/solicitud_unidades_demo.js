@@ -304,7 +304,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 "btnsolicitaruniaddemo"
               );
               if (btnSolicitar) {
-                btnSolicitar.addEventListener("click", function () {
+                //elimina el listener anterior para no realizar muchas inserciones en la bd y mandar muchos correos nuevoBoton
+                const nuevoBoton = btnSolicitar.cloneNode(true);
+                btnSolicitar.parentNode.replaceChild(nuevoBoton, btnSolicitar);
+
+                nuevoBoton.addEventListener("click", function () {
+                  // Obtener los valores de los campos
                   const id_unidad = document.getElementById("id_unidad");
                   const id_persona_fisica = document.getElementById("id_persona_fisica");
                   const id_persona_moral = document.getElementById("id_persona_moral");
@@ -345,6 +350,18 @@ document.addEventListener("DOMContentLoaded", function () {
                   if (tienePersonaMoral) {
                     caja1.append("id_persona_moral", id_persona_moral.value);
                   }
+                  const requiereMasterDriver = document.getElementById("requiere_master_driverldr");
+                  const comentarios_pruebas_demo = document.getElementById("comentarios_pruebas_demo");
+                  const objetivo_prueba_demo = document.getElementById("objetivo_prueba_demo");
+
+                  if (requiereMasterDriver && requiereMasterDriver.checked) {
+                    caja1.append("requiere_master_driver", "1");
+                  } else {
+                    caja1.append("requiere_master_driver", "0");
+                  }
+
+                  caja1.append("objetivo_prueba_demo",objetivo_prueba_demo.value);
+                  caja1.append("comentarios_pruebas_demo",comentarios_pruebas_demo.value);
 
                   contenedorspinner.style.display = "flex";
 

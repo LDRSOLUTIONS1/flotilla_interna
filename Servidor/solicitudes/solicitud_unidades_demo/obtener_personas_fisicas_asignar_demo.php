@@ -1,11 +1,7 @@
 <?php 
 include("../../conexion.php");
 
-// Iniciar sesión si no está iniciada
-if (!isset($_SESSION)
-&& isset($_POST['id_unidad'])
-&& isset($_POST['data_fecha_solicitudemo'])
-&& isset($_POST['data_fecha_devoluciondemo'])) {
+if (!isset($_SESSION) && isset($_POST['id_unidad']) && isset($_POST['data_fecha_solicitudemo']) && isset($_POST['data_fecha_devoluciondemo'])) {
     session_start();
 }
 
@@ -26,7 +22,7 @@ $resultado = $conexion->query($sql);
 $fila_tipo = $resultado->fetch_assoc();
 $id_tipo_usuario = $fila_tipo['id_tipo_usuario'] ?? null;
 
-// Consulta según tipo de usuario
+// Consulta de personas físicas
 $sql = "SELECT pf.id_persona_fisica, 
                pf.id_registrador_persona_fisica,
                col.nombre_1 AS nombre_1_colaborador,
@@ -44,39 +40,54 @@ $sql = "SELECT pf.id_persona_fisica,
         FROM personas_fisicas pf
         LEFT JOIN colaboradores col ON pf.id_registrador_persona_fisica = col.id_colaborador";
 
-// Aplicar condición según tipo
+// Si no es tipo administrador (4), limitar a sus registros
 if ($id_tipo_usuario !== null && $id_tipo_usuario != 4) {
-    // Usuarios comunes solo ven lo que registraron
     $sql .= " WHERE pf.id_registrador_persona_fisica = '$colaborador'";
 }
 
 $resultado = $conexion->query($sql);
 
-// Mostrar resultados
+// Generar tabla
 if ($resultado->num_rows > 0) {
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "
-        <th class='titulostablaunidades'>ID</th>
-        <th class='titulostablaunidades'>Nombre</th>
-        <th class='titulostablaunidades'>CURP</th>
-        <th class='titulostablaunidades'>RFC</th>
-        <th class='titulostablaunidades'>Domicilio</th>
-        <th class='titulostablaunidades'>Acción</th>
-        <tr>
-            <td class='titulostablaunidades'>" . $fila['id_persona_fisica'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['nombre_1'] . " " . $fila['nombre_2'] . " " . $fila['apellido_paterno'] . " " . $fila['apellido_materno'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['curp'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['rfc'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>
-            <td class='titulostablaunidades'>
-                <button class='btn btn-warning btn-sm btnasignarunidademo' data-id_persona_fisica='" . $fila['id_persona_fisica'] . "' data-id_unidad='" . $id_unidad . "' data-id_colaborador='" . $colaborador . "' data-fecha_solicitudemo='" . $data_fecha_solicitudemo . "' data-fecha_devoluciondemo='" . $data_fecha_devoluciondemo . "'>
-                    <i class='fa-solid fa-eye'></i> Asignar
-                </button>
-            </td>
-        </tr>";
+    echo "
+    <div class='table-responsive'>
+            <table class='table table-hover'>
+                <thead class='table-light'>
+                    <tr>
+                        <th class='titulostablaunidades'>ID</th>
+                        <th class='titulostablaunidades'>Nombre</th>
+                        <th class='titulostablaunidades'>CURP</th>
+                        <th class='titulostablaunidades'>RFC</th>
+                        <th class='titulostablaunidades'>Domicilio</th>
+                        <th class='titulostablaunidades'>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>";
 
+    while ($fila = $resultado->fetch_assoc()) {
+        echo "<tr>
+                <td class='titulostablaunidades'>{$fila['id_persona_fisica']}</td>
+                <td class='titulostablaunidades'>{$fila['nombre_1']} {$fila['nombre_2']} {$fila['apellido_paterno']} {$fila['apellido_materno']}</td>
+                <td class='titulostablaunidades'>{$fila['curp']}</td>
+                <td class='titulostablaunidades'>{$fila['rfc']}</td>
+                <td class='titulostablaunidades'>{$fila['domicilio']}</td>
+                <td class='titulostablaunidades'>
+                    <button class='btn btn-warning btn-sm btnasignarunidademo' 
+                        data-id_persona_fisica='{$fila['id_persona_fisica']}' 
+                        data-id_unidad='{$id_unidad}' 
+                        data-id_colaborador='{$colaborador}' 
+                        data-fecha_solicitudemo='{$data_fecha_solicitudemo}' 
+                        data-fecha_devoluciondemo='{$data_fecha_devoluciondemo}'>
+                        <i class='fa-solid fa-eye'></i> Asignar
+                    </button>
+                </td>
+            </tr>";
     }
+
+    echo "    </tbody>
+            </table>
+        </div>";
 } else {
-    echo "<tr><td colspan='13'>No se encontraron resultados.</td></tr>";
+    echo "<div class='alert alert-warning'>No se encontraron resultados.</div>";
 }
 ?>

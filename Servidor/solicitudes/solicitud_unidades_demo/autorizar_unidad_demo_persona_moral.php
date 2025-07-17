@@ -52,6 +52,10 @@ if (isset($_POST['id_unidad'])
         //sud = solicitante unidad demo
         //aud = asignacion unidad demo
         //pm = persona moral
+        //uni = unidad
+        //mar = marca
+        //model = modelo
+        //caud = colaborador autorizador unidad demo
 
         $querycorreosolicitandeunidademo = "SELECT uni.placa, 
                             uni.numero_motor, 
@@ -74,7 +78,15 @@ if (isset($_POST['id_unidad'])
                             pm.domicilio,
                             pm.archivo_domiclio_moral,
                             pm.archivo_escritura_constitutiva,
-                            pm.archivo_escrituras_estatus_sociales
+                            pm.archivo_escrituras_estatus_sociales,
+                            aud.objetivo_prestamo,
+                            aud.solicitar_master_driver,
+                            aud.comentarios,
+                            caud.nombre_1 AS nombre_1_colaborador_autorizador,
+                            caud.nombre_2 AS nombre_2_colaborador_autorizador,
+                            caud.apellido_paterno AS apellido_paterno_colaborador_autorizador,
+                            caud.apellido_materno AS apellido_materno_colaborador_autorizador
+
                   FROM asignacion_unidad_demo AS aud
                   INNER JOIN colaboradores AS sud 
                     ON aud.id_colaborador_que_asigna = sud.id_colaborador
@@ -86,6 +98,8 @@ if (isset($_POST['id_unidad'])
                     ON uni.id_modelo = model.id_modelo
                   INNER JOIN marcas AS mar 
                     ON model.id_marca = mar.id_marca
+                  INNER JOIN colaboradores AS caud 
+                    ON aud.id_autorizador = caud.id_colaborador
                   WHERE aud.id_asignacion_unidad_demo = '$id_asignacion_demo'";
 
         $result = mysqli_query($conexion, $querycorreosolicitandeunidademo);
@@ -115,6 +129,13 @@ if (isset($_POST['id_unidad'])
         $archivo_domiclio_moral = $row['archivo_domiclio_moral'];
         $archivo_escritura_constitutiva = $row['archivo_escritura_constitutiva'];
         $archivo_escrituras_estatus_sociales = $row['archivo_escrituras_estatus_sociales'];
+        $objetivo_prestamo = $row['objetivo_prestamo'];
+        $solicitar_master_driver = $row['solicitar_master_driver'];
+        $comentarios = $row['comentarios'];
+        $nombre_1_colaborador_autorizador = $row['nombre_1_colaborador_autorizador'];
+        $nombre_2_colaborador_autorizador = $row['nombre_2_colaborador_autorizador'];
+        $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
+        $apellido_materno_colaborador_autorizador = $row['apellido_materno_colaborador_autorizador'];
 
         //rutas de los archivos
         $ruta_archivo_identificacion_representante_legal = '../../../Servidor/archivos/files/files_asignacion_demo/personas_morales/files_id/' . $archivo_identificacion_representante_legal;
@@ -155,6 +176,7 @@ if (isset($_POST['id_unidad'])
             $mail1->Body = utf8_decode("Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,<br><br>
                             Te informamos que la unidad vehicular DEMO que solicitaste a la empresa o institución:<br>
                             <strong>$organizacion_institucion</strong> <br>
+                            Autorizado por: <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong>
                             con los siguientes datos ha sido autorizada.<br><br>
                             <strong>Marca:</strong> $marca<br>
                             <strong>Modelo:</strong> $modelo<br>
@@ -293,6 +315,126 @@ if (isset($_POST['id_unidad'])
                             } catch (Exception $e) {
                                 echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
                             }
+
+
+                //enviamos correo a ADMINISTRADOR PRUEBAS DEMO (Abraham)
+
+                // Obtener correos de usuarios tipo 11 administrador pruebas demos
+                        $correosadminpruebademo = [];
+                        $correo_sql = "SELECT u.id_colaborador, 
+                                                u.id_tipo_usuario,
+                                                cor.id_colaborador,
+                                                cor.email_corporativo
+                                        FROM usuarios AS u 
+                                        INNER JOIN colaboradores AS cor
+                                        ON u.id_colaborador = cor.id_colaborador
+                                        WHERE u.id_tipo_usuario = 11";
+                        $correo_result = $conexion->query($correo_sql);
+                        while ($correo_row = $correo_result->fetch_assoc()) {
+                            if (!empty($correo_row['email_corporativo'])) {
+                                $correosadminpruebademo[] = $correo_row['email_corporativo'];
+                            }
+                        }
+
+                        //$correosadminpruebademo = ["uriel.cabello@ldrsolutions.com.mx"];
+
+                        foreach ($correosadminpruebademo as $correo) {
+                            echo "Correo: $correo <br>";
+                        }
+                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+
+                try {
+                                $mail = new PHPMailer();
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.gmail.com';
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
+                                $mail->Password = 'ppiz zylc bpod tczi';
+                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                $mail->Port = 587;
+
+                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+                                foreach ($correosadminpruebademo as $correo) {
+                                    $mail->addAddress($correo);
+                                }
+                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+
+                                $mail->isHTML(true);
+                                $mail->Subject = utf8_decode('Autorizacion de unidad DEMO'); // Asunto del correo
+                                $mail->Body = utf8_decode("Estimado colaborador.
+                                                            <br>
+                                                            <br>
+                                                            Te enviamos este correo notificandote sobre la autorización correspondiente a la asignación de la siguiente unidad vehicular DEMO a sido autorizada por <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong>. 
+                                                            <br>
+                                                            <br>
+                                                            <strong>$marca $modelo: </strong>
+                                                            <br>
+                                                            <strong>Placa:</strong> $placa
+                                                            <br>
+                                                            <strong>Número de motor:</strong> $numero_motor
+                                                            <br>
+                                                            <strong>VIN:</strong> $VIN
+                                                            <br>
+                                                            <strong>Costo neto:</strong> $costo_neto
+                                                            <br>
+                                                            <strong>Año unidad:</strong> $año_unidad
+                                                            <br>
+                                                            Para la empresa o isntitución: <strong>$organizacion_institucion</strong> 
+                                                            <br>
+                                                            objetivo de prestamo: <strong>$objetivo_prestamo</strong> 
+                                                            <br>
+                                                            requiere Master Driver: <strong><?php echo $solicitar_master_driver == 1 ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER'; ?></strong>
+                                                            <br>
+                                                            Sigue los siguientes pasos para subir el documento:
+                                                            <br>
+                                                            <br>
+                                                            1. Ingresa a la plataforma Flotilla LDR con tu correo y contraseña.
+                                                            <br>
+                                                            2. Dirígete al menú en el apartado COMODATOS DEMOS.
+                                                            <br>
+                                                            3. Selecciona la empresa o institución con la unidad correspondiente y da clic en el botón SUBIR-COMODATO.
+                                                            <br>
+                                                            4. Sube el documento correspondiente.
+                                                            <br><br>
+                                                            <strong>¡Es de suma importancia que se verifique bien la información del comodatario.!</strong>
+                                                            <br>
+                                                            <br>
+                                                            Gracias por su atención.
+                                                            <br>
+                                                            Atentamente,
+                                                            <br>
+                                                            <br>
+                                                            <strong>Comercial - Flotilla LDR</strong>
+                                                            <br>
+                                                            <br>
+                                                            <strong>Acceso a la plataforma: </strong>
+                                                            <br>
+                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+
+                                $mail->addAttachment('' . $ruta_archivo_identificacion_representante_legal . '');
+                                $mail->addAttachment('' . $ruta_archivo_poder_representante_legal . '');
+                                $mail->addAttachment('' . $ruta_archivo_rfc_moral . '');
+                                $mail->addAttachment('' . $ruta_archivo_domiclio_moral . '');
+                                $mail->addAttachment('' . $ruta_archivo_escritura_constitutiva . '');
+                                $mail->addAttachment('' . $ruta_archivo_escrituras_estatus_sociales . '');
+
+                                $mail->addAttachment($ruta_archivo_identificacion_representante_legal); // Adjuntar el archivo PDF
+                                $mail->addAttachment($ruta_archivo_poder_representante_legal);
+                                $mail->addAttachment($ruta_archivo_rfc_moral);
+                                $mail->addAttachment($ruta_archivo_domiclio_moral);
+                                $mail->addAttachment($ruta_archivo_escritura_constitutiva);
+                                $mail->addAttachment($ruta_archivo_escrituras_estatus_sociales);
+
+                                if ($mail->send()) {
+                                    echo "Correo enviado exitosamente.";
+                                } else {
+                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
+                                }
+                            } catch (Exception $e) {
+                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+                            }
+
+
         if ($ejecutarconsulta) {
             echo "Unidad actualizada correctamente.";
         } else {

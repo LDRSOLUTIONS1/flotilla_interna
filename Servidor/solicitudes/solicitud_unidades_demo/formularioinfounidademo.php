@@ -77,7 +77,7 @@ if (isset($_POST['id_unidad'])) {
     }
     echo '<div class="row">
 <div class="contenedorimgunidadasignacion">
-    <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $data['img_unidad'] . '" class="imgasignacionunidad" onerror="this.src=\'../../../Cliente/img/unidades/carro_desconocido.png\'" alt="..." >
+    <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $data['img_unidad'] . '" class="imgasignacionunidad" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" alt="..." >
 </div>';
     echo '<input type="hidden" id="id_usuario_demo" name="id_usuario_demo" value="' . $id_usuario_demo . '">';
     // Mostrar los campos sin editar
@@ -138,6 +138,27 @@ if (isset($_POST['id_unidad'])) {
             </div>
             <label class="" style="color: white;"> </label>
         </div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="requiere_master_driverldr" name="requiere_master_driverldr" value="1">
+                <label class="form-check-label" for="requiere_master_driverldr">¿Requiere Master Driver?</label>
+            </div>
+        </div>
+        <div class="col-md-12">
+             <div class="form-group">
+                <p class="textmotivodenegacioncartaresponsiva">Objetivo de la prueba:</p>
+                <textarea class="form-control textareaobjetivosdemosolicitud objetivo_prueba_demo" id="objetivo_prueba_demo" name="objetivo_prueba_demo"></textarea>
+            </div>
+            <label class="" style="color: white;"> </label>
+        </div>
+        <div class="col-md-12">
+             <div class="form-group">
+                <p class="textmotivodenegacioncartaresponsiva">Comentarios:</p>
+                <textarea class="form-control textareacomentariosdemosolicitud comentarios_pruebas_demo" id="comentarios_pruebas_demo" name="comentarios_pruebas_demo"></textarea>
+            </div>
+            <label class="" style="color: white;"> </label>
+        </div>
+        
         </div>
         </div>
         <input type="hidden" id="id_unidad" value="' . $id_unidad . '">

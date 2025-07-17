@@ -208,9 +208,9 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 
-<!--js para mandar a llamar el modal de edicion de unidades-->
+<!--js para mandar a llamar el modal para dar de alta a las personas fisicas-->
 <script src="../js/asignar_unidades_demo/alta_personas_fisicas.js"></script>
-<!--js para mandar a llamar el modal de edicion de unidades-->
+<!--js para mandar a llamar el modal para editar a las personas fisicas-->
 <script src="../js/asignar_unidades_demo/editar_persona_fisica.js"></script>
 <!--js para filtrar la tabla de unidades-->
 <script src="../js/unidades/filtrar_tabla.js"></script>

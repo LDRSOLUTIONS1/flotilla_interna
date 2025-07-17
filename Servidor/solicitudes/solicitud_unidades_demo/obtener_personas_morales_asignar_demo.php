@@ -1,11 +1,13 @@
-<?php 
+<?php
 include("../../conexion.php");
 
 // Iniciar sesión si no está iniciada
-if (!isset($_SESSION)
-&& isset($_POST['id_unidad'])
-&& isset($_POST['data_fecha_solicitudemo'])
-&& isset($_POST['data_fecha_devoluciondemo'])) {
+if (
+    !isset($_SESSION)
+    && isset($_POST['id_unidad'])
+    && isset($_POST['data_fecha_solicitudemo'])
+    && isset($_POST['data_fecha_devoluciondemo'])
+) {
     session_start();
 }
 
@@ -51,14 +53,22 @@ $resultado = $conexion->query($sql);
 
 // Mostrar resultados
 if ($resultado->num_rows > 0) {
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "
-        <th class='titulostablaunidades'>ID</th>
+    echo "<div class='table-responsive'>
+            <table class='table table-hover'>
+                <thead class='table-light'>
+                    <tr>
+                    <th class='titulostablaunidades'>ID</th>
         <th class='titulostablaunidades'>Identificación</th>
         <th class='titulostablaunidades'>RFC</th>
         <th class='titulostablaunidades'>Domicilio</th>
         <th class='titulostablaunidades'>Acción</th>
-        <tr>
+        </tr>
+                </thead>
+                <tbody>";
+    while ($fila = $resultado->fetch_assoc()) {
+
+
+        echo "<tr>
             <td class='titulostablaunidades'>" . $fila['id_persona_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['identificacion_representante_legal_seccion'] . "</td>
             <td class='titulostablaunidades'>" . $fila['rfc_moral'] . "</td>
@@ -68,10 +78,12 @@ if ($resultado->num_rows > 0) {
                     <i class='fa-solid fa-eye'></i> Asignar
                 </button>
             </td>
-        </tr>
-            ";
+              </tr>";
     }
+
+    echo "    </tbody>
+            </table>
+        </div>";
 } else {
     echo "<tr><td colspan='13'>No se encontraron resultados.</td></tr>";
 }
-?>

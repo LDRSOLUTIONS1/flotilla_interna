@@ -57,6 +57,8 @@
     </div>
 </div>
 
+
+
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards.js"></script>
 <!--js para mandar a llmamar la informacion de unidades pool-->
