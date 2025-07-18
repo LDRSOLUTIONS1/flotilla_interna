@@ -23,8 +23,8 @@ require '../../lib/PHPMailer-master/src/SMTP.php';
 include("../../../Servidor/conexion.php");
 
 
-if (isset($_POST['id_unidad']) 
-&& isset($_POST['id_asignacion_demo']) 
+if (isset($_POST['id_unidad'])
+&& isset($_POST['id_asignacion_demo'])
 && isset($_POST['id_persona_moral'])){
     echo "Datos recibidos<br>";
 
@@ -38,7 +38,7 @@ if (isset($_POST['id_unidad'])
                                         ON asignacion_unidad_demo.id_unidad = unidades.id_unidad
                                         SET id_autorizador = $colaborador, 
                                             autorizacion = 'APROVADO',
-                                            unidades.id_estado_unidad = 3  
+                                            unidades.id_estado_unidad = 3
                                         WHERE id_asignacion_unidad_demo = '$id_asignacion_demo'";
 
         $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);

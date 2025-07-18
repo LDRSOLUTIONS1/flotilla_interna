@@ -3,6 +3,8 @@ include("../../Servidor/conexion.php");
 if (!isset($_SESSION)) {
     session_start();
 }
+$id_colaborador_que_asigna = $_SESSION['id_colaborador'];
+
 //uda = Unidad Demo Autorizada
 //pf = Persona Fisica
 //pm = Persona Moral
@@ -46,7 +48,8 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             ON uda.id_autorizador = aud.id_colaborador
             INNER JOIN colaboradores AS ca
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
-            WHERE uda.autorizacion = 'APROVADO'";
+            WHERE uda.autorizacion = 'APROVADO' AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
+            ORDER BY uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 
@@ -71,7 +74,6 @@ while ($fila = $resultado->fetch_assoc()) {
         }
 
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
-            <h6 class="card-text" style="font-size: 0.9rem;"><i class="fas fa-user me-2"></i><b>Colaborador que autoriza: </b>' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopautorizador'] . ' ' . $fila['apellidomautorizador'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') .

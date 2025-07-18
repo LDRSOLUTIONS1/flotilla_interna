@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2025 a las 02:05:42
+-- Tiempo de generación: 18-07-2025 a las 23:46:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -655,6 +655,7 @@ CREATE TABLE `asignacion_unidad_demo` (
   `comentarios` text DEFAULT NULL,
   `solicitar_master_driver` varchar(20) DEFAULT NULL,
   `id_autorizador` int(11) DEFAULT NULL,
+  `id_asignar_prueba_demo_master_driver` int(11) DEFAULT NULL,
   `autorizacion` varchar(20) NOT NULL,
   `id_creador_comodato_demo` int(11) DEFAULT NULL,
   `fecha_creacion_comodato` date DEFAULT NULL,
@@ -669,9 +670,12 @@ CREATE TABLE `asignacion_unidad_demo` (
 -- Volcado de datos para la tabla `asignacion_unidad_demo`
 --
 
-INSERT INTO `asignacion_unidad_demo` (`id_asignacion_unidad_demo`, `id_unidad`, `id_colaborador_que_asigna`, `id_persona_fisica`, `id_persona_moral`, `fecha_prestamo`, `fecha_devolucion`, `objetivo_prestamo`, `comentarios`, `solicitar_master_driver`, `id_autorizador`, `autorizacion`, `id_creador_comodato_demo`, `fecha_creacion_comodato`, `archivo_comodato_sin_firmar`, `id_estatus_comodato_demo`, `archivo_comodato_firmado`, `motivo_rechazo_comodato`, `id_estado_prueba_demo`) VALUES
-(1, 14, 698, 1, NULL, '2025-07-24', '2025-08-07', 'La prueba tiene como objetivo recorrer una distancia en el menos tiempo posible', 'Se requiere de un Master Driver que registre todos los incidentess que se presenten en la prueba', '1', 39, 'APROVADO', NULL, NULL, '', NULL, '', '', NULL),
-(2, 149, 698, NULL, 1, '2025-07-23', '2025-08-28', 'prueba 2', 'prueba 2', '1', NULL, '', NULL, NULL, '', NULL, '', '', NULL);
+INSERT INTO `asignacion_unidad_demo` (`id_asignacion_unidad_demo`, `id_unidad`, `id_colaborador_que_asigna`, `id_persona_fisica`, `id_persona_moral`, `fecha_prestamo`, `fecha_devolucion`, `objetivo_prestamo`, `comentarios`, `solicitar_master_driver`, `id_autorizador`, `id_asignar_prueba_demo_master_driver`, `autorizacion`, `id_creador_comodato_demo`, `fecha_creacion_comodato`, `archivo_comodato_sin_firmar`, `id_estatus_comodato_demo`, `archivo_comodato_firmado`, `motivo_rechazo_comodato`, `id_estado_prueba_demo`) VALUES
+(1, 149, 698, 1, NULL, '2025-07-24', '2025-08-05', 'ddddddddddddddd', 'ddddddddddddddddddd', '1', 39, NULL, 'APROVADO', NULL, NULL, '', NULL, '', '', NULL),
+(2, 13, 516, 3, NULL, '2025-07-23', '2025-08-05', 'pasar baches', 'no requiere master driver', '0', 39, NULL, 'APROVADO', NULL, NULL, '', NULL, '', '', NULL),
+(3, 19, 698, NULL, 2, '2025-07-29', '2025-09-25', 'hdhdhdhdhdhhdhdhdhd', 'bsbsbsbsbsbsbbsbsbsbs', '1', NULL, NULL, '', NULL, NULL, '', NULL, '', '', NULL),
+(4, 16, 698, NULL, 1, '2025-07-29', '2025-10-17', '', 'no requiere M D', '0', 39, NULL, 'APROVADO', NULL, NULL, '', NULL, '', '', NULL),
+(5, 15, 698, 1, NULL, '2025-07-24', '2025-07-31', 'La prueba tiene como objetivo recorrer distancias en el menor tiempo posible, recorriendo carreteras cin dificultad de paso', 'Se requiere de un Master Driver que realice los reportes correspondientes a las pruebas', '1', 698, NULL, 'APROVADO', NULL, NULL, '', NULL, '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -2343,25 +2347,6 @@ CREATE TABLE `pruebas_unidad_demo` (
   `id_colaborador_registra_prueba` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `pruebas_unidad_demo`
---
-
-INSERT INTO `pruebas_unidad_demo` (`id_prueba`, `id_asignacion_unidad_demo`, `fecha_prueba`, `nombre_del_conductor`, `tipo_prueba`, `temperatura`, `revoluciones`, `velocidad`, `kilometraje`, `foto_tablero`, `foto_odometro`, `foto_unidad`, `comentarios`, `id_colaborador_registra_prueba`) VALUES
-(1, 15, '2025-07-11 13:36:15', 'JOSE', 'TECNICA', 1.00, 2.00, 3.00, 4.00, 'foto_tablero_JOSE_carro_desconocido (1).png', 'foto_odometro_JOSE_carro_desconocido (1).png', 'foto_unidad_exterior_JOSE_carro_desconocido (1).png', 'Se requiere ajustes en los pedales ya que estan muy duros', 698),
-(2, 15, '2025-07-11 13:36:44', 'JOSE', 'TECNICA', 22.00, 33.00, 44.00, 55.00, 'foto_tablero_JOSE_ine.png', 'foto_odometro_JOSE_ine.png', 'foto_unidad_exterior_JOSE_ine.png', 'ffff', 698),
-(3, 15, '2025-07-11 13:37:32', 'JOSE', 'TECNICA', 88.00, 77.00, 66.00, 55.00, 'foto_tablero_JOSE_documento.png', 'foto_odometro_JOSE_documento.png', 'foto_unidad_exterior_JOSE_documento.png', 'ddddd', 698),
-(4, 16, '2025-07-11 13:55:27', 'JOSE', 'TECNICA', 22.00, 22.00, 22.00, 22.00, 'foto_tablero_JOSE_licencia_conducir_ejemplo.jpeg', 'foto_odometro_JOSE_LDR_LOGO.png', 'foto_unidad_exterior_JOSE_ine.png', 'Prueba', 698),
-(5, 19, '2025-07-11 15:51:37', 'MARIO CONTRERAS RAMIREZ', 'PRUEBA DE RECORRIDO', 234.00, 4321.00, 23445.00, 56777.00, 'foto_tablero_MARIO CONTRERAS RAMIREZ_constancia.png', 'foto_odometro_MARIO CONTRERAS RAMIREZ_licencia_conducir_ejemplo.jpeg', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_LDR_LOGO.png', 'La prueba resulto un exito en su primera fase', 698),
-(6, 1, '2025-07-11 16:48:38', 'MARIO CONTRERAS RAMIREZ', 'TECNICA', 23.00, 45.00, 66.00, 78.00, 'foto_tablero_MARIO CONTRERAS RAMIREZ_carro_desconocido (1).png', 'foto_odometro_MARIO CONTRERAS RAMIREZ_LDR_LOGO.png', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_ine.png', 'La unidad se soporto el recorrido, durante el transcurso de la prueba se escucharon ruidos extraños en la caja de velocidades', 698),
-(7, 1, '2025-07-11 16:50:52', 'JOSE HERNANDEZ CARRASCO', 'PRUEBA DE RECORRIDO', 3456.00, 65432.00, 23456.00, 678765.00, 'foto_tablero_JOSE HERNANDEZ CARRASCO_licencia_conducir.png', 'foto_odometro_JOSE HERNANDEZ CARRASCO_aveo_rojo-.png', 'foto_unidad_exterior_JOSE HERNANDEZ CARRASCO_pendiente.gif', 'La unidad recorrio sin dificuktades la distancia que se acordo', 698),
-(8, 2, '2025-07-11 16:51:47', 'PEDRO MARTINEZ NEGRETE', 'PRUEBA INICIAL', 1234.00, 123456.00, 3456543.00, 3456543.00, 'foto_tablero_PEDRO MARTINEZ NEGRETE_carro_desconocido.png', 'foto_odometro_PEDRO MARTINEZ NEGRETE_JETOUR_360_x70plus_negro.png', 'foto_unidad_exterior_PEDRO MARTINEZ NEGRETE_constancia.png', 'La unidad presento fallas en el freno', 698),
-(9, 1, '2025-07-11 17:29:34', 'JOSE HERNANDEZ CARRASCO', 'PRUEBA DE RECORRIDO', 2345.00, 23456.00, 23456.00, 3456.00, 'foto_tablero_JOSE HERNANDEZ CARRASCO_LDR_IMG.png', 'foto_odometro_JOSE HERNANDEZ CARRASCO_carro_desconocido.png', 'foto_unidad_exterior_JOSE HERNANDEZ CARRASCO_licencia_conducir_ejemplo.jpeg', 'La prueba finaliza con un rotundo exito ', 698),
-(10, 2, '2025-07-11 17:33:22', 'MARIO CONTRERAS RAMIREZ', 'PRUEBA DE RECORRIDO', 2345678.00, 123456.00, 65432.00, 12345.00, 'foto_tablero_MARIO CONTRERAS RAMIREZ_carro_desconocido (1).png', 'foto_odometro_MARIO CONTRERAS RAMIREZ_carro_desconocido.png', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_carro_desconocido.png', 'comentario', 698),
-(11, 2, '2025-07-15 11:51:25', 'MARIO CONTRERAS RAMIREZ', 'PRUEBA DE RECORRIDO', 1.00, 1.00, 1.00, 1.00, 'foto_tablero_MARIO CONTRERAS RAMIREZ_documento.png', 'foto_odometro_MARIO CONTRERAS RAMIREZ_atención.gif', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_licencia_conducir_ejemplo.jpeg', '111111', 698),
-(12, 3, '2025-07-15 12:02:37', 'PEDRO MARTINEZ NEGRETE', 'TECNICA', 34.00, 43.00, 34.00, 43.00, 'foto_tablero_PEDRO MARTINEZ NEGRETE_constancia.png', 'foto_odometro_PEDRO MARTINEZ NEGRETE_licencia_conducir_ejemplo.jpeg', 'foto_unidad_exterior_PEDRO MARTINEZ NEGRETE_JETOUR_360_x70_blanco.png', '343434343434343434343434343', 698),
-(13, 3, '2025-07-15 12:09:13', 'MARIO CONTRERAS RAMIREZ', 'TECNICA', 3456.00, 23456.00, 23456.00, 23456.00, 'foto_tablero_MARIO CONTRERAS RAMIREZ_carro_desconocido (1).png', 'foto_odometro_MARIO CONTRERAS RAMIREZ_carro_desconocido (1).png', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_carro_desconocido (1).png', 'q234567ytrewqasdfrgthyjn', 698);
-
 -- --------------------------------------------------------
 
 --
@@ -3524,13 +3509,13 @@ INSERT INTO `unidades` (`id_unidad`, `id_creador_unidad`, `id_modelo`, `id_estad
 (10, NULL, 6, 3, 1, 2, 2, 5, 'HU1477A', 'LVAV2JVB0RE300869', '233000666ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22262', 15874.58, '17.06313,-96.78574', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (11, NULL, 11, 1, 1, 3, 1, 5, 'HVT618A', 'HJRPBGJB6SB200014', 'SQRF4J20BBR', 716.00, 1, 'img_HVT618A_img_MKJ769A_20250610_121816.jpg', '0000-00-00', '2025', 3, 'V3227', 0.00, '', 200.00, 4, 1, 1, '1', 4, 4, 1, 1, 1, 1, 1, 1, 1),
 (12, NULL, 3, 1, 1, 3, 1, 5, 'J33BPX', 'LVUDB21B2RF023405', 'J00455', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 3000.00, 1, 2, 1, '1', 2, 2, 1, 1, 1, 1, 2, 1, 1),
-(13, NULL, 10, 1, 1, 3, 1, 2, 'JV96330', '3N6AD33A2JK900761', '', 0.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 11.00, 2, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(14, NULL, 10, 3, 1, 3, 1, 2, 'JV96331', '3N6AD35C8JK870888', '', 0.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 123451.00, 6, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(15, NULL, 22, 1, 1, 3, 1, 4, 'JW69517', 'LVAV2JVB8KE140701', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 5000.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(16, NULL, 20, 1, 1, 3, 1, 5, 'JX09360', 'LVAV2MBB9KC060115', '89739149', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 200362.59, '19.36431,-99.26767', 123453.00, 2, 3, 1, '1', 2, 4, 1, 1, 1, 1, 3, 1, 1),
+(13, NULL, 10, 3, 1, 3, 1, 2, 'JV96330', '3N6AD33A2JK900761', '', 0.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 11.00, 2, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(14, NULL, 10, 1, 1, 3, 1, 2, 'JV96331', '3N6AD35C8JK870888', 'dfghfdtyuj', 0.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 123451.00, 6, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(15, NULL, 22, 3, 1, 3, 1, 4, 'JW69517', 'LVAV2JVB8KE140701', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 5000.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(16, NULL, 20, 3, 1, 3, 1, 5, 'JX09360', 'LVAV2MBB9KC060115', '89739149', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 200362.59, '19.36431,-99.26767', 123453.00, 2, 3, 1, '1', 2, 4, 1, 1, 1, 1, 3, 1, 1),
 (17, NULL, 12, 1, 1, 3, 1, 3, 'JY52011', 'LVAV2JBB5NE200846', 'Q210644822D', 0.00, 1, 'img_JY52011_JETOUR_360_x70plus_negro.png', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 10.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (18, NULL, 12, 1, 1, 3, 1, 2, 'JY52012', 'LVAV2JBB1NE200844', 'Q210740142D', 0.00, 1, 'img_JY52012_JETOUR_360_dashing_gris_cenizo.png', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 200.00, 4, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(19, NULL, 21, 1, 1, 3, 1, 3, 'JY52013', '3LD122J5PA000505', '77121352', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 13212.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(19, NULL, 21, 4, 1, 3, 1, 3, 'JY52013', '3LD122J5PA000505', '77121352', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 13212.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (20, NULL, 19, 1, 1, 3, 2, 3, 'LF97684', 'LVAV2MAB4SU303020', 'R001566', 815.00, 1, '', '0000-00-00', '2025', 1, 'V22119', 7013.65, '25.7714,-100.29097', 76453.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (21, NULL, 21, 3, 1, 1, 2, 7, 'LG25822', '3LD12B2J5RA002144', '776182123', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22296', 2733.16, '19.73732,-98.97562', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (22, NULL, 21, 1, 1, 3, 2, 7, 'LG25825', '3LD12B2J1RA002142', '77176393', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22295', 2433.38, '20.571,-103.31036', 5643.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
@@ -3651,7 +3636,7 @@ INSERT INTO `unidades` (`id_unidad`, `id_creador_unidad`, `id_modelo`, `id_estad
 (144, 698, 5, 1, 1, 1, 1, 1, 'ASDFVBN67', '3LD12B1J1RA001087', '1234567SDFG', 566666.00, 3, 'img_ASDFVBN67_JETOUR_360_x70plus_azul.png', '0000-00-00', '2025', 1, '2345678', 24319.76, '21.16441,-86.83893', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (145, 516, 13, 1, 1, 1, 1, 5, '34rdefrg', '655656', 'gy77y', 3456789.00, 2, 'img_34rdefrg_', '0000-00-00', '2020', 1, '', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
 (146, 698, 6, 1, 1, 3, 1, 5, '234WEDFG', '345REDS', 'QWE34RES', 23456.00, 1, 'img_234WEDFG_JETOUR_360_x70plus_blanco.png', '0000-00-00', '2020', 1, '23457654', 0.00, '', 1.00, 8, 1, 1, '1', 4, 2, 1, 1, 1, 1, 1, 1, 1),
-(149, 698, 6, 4, 1, 3, 1, 1, '43526VCGDJ', '5454TEG', '6363TEYSD', 123466.00, 1, 'img_43526VCGDJ_', '2025-06-11', '2020', 1, '234532', 0.00, '', 2345.00, 2, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(149, 698, 6, 3, 1, 3, 1, 1, '43526VCGDJ', '5454TEG', '6363TEYSD', 123466.00, 1, 'img_43526VCGDJ_', '2025-06-11', '2020', 1, '234532', 0.00, '', 2345.00, 2, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3696,13 +3681,13 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `id_tipo_usuario`, `id_colaborador`, `correo`, `contraseña`, `avatar`) VALUES
-(1, 6, 698, 'uriel.cabello@ldrsolutions.com.mx', '123456789', '250685_f'),
+(1, 7, 698, 'uriel.cabello@ldrsolutions.com.mx', '123456789', '250685_f'),
 (2, 1, 230, 'carlos.roman@ldrsolutions.com.mx', 'K85T84', '230230_f'),
 (3, 1, 565, 'sharon.leon@ldrsolutions.com.mx', 'Q42O20', '240565_f'),
 (4, 2, 214, 'jorgel.martinez@ldrsolutions.com.mx', 'K86P31', '230214_f'),
 (5, 2, 348, 'daniela.bernal@ldrsolutions.com.mx', 'G46F77', '240348_f'),
 (6, 2, 341, 'cesarmt@ldrsolutions.com.mx', 'G56M76', '240341_f'),
-(8, 6, 516, 'christian.reyes@ldrsolutions.com.mx', '12345678', '240516_f'),
+(8, 9, 516, 'christian.reyes@ldrsolutions.com.mx', '12345678', '240516_f'),
 (9, 3, 202, 'jorge.sanchez@ldrsolutions.com.mx', '12345678', '230202_f'),
 (10, 3, 389, 'isaura.hernandez@ldrsolutions.com.mx', 'P45C25', '240389_f'),
 (12, 2, 539, 'jesus.farango@ldrsolutions.com.mx', 'X84N27', '240539_f'),
@@ -4066,7 +4051,8 @@ ALTER TABLE `asignacion_unidad_demo`
   ADD KEY `id_creador_comodato_demo FK colaboradores` (`id_creador_comodato_demo`),
   ADD KEY `id_estatus_comodato_demo FK estatus_comodato` (`id_estatus_comodato_demo`),
   ADD KEY `id_autorizador FK colaboras` (`id_autorizador`),
-  ADD KEY `id_estado_prueba_demo FK estado_pruebas_demos` (`id_estado_prueba_demo`);
+  ADD KEY `id_estado_prueba_demo FK estado_pruebas_demos` (`id_estado_prueba_demo`),
+  ADD KEY `	id_asignar_prueba_demo_master_driver` (`id_asignar_prueba_demo_master_driver`);
 
 --
 -- Indices de la tabla `catalogos_revisiones`
@@ -4577,7 +4563,7 @@ ALTER TABLE `asignacion_unidad_colaborador`
 -- AUTO_INCREMENT de la tabla `asignacion_unidad_demo`
 --
 ALTER TABLE `asignacion_unidad_demo`
-  MODIFY `id_asignacion_unidad_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_asignacion_unidad_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos_revisiones`
@@ -4787,7 +4773,7 @@ ALTER TABLE `polizas`
 -- AUTO_INCREMENT de la tabla `pruebas_unidad_demo`
 --
 ALTER TABLE `pruebas_unidad_demo`
-  MODIFY `id_prueba` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_prueba` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `puestos`
@@ -5025,6 +5011,7 @@ ALTER TABLE `asignacion_unidad_colaborador`
 -- Filtros para la tabla `asignacion_unidad_demo`
 --
 ALTER TABLE `asignacion_unidad_demo`
+  ADD CONSTRAINT `	id_asignar_prueba_demo_master_driver` FOREIGN KEY (`id_asignar_prueba_demo_master_driver`) REFERENCES `colaboradores` (`id_colaborador`),
   ADD CONSTRAINT `id_estado_prueba FK estado_prueba` FOREIGN KEY (`id_estado_prueba_demo`) REFERENCES `estado_pruebas_demos` (`id_estado_prueba_demo`),
   ADD CONSTRAINT `id_personas_fisicas_ FK personas_fisicas` FOREIGN KEY (`id_persona_fisica`) REFERENCES `personas_fisicas` (`id_persona_fisica`),
   ADD CONSTRAINT `id_personas_morales FK personas_morales` FOREIGN KEY (`id_persona_moral`) REFERENCES `personas_morales` (`id_persona_moral`),
