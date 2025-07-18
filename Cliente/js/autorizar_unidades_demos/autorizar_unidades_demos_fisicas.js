@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, asignar",
+        confirmButtonText: "Sí, aprovar",
       }).then((result) => {
         if (result.isConfirmed) {
           const formData = new FormData();

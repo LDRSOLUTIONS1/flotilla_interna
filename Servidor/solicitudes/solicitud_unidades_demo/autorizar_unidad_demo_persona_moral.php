@@ -172,21 +172,37 @@ if (isset($_POST['id_unidad'])
             $mail1->addBCC('uriel.cabello@ldrsolutions.com.mx');
 
             $mail1->isHTML(true);
-            $mail1->Subject = utf8_decode('Notificación de asignación de unidad vehicular DEMO');
-            $mail1->Body = utf8_decode("Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,<br><br>
-                            Te informamos que la unidad vehicular DEMO que solicitaste a la empresa o institución:<br>
-                            <strong>$organizacion_institucion</strong> <br>
-                            Autorizado por: <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong>
-                            con los siguientes datos ha sido autorizada.<br><br>
-                            <strong>Marca:</strong> $marca<br>
-                            <strong>Modelo:</strong> $modelo<br>
-                            <strong>Placa:</strong> $placa<br>
-                            <strong>Número de motor:</strong> $numero_motor<br>
-                            <strong>VIN:</strong> $VIN<br><br>
-                            En este momento se está enviando la información y documentos correspondientes al aréa jurídica para la realización del contrato de COMODATO.<br><br>
-                            Atentamente.<br>
-                            <strong>Flotilla - LDR</strong><br><br>
-                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+          $mail1->Subject = utf8_decode('Notificación de asignación de unidad vehicular DEMO');
+$mail1->Body = utf8_decode("
+    <p>Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,</p>
+
+    <p>Te informamos que la unidad vehicular <strong>DEMO</strong> que solicitaste para la empresa o institución:</p>
+
+    <p><strong>$organizacion_institucion</strong></p>
+
+    <p>Ha sido <strong>autorizada</strong> por:</p>
+    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <p><strong>Detalles de la unidad asignada:</strong></p>
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca:</strong></td><td style='padding: 6px;'>$marca</td></tr>
+        <tr><td style='padding: 6px;'><strong>Modelo:</strong></td><td style='padding: 6px;'>$modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+    </table>
+
+    <br>
+
+    <p>En este momento, la información y los documentos correspondientes están siendo enviados al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
 
             if ($mail1->send()) {
                 echo "Correo enviado al colaborador.<br>";
@@ -240,58 +256,50 @@ if (isset($_POST['id_unidad'])
                                 $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
                                 $mail->isHTML(true);
-                                $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad vehicular DEMO'); // Asunto del correo
-                                $mail->Body = utf8_decode("Estimado colaborador del área jurídico.
-                                                            <br>
-                                                            <br>
-                                                            Te enviamos este correo solicitando el <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular DEMO. 
-                                                            <br>
-                                                            <br>
-                                                            <strong>$marca $modelo: </strong>
-                                                            <br>
-                                                            <strong>Placa:</strong> $placa
-                                                            <br>
-                                                            <strong>Número de motor:</strong> $numero_motor
-                                                            <br>
-                                                            <strong>VIN:</strong> $VIN
-                                                            <br>
-                                                            <strong>Costo neto:</strong> $costo_neto
-                                                            <br>
-                                                            <strong>Año unidad:</strong> $año_unidad
-                                                            <br>
-                                                            Para la empresa o isntitución: <strong>$organizacion_institucion</strong> 
-                                                            <br> 
-                                                            RFC: <strong>$rfc_moral</strong> 
-                                                            <br>
-                                                            Domicilio: <strong>$domicilio</strong>
-                                                            <br>
-                                                            Una vez realizado el COMODATO debes subirlo en la plataforma <strong>Flotilla LDR.</strong>
-                                                            <br>
-                                                            Sigue los siguientes pasos para subir el documento:
-                                                            <br>
-                                                            <br>
-                                                            1. Ingresa a la plataforma Flotilla LDR con tu correo y contraseña.
-                                                            <br>
-                                                            2. Dirígete al menú en el apartado COMODATOS DEMOS.
-                                                            <br>
-                                                            3. Selecciona la empresa o institución con la unidad correspondiente y da clic en el botón SUBIR-COMODATO.
-                                                            <br>
-                                                            4. Sube el documento correspondiente.
-                                                            <br><br>
-                                                            <strong>¡Es de suma importancia que se verifique bien la información del comodatario.!</strong>
-                                                            <br>
-                                                            <br>
-                                                            Gracias por su atención.
-                                                            <br>
-                                                            Atentamente,
-                                                            <br>
-                                                            <br>
-                                                            <strong>Comercial - Flotilla LDR</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>Acceso a la plataforma: </strong>
-                                                            <br>
-                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+                               $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad vehicular DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador del área jurídica,</p>
+
+    <p>Te enviamos este correo para solicitar la elaboración del <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <br>
+
+    <p><strong>Datos del comodatario (empresa o institución):</strong><br>
+    <strong>Nombre:</strong> $organizacion_institucion<br>
+    <strong>RFC:</strong> $rfc_moral<br>
+    <strong>Domicilio:</strong> $domicilio</p>
+
+    <hr style='margin: 20px 0;'>
+
+    <p>Una vez elaborado el contrato de <strong>COMODATO</strong>, por favor súbelo a la plataforma <strong>Flotilla LDR</strong> siguiendo estos pasos:</p>
+
+    <ol>
+        <li>Ingresa a la plataforma con tu correo y contraseña.</li>
+        <li>Dirígete al menú <strong>COMODATOS DEMOS</strong>.</li>
+        <li>Selecciona la empresa o institución correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
+        <li>Adjunta el documento generado.</li>
+    </ol>
+
+    <p style='color: #b20000;'><strong>¡Es de suma importancia verificar cuidadosamente la información del comodatario!</strong></p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Comercial - Flotilla LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
 
                                 $mail->addAttachment('' . $ruta_archivo_identificacion_representante_legal . '');
                                 $mail->addAttachment('' . $ruta_archivo_poder_representante_legal . '');
@@ -342,7 +350,8 @@ if (isset($_POST['id_unidad'])
                             echo "Correo: $correo <br>";
                         }
                 $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
-
+                //cadena para ver si requiere master driver y mandarlo por correo
+$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
                 try {
                                 $mail = new PHPMailer();
                                 $mail->isSMTP();
@@ -360,70 +369,39 @@ if (isset($_POST['id_unidad'])
                                 $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
                                 $mail->isHTML(true);
-                                $mail->Subject = utf8_decode('Autorizacion de unidad DEMO'); // Asunto del correo
-                                $mail->Body = utf8_decode("Estimado colaborador.
-                                                            <br>
-                                                            <br>
-                                                            Te enviamos este correo notificandote sobre la autorización correspondiente a la asignación de la siguiente unidad vehicular DEMO a sido autorizada por <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong>. 
-                                                            <br>
-                                                            <br>
-                                                            <strong>$marca $modelo: </strong>
-                                                            <br>
-                                                            <strong>Placa:</strong> $placa
-                                                            <br>
-                                                            <strong>Número de motor:</strong> $numero_motor
-                                                            <br>
-                                                            <strong>VIN:</strong> $VIN
-                                                            <br>
-                                                            <strong>Costo neto:</strong> $costo_neto
-                                                            <br>
-                                                            <strong>Año unidad:</strong> $año_unidad
-                                                            <br>
-                                                            Para la empresa o isntitución: <strong>$organizacion_institucion</strong> 
-                                                            <br>
-                                                            objetivo de prestamo: <strong>$objetivo_prestamo</strong> 
-                                                            <br>
-                                                            requiere Master Driver: <strong><?php echo $solicitar_master_driver == 1 ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER'; ?></strong>
-                                                            <br>
-                                                            Sigue los siguientes pasos para subir el documento:
-                                                            <br>
-                                                            <br>
-                                                            1. Ingresa a la plataforma Flotilla LDR con tu correo y contraseña.
-                                                            <br>
-                                                            2. Dirígete al menú en el apartado COMODATOS DEMOS.
-                                                            <br>
-                                                            3. Selecciona la empresa o institución con la unidad correspondiente y da clic en el botón SUBIR-COMODATO.
-                                                            <br>
-                                                            4. Sube el documento correspondiente.
-                                                            <br><br>
-                                                            <strong>¡Es de suma importancia que se verifique bien la información del comodatario.!</strong>
-                                                            <br>
-                                                            <br>
-                                                            Gracias por su atención.
-                                                            <br>
-                                                            Atentamente,
-                                                            <br>
-                                                            <br>
-                                                            <strong>Comercial - Flotilla LDR</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>Acceso a la plataforma: </strong>
-                                                            <br>
-                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+                               $mail->Subject = utf8_decode('Autorización de unidad DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador,</p>
 
-                                $mail->addAttachment('' . $ruta_archivo_identificacion_representante_legal . '');
-                                $mail->addAttachment('' . $ruta_archivo_poder_representante_legal . '');
-                                $mail->addAttachment('' . $ruta_archivo_rfc_moral . '');
-                                $mail->addAttachment('' . $ruta_archivo_domiclio_moral . '');
-                                $mail->addAttachment('' . $ruta_archivo_escritura_constitutiva . '');
-                                $mail->addAttachment('' . $ruta_archivo_escrituras_estatus_sociales . '');
+    <p>Te notificamos que ha sido <strong>autorizada</strong> la asignación de la siguiente unidad vehicular <strong>DEMO</strong> por parte de:</p>
 
-                                $mail->addAttachment($ruta_archivo_identificacion_representante_legal); // Adjuntar el archivo PDF
-                                $mail->addAttachment($ruta_archivo_poder_representante_legal);
-                                $mail->addAttachment($ruta_archivo_rfc_moral);
-                                $mail->addAttachment($ruta_archivo_domiclio_moral);
-                                $mail->addAttachment($ruta_archivo_escritura_constitutiva);
-                                $mail->addAttachment($ruta_archivo_escrituras_estatus_sociales);
+    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <p><strong>Detalles de la unidad asignada:</strong></p>
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <br>
+
+    <p><strong>Empresa o institución:</strong> $organizacion_institucion</p>
+    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
+    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
 
                                 if ($mail->send()) {
                                     echo "Correo enviado exitosamente.";
@@ -442,7 +420,7 @@ if (isset($_POST['id_unidad'])
         }
 
         echo "Fin de proceso con éxito.<br>";
-   
+    
     } else {
     echo "No se recibieron los datos correctamente.";
 }

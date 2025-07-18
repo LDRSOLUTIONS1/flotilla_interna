@@ -95,7 +95,13 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                                 uni.numero_motor, 
                                 uni.VIN,
                                 uni.costo_neto,
-                                uni.año_unidad
+                                uni.año_unidad,
+                                caud.nombre_1 AS nombre_1_colaborador_asigna,
+                                caud.nombre_2 AS nombre_2_colaborador_asigna,
+                                caud.apellido_paterno AS apellido_paterno_colaborador_asigna,
+                                caud.apellido_materno AS apellido_materno_colaborador_asigna,
+                                area.nombre_area,
+                                puesto.nombre_puesto
                             FROM asignacion_unidad_demo AS notificar
                             LEFT JOIN personas_fisicas AS pf 
                                 ON notificar.id_persona_fisica = pf.id_persona_fisica
@@ -107,6 +113,12 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                                 ON uni.id_modelo = model.id_modelo
                             INNER JOIN marcas AS mar 
                                 ON model.id_marca = mar.id_marca  
+                            INNER JOIN colaboradores AS caud 
+                                ON notificar.id_colaborador_que_asigna = caud.id_colaborador
+                            INNER JOIN areas AS area
+                                ON caud.id_area = area.id_area
+                            INNER JOIN puestos AS puesto
+                                ON caud.id_puesto = puesto.id_puesto
                             ORDER BY notificar.id_asignacion_unidad_demo DESC 
                             LIMIT 1";
 
@@ -128,6 +140,12 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                 $VIN = $data['VIN'];
                 $costo_neto = $data['costo_neto'];
                 $año_unidad = $data['año_unidad'];
+                $nombre_1_colaborador_asigna = $data['nombre_1_colaborador_asigna'];
+                $nombre_2_colaborador_asigna = $data['nombre_2_colaborador_asigna'];
+                $apellido_paterno_colaborador_asigna = $data['apellido_paterno_colaborador_asigna'];
+                $apellido_materno_colaborador_asigna = $data['apellido_materno_colaborador_asigna'];
+                $area = $data['nombre_area'];
+                $puesto = $data['nombre_puesto'];
 
                 // Obtener correos de usuarios tipo 7 autorizador de asignacion demo
                 $correos = [];
@@ -169,50 +187,50 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                     $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
                     $mail->isHTML(true);
-                    $mail->Subject = utf8_decode('Solicitud de AUTORIZACIÓN para asignación de unidad vehicular DEMO'); // Asunto del correo
-                    $mail->Body = utf8_decode("Estimado colaborador.
-                                                            <br>
-                                                            <br>
-                                                            Te enviamos este correo solicitando la <strong>AUTORIZACIÓN</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO:</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>$marca $modelo: </strong>
-                                                            <br>
-                                                            <strong>Placa:</strong> $placa
-                                                            <br>
-                                                            <strong>Número de motor:</strong> $numero_motor
-                                                            <br>
-                                                            <strong>VIN:</strong> $VIN
-                                                            <br>
-                                                            <strong>Costo neto:</strong> $costo_neto
-                                                            <br>
-                                                            <strong>Año unidad:</strong> $año_unidad
-                                                            <br>
-                                                            Para el usuario o institución:<strong> $nombre_1 $nombre_2 $apaterno $amaterno $organizacion</strong> 
-                                                            <br> 
-                                                            <br>
-                                                            1. Para aceptar la autorización debes ingresar a la plataforma <strong>Flotilla LDR.</strong>
-                                                            <br>
-                                                            2. Dirígete al menú en el apartado <strong>Autorizaciones</strong>.
-                                                            <br>
-                                                            3. Selecciona al usuario con la unidad correspondiente y da clic en el botón Verificar.
-                                                            <br>
-                                                            4. Presiona el botón AUTORIZAR si estas de acuerdo con la asignación, de lo contrario da clic en el botón RECHAZAR y escribe el motivo del rechazo.
-                                                            <br><br>
-                                                            <strong>¡Es de suma importancia que se verifique bien la autorización para los ususarios y evitar alguna asignación erronea!</strong>
-                                                            <br>
-                                                            <br>
-                                                            Gracias por su atención.
-                                                            <br>
-                                                            Atentamente,
-                                                            <br>
-                                                            <br>
-                                                            <strong>Comercial - Flotilla LDR</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>Acceso a la plataforma: </strong>
-                                                            <br>
-                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+                    $mail->Subject = utf8_decode('Solicitud de Autorización unidad DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador,</p>
+
+    <p>Por medio del presente, solicitamos tu <strong>AUTORIZACIÓN</strong> para la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$ $costo_neto MXN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <p><strong>Usuario / Institución:</strong><br>
+    $nombre_1 $nombre_2 $apaterno $amaterno $organizacion</p>
+
+    <p><strong>Solicitante:</strong><br>
+    $nombre_1_colaborador_asigna $nombre_2_colaborador_asigna $apellido_paterno_colaborador_asigna $apellido_materno_colaborador_asigna<br>
+    <strong>Área:</strong> $area<br>
+    <strong>Puesto:</strong> $puesto</p>
+
+    <hr style='margin: 20px 0;'>
+
+    <p><strong>Pasos para autorizar:</strong></p>
+    <ol>
+        <li>Ingresa a la plataforma <strong>Flotilla LDR</strong> desde la <strong>INTRANET</strong>.</li>
+        <li>Dirígete al menú en el apartado <strong>Autorizaciones</strong>.</li>
+        <li>Selecciona al usuario con la unidad correspondiente y haz clic en <strong>Verificar</strong>.</li>
+        <li>Presiona <strong>AUTORIZAR</strong> si estás de acuerdo con la asignación, o bien <strong>RECHAZAR</strong> y especifica el motivo.</li>
+    </ol>
+
+    <p style='color: #b20000;'><strong>¡Es de suma importancia verificar correctamente la autorización para evitar asignaciones erróneas!</strong></p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Comercial - Flotilla LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
                     if ($mail->send()) {
                         echo "Correo enviado exitosamente.";
                     } else {

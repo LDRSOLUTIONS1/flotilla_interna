@@ -95,7 +95,7 @@ if (
 
     echo '<div class="row">
     <div class="col-6">
-        <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . htmlspecialchars($img_unidad) . '" class="card-img-top img-fluid imgcardverificarcomodato" onerror="this.src=\'../../../Cliente/img/unidades/carro_desconocido.png\'" alt="Unidad">
+        <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . htmlspecialchars($img_unidad) . '" class="imgcardautorizardemo" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" alt="Unidad">
         </div>
     <div class="col-6">
         <div class="card-body ">

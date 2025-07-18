@@ -52,6 +52,10 @@ if (isset($_POST['id_unidad'])
         //sud = solicitante unidad demo
         //aud = asignacion unidad demo
         //pf = persona fisica
+        //uni = unidad
+        //mar = marca
+        //model = modelo
+        //caud = colaborador autorizador unidad demo
 
         $querycorreosolicitandeunidademo = "SELECT uni.placa, 
                             uni.numero_motor, 
@@ -76,7 +80,14 @@ if (isset($_POST['id_unidad'])
                             pf.rfc,
                             pf.archivo_rfc,
                             pf.domicilio,
-                            pf.archivo_domicilio
+                            pf.archivo_domicilio,
+                            aud.objetivo_prestamo,
+                            aud.solicitar_master_driver,
+                            aud.comentarios,
+                            caud.nombre_1 AS nombre_1_colaborador_autorizador,
+                            caud.nombre_2 AS nombre_2_colaborador_autorizador,
+                            caud.apellido_paterno AS apellido_paterno_colaborador_autorizador,
+                            caud.apellido_materno AS apellido_materno_colaborador_autorizador
                   FROM asignacion_unidad_demo AS aud
                   INNER JOIN colaboradores AS sud 
                     ON aud.id_colaborador_que_asigna = sud.id_colaborador
@@ -88,6 +99,8 @@ if (isset($_POST['id_unidad'])
                     ON uni.id_modelo = model.id_modelo
                   INNER JOIN marcas AS mar 
                     ON model.id_marca = mar.id_marca
+                  INNER JOIN colaboradores AS caud 
+                    ON aud.id_autorizador = caud.id_colaborador
                   WHERE aud.id_asignacion_unidad_demo = '$id_asignacion_demo'";
 
         $result = mysqli_query($conexion, $querycorreosolicitandeunidademo);
@@ -119,6 +132,13 @@ if (isset($_POST['id_unidad'])
         $costo_neto = $row['costo_neto'];
         $año_unidad = $row['año_unidad'];
         $id_colaborador = $row['id_colaborador'];
+        $objetivo_prestamo = $row['objetivo_prestamo'];
+        $solicitar_master_driver = $row['solicitar_master_driver'];
+        $comentarios = $row['comentarios'];
+        $nombre_1_colaborador_autorizador = $row['nombre_1_colaborador_autorizador'];
+        $nombre_2_colaborador_autorizador = $row['nombre_2_colaborador_autorizador'];
+        $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
+        $apellido_materno_colaborador_autorizador = $row['apellido_materno_colaborador_autorizador'];
 
         //rutas de los archivos
         $ruta_archivo_ine = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_ines/" . $archivo_ine;
@@ -153,20 +173,30 @@ if (isset($_POST['id_unidad'])
 
             $mail1->isHTML(true);
             $mail1->Subject = utf8_decode('Notificación de asignación de unidad vehicular DEMO');
-            $mail1->Body = utf8_decode("Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,<br><br>
-                            Te informamos que la unidad vehicular DEMO que solicitaste para el usuario:<br>
-                            <strong>$nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</strong> <br>
-                            con los siguientes datos ha sido autorizada.<br><br>
-                            <strong>Marca:</strong> $marca<br>
-                            <strong>Modelo:</strong> $modelo<br>
-                            <strong>Placa:</strong> $placa<br>
-                            <strong>Número de motor:</strong> $numero_motor<br>
-                            <strong>VIN:</strong> $VIN<br><br>
-                            En este momento se está enviando la información y documentos correspondientes al aréa jurídica para la realización del contrato de COMODATO.<br><br>
-                            Atentamente.<br>
-                            <strong>Flotilla - LDR</strong><br><br>
-                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+$mail1->Body = utf8_decode("
+    <p>Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,</p>
 
+    <p>Te informamos que la unidad vehicular <strong>DEMO</strong> que solicitaste para el siguiente usuario ha sido <strong>autorizada</strong>:</p>
+
+    <p><strong>Usuario:</strong><br>
+    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
+
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca:</strong></td><td style='padding: 6px;'>$marca</td></tr>
+        <tr><td style='padding: 6px;'><strong>Modelo:</strong></td><td style='padding: 6px;'>$modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+    </table>
+
+    <p>En este momento se está enviando la información y los documentos correspondientes al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
 
             if ($mail1->send()) {
                 echo "Correo enviado al colaborador.<br>";
@@ -220,60 +250,51 @@ if (isset($_POST['id_unidad'])
                                 $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
                                 $mail->isHTML(true);
-                                $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad vehicular DEMO'); // Asunto del correo
-                                $mail->Body = utf8_decode("Estimado colaborador del área jurídico.
-                                                            <br>
-                                                            <br>
-                                                            Te enviamos este correo solicitando el <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular DEMO. 
-                                                            <br>
-                                                            <br>
-                                                            <strong>$marca $modelo: </strong>
-                                                            <br>
-                                                            <strong>Placa:</strong> $placa
-                                                            <br>
-                                                            <strong>Número de motor:</strong> $numero_motor
-                                                            <br>
-                                                            <strong>VIN:</strong> $VIN
-                                                            <br>
-                                                            <strong>Costo neto:</strong> $costo_neto
-                                                            <br>
-                                                            <strong>Año unidad:</strong> $año_unidad
-                                                            <br>
-                                                            Para el usuario: <strong>$nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</strong> 
-                                                            <br> 
-                                                            CURP: <strong>$curp</strong>
-                                                            <br> 
-                                                            RFC: <strong>$rfc</strong> 
-                                                            <br>
-                                                            Domicilio: <strong>$domicilio</strong>
-                                                            <br><br>
-                                                            Una vez realizado el COMODATO debes subirlo en la plataforma <strong>Flotilla LDR.</strong>
-                                                            <br>
-                                                            Sigue los siguientes pasos para subir el documento:
-                                                            <br>
-                                                            <br>
-                                                            1. Ingresa a la plataforma Flotilla LDR con tu correo y contraseña.
-                                                            <br>
-                                                            2. Dirígete al menú en el apartado COMODATOS DEMOS.
-                                                            <br>
-                                                            3. Selecciona el usuario con la unidad correspondiente y da clic en el botón SUBIR-COMODATO.
-                                                            <br>
-                                                            4. Sube el documento correspondiente.
-                                                            <br><br>
-                                                            <strong>¡Es de suma importancia que se verifique bien la información del comodatario.!</strong>
-                                                            <br>
-                                                            <br>
-                                                            Gracias por su atención.
-                                                            <br>
-                                                            Atentamente,
-                                                            <br>
-                                                            <br>
-                                                            <strong>Comercial - Flotilla LDR</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>Acceso a la plataforma: </strong>
-                                                            <br>
-                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+                               $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad vehicular DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador del área jurídica,</p>
+
+    <p>Por medio del presente, solicitamos la elaboración del <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <br>
+
+    <p><strong>Datos del comodatario:</strong><br>
+    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica<br>
+    <strong>CURP:</strong> $curp<br>
+    <strong>RFC:</strong> $rfc<br>
+    <strong>Domicilio:</strong> $domicilio</p>
+
+    <hr style='margin: 20px 0;'>
+
+    <p>Una vez elaborado el contrato de <strong>COMODATO</strong>, por favor súbelo a la plataforma <strong>Flotilla LDR</strong> siguiendo estos pasos:</p>
+
+    <ol>
+        <li>Ingresa a la plataforma desde la <strong>INTRANET</strong>.</li>
+        <li>Dirígete al menú <strong>COMODATOS</strong>.</li>
+        <li>Selecciona al usuario correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
+        <li>Adjunta el documento generado.</li>
+    </ol>
+
+    <p style='color: #b20000;'><strong>¡Es de suma importancia verificar cuidadosamente la información del comodatario!</strong></p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Comercial - Flotilla LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
 
                                 $mail->addAttachment('' . $ruta_archivo_ine . '');
                                 $mail->addAttachment('' . $ruta_archivo_curp . '');
@@ -294,6 +315,94 @@ if (isset($_POST['id_unidad'])
                                 echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
                             }
 
+                            //enviamos correo a ADMINISTRADOR PRUEBAS DEMO (Abraham)
+
+                // Obtener correos de usuarios tipo 11 administrador pruebas demos
+                        $correosadminpruebademo = [];
+                        $correo_sql = "SELECT u.id_colaborador, 
+                                                u.id_tipo_usuario,
+                                                cor.id_colaborador,
+                                                cor.email_corporativo
+                                        FROM usuarios AS u 
+                                        INNER JOIN colaboradores AS cor
+                                        ON u.id_colaborador = cor.id_colaborador
+                                        WHERE u.id_tipo_usuario = 11";
+                        $correo_result = $conexion->query($correo_sql);
+                        while ($correo_row = $correo_result->fetch_assoc()) {
+                            if (!empty($correo_row['email_corporativo'])) {
+                                $correosadminpruebademo[] = $correo_row['email_corporativo'];
+                            }
+                        }
+
+                        //$correosadminpruebademo = ["uriel.cabello@ldrsolutions.com.mx"];
+
+                        foreach ($correosadminpruebademo as $correo) {
+                            echo "Correo: $correo <br>";
+                        }
+                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+                //cadena para ver si requiere master driver y mandarlo por correo
+$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+
+                try {
+                                $mail = new PHPMailer();
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.gmail.com';
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
+                                $mail->Password = 'ppiz zylc bpod tczi';
+                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                $mail->Port = 587;
+
+                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+                                foreach ($correosadminpruebademo as $correo) {
+                                    $mail->addAddress($correo);
+                                }
+                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+
+                                $mail->isHTML(true);
+                               $mail->Subject = utf8_decode('Autorización de unidad DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador,</p>
+
+    <p>Te notificamos que ha sido <strong>autorizada</strong> la asignación de la siguiente unidad vehicular <strong>DEMO</strong> por parte de:</p>
+
+    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <br>
+
+    <p><strong>Información del usuario:</strong><br>
+    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
+
+    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
+    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
+
+                                if ($mail->send()) {
+                                    echo "Correo enviado exitosamente.";
+                                } else {
+                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
+                                }
+                            } catch (Exception $e) {
+                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+                            }
 
         if ($ejecutarconsulta) {
             echo "Unidad actualizada correctamente.";
