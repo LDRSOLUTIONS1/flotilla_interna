@@ -2684,3 +2684,14 @@ height: auto;
     font-size: 1.6rem;
   }
 }
+/*estilos para asignar Master Driver a la unidad*/
+.contenedorasignarmasterdriver{
+  padding-top: 60px;
+  position: relative;
+}
+.btasignarmasterdriver{
+  background-color: #2c6ebd; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}

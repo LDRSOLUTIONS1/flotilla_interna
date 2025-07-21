@@ -19,11 +19,10 @@ $resultado = $conexion->query($sql);
 $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
-<!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 ----------------------------------------------------------->
-<div class="contenedorautorizardemos">
-    <h5 class="titulosletrasunidademo text-nowrap">Asignación de Master Driver</h5>
+<!-------------------------------------------aqui comienza el contenedor Asignacion de mater driver porparte del ususario tipo 11 ----------------------------------------------------------->
+<div class="contenedorasignarmasterdriver">
+    <h5 class="titulosletrasunidademo text-nowrap">Asignación de Máster Driver</h5>
     <h5 class="letraautorizaciondemo text-nowrap">
-        Unidades demo
     </h5>
 </div>
 
@@ -32,8 +31,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <div class="buscadorautorizaciondemosificas">
         <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
     </div>
-    <!-- // Botón para alternar vista -->
-    <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista_fisicas mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
 </div>
 <!--contenedor de las cards de las unidades por asignar-->
 <div class="contenedorcardunidadescomodatoresponsiva">
@@ -42,19 +39,19 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 
-<!---------------------------------------modal para ver los detalles de la unidad y el COMODATO que el usuario cliente firmo----------------------->
+<!---------------------------------------modal para asignar master drver a la unidad------------------------------------------------------->
 <!--modal-->
-<div class="modal fade modalinfounidademofisica" id="modalinfounidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modalasugnarrmasterdriver" id="modalasugnarrmasterdriver" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detalles de la unidad</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalinfounidademofisica"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Master Driver</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalasugnarrmasterdriver"></button>
             </div>
-            <div class="modal-body" id="modalinfounidademofisicabody">
+            <div class="modal-body" id="modalasugnarrmasterdriverbody">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btncerrarmodalinfounidademofisica" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalasugnarrmasterdriver" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnaprovarunidademofisica">Aprovar</button>
                 <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Denegar</button>
             </div>
@@ -85,6 +82,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 <!--js para mandar a llamar el modal de informacion de la unidad y la carta responsiva de las unidades-->
-<script src="../js/autorizar_unidades_demos/autorizar_unidades_demos_fisicas.js"></script>
+<script src="../js/aisgnar_master_driver/aisgnar_master_driver.js"></script>
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards_tabla.js"></script>

@@ -36,7 +36,8 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 aud.apellido_materno AS apellidomaternoautorizador,
                 usr.avatar AS avatar_colaborador,
                 usr_aut.avatar AS avatar_autorizador,
-                epd.estado_prueba
+                epd.estado_prueba,
+                uda.solicitar_master_driver
             FROM asignacion_unidad_demo AS uda
                 LEFT JOIN unidades AS unid 
                 ON uda.id_unidad = unid.id_unidad
@@ -58,7 +59,9 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 ON usr_aut.id_colaborador = aud.id_colaborador
                 LEFT JOIN estado_pruebas_demos AS epd
                 ON uda.id_estado_prueba_demo = epd.id_estado_prueba_demo
-            WHERE uda.autorizacion = 'APROVADO'";
+            WHERE uda.autorizacion = 'APROVADO'
+            AND solicitar_master_driver = 1
+            ORDER BY uda.id_asignacion_unidad_demo DESC";
 
 $resultado = $conexion->query($sqlobtenerunidadsubircomodato);
 
@@ -66,62 +69,36 @@ echo '<div class="table-responsive">
     <table class="table table-hover tablaunidades" id="tablaUnidades">
         <thead class="table-light">
             <tr>
-                <th class="titulostablaverificarcomodatodemo" style="text-align: center"><i class="fas fa-user me-2"></i></th>
-                <th class="titulostablaverificarcomodatodemo" style="text-align: center"><i class="fas fa-route me-2"></i></th>
                 <th class="titulostablaverificarcomodatodemo">Nombre del usuario/empresa</th>
                 <th class="titulostablaverificarcomodatodemo">Modelo</th>
                 <th class="titulostablaverificarcomodatodemo">Placa</th>
                 <th class="titulostablaverificarcomodatodemo">Asignación</th>
                 <th class="titulostablaverificarcomodatodemo">Devolución</th>
-                <th class="titulostablaverificarcomodatodemo">Pruebas</th>
-                <th class="titulostablaverificarcomodatodemo">Estado</th>
                 <th class="titulostablaverificarcomodatodemo">Solicitante</th>
                 <th class="titulostablaverificarcomodatodemo"></th>
                 <th class="titulostablaverificarcomodatodemo">Autorizador</th>
                 <th class="titulostablaverificarcomodatodemo"></th>
+                <th class="titulostablaverificarcomodatodemo">Asignar M. D.</th>
             </tr>
         </thead>
         <tbody>';
 
 while ($fila = $resultado->fetch_assoc()) {
-    $estado = "norealizado";
-if (!is_null($fila['id_estado_prueba_demo'])) {
-    if ($fila['id_estado_prueba_demo'] == 3) {
-        $estado = "finalizado";
-    } else {
-        $estado = "enproceso";
-    }
-}
+
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
         $tipo_solicitante = $fila['id_persona_fisica'] ? 'fisica' : 'moral';
 
-        echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . ' tipo-' . $estado . '">';
+
         echo '
-            <td class="text-center">
-                <button type="button" class="fas fa-eye btn btn-sm btn-outline-green btnmostrarinfodemo" data-infodemo="' . $fila['id_unidad'] . '"></button>
-            </td>
-            <td style="text-align: center;">
-                <button type="button" class="btn btn-sm btn-mapa btnubicacionunidad" data-vin="' . $fila['vin'] . '">
-                            <i class="fa-solid fa-location-dot"></i> 
-                        </button></td>
             <td class="titulostablaverificarcomodatodemo">' . $nombre . '</td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['nombre_modelo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['placa'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td class="text-center">
-                <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
-            </td>
-            <td class="titulostablaverificarcomodatodemo">';
-        if (is_null($fila['id_estado_prueba_demo'])) {
-            echo '<span class="text-danger">NO SE HA REALIZADO</span>';
-        } elseif ($fila['id_estado_prueba_demo'] == 3) {
-            echo '<span class="text-success">FINALIZADA</span>';
-        } else {
-            echo $fila['estado_prueba'];
-        }
-        echo '</td>
+            ';
+            
+        echo '
             <td class="text-center">
                 <img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
                     class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
@@ -132,6 +109,9 @@ if (!is_null($fila['id_estado_prueba_demo'])) {
                     class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
             </td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '</td>
+            <td class="text-center">
+                <button type="button" class="fas fa-user-tie btn btasignarmasterdriver" id-asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '"></button>
+            </td>
             </tr>';
     }
 }
