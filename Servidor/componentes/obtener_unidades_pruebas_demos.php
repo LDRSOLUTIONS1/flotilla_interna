@@ -3,6 +3,7 @@ include("../../Servidor/conexion.php");
 if (!isset($_SESSION)) {
     session_start();
 }
+$id_colaborador = $_SESSION['id_colaborador'];
 
 $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 uda.id_asignacion_unidad_demo,
@@ -36,7 +37,8 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 aud.apellido_materno AS apellidomaternoautorizador,
                 usr.avatar AS avatar_colaborador,
                 usr_aut.avatar AS avatar_autorizador,
-                epd.estado_prueba
+                epd.estado_prueba,
+                uda.id_asignar_prueba_demo_master_driver
             FROM asignacion_unidad_demo AS uda
                 LEFT JOIN unidades AS unid 
                 ON uda.id_unidad = unid.id_unidad
@@ -58,7 +60,10 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 ON usr_aut.id_colaborador = aud.id_colaborador
                 LEFT JOIN estado_pruebas_demos AS epd
                 ON uda.id_estado_prueba_demo = epd.id_estado_prueba_demo
-            WHERE uda.autorizacion = 'APROVADO'";
+            WHERE uda.autorizacion = 'APROVADO'
+            AND solicitar_master_driver = 1
+            AND uda.id_asignar_prueba_demo_master_driver = $id_colaborador
+            ORDER BY uda.id_asignacion_unidad_demo DESC";
 
 $resultado = $conexion->query($sqlobtenerunidadsubircomodato);
 

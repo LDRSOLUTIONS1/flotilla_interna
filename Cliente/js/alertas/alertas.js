@@ -331,3 +331,14 @@ if (resultado == "pruebafinalizada") {
     confirmButtonText: "Aceptar",
   });
 } 
+//alerta para asignar Master Driver
+if (resultado == "MasterDriverAsignado") {
+  Swal.fire({
+    title: "Máster Driver asignado correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}
+

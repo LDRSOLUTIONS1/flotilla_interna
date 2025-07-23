@@ -46,7 +46,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 <!--contenedor de las cards de las unidades por asignar-->
 <div class="contenedorcardunidademoautorizada">
-    <?php include("../../Servidor/componentes/obtener_unidades_subir_resultados_demos.php"); ?>
+    <?php include("../../Servidor/componentes/obtener_desempeños_unidades_demo.php"); ?>
 </div>
 
 

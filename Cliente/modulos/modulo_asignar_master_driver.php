@@ -45,15 +45,14 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Master Driver</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Máster Driver</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalasugnarrmasterdriver"></button>
             </div>
             <div class="modal-body" id="modalasugnarrmasterdriverbody">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalasugnarrmasterdriver" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnaprovarunidademofisica">Aprovar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Denegar</button>
+                <button type="button" class="btn btn-primary" id="btnasignarmasterdriver">Asignar</button>
             </div>
         </div>
     </div>

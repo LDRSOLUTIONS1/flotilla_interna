@@ -79,7 +79,7 @@
 
     <div class="col-md-12">
         <div class="form-group">
-            <p class="textmotivodenegacioncartaresponsiva">Describe el motivo por el cual se denego el COMODATO</p>
+            <p class="textmotivodenegacioncartaresponsiva">Comentarios</p>
             <textarea class="form-control textareamotivodenegacioncartaresponsiva comentarios_pruebas_demo" id="comentarios_pruebas_demo" name="comentarios_pruebas_demo"></textarea>
         </div>
     </div>
