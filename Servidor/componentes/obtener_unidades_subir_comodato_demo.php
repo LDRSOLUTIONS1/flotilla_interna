@@ -110,7 +110,11 @@ while ($fila = $resultado->fetch_assoc()) {
                 <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-car me-2"></i><strong>Placa: </strong>' . $fila['placa'] . '</h6>
                 <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-calendar-check me-2"></i><strong>Asignación: </strong>' . $fila['fecha_prestamo'] . '</h6>
                 <h6 class="text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><strong>Devolución: </strong>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
-                <button type="button" id="btnmosrarmodalunidadcomodato" data-idunidad="' . $fila['id_unidad'] . '" data-id="' . $fila['id_asignacion_unidad_demo'] . '" data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '"  class="btn mt-3 btnmosrarmodalunidadcomodatodemo">Subir COMODATO</button>
+                <button type="button" id="btnmosrarmodalunidadcomodato" 
+                    data-idunidad="' . $fila['id_unidad'] . '" 
+                    data-idasignacion="' . $fila['id_asignacion_unidad_demo'] . '" 
+                    data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '"  
+                class="btn mt-3 btnmosrarmodalunidadcomodatodemo">Subir COMODATO</button>
             </div>
         </div>';
         }
@@ -152,7 +156,14 @@ while ($fila = $resultado->fetch_assoc()) {
             <td class="titulostablaverificarcomodatodemo">' . $fila['placa'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td style="text-align: center;"><button type="button" id="btnmosrarmodalunidadcomodato" data-idunidad="' . $fila['id_unidad'] . '" data-id="' . $fila['id_asignacion_unidad_demo'] . '" data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '" class="fas fa-upload btn mt-3 btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodato"></button></td>
+            <td style="text-align: center;">
+                <button type="button" id="btnmosrarmodalunidadcomodato" 
+                data-idunidad="' . $fila['id_unidad'] . '" 
+                data-idasignacion="' . $fila['id_asignacion_unidad_demo'] . '" 
+                data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '" 
+            class="fas fa-upload btn mt-3 btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodato">
+                </button>
+            </td>
             <td class="titulostablaverificarcomodatodemo">';
         echo '<?php';
         if ($fila['id_estatus_comodato_demo'] == 3) {

@@ -7,6 +7,16 @@ if (!isset($_SESSION)) {
 }
 
 $colaborador = $_SESSION['id_colaborador'];
+
+// Obtener el id del usuario
+$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
+$resultado = $conexion->query($sql);
+$id_usuario = $resultado->fetch_assoc()['id_usuario'];
+
+// Obtener el tipo de usuario
+$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
+$resultado = $conexion->query($sql);
+$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-- Contenedor -->
@@ -164,7 +174,7 @@ while ($fila = $resultado->fetch_assoc()) {
 
     echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
     echo "<h2 class='titulosletraconteopruebas'><strong>Pruebas realizadas:</strong> $totalPruebas</h2>";
-
+        if ($id_tipo_usuario == 9): // tipos de usuario solicitantes demos
     // Mostrar botón según estado
     if ($estado == 1 || $estado == null) { // NO SE HA REALIZADO
         echo "<button type='button' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
@@ -180,6 +190,7 @@ while ($fila = $resultado->fetch_assoc()) {
     } elseif ($estado == 3) { // FINALIZADA
         echo "<p class='text-success'><strong>Proceso finalizado.</strong></p>";
     }
+    endif;
 
     // código que muestra la tabla de pruebas
 
