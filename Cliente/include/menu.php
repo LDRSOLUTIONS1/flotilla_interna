@@ -49,8 +49,8 @@ $avatar = $datos_usuario['avatar'];
 
         <?php elseif ($id_tipo_usuario == 2): // juridico ?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
-            <li ><a class="menulist" href="historial_comodatos.php">Historial de COMODATOS</a></li>
             <li ><a class="menulist" href="comodatos.php">COMODATOS</a></li>
+            <li ><a class="menulist" href="historial_comodatos.php">Historial de COMODATOS</a></li>
 
         <?php elseif ($id_tipo_usuario == 3): // Cliente solicitar pool?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
@@ -85,7 +85,8 @@ $avatar = $datos_usuario['avatar'];
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="asignar_master_driver.php">Asignar Master Driver</a></li>
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
-            <li ><a class="menulist" href="resultados_finales.php">Resultados finales</a></li>
+            <li ><a class="menulist" href="subir_reporte_final.php">Reportes finales</a></li>
+            <li ><a class="menulist" href="resultados_finales.php">Resultados</a></li>
         <?php endif; ?>
         <li ><a class="menulist" href="http://localhost/intranet/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
     </ul>

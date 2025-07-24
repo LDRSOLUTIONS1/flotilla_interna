@@ -66,7 +66,7 @@ while ($fila = $resultado->fetch_assoc()) {
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
             $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         if ($fila['id_estatus_comodato_demo'] != 1 && $fila['id_estatus_comodato_demo'] != 4 && $fila['id_estatus_comodato_demo'] != 5) {
-            echo '<div class="card mb-3 card-solicitante tipo-' . $tipo_solicitante . '">';
+            echo '<div class="card mb-3  tipo-' . $tipo_solicitante . '">';
             if ($fila['id_estatus_comodato_demo'] == 3) {
                 echo '<div class="alerta d-flex align-items-center"">
                 <img src="../../Cliente/videos/succes-green.gif" class="me-2 imgalertasucces> 
@@ -136,10 +136,11 @@ echo '<div id="vistaTabla" style="display: none;">
                     <th class="titulostablaverificarcomodatodemo"><i class="fas fa-calendar-check me-2"></i>Asignación</th>
                     <th class="titulostablaverificarcomodatodemo"><i class="fas fa-undo-alt me-2"></i>Devolución</th>
                     <th class="titulostablaverificarcomodatodemo"><i class="fas fa-file-contract me-2"></i>Subir comodato</th>
-                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-file-signature me-2"></i>Estado</th>
                     <th class="titulostablaverificarcomodatodemo"><i class="fas fa-user-tie me-2"></i>Solicitante</th>
                     <th class="titulostablaverificarcomodatodemo"></th>
                     <th class="titulostablaverificarcomodatodemo"><i class="fas fa-user-check me-2"></i>Autorizador</th>
+                    <th class="titulostablaverificarcomodatodemo"></th>
+                    <th class="titulostablaverificarcomodatodemo"><i class="fas fa-file-signature me-2"></i>Estado</th>
                     <th class="titulostablaverificarcomodatodemo"></th>
                 </tr>
             </thead>
@@ -157,14 +158,28 @@ while ($fila = $resultado->fetch_assoc()) {
             <td class="titulostablaverificarcomodatodemo">' . $fila['fecha_prestamo'] . '</td>
             <td class="titulostablaverificarcomodatodemo">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
             <td style="text-align: center;">
-                <button type="button" id="btnmosrarmodalunidadcomodato" 
+                <button type="button" id="btnmosrarmodalunidadcomodatodemo" 
                 data-idunidad="' . $fila['id_unidad'] . '" 
                 data-idasignacion="' . $fila['id_asignacion_unidad_demo'] . '" 
                 data-idcolaborador="' . $fila['id_colaborador_que_asigna'] . '" 
-            class="fas fa-upload btn mt-3 btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodato">
+            class="fas fa-upload btn mt-3 btntablaverificarcomodatodemojuridico btnmosrarmodalunidadcomodatodemo">
                 </button>
             </td>
-            <td class="titulostablaverificarcomodatodemo">';
+        <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+                class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;" alt="avatar">
+        </td>
+                
+        <td class="titulostablaverificarcomodatodemo">
+    ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '
+        </td>
+
+        <td style="text-align: center;"><img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
+                class="rounded-circle me-2" style="width: 25px; height: 25px; object-fit: cover;" alt="avatar">
+        </td>
+        <td class="titulostablaverificarcomodatodemo">
+    ' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '
+        </td>
+        <td class="titulostablaverificarcomodatodemo">';
         echo '<?php';
         if ($fila['id_estatus_comodato_demo'] == 3) {
             echo '<div>
@@ -184,22 +199,8 @@ while ($fila = $resultado->fetch_assoc()) {
             echo $fila['fecha_prestamo'];
         }
 
-        echo '</td>
-        <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
-                class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
-        </td>
-                
-        <td class="titulostablaverificarcomodatodemo">
-    ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '
-        </td>
-
-        <td style="text-align: center;"><img src="' . (empty($fila["avatar_autorizador"]) ? "../../Cliente/img/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_autorizador"]) . '.png"
-                class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
-        </td>
-        <td class="titulostablaverificarcomodatodemo">
-    ' . $fila['nombre1autorizador'] . ' ' . $fila['nombre2autorizador'] . ' ' . $fila['apellidopaternoautorizador'] . ' ' . $fila['apellidomaternoautorizador'] . '
-        </td>
-                </tr>';
+        echo '</td>';
+                echo '</tr>';
             ?>
         
 <?php

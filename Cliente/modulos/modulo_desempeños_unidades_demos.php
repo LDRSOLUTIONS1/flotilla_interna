@@ -21,7 +21,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!-----------------aqui comienza el contenedor para subir el desempeño de las unidades demos por parte del usuario tipo 11 ADMINISTRADOR PRUEBA DEMO ---------------------------------->
 <div class="contenedordesempeñosdemos">
-    <h5 class="titulosletrasdesempeñodemos text-nowrap">Desempeños de las unidades</h5>
+    <h5 class="titulosletrasdesempeñodemos text-nowrap">Desempeños de las unidades demos</h5>
 </div>
 
 <!-- Campo de búsqueda para filtrar la tabla -->

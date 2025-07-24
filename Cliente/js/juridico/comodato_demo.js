@@ -87,9 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("id_unidad", unidad);
       formData.append("archivo_subir_comodato", valor_archivo_subir_comodato);
       console.log(valor_archivo_subir_comodato);
-      console.log(asignacion + "asignacion");
-      console.log(colaborador + "colaborador");
-      console.log(unidad + "unidad");
+      console.log(asignacion + ": asignacion");
+      console.log(colaborador + ": colaborador");
+      console.log(unidad + ": unidad");
 
       if (colaborador) {
       $.ajax({
@@ -102,32 +102,13 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log(response);
           if (response.includes("correctamente")) {
             contenedorspinner.style.display = "none";
-            window.location.href = "./comodatos.php?resultado=Comodatoenviado";
+            window.location.href = "./comodatos_demos.php?resultado=Comodatoenviado";
           } else {
             if (response == "error") {
             }
           }
         },
       });
-    }else if (usuarioexterno) {
-      $.ajax({
-        type: "POST",
-        url: "../../Servidor/solicitudes/unidades/comodato/enviarcomodatoexterno.php",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-          console.log(response);
-          if (response.includes("correctamente")) {
-            contenedorspinner.style.display = "none";
-            window.location.href = "./comodatos.php?resultado=Comodatoenviado";
-          } else {
-            if (response == "error") {
-            }
-          }
-        },
-      });
-
     }
     }
   });

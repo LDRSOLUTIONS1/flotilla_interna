@@ -29,8 +29,8 @@ if (isset($_FILES['archivo_subir_comodato'])
 
     if (move_uploaded_file($_FILES['archivo_subir_comodato']['tmp_name'], $rutaarchivocomodato . $nombrearchivocomodato)) {
         $sql = "UPDATE asignacion_unidad_demo 
-                SET id_estatus_comodato = 3,
-                id_creador_comodato = $id_creador_comodato,
+                SET id_estatus_comodato_demo = 3,
+                id_creador_comodato_demo = $id_creador_comodato,
                 fecha_creacion_comodato = NOW(),
                 archivo_comodato_sin_firmar = '$nombrearchivocomodato'
                 WHERE id_asignacion_unidad_demo = $valor_idasignacion";
@@ -47,13 +47,20 @@ if (isset($_FILES['archivo_subir_comodato'])
                          col.nombre_2, 
                          col.apellido_paterno, 
                          col.apellido_materno,
-                         asigpdf.archivo_comodato_sin_firmar
+                         asigpdf.archivo_comodato_sin_firmar,
+                         pf.nombre_1 as nombre1_persona_fisica, 
+                         pf.nombre_2 as nombre2_persona_fisica, 
+                         pf.apellido_paterno as apellido_paterno_persona_fisica, 
+                         pf.apellido_materno as apellido_materno_persona_fisica,
+                         pm.organizacion_institucion
                   FROM asignacion_unidad_demo AS asigpdf
                   INNER JOIN colaboradores AS col ON asigpdf.id_colaborador_que_asigna = col.id_colaborador
                   INNER JOIN unidades AS uni ON asigpdf.id_unidad = uni.id_unidad
                   INNER JOIN modelos AS model ON uni.id_modelo = model.id_modelo
                   INNER JOIN marcas AS mar ON model.id_marca = mar.id_marca
-                  WHERE asigpdf.id_asignaciones = $valor_idasignacion";
+                  LEFT JOIN personas_fisicas AS pf ON asigpdf.id_persona_fisica = pf.id_persona_fisica
+                  LEFT JOIN personas_morales AS pm ON asigpdf.id_persona_moral = pm.id_persona_moral
+                  WHERE asigpdf.id_asignacion_unidad_demo = $valor_idasignacion";
 
         $result = mysqli_query($conexion, $query);
         $row = mysqli_fetch_assoc($result);
@@ -62,6 +69,11 @@ if (isset($_FILES['archivo_subir_comodato'])
         $nombre_2 = $row['nombre_2'];
         $apaterno = $row['apellido_paterno'];
         $amaterno = $row['apellido_materno'];
+        $nombre_1_persona_fisica = $row['nombre1_persona_fisica'];
+        $nombre_2_persona_fisica = $row['nombre2_persona_fisica'];
+        $apaterno_persona_fisica = $row['apellido_paterno_persona_fisica'];
+        $amaterno_persona_fisica = $row['apellido_materno_persona_fisica'];
+        $organizacion_institucion = $row['organizacion_institucion'];
         $placa = $row['placa'];
         $numero_motor = $row['numero_motor'];
         $VIN = $row['VIN'];
@@ -103,18 +115,31 @@ if (isset($_FILES['archivo_subir_comodato'])
 
             $mail->isHTML(true);
             $mail->Subject = utf8_decode('Notificación de COMODATO UNIDAD DEMO');
-            $mail->Body = utf8_decode("Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno.</strong> 
-                Se ha generado el documento denominado <strong>COMODATO</strong> para la siguiente unidad vehicular:<br><br>
-                <strong>Unidad:</strong> $marca $modelo<br>
-                <strong>Placa:</strong> $placa<br>
-                <strong>Número de motor:</strong> $numero_motor<br>
-                <strong>VIN:</strong> $VIN<br><br>
-                Asignado al colaborador: <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong><br><br>
-                En este correo se adjunta el documento sin firma para su revisión.<br><br>
-                Gracias por su atención.<br><br>
-                Atentamente,<br><br>
-                <strong> Jurídico - Flotilla LDR </strong>
+            $mail->Body = utf8_decode("
+                <p>Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,</p>
+
+                <p>Se ha generado el documento denominado <strong>COMODATO</strong> para la siguiente unidad vehicular:</p>
+
+                <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+                    <tr><td style='padding: 6px;'><strong>Unidad:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+                    <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+                </table>
+
+                <br>
+
+                <p><strong>Usuario / Institución:</strong><br>
+                $nombre_1_persona_fisica $nombre_2_persona_fisica $apaterno_persona_fisica $amaterno_persona_fisica $organizacion_institucion</p>
+
+                <p>En este correo se adjunta el documento <strong>sin firma</strong> para su revisión.</p>
+
+                <p>Gracias por su atención.</p>
+
+                <p>Atentamente,<br>
+                <strong>Jurídico - Flotilla LDR</strong></p>
             ");
+
 
             $mail->send();
             echo "Correo enviado exitosamente con archivo adjunto.<br>";
