@@ -7,12 +7,14 @@ if (!isset($_SESSION)) {
         //pf = Persona Fisica
         //pm = Persona Moral
         //ca = Colaborador que Asigna
+
             $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 uda.id_asignacion_unidad_demo,
                 uda.id_unidad,
                 uda.id_colaborador_que_asigna,
                 uda.id_persona_fisica,
                 uda.autorizacion,
+                uda.solicitar_master_driver,
                 pf.id_persona_fisica,
                 pf.nombre_1,
                 pf.nombre_2,
@@ -45,6 +47,8 @@ if (!isset($_SESSION)) {
             INNER JOIN usuarios AS usr 
             ON usr.id_colaborador = ca.id_colaborador
             WHERE uda.autorizacion = 'APROVADO'
+            AND uda.solicitar_master_driver = 1
+            AND id_estado_prueba_demo = 3
             order by uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);

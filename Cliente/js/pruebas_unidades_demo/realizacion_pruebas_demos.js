@@ -229,7 +229,26 @@ document.body.addEventListener("click", function (event) {
     });
 });
 
-
+//abrimoa la modal para subir el reporte final de la prueba
+const modalregistrarresultados = new bootstrap.Modal(document.getElementById('modalregistrarresultados'));
+const modalregistrarresultadosbody = document.getElementById('modalregistrarresultadosbody');
+ 
+let subir_reporte_final = 0;
+  document.body.addEventListener("click", function (event) {
+    if (event.target.classList.contains("subir_reporte_final")) {
+      subir_reporte_final = event.target.getAttribute("data-idpruebademo");
+      id_asignacion_unidad_demo = event.target.getAttribute("data-idpruebademo");
+      $.ajax({
+        type: "POST",
+        data: { id_subir_reporte_final: subir_reporte_final },
+        url: "#",
+        success: function (response) {
+          modalregistrarresultadosbody.innerHTML = response;
+          modalregistrarresultados.show();
+        },
+      });
+    }
+  });
 
 
 });

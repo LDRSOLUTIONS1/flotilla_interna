@@ -21,50 +21,8 @@
 
 
 
-<!---------------------------------------modal para ver los detalles de la unidad y el COMODATO que el usuario cliente firmo----------------------->
-<!--modal-->
-<div class="modal fade modalinfounidadcomodato" id="modalinfounidadcomodato" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detalles de la unidad y COMODATO</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalinfounidadcomodato"></button>
-            </div>
-            <div class="modal-body" id="modalinfounidadcomodatobody">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" id="btnnotificarusuario"><i class="fas fa-bell"></i> Notificar</button>
-                <button type="button" class="btn btn-secondary" id="btncerrarmodalinfounidadcomodato" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnaprovarcomodatofirmado">Asignar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarcomodatofirmado">Denegar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--------------------------------------modal para escribir el motivo por el cual se denego el comodato firmado---------------------------------------------->
-<!--modal-->
-<div class="modal fade modaldescripcionnegacioncomodatofirmado" id="modaldescripcionnegacioncomodatofirmado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Denegar carta responsiva</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodaldescripcionnegacioncomodatofirmado"></button>
-            </div>
-            <div class="modal-body" id="modaldescripcionnegacioncomodatofirmadobody">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btncerrarmodaldescripcionnegacioncomodatofirmado" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarcartaresponsivafirmadadenegar">Enviar motivo de denegación</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 
 <!--js para mandar a llamar el modal de informacion de la unidad y la carta responsiva de las unidades-->
-<script src="../js/asignar_unidades/validacion_unidades_comodato.js"></script>
+<script src="../js/reporte_final_prueba_demo/reporte_final_prueba_demo.js"></script>
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards_tabla.js"></script>

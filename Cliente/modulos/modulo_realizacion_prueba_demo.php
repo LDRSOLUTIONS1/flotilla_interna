@@ -146,7 +146,9 @@ if (isset($_GET['id_unidad'])) {
                     model.nombre_modelo,
                     unid.placa,
                     unid.vin,
-                    epd.estado_prueba
+                    epd.estado_prueba,
+                    a.reporte_final_prueba,
+                    a.id_estado_prueba_demo
                 FROM asignacion_unidad_demo AS a
                 LEFT JOIN unidades AS u ON a.id_unidad = u.id_unidad
                 LEFT JOIN modelos AS model ON u.id_modelo = model.id_modelo
@@ -158,9 +160,12 @@ if (isset($_GET['id_unidad'])) {
     $stmt->bind_param("i", $id_asignacion);
     $stmt->execute();
     $resultado = $stmt->get_result();
+
 while ($fila = $resultado->fetch_assoc()) {
     $id_asignacion = $fila['id_asignacion_unidad_demo'];
     $estado = $fila['id_estado_prueba_demo'];
+    $reporte_final = $fila['reporte_final_prueba'];
+    $id_estado_prueba_demo = $fila['id_estado_prueba_demo'];
 
     // Contar pruebas
     $sqlTotalPruebas = "SELECT COUNT(*) AS total FROM pruebas_unidad_demo WHERE id_asignacion_unidad_demo = ?";
@@ -190,6 +195,17 @@ while ($fila = $resultado->fetch_assoc()) {
     } elseif ($estado == 3) { // FINALIZADA
         echo "<p class='text-success'><strong>Proceso finalizado.</strong></p>";
     }
+    endif;
+
+    // ----------------------------------------------------------------------------Botón de subir reporte final---------------------------------------------------
+    if ($id_tipo_usuario == 11): // tipos de usuario solicitantes demos
+        if (empty($reporte_final) || $reporte_final == null) {
+            if ($id_estado_prueba_demo == 3) {
+            echo "<button type='button' class='btn btn-primera_prueba subir_reporte_final' data-idpruebademo='$id_asignacion'>
+                    Subir reporte final
+                </button>";
+            }
+        }
     endif;
 
     // código que muestra la tabla de pruebas
@@ -300,6 +316,25 @@ while ($fila = $resultado->fetch_assoc()) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalpruebademo" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnregistrarpruebademo">Registrar PRUEBA</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------------------------------------------------------modal para registrar los resultados de las pruebas--------------------------------->
+<!--modal-->
+<div class="modal fade modalregistrarresultados" id="modalregistrarresultados" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalresultados"></button>
+            </div>
+            <div class="modal-body" id="modalregistrarresultadosbody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalresultados" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnregistrarresultados">Registrar RESULTADOS</button>
             </div>
         </div>
     </div>
