@@ -334,7 +334,7 @@ while ($fila = $resultado->fetch_assoc()) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalresultados" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnregistrarresultados">Registrar RESULTADOS</button>
+                <button type="button" class="btn btn-primary btnregistrarresultados" id="btnregistrarresultados">Registrar</button>
             </div>
         </div>
     </div>
@@ -342,6 +342,7 @@ while ($fila = $resultado->fetch_assoc()) {
 
 <!--pruebas unidades demo-->
 <script src="../js/pruebas_unidades_demo/realizacion_pruebas_demos.js"></script>
+<script src="../js/pruebas_unidades_demo/reporte_final_pruebas.js"></script>
 <!--js para filtrar la tabla de unidades-->
 <script src="../js/unidades/filtrar_tabla.js"></script>
 

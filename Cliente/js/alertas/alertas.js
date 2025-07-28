@@ -341,4 +341,14 @@ if (resultado == "MasterDriverAsignado") {
   });
   limpiarparametros();
 }
+//alerta para insertar la prueba final demo
+if (resultado == "reporteinsertado") {
+  Swal.fire({
+    title: "Prueba final demo insertada correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}
 

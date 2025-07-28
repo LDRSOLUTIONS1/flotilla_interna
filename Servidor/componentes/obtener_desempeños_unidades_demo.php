@@ -120,6 +120,8 @@ while ($fila = $resultado->fetch_assoc()) {
             echo '<span class="text-danger">NO SE HA REALIZADO</span>';
         } elseif ($fila['id_estado_prueba_demo'] == 3) {
             echo '<span class="text-success">FINALIZADA</span>';
+        }elseif ($fila['id_estado_prueba_demo'] == 4) {
+            echo '<span style="color: #F7931A;">PRUEBA FINAL SUBIDA</span>';
         } else {
             echo $fila['estado_prueba'];
         }

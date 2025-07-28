@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
           position: "right",
           stopOnFocus: true,
           style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            background: "linear-gradient(to right, #b00000ff, #c93d3dff)",
           },
         }).showToast();
         return false;
