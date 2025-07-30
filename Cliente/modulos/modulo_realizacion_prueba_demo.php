@@ -25,11 +25,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 <!-----------------------------------------------------------------card con informacion de la unidad y solicitud demo--------------------------------------->
 <div class="contenedorrealizacionprueba">
-<?php
-if (isset($_GET['id_unidad'])) {
-    $id_asignacion = $_GET['id_unidad'];
+    <?php
+    if (isset($_GET['id_unidad'])) {
+        $id_asignacion = $_GET['id_unidad'];
 
-    $consulta = "SELECT 
+        $consulta = "SELECT 
                     a.id_asignacion_unidad_demo,
                     a.id_unidad,
                     a.id_colaborador_que_asigna,
@@ -67,79 +67,79 @@ if (isset($_GET['id_unidad'])) {
                 LEFT JOIN estado_pruebas_demos AS epd ON a.id_estado_prueba_demo = epd.id_estado_prueba_demo
                 WHERE a.id_asignacion_unidad_demo = ?";
 
-    $stmt = $conexion->prepare($consulta);
-    $stmt->bind_param("i", $id_asignacion);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+        $stmt = $conexion->prepare($consulta);
+        $stmt->bind_param("i", $id_asignacion);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
-    while ($fila = $resultado->fetch_assoc()) {
-        if (($fila['id_persona_fisica'] || $fila['id_persona_moral'])) {
-            $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
+        while ($fila = $resultado->fetch_assoc()) {
+            if (($fila['id_persona_fisica'] || $fila['id_persona_moral'])) {
+                $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
 
-            $img = $fila['img_unidad'];
-            $ruta_servidor = "../../Servidor/archivos/imagenes/imagenes_unidades/";
-            $ruta_completa = $ruta_servidor . $img;
-            $ruta_url = $ruta_servidor . $img;
-            $ruta_fallback = "../../Cliente/img/unidades/carro_desconocido.png";
+                $img = $fila['img_unidad'];
+                $ruta_servidor = "../../Servidor/archivos/imagenes/imagenes_unidades/";
+                $ruta_completa = $ruta_servidor . $img;
+                $ruta_url = $ruta_servidor . $img;
+                $ruta_fallback = "../../Cliente/img/unidades/carro_desconocido.png";
 
-            echo "<div class='contenido-card'>";
+                echo "<div class='contenido-card'>";
 
-            echo "<div class='contenedor-imagen'>";
-            if (!empty($img) && file_exists($ruta_completa)) {
-                echo "<img class='imgunidadpruebademo' src='" . htmlspecialchars($ruta_url) . "' alt='Imagen de la unidad'>";
-            } else {
-                echo "<img class='imgunidadpruebademo' src='" . htmlspecialchars($ruta_fallback) . "' alt='Imagen no disponible'>";
+                echo "<div class='contenedor-imagen'>";
+                if (!empty($img) && file_exists($ruta_completa)) {
+                    echo "<img class='imgunidadpruebademo' src='" . htmlspecialchars($ruta_url) . "' alt='Imagen de la unidad'>";
+                } else {
+                    echo "<img class='imgunidadpruebademo' src='" . htmlspecialchars($ruta_fallback) . "' alt='Imagen no disponible'>";
+                }
+                echo "</div>";
+
+                echo "<form action='' method='post'>";
+                echo "<div class='row'>";
+                echo "<div class='col-md-6'>";
+                echo "<label for='nombre' class='letrasinfounidademoprueba'><b>Nombre del usuario/empresa:</b></label>";
+                echo "<input type='text' class='form-control letrasinfounidademoprueba' id='nombre' name='nombre' value='" . $nombre . "' readonly>";
+                echo "</div>";
+                echo "<div class='col-6'>";
+                echo "<label for='solicitante' class='letrasinfounidademoprueba'><b>Solicitante:</b></label>";
+                echo "<input type='text' class='form-control letrasinfounidademoprueba' id='solicitante' name='solicitante' value='" . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . "' readonly>";
+                echo "</div>";
+                echo "<div class='col-3'>";
+                echo "<label for='fecha_prestamo' class='letrasinfounidademoprueba'><b>Fecha Préstamo:</b></label>";
+                echo "<input type='text' class='form-control letrasinfounidademoprueba' id='fecha_prestamo' name='fecha_prestamo' value='" . $fila['fecha_prestamo'] . "' readonly>";
+                echo "</div>";
+                echo "<div class='col-3'>";
+                echo "<label for='fecha_devolucion' class='letrasinfounidademoprueba'><b>Fecha Devolución:</b></label>";
+                echo "<input type='text' class='form-control letrasinfounidademoprueba' id='fecha_devolucion' name='fecha_devolucion' value='" . $fila['fecha_devolucion'] . "' readonly>";
+                echo "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                echo "<div class='col-6'>";
+                echo "<label for='objetivo_prestamo' class='letrasinfounidademoprueba'><b>Objetivo Préstamo:</b></label>";
+                echo "<textarea class='form-control letrasinfounidademoprueba' id='objetivo_prestamo' name='objetivo_prestamo' rows='4' readonly>" . $fila['objetivo_prestamo'] . "</textarea>";
+                echo "</div>";
+                echo "<div class='col-6'>";
+                echo "<label for='comentarios' class='letrasinfounidademoprueba'><b>Comentarios:</b></label>";
+                echo "<textarea class='form-control letrasinfounidademoprueba' id='comentarios' name='comentarios' rows='4' readonly>" . $fila['comentarios'] . "</textarea>";
+                echo "</div>";
+                echo "</div>";
+                echo "</form>";
+
+                echo "</div>"; // contenido-card
             }
-            echo "</div>";
-
-            echo "<form action='' method='post'>";
-            echo "<div class='row'>";
-            echo "<div class='col-md-6'>";
-            echo "<label for='nombre' class='letrasinfounidademoprueba'><b>Nombre del usuario/empresa:</b></label>";
-            echo "<input type='text' class='form-control letrasinfounidademoprueba' id='nombre' name='nombre' value='" . $nombre . "' readonly>";
-            echo "</div>";
-            echo "<div class='col-6'>";
-            echo "<label for='solicitante' class='letrasinfounidademoprueba'><b>Solicitante:</b></label>";
-            echo "<input type='text' class='form-control letrasinfounidademoprueba' id='solicitante' name='solicitante' value='" . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . "' readonly>";
-            echo "</div>";
-            echo "<div class='col-3'>";
-            echo "<label for='fecha_prestamo' class='letrasinfounidademoprueba'><b>Fecha Préstamo:</b></label>";
-            echo "<input type='text' class='form-control letrasinfounidademoprueba' id='fecha_prestamo' name='fecha_prestamo' value='" . $fila['fecha_prestamo'] . "' readonly>";
-            echo "</div>";
-            echo "<div class='col-3'>";
-            echo "<label for='fecha_devolucion' class='letrasinfounidademoprueba'><b>Fecha Devolución:</b></label>";
-            echo "<input type='text' class='form-control letrasinfounidademoprueba' id='fecha_devolucion' name='fecha_devolucion' value='" . $fila['fecha_devolucion'] . "' readonly>";
-            echo "</div>";
-            echo "</div>";
-            echo "<div class='row'>";
-            echo "<div class='col-6'>";
-            echo "<label for='objetivo_prestamo' class='letrasinfounidademoprueba'><b>Objetivo Préstamo:</b></label>";
-            echo "<textarea class='form-control letrasinfounidademoprueba' id='objetivo_prestamo' name='objetivo_prestamo' rows='4' readonly>" . $fila['objetivo_prestamo'] . "</textarea>";
-            echo "</div>";
-            echo "<div class='col-6'>";
-            echo "<label for='comentarios' class='letrasinfounidademoprueba'><b>Comentarios:</b></label>";
-            echo "<textarea class='form-control letrasinfounidademoprueba' id='comentarios' name='comentarios' rows='4' readonly>" . $fila['comentarios'] . "</textarea>";
-            echo "</div>";
-            echo "</div>";
-            echo "</form>";
-
-            echo "</div>"; // contenido-card
         }
+        $stmt->close();
+    } else {
+        echo "<h1>ID de asignación no proporcionado.</h1>";
     }
-    $stmt->close();
-} else {
-    echo "<h1>ID de asignación no proporcionado.</h1>";
-}
-?>
+    ?>
 </div>
 
 <!-----------------------------------------------------------------modulo de registro de la prueba demo ------------------------------------------------------------>
 <div class="contenedorealizaciondeprueba">
-<?php
-if (isset($_GET['id_unidad'])) {
-    $id_asignacion = $_GET['id_unidad'];
+    <?php
+    if (isset($_GET['id_unidad'])) {
+        $id_asignacion = $_GET['id_unidad'];
 
-    $consulta = "SELECT 
+        $consulta = "SELECT 
                     a.id_asignacion_unidad_demo,
                     a.id_unidad,
                     a.id_estado_prueba_demo,
@@ -156,61 +156,61 @@ if (isset($_GET['id_unidad'])) {
                 LEFT JOIN estado_pruebas_demos AS epd ON a.id_estado_prueba_demo = epd.id_estado_prueba_demo
                 WHERE a.id_asignacion_unidad_demo = ?";
 
-    $stmt = $conexion->prepare($consulta);
-    $stmt->bind_param("i", $id_asignacion);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
+        $stmt = $conexion->prepare($consulta);
+        $stmt->bind_param("i", $id_asignacion);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
-while ($fila = $resultado->fetch_assoc()) {
-    $id_asignacion = $fila['id_asignacion_unidad_demo'];
-    $estado = $fila['id_estado_prueba_demo'];
-    $reporte_final = $fila['reporte_final_prueba'];
-    $id_estado_prueba_demo = $fila['id_estado_prueba_demo'];
+        while ($fila = $resultado->fetch_assoc()) {
+            $id_asignacion = $fila['id_asignacion_unidad_demo'];
+            $estado = $fila['id_estado_prueba_demo'];
+            $reporte_final = $fila['reporte_final_prueba'];
+            $id_estado_prueba_demo = $fila['id_estado_prueba_demo'];
 
-    // Contar pruebas
-    $sqlTotalPruebas = "SELECT COUNT(*) AS total FROM pruebas_unidad_demo WHERE id_asignacion_unidad_demo = ?";
-    $stmtTotal = $conexion->prepare($sqlTotalPruebas);
-    $stmtTotal->bind_param("i", $id_asignacion);
-    $stmtTotal->execute();
-    $resTotal = $stmtTotal->get_result();
-    $filaTotal = $resTotal->fetch_assoc();
-    $totalPruebas = $filaTotal['total'];
-    $stmtTotal->close();
+            // Contar pruebas
+            $sqlTotalPruebas = "SELECT COUNT(*) AS total FROM pruebas_unidad_demo WHERE id_asignacion_unidad_demo = ?";
+            $stmtTotal = $conexion->prepare($sqlTotalPruebas);
+            $stmtTotal->bind_param("i", $id_asignacion);
+            $stmtTotal->execute();
+            $resTotal = $stmtTotal->get_result();
+            $filaTotal = $resTotal->fetch_assoc();
+            $totalPruebas = $filaTotal['total'];
+            $stmtTotal->close();
 
-    echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
-    echo "<h2 class='titulosletraconteopruebas'><strong>Pruebas realizadas:</strong> $totalPruebas</h2>";
-        if ($id_tipo_usuario == 9): // tipos de usuario solicitantes demos
-    // Mostrar botón según estado
-    if ($estado == 1 || $estado == null) { // NO SE HA REALIZADO
-        echo "<button type='button' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
+            echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
+            echo "<h2 class='titulosletraconteopruebas'><strong>Pruebas realizadas:</strong> $totalPruebas</h2>";
+            if ($id_tipo_usuario == 9): // tipos de usuario solicitantes demos
+                // Mostrar botón según estado
+                if ($estado == 1 || $estado == null) { // NO SE HA REALIZADO
+                    echo "<button type='button' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
                 Realizar primera prueba
               </button>";
-    } elseif ($estado == 2) { // EN PROCESO
-        echo "<button type='button' class='btn btn-segunda_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
+                } elseif ($estado == 2) { // EN PROCESO
+                    echo "<button type='button' class='btn btn-segunda_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>
                 Realizar prueba: " . ($totalPruebas + 1) . "
               </button>";
-        echo "<button type='button' class='btn btn-tercera_prueba finalizar_prueba' data-idpruebademo='$id_asignacion'>
+                    echo "<button type='button' class='btn btn-tercera_prueba finalizar_prueba' data-idpruebademo='$id_asignacion'>
                 Finalizar pruebas
               </button>";
-    } elseif ($estado == 3) { // FINALIZADA
-        echo "<p class='text-success'><strong>Proceso finalizado.</strong></p>";
-    }
-    endif;
+                } elseif ($estado == 3) { // FINALIZADA
+                    echo "<p class='text-success'><strong>Proceso finalizado.</strong></p>";
+                }
+            endif;
 
-    // ----------------------------------------------------------------------------Botón de subir reporte final---------------------------------------------------
-    if ($id_tipo_usuario == 11): // tipos de usuario solicitantes demos
-        if (empty($reporte_final) || $reporte_final == null) {
-            if ($id_estado_prueba_demo == 3) {
-            echo "<button type='button' class='btn btn-primera_prueba subir_reporte_final' data-idpruebademo='$id_asignacion'>
+            // ----------------------------------------------------------------------------Botón de subir reporte final---------------------------------------------------
+            if ($id_tipo_usuario == 11): // tipos de usuario solicitantes demos
+                if (empty($reporte_final) || $reporte_final == null) {
+                    if ($id_estado_prueba_demo == 3) {
+                        echo "<button type='button' class='btn btn-primera_prueba subir_reporte_final' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
                     Subir reporte final
                 </button>";
-            }
-        }
-    endif;
+                    }
+                }
+            endif;
 
-    // código que muestra la tabla de pruebas
+            // código que muestra la tabla de pruebas
 
-    $consulta_pruebas = "SELECT 
+            $consulta_pruebas = "SELECT 
                     p.id_prueba,
                     p.id_asignacion_unidad_demo,
                     p.fecha_prueba,
@@ -232,11 +232,11 @@ while ($fila = $resultado->fetch_assoc()) {
                 LEFT JOIN colaboradores AS crp ON p.id_colaborador_registra_prueba = crp.id_colaborador
                 WHERE p.id_asignacion_unidad_demo = ?";
 
-    $stmti = $conexion->prepare($consulta_pruebas);
-    $stmti->bind_param("i", $id_asignacion);
-    $stmti->execute();
-    $resultado = $stmti->get_result();
-    echo "<div class='table-responsive'>
+            $stmti = $conexion->prepare($consulta_pruebas);
+            $stmti->bind_param("i", $id_asignacion);
+            $stmti->execute();
+            $resultado = $stmti->get_result();
+            echo "<div class='table-responsive'>
             <table class='table table-hover tablaunidades' id='tablaUnidades'>
             <thead class='table-light'>
                 <tr>
@@ -257,51 +257,81 @@ while ($fila = $resultado->fetch_assoc()) {
             </thead>
             <tbody>";
 
-    $contador = 1;
-    while ($fila = $resultado->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td class='letratablapruebademo'>" . ($contador++) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['fecha_prueba']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['revoluciones']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['velocidad']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['kilometraje']) . "</td>";
-        echo "<td class='letratablapruebademo' style='text-align: center;'>
+            $contador = 1;
+            while ($fila = $resultado->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td class='letratablapruebademo'>" . ($contador++) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['fecha_prueba']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['revoluciones']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['velocidad']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['kilometraje']) . "</td>";
+                echo "<td class='letratablapruebademo' style='text-align: center;'>
                 <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_tablero/" . ($fila['foto_tablero']) . "' target='_blank'>
                     <button class='btn btn-sm btn-tablero'><i class='fas fa-dashboard'></i></button>
                 </a>
               </td>";
-        echo "<td class='letratablapruebademo' style='text-align: center;'>
+                echo "<td class='letratablapruebademo' style='text-align: center;'>
                 <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_odometro/" . ($fila['foto_odometro']) . "' target='_blank'>
                     <button class='btn btn-sm btn-odometro'><i class='fas fa-tachometer-alt'></i></button>
                 </a>
               </td>";
-        echo "<td class='letratablapruebademo' style='text-align: center;'>
+                echo "<td class='letratablapruebademo' style='text-align: center;'>
                 <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_unidad_exterior/" . ($fila['foto_unidad']) . "' target='_blank'>
                     <button class='btn btn-sm btn-unidad-exterior'><i class='fas fa-car-side'></i></button>
                 </a>
               </td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
-        echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
-        echo "</tr>";
-    }
+                echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
+                echo "</tr>";
+            }
 
 
-    $stmti->close();
+            $stmti->close();
         }
-    
 
-    echo "</tbody></table>";
 
-    $stmt->close();
-} else {
-    echo "<h1>ID de asignación no proporcionado.</h1>";
-}
-?>
+        echo "</tbody></table>";
+
+        $stmt->close();
+    } else {
+        echo "<h1>ID de asignación no proporcionado.</h1>";
+    }
+    ?>
+</div>
 </div>
 
+<?php
+if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3) {
+    ?>
+    <div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
+        <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" placeholder="Fecha de Inicio">
+                    <label for="fechaInicio">Fecha de Inicio</label>
+                </div>
+                <label for="fechaInicio"></label>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha de Fin">
+                    <label for="fechaFin">Fecha de Fin</label>
+                </div>
+                <label for="fechaInicio"></label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnregistrarpruebademo" style="text-align: center;">Obtener datos de la prueba</button>
+    </div>
+    <?php
+}
+?>
+
+<br><br>
+<br><br>
 <!--------------------------------------------------------------------------modal para registrar las pruebas demos por unidad-------------------->
 <!--modal-->
 <div class="modal fade modalregistrarpruebas" id="modalregistrarpruebas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -345,4 +375,3 @@ while ($fila = $resultado->fetch_assoc()) {
 <script src="../js/pruebas_unidades_demo/reporte_final_pruebas.js"></script>
 <!--js para filtrar la tabla de unidades-->
 <script src="../js/unidades/filtrar_tabla.js"></script>
-

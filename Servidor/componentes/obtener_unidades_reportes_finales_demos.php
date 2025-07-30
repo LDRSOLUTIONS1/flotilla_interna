@@ -48,7 +48,7 @@ if (!isset($_SESSION)) {
             ON usr.id_colaborador = ca.id_colaborador
             WHERE uda.autorizacion = 'APROVADO'
             AND uda.solicitar_master_driver = 1
-            AND id_estado_prueba_demo = 3
+            AND id_estado_prueba_demo = 4
             order by uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
