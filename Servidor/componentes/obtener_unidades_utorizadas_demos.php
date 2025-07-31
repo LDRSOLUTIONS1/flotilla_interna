@@ -39,16 +39,16 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             LEFT JOIN unidades AS unid 
             ON uda.id_unidad = unid.id_unidad
             LEFT JOIN modelos AS model 
-            ON unid.id_modelo = model.id_modelo 
-            LEFT JOIN personas_fisicas AS pf 
+            ON unid.id_modelo = model.id_modelo
+            LEFT JOIN personas_fisicas AS pf
             ON uda.id_persona_fisica = pf.id_persona_fisica
-            LEFT JOIN personas_morales AS pm 
+            LEFT JOIN personas_morales AS pm
             ON uda.id_persona_moral = pm.id_persona_moral
             LEFT JOIN colaboradores AS aud
             ON uda.id_autorizador = aud.id_colaborador
             INNER JOIN colaboradores AS ca
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
-            WHERE uda.autorizacion = 'APROVADO' 
+            WHERE uda.autorizacion = 'APROVADO'
             AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
             AND uda.solicitar_master_driver = 1
             AND id_estado_prueba_demo = 4
@@ -80,8 +80,9 @@ while ($fila = $resultado->fetch_assoc()) {
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
-            <button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Solicitar prórroga</button>
-            <button type="button" class="btn btn-warning btn-sm" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>
+            <button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Prórroga</button>
+            <button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Reporte</button>
+            <button type="button" class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>
         </div>
         </div>';
     }

@@ -39,7 +39,7 @@
 
 
 
-<!--js para mandar a llamar el modal de informacion de la unidad y la carta responsiva de las unidades-->
+<!--js para vizualisar el reporte final de la prueba demo-->
 <script src="../js/reporte_final_prueba_demo/reportes_finales_demos.js"></script>
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards_tabla.js"></script>
