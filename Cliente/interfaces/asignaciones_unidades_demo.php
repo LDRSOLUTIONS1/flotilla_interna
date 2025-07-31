@@ -31,7 +31,7 @@
     <div class="cuadroblancocontenido">
 
 
-        <?php include("../modulos/modulo_proceso_asignacion_demo.php"); ?>
+        <?php include("../modulos/modulo_asignaciones_unidades_demo.php"); ?>
 
     </div>
 

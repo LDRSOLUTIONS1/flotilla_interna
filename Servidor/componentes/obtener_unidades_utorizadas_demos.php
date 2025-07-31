@@ -48,7 +48,10 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             ON uda.id_autorizador = aud.id_colaborador
             INNER JOIN colaboradores AS ca
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
-            WHERE uda.autorizacion = 'APROVADO' AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
+            WHERE uda.autorizacion = 'APROVADO' 
+            AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
+            AND uda.solicitar_master_driver = 1
+            AND id_estado_prueba_demo = 4
             ORDER BY uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
@@ -76,8 +79,9 @@ while ($fila = $resultado->fetch_assoc()) {
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
-            <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') .
-            '</h6>
+            <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
+            <button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Solicitar prórroga</button>
+            <button type="button" class="btn btn-warning btn-sm" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>
         </div>
         </div>';
     }

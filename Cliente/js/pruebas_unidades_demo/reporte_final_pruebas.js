@@ -80,9 +80,9 @@ let subir_reporte_final = 0;
 
   function insertardatos() {
     const formdata = new FormData();
+    formdata.append("id_asignacion_unidad_demo", id_asignacion_unidad_demo);
     formdata.append("reporte_final", valoreporte_final);
     formdata.append("comentarios_finales", valorcomentarios_finales); 
-    formdata.append("id_asignacion_unidad_demo", id_asignacion_unidad_demo);
 
     $.ajax({
       type: "POST",

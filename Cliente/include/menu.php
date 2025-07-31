@@ -69,7 +69,7 @@ $avatar = $datos_usuario['avatar'];
         <?php elseif ($id_tipo_usuario == 6): // Cliente solicitar demo?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solictar unidades demo</a></li>
-            <li ><a class="menulist" href="proceso_asignacion_demo.php">Asignaciones</a></li>
+            <li ><a class="menulist" href="asignaciones_unidades_demo.php">Asignaciones</a></li>
 
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES (Francisco Chavez)?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>

@@ -201,8 +201,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             if ($id_tipo_usuario == 11): // tipos de usuario solicitantes demos
                 if (empty($reporte_final) || $reporte_final == null) {
                     if ($id_estado_prueba_demo == 3) {
-                        echo "<button type='button' class='btn btn-primera_prueba subir_reporte_final' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
+                        echo "<button type='button' class='btn btn-reporte_final subir_reporte_final' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
                     Subir reporte final
+                </button>";
+                        echo "<button type='button' class='btn btn-solicitar_prorroga solicitar_prorroga' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
+                    Solicitar prorroga
                 </button>";
                     }
                 }
@@ -251,8 +254,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <th class='letratablapruebademo'>Tablero</th>
                     <th class='letratablapruebademo'>Odómetro</th>
                     <th class='letratablapruebademo'>Unidad</th>
-                    <th class='letratablapruebademo'>Comentarios</th>
                     <th class='letratablapruebademo'>Registrador de prueba</th>
+                    <th class='letratablapruebademo'>Comentarios</th>
                 </tr>
             </thead>
             <tbody>";
@@ -283,8 +286,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <button class='btn btn-sm btn-unidad-exterior'><i class='fas fa-car-side'></i></button>
                 </a>
               </td>";
+              echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
                 echo "</tr>";
             }
 

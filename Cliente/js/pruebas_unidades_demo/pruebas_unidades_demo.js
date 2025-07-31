@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
  const modalinfopruebaunidademo = new bootstrap.Modal(document.getElementById("modalinfopruebaunidademo"));
  const modalinfopruebaunidademobody = document.getElementById("modalinfopruebaunidademobody");
 
- let info_unidad_demo = 0
+ let info_unidad_demo = 0;
 
    document.body.addEventListener("click", function (event) {
      if (event.target.classList.contains("btnmostrarinfodemo")) {

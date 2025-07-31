@@ -2596,11 +2596,31 @@ height: auto;
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
+.btn-reporte_final{
+  background-color: #11367a; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
+.btn-solicitar_prorroga{
+  background-color: #a89912; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
+}
 .realizacion_prueba {
   display: inline-block;
   margin: 10px;
 }
 .finalizar_prueba  {
+  display: inline-block;
+  margin: 10px;
+}
+.subir_reporte_final  {
+  display: inline-block;
+  margin: 10px;
+}
+.solicitar_prorroga  {
   display: inline-block;
   margin: 10px;
 }
