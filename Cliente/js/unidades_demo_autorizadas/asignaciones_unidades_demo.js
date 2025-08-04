@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     $.ajax({
                         type: "POST",
                         data: {id_asignacion: id_asignacion_demo},
-                        url: "../../Servidor/solicitudes/unidades_demo_autorizadas/formulario_finalizarunidaddemo.php",
+                        url: "../../Servidor/solicitudes/unidades_demo_autorizadas/finalizar_prueba_demo.php",
                         success: function (response) {
                             console.log("entro a success");
                             console.log(response);
                             if (response.includes("correctamente")) {
                                 contenedorspinner.style.display = "none";
-                                window.location.href = "./asignaciones_unidades_demo.php?resultado=pruebaterminada";
+                                //window.location.href = "./asignaciones_unidades_demo.php?resultado=pruebaterminada";
                             }
                         },
                     });

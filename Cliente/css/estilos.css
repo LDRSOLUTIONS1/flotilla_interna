@@ -1,4 +1,19 @@
 /*------------------------------------------------------------------------------ Estilos globales ---------------------------------------------------------------*/
+/*estilos de los encabezados de las modales*/
+.modal-header {
+  background-color: #969fa8;
+  color: #fff;
+}
+/*estilos de los pies de las modales*/
+.modal-footer {
+  background-color: #969fa8;
+  color: #fff;
+}
+/*estilos del boton cerrar de las modales*/
+.btn-close {
+  background-color: #fff;
+  color: #fff;
+}
 /*Estilos de las letras*/
 .titulosletras {
   padding-top: 40px;

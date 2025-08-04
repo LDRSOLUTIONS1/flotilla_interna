@@ -15,6 +15,7 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 uda.id_colaborador_que_asigna,
                 uda.id_persona_fisica,
                 uda.autorizacion,
+                uda.id_estado_prueba_demo,
                 pf.id_persona_fisica,
                 pf.nombre_1,
                 pf.nombre_2,
@@ -51,7 +52,6 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             WHERE uda.autorizacion = 'APROVADO'
             AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
             AND uda.solicitar_master_driver = 1
-            AND id_estado_prueba_demo = 4
             ORDER BY uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
@@ -79,11 +79,15 @@ while ($fila = $resultado->fetch_assoc()) {
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
-            <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
-            <button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Prórroga</button>
-            <button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Reporte</button>
-            <button type="button" class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>
-        </div>
+            <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';
+            if ($fila['id_estado_prueba_demo'] != 3 && $fila['id_estado_prueba_demo'] !=2 && $fila['id_estado_prueba_demo'] != 1 && $fila['id_estado_prueba_demo'] != NULL) {
+            echo '<button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Prórroga</button>
+            <button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Reporte</button>';
+            if ($fila['id_estado_prueba_demo'] != 5) {
+                echo '<button type="button" class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>';
+            }
+        }
+        echo '</div>
         </div>';
     }
 }

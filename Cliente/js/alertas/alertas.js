@@ -351,4 +351,13 @@ if (resultado == "reporteinsertado") {
   });
   limpiarparametros();
 }
-
+//alerta para finalizar la prueba demo y solicitar la baja
+if (resultado == "pruebaterminada") {
+  Swal.fire({
+    title: "Prueba finalizada correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}
