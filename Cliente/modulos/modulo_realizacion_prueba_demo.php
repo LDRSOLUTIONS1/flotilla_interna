@@ -50,6 +50,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     model.nombre_modelo,
                     unid.placa,
                     unid.vin,
+                    unid.id_telematics,
                     ca.nombre_1 AS nombre1colaborador,
                     ca.nombre_2 AS nombre2colaborador,
                     ca.apellido_paterno AS apellidopcolaborador,
@@ -75,6 +76,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         while ($fila = $resultado->fetch_assoc()) {
             if (($fila['id_persona_fisica'] || $fila['id_persona_moral'])) {
                 $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
+                $id_telematics = $fila['id_telematics'];
 
                 $img = $fila['img_unidad'];
                 $ruta_servidor = "../../Servidor/archivos/imagenes/imagenes_unidades/";
@@ -204,15 +206,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                         echo "<button type='button' class='btn btn-reporte_final subir_reporte_final' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
                     Subir reporte final
                 </button>";
-                        echo "<button type='button' class='btn btn-solicitar_prorroga solicitar_prorroga' data-idpruebademo='$id_asignacion'  style='text-align: center;'>
-                    Solicitar prorroga
-                </button>";
                     }
                 }
             endif;
 
             // código que muestra la tabla de pruebas
-
             $consulta_pruebas = "SELECT 
                     p.id_prueba,
                     p.id_asignacion_unidad_demo,
@@ -264,7 +262,9 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             while ($fila = $resultado->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td class='letratablapruebademo'>" . ($contador++) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['fecha_prueba']) . "</td>";
+                $fecha_prueba = new DateTime($fila['fecha_prueba']);
+                $fecha_prueba->setTimezone(new DateTimeZone('America/Mexico_City'));
+                echo "<td class='letratablapruebademo'>" . $fecha_prueba->format('d/m/Y H:i:s') . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . "</td>";
@@ -305,33 +305,101 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     ?>
 </div>
 </div>
-
-<?php
-if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3) {
-    ?>
-    <div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
-        <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" placeholder="Fecha de Inicio">
-                    <label for="fechaInicio">Fecha de Inicio</label>
-                </div>
-                <label for="fechaInicio"></label>
-            </div>
-            <div class="col-md-6">
-                <div class="form-floating">
-                    <input type="date" class="form-control" id="fechaFin" name="fechaFin" placeholder="Fecha de Fin">
-                    <label for="fechaFin">Fecha de Fin</label>
-                </div>
-                <label for="fechaInicio"></label>
+<!--codigo que muestra latabla de la prueba monitoriada por telematics-->
+<?php if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3): ?>
+<div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
+    <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
+                <label for="fechaInicio">Fecha de Inicio</label>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" id="btnregistrarpruebademo" style="text-align: center;">Obtener datos de la prueba</button>
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="fechaFin" name="fechaFin">
+                <label for="fechaFin">Fecha de Fin</label>
+            </div>
+        </div>
     </div>
-    <?php
-}
-?>
+    <br>
+    <button type="button" class="btn btn-primary" id="btnObtenerDatos" style="text-align: center;">Obtener datos de la prueba</button>
+    <br><br>
+    <div class="table-responsive" id="tablaTelematicsContainer" style="display:none;">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="letratablapruebademo">Fecha</th>
+                    <th class="letratablapruebademo">Consumo Combustible</th>
+                    <th class="letratablapruebademo">Distancia Recorrida</th>
+                    <th class="letratablapruebademo">Horas Motor</th>
+                    <th class="letratablapruebademo">Horas Motor Ralenti</th>
+                    <th class="letratablapruebademo">Combustible Ralenti</th>
+                    <th class="letratablapruebademo">AdBlue Level</th>
+                    <th class="letratablapruebademo">Uso Freno Total</th>
+                    <th class="letratablapruebademo">Precio Combustible</th>
+                </tr>
+            </thead>
+            <tbody id="tablaTelematicsBody"></tbody>
+        </table>
+    </div>
+</div>
+<script>
+document.getElementById('btnObtenerDatos').addEventListener('click', function() {
+    let fechaInicio = document.getElementById('fechaInicio').value;
+    let fechaFin = document.getElementById('fechaFin').value;
+    let idTelematics = "<?php echo $id_telematics; ?>";
+
+    if (!fechaInicio || !fechaFin) {
+        Swal.fire({
+            title: "Error",
+            text: "Selecciona las fechas de monitoreo.",
+            icon: "error",
+            confirmButtonText: "Aceptar"
+        });
+        return;
+    }
+
+    fetch(`../js/api/obtener_campos_prueba_telematics.php?id=${idTelematics}&fi=${fechaInicio}&ff=${fechaFin}`)
+        .then(res => res.json())
+        .then(data => {
+            let tbody = document.getElementById('tablaTelematicsBody');
+            tbody.innerHTML = "";
+            if (Array.isArray(data)) {
+                data.forEach(row => {
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="letratablapruebademo">${new Intl.DateTimeFormat('es-MX', {year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(row.FECHA))}</td>
+                        <td class="letratablapruebademo">${row.consumoTotalComb ?? 0}</td>
+                        <td class="letratablapruebademo">${row.distanciaTotalRec ?? 0}</td>
+                        <td class="letratablapruebademo">${row.hrmotorTotal ?? 0}</td>
+                        <td class="letratablapruebademo">${row.hrmotorRelentiTotal ?? 0}</td>
+                        <td class="letratablapruebademo">${row.combustibleRelentiTotal ?? 0}</td>
+                        <td class="letratablapruebademo">${row.adbluelevel ?? 0}</td>
+                        <td class="letratablapruebademo">${row.usoFrenoTotal ?? 0}</td>
+                        <td class="letratablapruebademo">${row.precioCombustible ?? 0}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                document.getElementById('tablaTelematicsContainer').style.display = "block";
+            } else {
+                alert("No se encontraron datos para el rango seleccionado.");
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            Swal.fire({
+                title: "Error",
+                text: "Error al obtener los datos de Telematics.",
+                icon: "error",
+                confirmButtonText: "Aceptar"
+            });
+        });
+});
+</script>
+<?php endif; ?>
+
 
 <br><br>
 <br><br>
@@ -375,6 +443,7 @@ if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3) {
 
 <!--pruebas unidades demo-->
 <script src="../js/pruebas_unidades_demo/realizacion_pruebas_demos.js"></script>
+<!--js para subir el reporte final de la prueba demo-->
 <script src="../js/pruebas_unidades_demo/reporte_final_pruebas.js"></script>
 <!--js para filtrar la tabla de unidades-->
 <script src="../js/unidades/filtrar_tabla.js"></script>
