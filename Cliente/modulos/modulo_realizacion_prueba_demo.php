@@ -112,6 +112,10 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 echo "<label for='fecha_devolucion' class='letrasinfounidademoprueba'><b>Fecha Devolución:</b></label>";
                 echo "<input type='text' class='form-control letrasinfounidademoprueba' id='fecha_devolucion' name='fecha_devolucion' value='" . $fila['fecha_devolucion'] . "' readonly>";
                 echo "</div>";
+                echo "<div class='col-2'>";
+                echo "<label for='fecha_devolucion' class='letrasinfounidademoprueba'><b>Placa:</b></label>";
+                echo "<input type='text' class='form-control letrasinfounidademoprueba' id='placa' name='placa' value='" . $fila['placa'] . "' readonly>";
+                echo "</div>";
                 echo "</div>";
                 echo "<div class='row'>";
                 echo "<div class='col-6'>";
@@ -124,7 +128,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 echo "</div>";
                 echo "</div>";
                 echo "</form>";
-
                 echo "</div>"; // contenido-card
             }
         }
@@ -231,7 +234,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     crp.apellido_materno
                 FROM pruebas_unidad_demo AS p
                 LEFT JOIN colaboradores AS crp ON p.id_colaborador_registra_prueba = crp.id_colaborador
-                WHERE p.id_asignacion_unidad_demo = ?";
+                WHERE p.id_asignacion_unidad_demo = ?
+                ORDER BY fecha_prueba ASC";
 
             $stmti = $conexion->prepare($consulta_pruebas);
             $stmti->bind_param("i", $id_asignacion);
@@ -259,7 +263,20 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <tbody>";
 
             $contador = 1;
+            $primer_fecha = null;
+            $ultima_fecha = null;
             while ($fila = $resultado->fetch_assoc()) {
+                // Guardar la primera fecha (solo la primera vez que entra al bucle)
+    if ($primer_fecha === null) {
+        $primer_fecha = new DateTime($fila['fecha_prueba']);
+        $primer_fecha->setTimezone(new DateTimeZone('America/Mexico_City'));
+    }
+
+    // Actualizar la última fecha en cada iteración (al final será la última del ciclo)
+    $temp_fecha = new DateTime($fila['fecha_prueba']);
+    $temp_fecha->setTimezone(new DateTimeZone('America/Mexico_City'));
+    $ultima_fecha = $temp_fecha;
+    
                 echo "<tr>";
                 echo "<td class='letratablapruebademo'>" . ($contador++) . "</td>";
                 $fecha_prueba = new DateTime($fila['fecha_prueba']);
@@ -290,7 +307,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
                 echo "</tr>";
             }
-
+        // Ya fuera del bucle, formateamos el rango de fechas
+        $fecha_prueba_estimada = '';
+        if ($primer_fecha && $ultima_fecha) {
+            $fecha_prueba_estimada = $primer_fecha->format('d/m/Y') . ' - ' . $ultima_fecha->format('d/m/Y');
+        }
 
             $stmti->close();
         }
@@ -305,11 +326,15 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     ?>
 </div>
 </div>
+
 <!--codigo que muestra latabla de la prueba monitoriada por telematics-->
 <?php if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3): ?>
 <div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
     <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
-    <div class="row">
+    <h2 class='text-right titulosletrafechasmonitoreo'>
+    Fecha estimada de monitoreo: <?php echo $fecha_prueba_estimada; ?>
+</h2>
+   <div class="row">
         <div class="col-md-6">
             <div class="form-floating">
                 <input type="date" class="form-control" id="fechaInicio" name="fechaInicio">
@@ -326,7 +351,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <br>
     <button type="button" class="btn btn-primary" id="btnObtenerDatos" style="text-align: center;">Obtener datos de la prueba</button>
     <br><br>
-    <div class="table-responsive" id="tablaTelematicsContainer" style="display:none;">
+    
+    <!-- Contenedor para las cards -->
+<div class="row" id="cardsResumen" style="margin-top:20px;"></div>
+<br>
+<div class="table-responsive" id="tablaTelematicsContainer" style="display:none;">
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -344,33 +373,60 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <tbody id="tablaTelematicsBody"></tbody>
         </table>
     </div>
+    <!-- Loader -->
+<div id="loaderTelematics" style="display:none;text-align:center;">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p>Cargando datos de Telematics...</p>
+</div>
+
 </div>
 <script>
-document.getElementById('btnObtenerDatos').addEventListener('click', function() {
+document.getElementById('btnObtenerDatos').addEventListener('click', function () {
     let fechaInicio = document.getElementById('fechaInicio').value;
     let fechaFin = document.getElementById('fechaFin').value;
     let idTelematics = "<?php echo $id_telematics; ?>";
 
     if (!fechaInicio || !fechaFin) {
         Swal.fire({
-            title: "Error",
-            text: "Selecciona las fechas de monitoreo.",
-            icon: "error",
-            confirmButtonText: "Aceptar"
+            icon: 'error',
+            title: 'Error',
+            text: 'Por favor selecciona las fechas de monitoreo.'
         });
         return;
     }
 
-    fetch(`../js/api/obtener_campos_prueba_telematics.php?id=${idTelematics}&fi=${fechaInicio}&ff=${fechaFin}`)
+    document.getElementById('loaderTelematics').style.display = "block";
+
+    fetch(`../../Cliente/js/api/obtener_campos_prueba_telematics.php?id=${idTelematics}&fi=${fechaInicio}&ff=${fechaFin}`)
         .then(res => res.json())
         .then(data => {
             let tbody = document.getElementById('tablaTelematicsBody');
             tbody.innerHTML = "";
+
             if (Array.isArray(data)) {
+                // Variables para acumular totales
+                let totalKm = 0, totalHoras = 0, totalDiesel = 0, totalRalenti = 0, totalRalentiHoras = 0, totalAdBlue = 0;
+                let velMax = 0, velSum = 0, registros = 0, rpmMax = 0;
+
                 data.forEach(row => {
+                    totalKm += parseFloat(row.distanciaTotalRec ?? 0);
+                    totalHoras += parseFloat(row.hrmotorTotal ?? 0);
+                    totalDiesel += parseFloat(row.consumoTotalComb ?? 0);
+                    totalRalenti += parseFloat(row.combustibleRelentiTotal ?? 0);
+                    totalRalentiHoras += parseFloat(row.hrmotorRelentiTotal ?? 0);
+                    totalAdBlue += parseFloat(row.adbluelevel ?? 0);
+
+                    let vel = parseFloat(row.velocidadMax ?? 0);
+                    velMax = vel > velMax ? vel : velMax;
+                    velSum += parseFloat(row.velocidadPromedio ?? 0);
+                    rpmMax = Math.max(rpmMax, parseFloat(row.rpmMaximas ?? 0));
+
+                    registros++;
+
+                    // Agregar fila a la tabla
                     let tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="letratablapruebademo">${new Intl.DateTimeFormat('es-MX', {year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date(row.FECHA))}</td>
+                        <td class="letratablapruebademo">${row.FECHA}</td>
                         <td class="letratablapruebademo">${row.consumoTotalComb ?? 0}</td>
                         <td class="letratablapruebademo">${row.distanciaTotalRec ?? 0}</td>
                         <td class="letratablapruebademo">${row.hrmotorTotal ?? 0}</td>
@@ -382,24 +438,41 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function() 
                     `;
                     tbody.appendChild(tr);
                 });
+
+                // Calcular rendimiento promedio
+                let rendimiento = totalKm && totalDiesel ? (totalKm / totalDiesel).toFixed(1) : 0;
+                let velPromedio = registros ? (velSum / registros).toFixed(1) : 0;
+                let porcentajeRalenti = totalHoras ? ((totalRalentiHoras / totalHoras) * 100).toFixed(0) : 0;
+
+                // Mostrar las cards
+                let cardsHTML = `
+                    <div class="col-md-2 cardTele"><h3>${totalKm.toFixed(0)} km</h3><p>Kilómetros Recorridos</p></div>
+                    <div class="col-md-2 cardTele"><h3>${totalHoras.toFixed(0)} h</h3><p>Horas Motor</p></div>
+                    <div class="col-md-2 cardTele"><h3>${totalDiesel.toFixed(0)} l</h3><p>Litros de Diésel Consumido</p></div>
+                    <div class="col-md-2 cardTele"><h3>${rendimiento} km/l</h3><p>Rendimiento Promedio</p></div>
+                    <div class="col-md-2 cardTele"><h3>${totalRalenti.toFixed(0)} l</h3><p>Litros de Combustible en Ralenti</p></div>
+                    <div class="col-md-2 cardTele"><h3>${rpmMax.toLocaleString()}</h3><p>RPM Máximas</p></div>
+                    <div class="col-md-2 cardTele"><h3>${totalAdBlue.toFixed(0)} l</h3><p>Litros de Ad Blue Consumido</p></div>
+                    <div class="col-md-2 cardTele"><h3>${velMax} km/h</h3><p>Velocidad Máxima Alcanzada</p></div>
+                    <div class="col-md-2 cardTele"><h3>${velPromedio} km/h</h3><p>Velocidad Promedio</p></div>
+                    <div class="col-md-2 cardTele"><h3>${porcentajeRalenti} %</h3><p>Porcentaje de Horas en Ralenti</p></div>
+                `;
+                document.getElementById('cardsResumen').innerHTML = cardsHTML;
+                document.getElementById('cardsResumen').style.display = "flex";
+                document.getElementById('loaderTelematics').style.display = "none";
                 document.getElementById('tablaTelematicsContainer').style.display = "block";
             } else {
-                alert("No se encontraron datos para el rango seleccionado.");
+                Swal.fire({ icon: "warning", title: "Sin datos", text: "No se encontraron datos para el rango seleccionado." });
             }
         })
         .catch(err => {
             console.error(err);
-            Swal.fire({
-                title: "Error",
-                text: "Error al obtener los datos de Telematics.",
-                icon: "error",
-                confirmButtonText: "Aceptar"
-            });
+            Swal.fire({ icon: "error", title: "Error", text: "Error al obtener los datos de Telematics." });
         });
 });
+
 </script>
 <?php endif; ?>
-
 
 <br><br>
 <br><br>

@@ -413,6 +413,94 @@ $mail->Body = utf8_decode("
                             }
 
 
+                //enviamos correo a telematics para que habiliten la unidad
+
+                // Obtener correos de usuarios tipo 12 telematics
+                        $correostelematics = [];
+                        $correo_sql = "SELECT u.id_colaborador, 
+                                                u.id_tipo_usuario,
+                                                cor.id_colaborador,
+                                                cor.email_corporativo
+                                        FROM usuarios AS u 
+                                        INNER JOIN colaboradores AS cor
+                                        ON u.id_colaborador = cor.id_colaborador
+                                        WHERE u.id_tipo_usuario = 12";
+                        $correo_result = $conexion->query($correo_sql);
+                        while ($correo_row = $correo_result->fetch_assoc()) {
+                            if (!empty($correo_row['email_corporativo'])) {
+                                $correostelematics[] = $correo_row['email_corporativo'];
+                            }
+                        }
+
+                        //$correostelematics = ["uriel.cabello@ldrsolutions.com.mx"];
+
+                        foreach ($correostelematics as $correo) {
+                            echo "Correo: $correo <br>";
+                        }
+                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+                //cadena para ver si requiere master driver y mandarlo por correo
+$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+                try {
+                                $mail = new PHPMailer();
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.gmail.com';
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
+                                $mail->Password = 'ppiz zylc bpod tczi';
+                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                $mail->Port = 587;
+
+                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+                                foreach ($correostelematics as $correo) {
+                                    $mail->addAddress($correo);
+                                }
+                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+
+                                $mail->isHTML(true);
+                               $mail->Subject = utf8_decode('Autorización de unidad DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador,</p>
+
+    <p>Te enviamos este correo para solicitar la habilitación de la unidad <strong>DEMO</strong> que ha sido autorizada por parte de:</p><p>Te enviamos este correo para solicitar la habilitación de la unidad que ha sido autorizadavehicular <strong>DEMO</strong> por parte de:</p>
+
+    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <p><strong>Detalles de la unidad asignada:</strong></p>
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+    </table>
+
+    <br>
+
+    <p><strong>Empresa o institución:</strong> $organizacion_institucion</p>
+    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
+    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
+
+                                if ($mail->send()) {
+                                    echo "Correo enviado exitosamente.";
+                                } else {
+                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
+                                }
+                            } catch (Exception $e) {
+                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+                            }
+
+
         if ($ejecutarconsulta) {
             echo "Unidad actualizada correctamente.";
         } else {

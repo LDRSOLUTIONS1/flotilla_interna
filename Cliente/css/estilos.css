@@ -2490,10 +2490,11 @@ height: auto;
 }
 
 .imgunidadpruebademo {
-  padding-top: 30px;
   border-radius: 15px;
   width: 140px;
   object-fit: cover;
+  display: block;
+  margin: auto;
 }
 
 .imgavatarpruebademo {
@@ -2560,13 +2561,22 @@ height: auto;
   padding-top: 30px;
   padding-left: 20px;
 }
-/*estilo de los titulos */
+/*estilo de los titulos de la prueba demo*/
 .titulosletrarealizacionpruebademoestatus {
   padding-top: 10px;
   padding-left: 30px;
   font-weight: bold;
   font-size: 1.8rem;
   color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
+}
+.titulosletrafechasmonitoreo {
+  padding-top: 10px;
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: rgb(81, 92, 112);
   font-weight: bold;
   animation: slide-in 0.5s ease-out forwards;
 }
@@ -2738,4 +2748,21 @@ height: auto;
   border: 2px solid #585858;
   padding: 5px;
   font-size: 16px;
+}
+/*------------------------------------------------estilos monitoreo telematics unidades demo*/
+.cardTele {
+    background: rgba(0,0,0,0.7);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 5px;
+}
+.cardTele h3 {
+    font-weight: bold;
+    font-size: 1.8em;
+}
+.cardTele p {
+    margin: 0;
+    font-size: 0.9em;
 }

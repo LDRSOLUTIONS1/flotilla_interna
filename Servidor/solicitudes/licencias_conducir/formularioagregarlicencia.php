@@ -43,7 +43,7 @@
     <h5><b>Licencia </b></h5>
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="number" class="form-control numerolicenciaconducir" id="numerolicenciaconducir" placeholder="numerolicenciaconducir" name="numerolicenciaconducir">
+            <input type="text" class="form-control numerolicenciaconducir" id="numerolicenciaconducir" placeholder="numerolicenciaconducir" name="numerolicenciaconducir">
             <label for="numerolicenciaconducirldr">Número de licencia</label>
         </div>
         <label class="" style="color: white;">*Campo obligatorio</label>

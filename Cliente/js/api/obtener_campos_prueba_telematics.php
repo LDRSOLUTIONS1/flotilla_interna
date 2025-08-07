@@ -23,4 +23,3 @@ if ($response === false) {
 
 header('Content-Type: application/json');
 echo $response;
-?>
