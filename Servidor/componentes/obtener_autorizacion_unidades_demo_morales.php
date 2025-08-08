@@ -55,7 +55,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . 
             '</h6>
-            <button type="button" id="btnmosrarmodalunidadmoral" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-idpersonamoral="' . $fila['id_persona_moral'] . '" class="btn btn-sm mt-3 btn-verunidad_autorizar_morales btnmosrarmodalunidadmoral">Verificar</button>
+            <button type="button" id="btnmosrarmodalunidadmoral" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-id_persona_moral="' . $fila['id_persona_moral'] . '" class="btn btn-sm mt-3 btn-verunidad_autorizar_morales btnmosrarmodalunidadmoral">Verificar</button>
         </div>
         </div>';
     }

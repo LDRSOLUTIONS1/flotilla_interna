@@ -64,7 +64,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalinfounidademomoral" data-bs-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-primary" id="btnaprovarunidademomoral">Autorizar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarcomodatofirmado">Rechazar</button>
+                <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Rechazar</button>
             </div>
         </div>
     </div>
@@ -72,18 +72,18 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!--------------------------------------modal para escribir el motivo por el cual se denego el comodato firmado---------------------------------------------->
 <!--modal-->
-<div class="modal fade modaldescripcionnegacioncomodatofirmado" id="modaldescripcionnegacioncomodatofirmado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modaldescripcionnegacionunidademofisica" id="modaldescripcionnegacionunidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Denegar carta responsiva</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodaldescripcionnegacioncomodatofirmado"></button>
+                <h5 class="modal-title" id="exampleModalLabel">Rechazar autorización</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodaldescripcionnegacionunidademofisica"></button>
             </div>
-            <div class="modal-body" id="modaldescripcionnegacioncomodatofirmadobody">
+            <div class="modal-body" id="modaldescripcionnegacionunidademofisicabody">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="btncerrarmodaldescripcionnegacioncomodatofirmado" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarcartaresponsivafirmadadenegar">Enviar motivo de denegación</button>
+                <button type="button" class="btn btn-secondary" id="btncerrarmodaldescripcionnegacionunidademofisica" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" id="btndenegarunidaddemofisica">Enviar</button>
             </div>
         </div>
     </div>

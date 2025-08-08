@@ -284,10 +284,10 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 echo "<td class='letratablapruebademo'>" . $fecha_prueba->format('d/m/Y H:i:s') . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['revoluciones']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['velocidad']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['kilometraje']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . " °C</td>";
+                echo "<td class='letratablapruebademo'>" . number_format($fila['revoluciones'], 0, '', ',') . " RPM</td>";
+                echo "<td class='letratablapruebademo'>" . number_format($fila['velocidad'], 1, ',', '.') . " km/h</td>";
+                echo "<td class='letratablapruebademo'>" . number_format($fila['kilometraje'], 0, '', ',') . " km</td>";
                 echo "<td class='letratablapruebademo' style='text-align: center;'>
                 <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_tablero/" . ($fila['foto_tablero']) . "' target='_blank'>
                     <button class='btn btn-sm btn-tablero'><i class='fas fa-dashboard'></i></button>
@@ -447,7 +447,7 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
                 // Mostrar las cards
                 let cardsHTML = `
                     <div class="col-md-2 cardTele"><h3>${totalKm.toFixed(0)} km</h3><p>Kilómetros Recorridos</p></div>
-                    <div class="col-md-2 cardTele"><h3>${totalHoras.toFixed(0)} h</h3><p>Horas Motor</p></div>
+                    <div class="col-md-2 cardTele"><h3>${totalHoras.toFixed(0)} hrs</h3><p>Horas Motor</p></div>
                     <div class="col-md-2 cardTele"><h3>${totalDiesel.toFixed(0)} l</h3><p>Litros de Diésel Consumido</p></div>
                     <div class="col-md-2 cardTele"><h3>${rendimiento} km/l</h3><p>Rendimiento Promedio</p></div>
                     <div class="col-md-2 cardTele"><h3>${totalRalenti.toFixed(0)} l</h3><p>Litros de Combustible en Ralenti</p></div>

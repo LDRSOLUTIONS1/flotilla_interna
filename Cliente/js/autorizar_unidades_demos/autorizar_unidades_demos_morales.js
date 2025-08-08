@@ -1,17 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const modalinfounidademomoral = new bootstrap.Modal(
-    document.getElementById("modalinfounidademomoral")
-  );
-  const modalinfounidademomoralbody = document.getElementById(
-    "modalinfounidademomoralbody"
-  );
+  const modalinfounidademomoral = new bootstrap.Modal(document.getElementById("modalinfounidademomoral"));
+  const modalinfounidademomoralbody = document.getElementById("modalinfounidademomoralbody");
+
   const contenedorspinner = document.getElementById("contenedorspinner");
-  const modaldescripcionnegacioncomodatofirmado = new bootstrap.Modal(
-    document.getElementById("modaldescripcionnegacioncomodatofirmado")
-  );
-  const modaldescripcionnegacioncomodatofirmadobody = document.getElementById(
-    "modaldescripcionnegacioncomodatofirmadobody"
-  );
+
+  const modaldescripcionnegacionunidademofisica = new bootstrap.Modal(document.getElementById("modaldescripcionnegacionunidademofisica"));
+  const modaldescripcionnegacionunidademofisicabody = document.getElementById("modaldescripcionnegacionunidademofisicabody");
 
   let id_unidad = 0;
   let id_asignacion_demo = 0;
@@ -89,112 +83,66 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Mostrar modal de negación
+  // Mostrar modal de negación de la unidad
   document.body.addEventListener("click", function (event) {
-    if (event.target && event.target.id === "btndenegarcomodatofirmado") {
-      const btn = event.target;
-      btn.disabled = true;
+    if (event.target && event.target.id === "btndenegarunidademofisica") {
       $.ajax({
         type: "POST",
-        url: "../../Servidor/solicitudes/solicitud_unidades_ver_comodato/descripciondenegacioncomodatofirmado.php",
-        data: {
-          idasignacion: asignacion,
-          idcolaborador: colaborador,
-          idusuarioexterno: usuarioexterno,
-        },
+        url: "../../Servidor/solicitudes/solicitud_unidades_demo/descripcion_negacion_unidad_demo_fisica.php",
+        data: { idunidad: id_unidad,
+                idasignaciondemo: id_asignacion_demo,
+                idpersonamoral: id_persona_moral
+              },
         success: function (response) {
-          modaldescripcionnegacioncomodatofirmadobody.innerHTML = response;
-          modaldescripcionnegacioncomodatofirmado.show();
-          btn.disabled = false;
+          modaldescripcionnegacionunidademofisicabody.innerHTML = response;
+          modaldescripcionnegacionunidademofisica.show();
         },
       });
     }
   });
 
-  // Denegar comodato (delegación porque se carga dinámicamente)
+  // Denegar unidad (delegación porque se carga dinámicamente)
   document.body.addEventListener("click", function (event) {
-    if (
-      event.target &&
-      event.target.id === "btndenegarcartaresponsivafirmadadenegar"
-    ) {
-      const descripcion = document.getElementById(
-        "descripciondenegacioncomodato"
-      ).value;
+    if (event.target && event.target.id === "btndenegarunidaddemofisica") {
+      const descripcion = document.getElementById("descripcionegacionunidademofisica").value;
+
 
       if (descripcion.trim() === "") {
         Toastify({
-          text: "El campo de descripción no debe estar vacío.",
+          text: "El campo descripción no debe estar vacío.",
           duration: 3000,
           gravity: "top",
           position: "right",
-          style: { background: "linear-gradient(to right, #00b09b, #96c93d)" },
+          style: { background: "linear-gradient(to right, #b00000ff, #c93d3dff)" },
         }).showToast();
         return;
       }
 
       const formData = new FormData();
-      formData.append("idasignacion", asignacion);
-      formData.append("idcolaborador", colaborador);
-      formData.append("idusuarioexterno", usuarioexterno);
-      formData.append("descripciondenegacioncomodato", descripcion);
+      formData.append("id_unidad", id_unidad);
+      formData.append("id_asignacion_demo", id_asignacion_demo);
+      formData.append("id_persona_moral", id_persona_moral);
+      formData.append("descripcionegacionunidademofisica", descripcion);
+      
       console.log(descripcion);
-      console.log(asignacion);
-      console.log(colaborador);
-      console.log(usuarioexterno);
-
+      console.log("id_unidad: " + id_unidad);
+      console.log("id_asignacion_demo: " + id_asignacion_demo);
+      console.log("id_persona_moral: " + id_persona_moral);
       contenedorspinner.style.display = "flex";
-      if (colaborador) {
-        $.ajax({
-          type: "POST",
-          url: "../../Servidor/solicitudes/solicitud_unidades_ver_comodato/denegarcomodatofirmado.php",
-          data: formData,
-          contentType: false,
-          processData: false,
-          success: function (response) {
-            console.log("Éxito:", response);
-            contenedorspinner.style.display = "none";
-            window.location.href =
-              "./validacion_unidades_comodato.php?resultado=Comodatodenegado";
-          },
-        });
-      } else if (usuarioexterno) {
-        $.ajax({
-          type: "POST",
-          url: "../../Servidor/solicitudes/solicitud_unidades_ver_comodato/denegarcomodatofirmadoexterno.php",
-          data: formData,
-          contentType: false,
-          processData: false,
-          success: function (response) {
-            console.log("Éxito:", response);
-            contenedorspinner.style.display = "none";
-            window.location.href =
-              "./validacion_unidades_comodato.php?resultado=Comodatodenegado";
-          },
-        });
-      }
-    }
-  });
-
-  // Notificar usuario (una vez)
-  const btnnotificarusuario = document.getElementById("btnnotificarusuario");
-  if (btnnotificarusuario) {
-    btnnotificarusuario.addEventListener("click", function () {
-      btnnotificarusuario.disabled = true;
-      contenedorspinner.style.display = "flex";
-
       $.ajax({
         type: "POST",
-        url: "../../Servidor/solicitudes/solicitud_unidades_ver_comodato/notificarusuario.php",
-        data: { idasignacion: asignacion },
+        url: "../../Servidor/solicitudes/solicitud_unidades_demo/denegar_unidad_demo_moral.php",
+        data: formData,
+        contentType: false,
+        processData: false,
         success: function (response) {
           console.log("Éxito:", response);
           contenedorspinner.style.display = "none";
-          window.location.href =
-            "./validacion_unidades_comodato.php?resultado=Notificaciónenviada";
+          //window.location.href = "./validacion_unidades_comodato.php?resultado=Unidademodenegada";
         },
       });
-    });
-  }
+    }
+  });
 });
 
 //aqui usams este codigo para realizar el cambio de interfaz cards a tabla
