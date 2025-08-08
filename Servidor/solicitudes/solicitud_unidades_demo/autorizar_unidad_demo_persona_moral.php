@@ -391,7 +391,7 @@ $mail->Body = utf8_decode("
 
     <p><strong>Empresa o institución:</strong> $organizacion_institucion</p>
     <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
-    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+    <strong>¿Requiere Master Driver?:</strong> <strong style='color: red;'>$requiere_master_driver</strong></p>
 
     <p>Gracias por tu atención.</p>
 
@@ -457,16 +457,16 @@ $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER 
                                 $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
                                 $mail->isHTML(true);
-                               $mail->Subject = utf8_decode('Autorización de unidad DEMO');
+                                $mail->Subject = utf8_decode('Alta de unidad DEMO');
 $mail->Body = utf8_decode("
     <p>Estimado colaborador,</p>
 
-    <p>Te enviamos este correo para solicitar la habilitación de la unidad <strong>DEMO</strong> que ha sido autorizada por parte de:</p><p>Te enviamos este correo para solicitar la habilitación de la unidad que ha sido autorizadavehicular <strong>DEMO</strong> por parte de:</p>
+    <p>Te solicitamos el alta de una unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
 
-    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+    <p style='margin-left: 20px;'><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
     <p><strong>Detalles de la unidad asignada:</strong></p>
-    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; margin-top: 10px;'>
         <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
         <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
         <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
@@ -477,9 +477,7 @@ $mail->Body = utf8_decode("
 
     <br>
 
-    <p><strong>Empresa o institución:</strong> $organizacion_institucion</p>
-    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
-    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+    <p style='color: #b20000; font-weight: bold;'>⚠ Es muy importante que se realice el alta de esta unidad para que comience el monitoreo correspondiente.</p>
 
     <p>Gracias por tu atención.</p>
 

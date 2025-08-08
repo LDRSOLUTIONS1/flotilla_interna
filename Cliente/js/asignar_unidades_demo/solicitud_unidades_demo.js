@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
           $.ajax({
             type: "POST",
             url: "../../Servidor/solicitudes/solicitud_unidades_demo/seleccionar_persona_fisica_moral.php",
-            data: { id_unidad: id_unidad, 
+            data: { id_unidad: id_unidad,
                     id_usuario_demo: id_usuario_demo,
                     data_fecha_solicitudemo: data_fecha_solicitudemo,
                     data_fecha_devoluciondemo: data_fecha_devoluciondemo },

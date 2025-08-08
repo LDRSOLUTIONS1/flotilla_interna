@@ -63,8 +63,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalinfounidademomoral" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnaprovarunidademomoral">Aprovar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarcomodatofirmado">Denegar</button>
+                <button type="button" class="btn btn-primary" id="btnaprovarunidademomoral">Autorizar</button>
+                <button type="button" class="btn btn-danger" id="btndenegarcomodatofirmado">Rechazar</button>
             </div>
         </div>
     </div>

@@ -74,6 +74,8 @@ echo '<div id="vistaTabla" style="display: none;">
                     <th>Placa</th>
                     <th>Asignación</th>
                     <th>Devolución</th>
+                    <th>solicitante</th>
+                    <th></th>
                     <th>Ver</th>
                 </tr>
             </thead>
@@ -87,6 +89,9 @@ while ($fila = $resultado->fetch_assoc()) {
             <td>' . $fila['placa'] . '</td>
             <td>' . $fila['fecha_prestamo'] . '</td>
             <td>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
+            <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+            class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
+            <td>' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</td>
             <td><button type="button" class="btn btn-sm btn-verunidad_autorizar_morales btnmosrarmodalunidadmoral" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-id_persona_moral="' . $fila['id_persona_moral'] . '"> Verificar</button></td>
             <td>';
                 echo '<?php';

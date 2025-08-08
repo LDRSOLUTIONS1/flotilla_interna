@@ -383,7 +383,7 @@ $mail->Body = utf8_decode("
     $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
 
     <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
-    <strong>¿Requiere Master Driver?:</strong> $requiere_master_driver</p>
+    <strong>¿Requiere Master Driver?:</strong> <strong style='color: red;'>$requiere_master_driver</strong></p>
 
     <p>Gracias por tu atención.</p>
 

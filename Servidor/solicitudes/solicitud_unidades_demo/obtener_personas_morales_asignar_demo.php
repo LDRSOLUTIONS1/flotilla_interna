@@ -39,7 +39,8 @@ $sql = "SELECT pm.id_persona_moral,
                pm.identificacion_representante_legal_seccion,
                pm.vigencia,
                pm.rfc_moral,
-               pm.domicilio
+               pm.domicilio,
+               pm.organizacion_institucion
         FROM personas_morales AS pm
         LEFT JOIN colaboradores col ON pm.id_registrador_persona_moral = col.id_colaborador";
 
@@ -58,6 +59,7 @@ if ($resultado->num_rows > 0) {
                 <thead class='table-light'>
                     <tr>
                     <th class='titulostablaunidades'>ID</th>
+        <th class='titulostablaunidades'>Organización/institución</th>
         <th class='titulostablaunidades'>Identificación</th>
         <th class='titulostablaunidades'>RFC</th>
         <th class='titulostablaunidades'>Domicilio</th>
@@ -70,6 +72,7 @@ if ($resultado->num_rows > 0) {
 
         echo "<tr>
             <td class='titulostablaunidades'>" . $fila['id_persona_moral'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['organizacion_institucion'] . "</td>
             <td class='titulostablaunidades'>" . $fila['identificacion_representante_legal_seccion'] . "</td>
             <td class='titulostablaunidades'>" . $fila['rfc_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>

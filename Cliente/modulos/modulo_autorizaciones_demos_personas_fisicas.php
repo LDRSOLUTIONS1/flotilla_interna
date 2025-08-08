@@ -50,7 +50,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 
-<!---------------------------------------modal para ver los detalles de la unidad y el COMODATO que el usuario cliente firmo----------------------->
+<!---------------------------------------modal para ver los detalles de la unidad ---------------------->
 <!--modal-->
 <div class="modal fade modalinfounidademofisica" id="modalinfounidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -63,8 +63,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalinfounidademofisica" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnaprovarunidademofisica">Aprovar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Denegar</button>
+                <button type="button" class="btn btn-primary" id="btnaprovarunidademofisica">Autorizar</button>
+                <button type="button" class="btn btn-danger" id="btndenegarunidademofisica">Rechazar</button>
             </div>
         </div>
     </div>
@@ -76,14 +76,14 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Denegar carta responsiva</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rechazar autorización</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodaldescripcionnegacionunidademofisica"></button>
             </div>
             <div class="modal-body" id="modaldescripcionnegacionunidademofisicabody">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodaldescripcionnegacionunidademofisica" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" id="btndenegarunidaddemofisica">Enviar motivo de denegación</button>
+                <button type="button" class="btn btn-danger" id="btndenegarunidaddemofisica">Enviar</button>
             </div>
         </div>
     </div>

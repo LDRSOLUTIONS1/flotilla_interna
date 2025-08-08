@@ -60,7 +60,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . 
             '</h6>
-            <button type="button" id="btnmosrarmodalunidadfisica" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-idpersonafisica="' . $fila['id_persona_fisica'] . '" class="btn btn-sm mt-3 btn-verunidad_autorizar_fisicas btnmosrarmodalunidadfisica">Verificar</button>
+            <button type="button" id="btnmosrarmodalunidadfisica" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-id_persona_fisica="' . $fila['id_persona_fisica'] . '" class="btn btn-sm mt-3 btn-verunidad_autorizar_fisicas btnmosrarmodalunidadfisica">Verificar</button>
         </div>
         </div>';
     }
@@ -74,11 +74,13 @@ echo '<div id="vistaTabla" style="display: none;">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th>Nombre del colaborador</th>
+                    <th>Usuario</th>
                     <th>Modelo</th>
                     <th>Placa</th>
                     <th>Asignación</th>
                     <th>Devolución</th>
+                    <th>solicitante</th>
+                    <th></th>
                     <th>Ver</th>
                 </tr>
             </thead>
@@ -93,6 +95,9 @@ while ($fila = $resultado->fetch_assoc()) {
             <td>' . $fila['placa'] . '</td>
             <td>' . $fila['fecha_prestamo'] . '</td>
             <td>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
+            <td style="text-align: center;"><img src="' . (empty($fila["avatar_colaborador"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"]) . '.png"
+            class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
+            <td>' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</td>
             <td><button type="button" class="btn btn-sm btn-verunidad_autorizar_fisicas btnmosrarmodalunidadfisica" data-idunidad="' . $fila['id_unidad'] . '" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" data-id_persona_fisica="' . $fila['id_persona_fisica'] . '"> Verificar</button></td>
             <td>';
                 echo '<?php';

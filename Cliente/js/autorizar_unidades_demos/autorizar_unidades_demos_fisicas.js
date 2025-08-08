@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Denegar comodato (delegación porque se carga dinámicamente)
+  // Denegar unidad (delegación porque se carga dinámicamente)
   document.body.addEventListener("click", function (event) {
     if (event.target && event.target.id === "btndenegarunidaddemofisica") {
       const descripcion = document.getElementById("descripcionegacionunidademofisica").value;
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
           duration: 3000,
           gravity: "top",
           position: "right",
-          style: { background: "linear-gradient(to right, #00b09b, #96c93d)" },
+          style: { background: "linear-gradient(to right, #b00000ff, #c93d3dff)" },
         }).showToast();
         return;
       }
@@ -119,20 +119,20 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("descripcionegacionunidademofisica", descripcion);
       
       console.log(descripcion);
-      console.log(id_unidad);
-      console.log(id_asignacion_demo);
-      console.log(id_persona_fisica);
+      console.log("id_unidad: " + id_unidad);
+      console.log("id_asignacion_demo: " + id_asignacion_demo);
+      console.log("id_persona_fisica: " + id_persona_fisica);
       contenedorspinner.style.display = "flex";
       $.ajax({
         type: "POST",
-        url: "../../Servidor/solicitudes/solicitud_unidades_demo/denegar_unidad_demo_persona_fisica.php",
+        url: "../../Servidor/solicitudes/solicitud_unidades_demo/denegar_unidad_demo_fisica.php",
         data: formData,
         contentType: false,
         processData: false,
         success: function (response) {
           console.log("Éxito:", response);
           contenedorspinner.style.display = "none";
-          window.location.href = "./validacion_unidades_comodato.php?resultado=Unidademodenegada";
+          //window.location.href = "./validacion_unidades_comodato.php?resultado=Unidademodenegada";
         },
       });
     }
