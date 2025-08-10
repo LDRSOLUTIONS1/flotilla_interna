@@ -21,6 +21,20 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
     $valoreditartipoarrendadoraunidad = $_POST['editartipoarrendadoraunidad'];
     $valoreditarfoliofacturaunidad = $_POST['editarfoliofacturaunidad'];
 
+    $valoreditarCarga = $_POST['editarCarga'];
+    $valoreditarPasajeros = $_POST['editarPasajeros'];
+    $valoreditarCombustible = $_POST['editarCombustible'];
+    $valoreditarTraccion = $_POST['editarTraccion'];
+    $valoreditarCarroceria = $_POST['editarCarroceria'];
+    $valoreditarPuertas = $_POST['editarPuertas'];
+    $valoreditarAsientos = $_POST['editarAsientos'];
+    $valoreditarCaja = $_POST['editarCaja'];
+    $valoreditarFreno = $_POST['editarFreno'];
+    $valoreditarSuspencion = $_POST['editarSuspencion'];
+    $valoreditarEjes = $_POST['editarEjes'];
+    $valoreditarUso = $_POST['editarUso'];
+    $valoreditar_camara_reversa = $_POST['editar_camara_reversa'];
+    $valoreditar_sensores_reversa = $_POST['editar_sensores_reversa'];
 
     if (isset($_FILES['imagen_unidad']['tmp_name'])) {
         $nombrearchivoimagenunidad = 'img_' . $valorPlacaeditar . '_' . basename($_FILES['imagen_unidad']['name']);
@@ -43,7 +57,21 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
                 id_tipo_adquisicion = '$valortipoadquisicionunidadeditar',
                 id_arrendadora = '$valoreditartipoarrendadoraunidad',
                 folio_factura = '$valoreditarfoliofacturaunidad',
-                img_unidad = '$nombrearchivoimagenunidad' 
+                img_unidad = '$nombrearchivoimagenunidad' ,
+                capacidad_carga = '$valoreditarCarga',
+                capacidad_pasajeros = '$valoreditarPasajeros',
+                id_tipo_combustible = '$valoreditarCombustible',
+                id_traccion = '$valoreditarTraccion',
+                tipo_carrceria = '$valoreditarCarroceria',
+                numero_puertas = '$valoreditarPuertas',
+                numero_asientos = '$valoreditarAsientos',
+                id_tipo_caja = '$valoreditarCaja',
+                id_tipo_freno = '$valoreditarFreno',
+                id_tipo_suspencion = '$valoreditarSuspencion',
+                numero_ejes = '$valoreditarEjes',
+                id_tipo_uso = '$valoreditarUso',
+                camara_reversa = '$valoreditar_camara_reversa',
+                sensores_reversa = '$valoreditar_sensores_reversa'
                 WHERE id_unidad = '$valorid_unidad'";
 
             $ejecutar = mysqli_query($conexion, $sql);
@@ -72,7 +100,21 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
             fecha_adquisicion = '$valorfechaadquisicionunidadeditar',
             id_tipo_adquisicion = '$valortipoadquisicionunidadeditar',
             id_arrendadora = '$valoreditartipoarrendadoraunidad',
-            folio_factura = '$valoreditarfoliofacturaunidad'
+            folio_factura = '$valoreditarfoliofacturaunidad',
+            capacidad_carga = '$valoreditarCarga',
+            capacidad_pasajeros = '$valoreditarPasajeros',
+            id_tipo_combustible = '$valoreditarCombustible',
+            id_traccion = '$valoreditarTraccion',
+            tipo_carrceria = '$valoreditarCarroceria',
+            numero_puertas = '$valoreditarPuertas',
+            numero_asientos = '$valoreditarAsientos',
+            id_tipo_caja = '$valoreditarCaja',
+            id_tipo_freno = '$valoreditarFreno',
+            id_tipo_suspencion = '$valoreditarSuspencion',
+            numero_ejes = '$valoreditarEjes',
+            id_tipo_uso = '$valoreditarUso',
+            camara_reversa = '$valoreditar_camara_reversa',
+            sensores_reversa = '$valoreditar_sensores_reversa'
             WHERE id_unidad = '$valorid_unidad'";
 
         $ejecutar = mysqli_query($conexion, $sql);

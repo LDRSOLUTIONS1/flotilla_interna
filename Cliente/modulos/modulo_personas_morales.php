@@ -3,8 +3,10 @@
   <h2 class="titulosletrasunidades text-nowrap">Personas morales</h2>
   <div class="container mt-4">
     <div class="d-flex flex-wrap justify-content-center contenedor_botones">
+      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos ?>
       <!-- Botón estilizado -->
       <button  class="btn btn-resgistrar_moral m-2 btnagregarpersonamoral"> <i class="fa-solid fa-building-user"> </i>   Registrar</button>
+      <?php endif; ?>
     </div>
   </div>
 </div>

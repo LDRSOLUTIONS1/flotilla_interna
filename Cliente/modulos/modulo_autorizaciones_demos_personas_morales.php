@@ -19,8 +19,8 @@ $resultado = $conexion->query($sql);
 $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
-<!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 ----------------------------------------------------------->
-<div class="contenedorautorizardemos">
+<!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 --------------------------------------------------->
+<div class="contenedorautorizardemos"> 
     <h5 class="titulosletrasunidademo text-nowrap">Autorización de vehículos demo</h5>
     <h5 class="letraautorizaciondemo text-nowrap">
         Personas Morales
@@ -48,8 +48,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <?php include("../../Servidor/componentes/obtener_autorizacion_unidades_demo_morales.php"); ?>
 </div>
 
-
-
 <!---------------------------------------modal para ver los detalles de la unidad y el COMODATO que el usuario cliente firmo----------------------->
 <!--modal-->
 <div class="modal fade modalinfounidademomoral" id="modalinfounidademomoral" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,7 +68,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     </div>
 </div>
 
-<!--------------------------------------modal para escribir el motivo por el cual se denego el comodato firmado---------------------------------------------->
+<!--------------------------------------modal para escribir el motivo por el cual rechaza la unidad demo---------------------------------------------->
 <!--modal-->
 <div class="modal fade modaldescripcionnegacionunidademofisica" id="modaldescripcionnegacionunidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">

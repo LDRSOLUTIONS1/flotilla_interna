@@ -123,6 +123,25 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     </div>
   </div>
 </div>
+
+<!----------------------------------------------------------------------- modal de edicion de unidades demo------------------------------------------------------------------->
+<!-- Modal -->
+<div class="modal fade modalEditarUnidadesdemo" id="modalEditarUnidadesdemo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar unidades DEMO</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalEditarUnidadesdemoBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btnactualizarunidademo">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!----------------------------------------------------------------------- modal de registro de aseguradoras ------------------------------------------------------------------->
 <!-- Modal -->
 <div class="modal fade modalpolizasunidades" id="modalPolizasUnidades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -404,6 +423,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!--js para mandar a llamar el modal de edicion de unidades-->
 <script src="../js/unidades/editarunidades.js"></script>
+<!--js para mandar a llamar el modal de edicion de unidades demo-->
+<script src="../js/unidades/editarunidadesdemo.js"></script>
 <!--js para mandar a llamar el modal de polizas aseguradoras-->
 <script src="../js/polizas/modulo_poliza_aseguradora.js"></script>
 <!--js para mandar a llamar el modal de polizas tenencias-->

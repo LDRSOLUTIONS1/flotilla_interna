@@ -24,6 +24,7 @@ $sql = "SELECT ung.id_unidad,
         ung.placa,
         ung.vin,
         ung.ultimo_kilometraje,
+        ung.id_unidad,
         unest.estado,
         sed.ubicacion,
         tipunid.id_tipo_unidad,
@@ -88,7 +89,7 @@ if ($resultado->num_rows > 0) {
         while ($fila = $resultado->fetch_assoc()) {
             echo "<tr>
                     <td class='sticky-left-0'>
-                        <button class='btn btn-editarunidades btn-sm btneditarunidades' data-id='" . $fila['id_unidad'] . "'>
+                        <button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
                             <i class='fas fa-edit'></i> Editar
                         </button>
                     </td>

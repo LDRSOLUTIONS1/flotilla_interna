@@ -36,6 +36,12 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                                 u.id_tipo_unidad,
                                 u.id_tipo_adquisicion,
                                 u.id_sede,
+                                u.id_tipo_combustible,
+                                u.id_traccion,
+                                u.id_tipo_caja,
+                                u.id_tipo_freno,
+                                u.id_tipo_suspencion,
+                                u.id_tipo_uso,
                                 u.vin,
                                 u.numero_motor,
                                 u.placa,
@@ -46,9 +52,23 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                                 u.fecha_adquisicion,
                                 u.año_unidad,
                                 u.id_arrendadora,
+                                u.capacidad_carga,
+                                u.capacidad_pasajeros,
                                 marc.id_marca,
                                 color.color_unidad,
-                                arren.arrendadora
+                                arren.arrendadora,
+                                comb.combustible,
+                                tr.traccion,
+                                u.tipo_carrceria,
+                                u.numero_puertas,
+                                u.numero_asientos,
+                                tc.tipo_caja,
+                                tf.tipo_freno,
+                                ts.tipo_suspencion,
+                                u.numero_ejes,
+                                tu.tipo_uso,
+                                u.camara_reversa,
+                                u.sensores_reversa
                                 FROM unidades AS u 
                                 INNER JOIN modelos AS mode
                                 ON u.id_modelo = mode.id_modelo
@@ -58,6 +78,18 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                                 ON u.id_color = color.id_color
                                 INNER JOIN arrendadora AS arren
                                 ON u.id_arrendadora = arren.id_arrendadora
+                                INNER JOIN tipos_combustibles as comb
+                                ON u.id_tipo_combustible = comb.id_tipo_combustible
+                                INNER JOIN tracciones AS tr
+                                ON u.id_traccion = tr.id_traccion
+                                INNER JOIN tipos_cajas AS tc
+                                ON u.id_tipo_caja = tc.id_tipo_caja
+                                INNER JOIN tipos_frenos AS tf    
+                                ON u.id_tipo_freno = tf.id_tipo_freno
+                                INNER JOIN tipos_suspenciones AS ts
+                                ON u.id_tipo_suspencion = ts.id_tipo_suspencion
+                                INNER JOIN tipos_usos AS tu
+                                ON u.id_tipo_uso = tu.id_tipo_uso
                                 WHERE u.id_unidad = '$idunidad'";
 
         $ejecutarobtenervalorunidad = $conectar->query($queryobtenerunidad);
@@ -258,7 +290,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             $result = $conectar->query($sqltipounidad);
             echo '<div class="col-md-6">
             <div class="form-floating">
-                <select class="form-control" id="editarTipoUnidad" placeholder="editarTipoUnidad" name="editarTipoUnidad">
+                <select class="form-control" id="editarTipoUnidad" placeholder="editarTipoUnidad" name="editarTipoUnidad" disabled>
                     <option value="">Seleccione un tipo</option>'; // Opción predeterminada
 
             while ($rowtipounidad = $result->fetch_assoc()) {
@@ -350,7 +382,212 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <label class="" style="color: white;">*Campo obligatorio</label>
 </div>';
 
-        
+//-------------------------------------------------------------editar caracteristicas funcionales de las unidades demos
+
+if ($id_tipo_usuario == 4): // Administrador DEMOS
+            echo '<h3>Características funcionales</h3>
+        <!-----------------------------------------------------------------Capacidad de carga (kg)-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarCarga" placeholder="editarCarga" name="editarCarga" value="' . $data['capacidad_carga'] . '">
+                <label for="kilometrajeunidadldr">Capacidad de carga (kg)</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>
+
+        <!-----------------------------------------------------------------Capacidad de pasajeros-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarPasajeros" placeholder="editarPasajeros" name="editarPasajeros" value="' . $data['capacidad_pasajeros'] . '">
+                <label for="kilometrajeunidadldr">Capacidad de pasajeros</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>
+        ';
+        //---------------------------------------------------------------editar tipo de combustible------------------------------------------------
+            // Realizar la consulta para obtener el tipo de combustible
+            $sqltipocombustible = "SELECT id_tipo_combustible, combustible FROM tipos_combustibles";
+            $result = $conectar->query($sqltipocombustible);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarCombustible" placeholder="editarCombustible" name="editarCombustible">
+                    <option value="">Seleccione un tipo de combustible</option>'; // Opción predeterminada
+
+            while ($rowtipocombustible = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_tipo_combustible'] == $rowtipocombustible['id_tipo_combustible']) ? 'selected' : '';
+                echo '<option value="' . $rowtipocombustible['id_tipo_combustible'] . '" ' . $selected . '>' . $rowtipocombustible['combustible'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Tipo de combustible</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+        //---------------------------------------------------------------editar traccion------------------------------------------------
+            // Realizar la consulta para obtener la traccion
+            $sqltipocombustible = "SELECT id_traccion, traccion FROM tracciones";
+            $result = $conectar->query($sqltipocombustible);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarTraccion" placeholder="editarTraccion" name="editarTraccion">
+                    <option value="">Seleccione la traccion</option>'; // Opción predeterminada
+
+            while ($rowtraccion = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_traccion'] == $rowtraccion['id_traccion']) ? 'selected' : '';
+                echo '<option value="' . $rowtraccion['id_traccion'] . '" ' . $selected . '>' . $rowtraccion['traccion'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Traccion</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+    echo'
+        <!-----------------------------------------------------------------------editar tipo carroceria-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarCarroceria" placeholder="editarCarroceria" name="editarCarroceria" value="' . $data['tipo_carrceria'] . '">
+                <label for="kilometrajeunidadldr">Carrocería</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>
+
+        <!-----------------------------------------------------------------------editar numero de puertas-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarPuertas" placeholder="editarPuertas" name="editarPuertas" value="' . $data['numero_puertas'] . '">
+                <label for="kilometrajeunidadldr">Número de puertas</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>
+
+        <!-----------------------------------------------------------------------editar numero de asientos-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarAsientos" placeholder="editarAsientos" name="editarAsientos" value="' . $data['numero_asientos'] . '">
+                <label for="kilometrajeunidadldr">Número de asientos</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>';
+
+        //---------------------------------------------------------------editar tipo de caja------------------------------------------------
+            // Realizar la consulta para obtener el tipo de caja
+            $sqltipocaja = "SELECT id_tipo_caja, tipo_caja FROM tipos_cajas";
+            $result = $conectar->query($sqltipocaja);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarCaja" placeholder="editarCaja" name="editarCaja">
+                    <option value="">Seleccione el tipo de caja</option>'; // Opción predeterminada
+
+            while ($rowtipocaja = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_tipo_caja'] == $rowtipocaja['id_tipo_caja']) ? 'selected' : '';
+                echo '<option value="' . $rowtipocaja['id_tipo_caja'] . '" ' . $selected . '>' . $rowtipocaja['tipo_caja'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Tipo de caja</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+        //---------------------------------------------------------------editar tipo de frenos------------------------------------------------
+            // Realizar la consulta para obtener el tipo de frenos
+            $sqltipofrenos = "SELECT id_tipo_freno, tipo_freno FROM tipos_frenos";
+            $result = $conectar->query($sqltipofrenos);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarFreno" placeholder="editarFreno" name="editarFreno">
+                    <option value="">Seleccione el tipo de freno</option>'; // Opción predeterminada
+
+            while ($rowtipofrenos = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_tipo_freno'] == $rowtipofrenos['id_tipo_freno']) ? 'selected' : '';
+                echo '<option value="' . $rowtipofrenos['id_tipo_freno'] . '" ' . $selected . '>' . $rowtipofrenos['tipo_freno'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Tipo de frenos</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+        //---------------------------------------------------------------editar suspencion------------------------------------------------
+            // Realizar la consulta para obtener el tipo de frenos
+            $sqltiposuspension = "SELECT id_tipo_suspencion, tipo_suspencion FROM tipos_suspenciones";
+            $result = $conectar->query($sqltiposuspension);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarSuspencion" placeholder="editarSuspencion" name="editarSuspencion">
+                    <option value="">Seleccione el tipo de suspención</option>'; // Opción predeterminada
+
+            while ($rowtiposuspencion = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_tipo_suspencion'] == $rowtiposuspencion['id_tipo_suspencion']) ? 'selected' : '';
+                echo '<option value="' . $rowtiposuspencion['id_tipo_suspencion'] . '" ' . $selected . '>' . $rowtiposuspencion['tipo_suspencion'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Tipo de suspención</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+    echo'
+        <!-----------------------------------------------------------------------editar numero de ejes-------------------------------------->
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="editarEjes" placeholder="editarEjes" name="editarEjes" value="' . $data['numero_ejes'] . '">
+                <label for="kilometrajeunidadldr">Número de ejes</label>
+            </div>
+            <label class="" style="color: white;">*Campo obligatorio</label>
+        </div>';
+
+        //---------------------------------------------------------------editar uso permitido------------------------------------------------
+            // Realizar la consulta para obtener el uso permitido
+            $sqlusopermitido = "SELECT id_tipo_uso, tipo_uso FROM tipos_usos";
+            $result = $conectar->query($sqlusopermitido);
+            echo '
+            <div class="col-md-6">
+            <div class="form-floating">
+                <select class="form-control" id="editarUso" placeholder="editarUso" name="editarUso">
+                    <option value="">Seleccione el uso permitido</option>'; // Opción predeterminada
+
+            while ($rowusopermitido = $result->fetch_assoc()) {
+                // Mostrar cada estado como una opcion
+                $selected = ($data['id_tipo_uso'] == $rowusopermitido['id_tipo_uso']) ? 'selected' : '';
+                echo '<option value="' . $rowusopermitido['id_tipo_uso'] . '" ' . $selected . '>' . $rowusopermitido['tipo_uso'] . '</option>';
+            }
+            echo '</select>
+            <label for="estadounidadldr">Uso permitido</label>
+        </div>
+        <label class="" style="color: white;">*Campo obligatorio</label>
+    </div>';
+
+    echo'
+        <!-----------------------------------------------------------------------editar checkboxes-------------------------------------->
+        <div class="col-md-6">
+            <!-- Extras tecnológicos -->
+                    <div class="col-md-6">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="editar_camara_reversa" id="editar_camara_reversa" value="1" ' . ($data['camara_reversa'] == 1 ? 'checked' : '') . '>
+                            <label class="form-check-label" for="editar_camara_reversa">Cámara de reversa</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="editar_sensores_reversa" id="editar_sensores_reversa" value="1" ' . ($data['sensores_reversa'] == 1 ? 'checked' : '') . '>
+                            <label class="form-check-label" for="editar_sensores_reversa">Sensores de reversa</label>
+                        </div>
+                    </div>
+        </div>';
+
+        endif;
+
 //---------------------------------------------------------------editar imagen de la unidad------------------------------------------------
         echo '
         <h3>Imagen</h3>
