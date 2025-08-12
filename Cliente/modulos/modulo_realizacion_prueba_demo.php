@@ -77,6 +77,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             if (($fila['id_persona_fisica'] || $fila['id_persona_moral'])) {
                 $nombre = $fila['id_persona_fisica'] ? $fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno'] : $fila['organizacion_institucion'];
                 $id_telematics = $fila['id_telematics'];
+                $id_asignacion_unidad_demo = $fila['id_asignacion_unidad_demo'];
 
                 $img = $fila['img_unidad'];
                 $ruta_servidor = "../../Servidor/archivos/imagenes/imagenes_unidades/";
@@ -384,7 +385,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 document.getElementById('btnObtenerDatos').addEventListener('click', function () {
     let fechaInicio = document.getElementById('fechaInicio').value;
     let fechaFin = document.getElementById('fechaFin').value;
-    let idTelematics = "<?php echo $id_telematics; ?>";
+    let idAsignacionUnidadDemo = "<?php echo $id_asignacion_unidad_demo; ?>";
 
     if (!fechaInicio || !fechaFin) {
         Swal.fire({
@@ -397,14 +398,13 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
 
     document.getElementById('loaderTelematics').style.display = "block";
 
-    fetch(`../../Cliente/js/api/obtener_campos_prueba_telematics.php?id=${idTelematics}&fi=${fechaInicio}&ff=${fechaFin}`)
+    fetch(`../../Cliente/js/api/obtener_campos_prueba_telematics.php?fi=${fechaInicio}&ff=${fechaFin}&idAsignacionUnidadDemo=${idAsignacionUnidadDemo}`)
         .then(res => res.json())
         .then(data => {
             let tbody = document.getElementById('tablaTelematicsBody');
             tbody.innerHTML = "";
 
             if (Array.isArray(data)) {
-                // Variables para acumular totales
                 let totalKm = 0, totalHoras = 0, totalDiesel = 0, totalRalenti = 0, totalRalentiHoras = 0, totalAdBlue = 0;
                 let velMax = 0, velSum = 0, registros = 0, rpmMax = 0;
 
@@ -423,7 +423,6 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
 
                     registros++;
 
-                    // Agregar fila a la tabla
                     let tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td class="letratablapruebademo">${row.FECHA}</td>
@@ -439,12 +438,10 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
                     tbody.appendChild(tr);
                 });
 
-                // Calcular rendimiento promedio
                 let rendimiento = totalKm && totalDiesel ? (totalKm / totalDiesel).toFixed(1) : 0;
                 let velPromedio = registros ? (velSum / registros).toFixed(1) : 0;
                 let porcentajeRalenti = totalHoras ? ((totalRalentiHoras / totalHoras) * 100).toFixed(0) : 0;
 
-                // Mostrar las cards
                 let cardsHTML = `
                     <div class="col-md-2 cardTele"><h3>${totalKm.toFixed(0)} km</h3><p>Kilómetros Recorridos</p></div>
                     <div class="col-md-2 cardTele"><h3>${totalHoras.toFixed(0)} hrs</h3><p>Horas Motor</p></div>
@@ -463,15 +460,19 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
                 document.getElementById('tablaTelematicsContainer').style.display = "block";
             } else {
                 Swal.fire({ icon: "warning", title: "Sin datos", text: "No se encontraron datos para el rango seleccionado." });
+                document.getElementById('loaderTelematics').style.display = "none";
+                document.getElementById('tablaTelematicsContainer').style.display = "none";
             }
         })
         .catch(err => {
             console.error(err);
             Swal.fire({ icon: "error", title: "Error", text: "Error al obtener los datos de Telematics." });
+            document.getElementById('loaderTelematics').style.display = "none";
+            document.getElementById('tablaTelematicsContainer').style.display = "none";
         });
 });
-
 </script>
+
 <?php endif; ?>
 
 <br><br>
