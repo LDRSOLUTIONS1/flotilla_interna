@@ -15,7 +15,7 @@
                 <div class="card text-center bg-dark text-white">
                     <div class="card-body">
                         <h6>Total unidades</h6>
-                        <h3 id="totalUnidades">0</h3>
+                        <h4 id="totalUnidades">0</h4>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="card text-center bg-primary text-white">
                     <div class="card-body">
                         <h6>Activas (&lt; 48 meses)</h6>
-                        <h3 id="totalActivas">0</h3>
+                        <h4 id="totalActivas">0</h4>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <div class="card text-center bg-warning text-dark">
                     <div class="card-body">
                         <h6>Próximas a venta (48-59 meses)</h6>
-                        <h3 id="totalProximas">0</h3>
+                        <h4 id="totalProximas">0</h4>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="card text-center bg-danger text-white">
                     <div class="card-body">
                         <h6>Para vender (&ge; 60 meses)</h6>
-                        <h3 id="totalVenta">0</h3>
+                        <h4 id="totalVenta">0</h4>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
 
         <!-- Gráfica -->
         <div class="row mb-4">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <canvas id="graficaEstados"></canvas>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <!-- Tabla -->
                 <div class="table-responsive">
                     <table id="tablaVidaUtil" class="table table-dark table-hover align-middle">

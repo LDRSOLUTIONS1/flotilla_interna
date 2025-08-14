@@ -151,10 +151,12 @@ document.addEventListener("DOMContentLoaded", function () {
         "sensores_reversa",
         document.getElementById("sensores_reversa").checked ? 1 : 0
       );
+      caja.append("nombre_modelo", document.getElementById("nombre_modelo").value);
 
       console.log(caja);
       // 🔍 Nuevos filtros funcionales
       const camposFiltro = [
+        "nombre_modelo",
         "capacidad_carga",
         "capacidad_pasajeros",
         "tipo_combustible",

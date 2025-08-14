@@ -102,6 +102,34 @@
       <div class="offcanvas-body">
         <div class="row g-3">
             <!-- -----------------------------------------------------------Aquí pegas todos los campos desde capacidad_carga hasta sensores de reversa -->
+            <!-- Modelos de las unidades para filtrar-->
+             <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de combustibles
+            $sql = "SELECT id_modelo, nombre_modelo FROM modelos";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                // Tipo de combustible -->
+                echo '<div class="col-md-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="nombre_modelo" name="nombre_modelo">
+                                <option value=""></option>';
+                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_modelo'] . '">' . $row['nombre_modelo'] . '</option>';
+                }
+                echo '</select>
+                            <label for="nombre_modelo" style="font-size: 1.0rem;">Unidad modelo</label>
+                        </div>
+                    </div>';
+            } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
             <!-- Capacidad de carga -->
             <div class="col-md-6">
                 <div class="form-floating">

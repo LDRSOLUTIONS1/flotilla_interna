@@ -19,6 +19,7 @@ if (isset($_POST['sederecolecciondemo'])
     $fechadevolucionunidademo = $_POST['fechadevolucionunidademo'];
 
     // Características funcionales como filtros
+    $nombre_modelo = $_POST['nombre_modelo'] ?? '';
     $capacidad_carga = $_POST['capacidad_carga'] ?? '';
     $capacidad_pasajeros = $_POST['capacidad_pasajeros'] ?? '';
     $tipo_combustible = $_POST['tipo_combustible'] ?? '';
@@ -37,6 +38,7 @@ if (isset($_POST['sederecolecciondemo'])
     // Construcción dinámica del WHERE
     $filtros = "WHERE ung.id_estado_unidad = 1 AND ung.id_estatus_unidad = 1 AND ung.id_sede = $sederecolecciondemo AND ung.id_tipo_unidad = 3";
 
+    if ($nombre_modelo !== '')          $filtros .= " AND ung.id_modelo = $nombre_modelo";
     if ($capacidad_carga !== '')        $filtros .= " AND ung.capacidad_carga >= $capacidad_carga";
     if ($capacidad_pasajeros !== '')    $filtros .= " AND ung.capacidad_pasajeros >= $capacidad_pasajeros";
     if ($tipo_combustible !== '')       $filtros .= " AND ung.id_tipo_combustible = $tipo_combustible";

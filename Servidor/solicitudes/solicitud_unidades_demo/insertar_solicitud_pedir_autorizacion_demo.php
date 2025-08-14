@@ -81,6 +81,8 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
 
             $queryultimo = "SELECT 
                                 notificar.id_asignacion_unidad_demo, 
+                                notificar.fecha_prestamo, 
+                                notificar.fecha_devolucion,
                                 pf.nombre_1, 
                                 pf.nombre_2, 
                                 pf.apellido_paterno, 
@@ -146,6 +148,8 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                 $apellido_materno_colaborador_asigna = $data['apellido_materno_colaborador_asigna'];
                 $area = $data['nombre_area'];
                 $puesto = $data['nombre_puesto'];
+                $fecha_prestamo = $data['fecha_prestamo'];
+                $fecha_devolucion = $data['fecha_devolucion'];
 
                 // Obtener correos de usuarios tipo 7 autorizador de asignacion demo
                 $correos = [];
@@ -189,9 +193,9 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                     $mail->isHTML(true);
                     $mail->Subject = utf8_decode('Solicitud de Autorización unidad DEMO');
 $mail->Body = utf8_decode("
-    <p>Estimado colaborador,</p>
+    <p>Estimados colaboradores autorizadores,</p>
 
-    <p>Por medio del presente, solicitamos tu <strong>AUTORIZACIÓN</strong> para la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+    <p>Por medio del presente, solicitamos su <strong>AUTORIZACIÓN</strong> para la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
 
     <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
         <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
@@ -200,6 +204,8 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$ $costo_neto MXN</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
     <p><strong>Usuario / Institución:</strong><br>
