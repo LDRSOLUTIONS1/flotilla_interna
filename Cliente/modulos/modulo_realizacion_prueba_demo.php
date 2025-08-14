@@ -328,8 +328,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 </div>
 
-<!--codigo que muestra latabla de la prueba monitoriada por telematics-->
-<?php if ($id_tipo_usuario == 11 && $id_estado_prueba_demo == 3): ?>
+<!--codigo que muestra la tabla de la prueba monitoriada por telematics-->
+<?php if ($id_tipo_usuario == 11): ?>
 <div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
     <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
     <h2 class='text-right titulosletrafechasmonitoreo'>

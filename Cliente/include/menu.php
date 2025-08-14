@@ -86,7 +86,7 @@ $avatar = $datos_usuario['avatar'];
             <li ><a class="menulist" href="asignar_master_driver.php">Asignar Master Driver</a></li>
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
             <li ><a class="menulist" href="reportes_finales_demos.php">Reportes finales</a></li>
-            <li ><a class="menulist" href="resultados_finales.php">Resultados</a></li>
+            <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>
         <?php endif; ?>
         <li ><a class="menulist" href="http://localhost/intranet/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
     </ul>

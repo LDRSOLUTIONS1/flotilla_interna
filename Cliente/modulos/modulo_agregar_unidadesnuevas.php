@@ -679,3 +679,4 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 
 <script src="../js/unidades/agregar_nuevas_unidades.js"></script>
+<script src="../js/unidades/agregar_nuevas_unidades_demos.js"></script>
