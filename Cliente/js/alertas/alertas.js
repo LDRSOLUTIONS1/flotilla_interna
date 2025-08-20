@@ -361,3 +361,13 @@ if (resultado == "pruebaterminada") {
   });
   limpiarparametros();
 }
+//alerta de prorroga unidad demo
+if (resultado == "prorrogaenviada") {
+  Swal.fire({
+    title: "Prórroga solicitada correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}

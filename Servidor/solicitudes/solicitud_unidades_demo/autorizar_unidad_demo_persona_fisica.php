@@ -84,10 +84,15 @@ if (isset($_POST['id_unidad'])
                             aud.objetivo_prestamo,
                             aud.solicitar_master_driver,
                             aud.comentarios,
+                            aud.fecha_prestamo,
+                            aud.fecha_devolucion,
                             caud.nombre_1 AS nombre_1_colaborador_autorizador,
                             caud.nombre_2 AS nombre_2_colaborador_autorizador,
                             caud.apellido_paterno AS apellido_paterno_colaborador_autorizador,
-                            caud.apellido_materno AS apellido_materno_colaborador_autorizador
+                            caud.apellido_materno AS apellido_materno_colaborador_autorizador,
+                            area.nombre_area,
+                            puesto.nombre_puesto
+
                   FROM asignacion_unidad_demo AS aud
                   INNER JOIN colaboradores AS sud 
                     ON aud.id_colaborador_que_asigna = sud.id_colaborador
@@ -101,6 +106,10 @@ if (isset($_POST['id_unidad'])
                     ON model.id_marca = mar.id_marca
                   INNER JOIN colaboradores AS caud 
                     ON aud.id_autorizador = caud.id_colaborador
+                    INNER JOIN areas AS area
+                    ON sud.id_area = area.id_area
+                  INNER JOIN puestos AS puesto
+                    ON sud.id_puesto = puesto.id_puesto
                   WHERE aud.id_asignacion_unidad_demo = '$id_asignacion_demo'";
 
         $result = mysqli_query($conexion, $querycorreosolicitandeunidademo);
@@ -113,6 +122,8 @@ if (isset($_POST['id_unidad'])
         $nombre_2 = $row['nombre_2'];
         $apaterno = $row['apellido_paterno'];
         $amaterno = $row['apellido_materno'];
+        $area = $row['nombre_area'];
+        $puesto = $row['nombre_puesto'];
         $nombre_1_persona_fisica = $row['nombre_1_persona_fisica'];
         $nombre_2_persona_fisica = $row['nombre_2_persona_fisica'];
         $apellido_paterno_persona_fisica = $row['apellido_paterno_persona_fisica'];
@@ -135,6 +146,8 @@ if (isset($_POST['id_unidad'])
         $objetivo_prestamo = $row['objetivo_prestamo'];
         $solicitar_master_driver = $row['solicitar_master_driver'];
         $comentarios = $row['comentarios'];
+        $fecha_prestamo = $row['fecha_prestamo'];
+        $fecha_devolucion = $row['fecha_devolucion'];
         $nombre_1_colaborador_autorizador = $row['nombre_1_colaborador_autorizador'];
         $nombre_2_colaborador_autorizador = $row['nombre_2_colaborador_autorizador'];
         $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
@@ -176,18 +189,24 @@ if (isset($_POST['id_unidad'])
 $mail1->Body = utf8_decode("
     <p>Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,</p>
 
-    <p>Te informamos que la unidad vehicular <strong>DEMO</strong> que solicitaste para el siguiente usuario ha sido <strong>autorizada</strong>:</p>
+    <p>Te informamos que la unidad vehicular <strong>DEMO</strong> que solicitaste para el siguiente usuario:</p>
 
-    <p><strong>Usuario:</strong><br>
-    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
+    <p><strong>$nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica </strong><br></p>
 
+            <p>Ha sido <strong>autorizada</strong> por: <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <p><strong>Detalles de la unidad asignada:</strong></p>
     <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
         <tr><td style='padding: 6px;'><strong>Marca:</strong></td><td style='padding: 6px;'>$marca</td></tr>
         <tr><td style='padding: 6px;'><strong>Modelo:</strong></td><td style='padding: 6px;'>$modelo</td></tr>
         <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
         <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+
+    <br>
 
     <p>En este momento se está enviando la información y los documentos correspondientes al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
 
@@ -263,7 +282,15 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+
+    <br>
+
+    <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
+        <strong>Área:</strong> $area<br>
+        <strong>Puesto:</strong> $puesto</p>
 
     <br>
 
@@ -279,7 +306,7 @@ $mail->Body = utf8_decode("
 
     <ol>
         <li>Ingresa a la plataforma desde la <strong>INTRANET</strong>.</li>
-        <li>Dirígete al menú <strong>COMODATOS</strong>.</li>
+        <li>Dirígete al menú <strong>COMODATOS DEMOS</strong>.</li>
         <li>Selecciona al usuario correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
         <li>Adjunta el documento generado.</li>
     </ol>
@@ -368,6 +395,7 @@ $mail->Body = utf8_decode("
 
     <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
+    <p><strong>Detalles de la unidad asignada:</strong></p>
     <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
         <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
         <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
@@ -375,15 +403,108 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
     <br>
 
-    <p><strong>Información del usuario:</strong><br>
-    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
+    <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
+        <strong>Área:</strong> $area<br>
+        <strong>Puesto:</strong> $puesto</p>
 
+    <br>
+
+    <p><strong>Usuario:</strong> $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
     <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
     <strong>¿Requiere Master Driver?:</strong> <strong style='color: red;'>$requiere_master_driver</strong></p>
+
+    <p>Gracias por tu atención.</p>
+
+    <p>Atentamente,<br>
+    <strong>Flotilla - LDR</strong></p>
+
+    <p><strong>Acceso a la plataforma:</strong><br>
+    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+");
+
+
+                                if ($mail->send()) {
+                                    echo "Correo enviado exitosamente.";
+                                } else {
+                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
+                                }
+                            } catch (Exception $e) {
+                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+                            }
+
+                             //enviamos correo a telematics para que habiliten la unidad
+
+                // Obtener correos de usuarios tipo 12 telematics
+                        $correostelematics = [];
+                        $correo_sql = "SELECT u.id_colaborador, 
+                                                u.id_tipo_usuario,
+                                                cor.id_colaborador,
+                                                cor.email_corporativo
+                                        FROM usuarios AS u 
+                                        INNER JOIN colaboradores AS cor
+                                        ON u.id_colaborador = cor.id_colaborador
+                                        WHERE u.id_tipo_usuario = 12";
+                        $correo_result = $conexion->query($correo_sql);
+                        while ($correo_row = $correo_result->fetch_assoc()) {
+                            if (!empty($correo_row['email_corporativo'])) {
+                                $correostelematics[] = $correo_row['email_corporativo'];
+                            }
+                        }
+
+                        //$correostelematics = ["uriel.cabello@ldrsolutions.com.mx"];
+
+                        foreach ($correostelematics as $correo) {
+                            echo "Correo: $correo <br>";
+                        }
+                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+                //cadena para ver si requiere master driver y mandarlo por correo
+$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+                try {
+                                $mail = new PHPMailer();
+                                $mail->isSMTP();
+                                $mail->Host = 'smtp.gmail.com';
+                                $mail->SMTPAuth = true;
+                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
+                                $mail->Password = 'ppiz zylc bpod tczi';
+                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                                $mail->Port = 587;
+
+                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+                                foreach ($correostelematics as $correo) {
+                                    $mail->addAddress($correo);
+                                }
+                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+
+                                $mail->isHTML(true);
+                                $mail->Subject = utf8_decode('Alta de unidad DEMO');
+$mail->Body = utf8_decode("
+    <p>Estimado colaborador,</p>
+
+    <p>Por medio del presente te solicitamos el alta de la unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
+
+    <p style='margin-left: 20px;'><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+
+    <p><strong>Detalles de la unidad asignada:</strong></p>
+    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; margin-top: 10px;'>
+        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
+    </table>
+
+    <br>
+
+    <p style='color: #b20000; font-weight: bold;'>Es muy importante que se realice el alta de esta unidad para que comience el monitoreo correspondiente.</p>
 
     <p>Gracias por tu atención.</p>
 

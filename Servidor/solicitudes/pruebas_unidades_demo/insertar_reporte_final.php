@@ -90,6 +90,8 @@ if (isset($_POST['id_asignacion_unidad_demo'])
                             aud.objetivo_prestamo,
                             aud.solicitar_master_driver,
                             aud.comentarios,
+                            aud.fecha_prestamo,
+                            aud.fecha_devolucion,
                             caud.nombre_1 AS nombre_1_colaborador_autorizador,
                             caud.nombre_2 AS nombre_2_colaborador_autorizador,
                             caud.apellido_paterno AS apellido_paterno_colaborador_autorizador,
@@ -156,6 +158,8 @@ if (isset($_POST['id_asignacion_unidad_demo'])
         $modelo = $row['nombre_modelo'];
         $costo_neto = $row['costo_neto'];
         $año_unidad = $row['año_unidad'];
+        $fecha_prestamo = $row['fecha_prestamo'];
+        $fecha_devolucion = $row['fecha_devolucion'];
         $id_colaborador = $row['id_colaborador'];
         $objetivo_prestamo = $row['objetivo_prestamo'];
         $solicitar_master_driver = $row['solicitar_master_driver'];
@@ -207,6 +211,8 @@ $mail1->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
         <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha prestamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
     <br>

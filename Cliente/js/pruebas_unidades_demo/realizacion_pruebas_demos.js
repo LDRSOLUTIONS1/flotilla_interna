@@ -42,12 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let valornombre_conductor;
   let valortipo_prueba;
+  let valororigen_inicial;
+  let valororigen_destino;
   let valortemperatura;
   let valorevoluciones;
   let valorvelocidad;
   let valorkilometraje;
-  let valorfoto_tablero;
-  let valorfoto_odometro;
+  let valorfoto_cluster;
   let valorfoto_unidad_exterior;
   let valorcomentarios_pruebas_demo;
 
@@ -58,12 +59,13 @@ document.body.addEventListener("click", function (event) {
       //mandamos a llamar los datos del formulario de registro de la primera prueba
       const nombre_conductor = document.getElementById("nombre_conductor");
       const tipo_prueba = document.getElementById("tipo_prueba");
+      const origen_inicial = document.getElementById("origen_inicial");
+      const origen_destino = document.getElementById("origen_destino");
       const temperatura = document.getElementById("temperatura");
       const revoluciones = document.getElementById("revoluciones");
       const velocidad = document.getElementById("velocidad");
       const kilometraje = document.getElementById("kilometraje");
-      const foto_tablero = document.getElementById("foto_tablero");
-      const foto_odometro = document.getElementById("foto_odometro");
+      const foto_cluster = document.getElementById("foto_cluster");
       const foto_unidad_exterior = document.getElementById(
         "foto_unidad_exterior"
       );
@@ -80,23 +82,25 @@ document.body.addEventListener("click", function (event) {
   function obtenervalores() {
     valornombre_conductor = nombre_conductor.value;
     valortipo_prueba = tipo_prueba.value;
+    valororigen_inicial = origen_inicial.value;
+    valororigen_destino = origen_destino.value;
     valortemperatura = temperatura.value;
     valorevoluciones = revoluciones.value;
     valorvelocidad = velocidad.value;
     valorkilometraje = kilometraje.value;
-    valorfoto_tablero = foto_tablero.files[0];
-    valorfoto_odometro = foto_odometro.files[0];
+    valorfoto_cluster = foto_cluster.files[0];
     valorfoto_unidad_exterior = foto_unidad_exterior.files[0];
     valorcomentarios_pruebas_demo = comentarios_pruebas_demo.value;
 
     console.log(valornombre_conductor);
     console.log(valortipo_prueba);
+    console.log(valororigen_inicial);
+    console.log(valororigen_destino);
     console.log(valortemperatura);
     console.log(valorevoluciones);
     console.log(valorvelocidad);
     console.log(valorkilometraje);
-    console.log(valorfoto_tablero);
-    console.log(valorfoto_odometro);
+    console.log(valorfoto_cluster);
     console.log(valorfoto_unidad_exterior);
     console.log(valorcomentarios_pruebas_demo);
   }
@@ -110,6 +114,14 @@ document.body.addEventListener("click", function (event) {
       {
         campo: valortipo_prueba,
         nombre: "Tipo de prueba",
+      },
+      {
+        campo: valororigen_inicial,
+        nombre: "Origen inicial",
+      },
+      {
+        campo: valororigen_destino,
+        nombre: "Origen destino",
       },
       {
         campo: valortemperatura,
@@ -128,12 +140,8 @@ document.body.addEventListener("click", function (event) {
         nombre: "Kilómetraje",
       },
       {
-        campo: valorfoto_tablero,
-        nombre: "Foto del tablero",
-      },
-      {
-        campo: valorfoto_odometro,
-        nombre: "Foto del odometro",
+        campo: valorfoto_cluster,
+        nombre: "Foto del cloúster",
       },
       {
         campo: valorfoto_unidad_exterior,
@@ -171,12 +179,13 @@ document.body.addEventListener("click", function (event) {
       formdata.append("id_asignacion_unidad_demo", id_asignacion_unidad_demo);
       formdata.append("nombre_conductor", valornombre_conductor);
       formdata.append("tipo_prueba", valortipo_prueba);
+      formdata.append("origen_inicial", valororigen_inicial);
+      formdata.append("origen_destino", valororigen_destino);
       formdata.append("temperatura", valortemperatura);
       formdata.append("revoluciones", valorevoluciones);
       formdata.append("velocidad", valorvelocidad);
       formdata.append("kilometraje", valorkilometraje);
-      formdata.append("foto_tablero", valorfoto_tablero);
-      formdata.append("foto_odometro", valorfoto_odometro);
+      formdata.append("foto_cluster", valorfoto_cluster);
       formdata.append("foto_unidad_exterior", valorfoto_unidad_exterior);
       formdata.append("comentarios_pruebas_demo", valorcomentarios_pruebas_demo);
 

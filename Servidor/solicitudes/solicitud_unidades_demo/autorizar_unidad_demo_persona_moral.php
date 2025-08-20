@@ -58,15 +58,15 @@ if (isset($_POST['id_unidad'])
         //caud = colaborador autorizador unidad demo
 
         $querycorreosolicitandeunidademo = "SELECT uni.placa, 
-                            uni.numero_motor, 
-                            uni.VIN, 
+                            uni.numero_motor,
+                            uni.VIN,
                             uni.costo_neto,
                             uni.año_unidad,
-                            mar.nombre_marca, 
+                            mar.nombre_marca,
                             model.nombre_modelo,
                             sud.nombre_1, 
                             sud.nombre_2, 
-                            sud.apellido_paterno, 
+                            sud.apellido_paterno,
                             sud.apellido_materno, 
                             sud.id_colaborador,
                             pm.id_persona_moral,
@@ -82,14 +82,21 @@ if (isset($_POST['id_unidad'])
                             aud.objetivo_prestamo,
                             aud.solicitar_master_driver,
                             aud.comentarios,
+                            aud.fecha_prestamo,
+                            aud.fecha_devolucion,
                             caud.nombre_1 AS nombre_1_colaborador_autorizador,
                             caud.nombre_2 AS nombre_2_colaborador_autorizador,
                             caud.apellido_paterno AS apellido_paterno_colaborador_autorizador,
-                            caud.apellido_materno AS apellido_materno_colaborador_autorizador
-
+                            caud.apellido_materno AS apellido_materno_colaborador_autorizador,
+                            area.nombre_area,
+                            puesto.nombre_puesto
                   FROM asignacion_unidad_demo AS aud
                   INNER JOIN colaboradores AS sud 
                     ON aud.id_colaborador_que_asigna = sud.id_colaborador
+                  INNER JOIN areas AS area
+                    ON sud.id_area = area.id_area
+                  INNER JOIN puestos AS puesto
+                    ON sud.id_puesto = puesto.id_puesto
                   INNER JOIN personas_morales AS pm 
                     ON aud.id_persona_moral = pm.id_persona_moral
                   INNER JOIN unidades AS uni 
@@ -112,6 +119,8 @@ if (isset($_POST['id_unidad'])
         $nombre_2 = $row['nombre_2'];
         $apaterno = $row['apellido_paterno'];
         $amaterno = $row['apellido_materno'];
+        $area = $row['nombre_area'];
+        $puesto = $row['nombre_puesto'];
         $organizacion_institucion = $row['organizacion_institucion'];
         $placa = $row['placa'];
         $numero_motor = $row['numero_motor'];
@@ -132,6 +141,8 @@ if (isset($_POST['id_unidad'])
         $objetivo_prestamo = $row['objetivo_prestamo'];
         $solicitar_master_driver = $row['solicitar_master_driver'];
         $comentarios = $row['comentarios'];
+        $fecha_prestamo = $row['fecha_prestamo'];
+        $fecha_devolucion = $row['fecha_devolucion'];
         $nombre_1_colaborador_autorizador = $row['nombre_1_colaborador_autorizador'];
         $nombre_2_colaborador_autorizador = $row['nombre_2_colaborador_autorizador'];
         $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
@@ -180,8 +191,7 @@ $mail1->Body = utf8_decode("
 
     <p><strong>$organizacion_institucion</strong></p>
 
-    <p>Ha sido <strong>autorizada</strong> por:</p>
-    <p><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
+    <p>Ha sido <strong>autorizada</strong> por: <strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
     <p><strong>Detalles de la unidad asignada:</strong></p>
     <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
@@ -190,11 +200,13 @@ $mail1->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
         <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
     <br>
 
-    <p>En este momento, la información y los documentos correspondientes están siendo enviados al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
+    <p>En este momento se está enviando la información y los documentos correspondientes al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
 
     <p>Atentamente,<br>
     <strong>Flotilla - LDR</strong></p>
@@ -260,7 +272,7 @@ $mail1->Body = utf8_decode("
 $mail->Body = utf8_decode("
     <p>Estimado colaborador del área jurídica,</p>
 
-    <p>Te enviamos este correo para solicitar la elaboración del <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+    <p>Por medio del presente, solicitamos la elaboración del <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
 
     <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
         <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
@@ -269,7 +281,14 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+
+    <br>
+        <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
+        <strong>Área:</strong> $area<br>
+        <strong>Puesto:</strong> $puesto</p>
 
     <br>
 
@@ -283,7 +302,7 @@ $mail->Body = utf8_decode("
     <p>Una vez elaborado el contrato de <strong>COMODATO</strong>, por favor súbelo a la plataforma <strong>Flotilla LDR</strong> siguiendo estos pasos:</p>
 
     <ol>
-        <li>Ingresa a la plataforma con tu correo y contraseña.</li>
+        <li>Ingresa a la plataforma desde la <strong>INTRANET</strong>.</li>
         <li>Dirígete al menú <strong>COMODATOS DEMOS</strong>.</li>
         <li>Selecciona la empresa o institución correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
         <li>Adjunta el documento generado.</li>
@@ -385,7 +404,15 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+
+    <br>
+
+    <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
+        <strong>Área:</strong> $area<br>
+        <strong>Puesto:</strong> $puesto</p>
 
     <br>
 
@@ -461,7 +488,7 @@ $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER 
 $mail->Body = utf8_decode("
     <p>Estimado colaborador,</p>
 
-    <p>Te solicitamos el alta de una unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
+    <p>Por medio del presente te solicitamos el alta de la unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
 
     <p style='margin-left: 20px;'><strong>$nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
@@ -473,11 +500,13 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$costo_neto</td></tr>
         <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
     <br>
 
-    <p style='color: #b20000; font-weight: bold;'>⚠ Es muy importante que se realice el alta de esta unidad para que comience el monitoreo correspondiente.</p>
+    <p style='color: #b20000; font-weight: bold;'>Es muy importante que se realice el alta de esta unidad para que comience el monitoreo correspondiente.</p>
 
     <p>Gracias por tu atención.</p>
 

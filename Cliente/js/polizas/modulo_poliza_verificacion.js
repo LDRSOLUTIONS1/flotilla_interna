@@ -73,14 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function validarllenado() {
     const campos = [
       {
-        campo: valorfolioverificacion,
-        nombre: "folioverificacion",
-      },
-      {
-        campo: valormontoverificacion,
-        nombre: "montoverificacion",
-      },
-      {
         campo: valorañoverificacion,
         nombre: "añoverificacion",
       },

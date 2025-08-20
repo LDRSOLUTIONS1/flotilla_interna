@@ -9,6 +9,7 @@ $id_colaborador_que_asigna = $_SESSION['id_colaborador'];
 //pf = Persona Fisica
 //pm = Persona Moral
 //ca = Colaborador que Asigna
+//pru = Prorroga Unidad demo
 $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 uda.id_asignacion_unidad_demo,
                 uda.id_unidad,
@@ -35,7 +36,8 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 aud.nombre_1 AS nombre1autorizador,
                 aud.nombre_2 AS nombre2autorizador,
                 aud.apellido_paterno AS apellidopautorizador,
-                aud.apellido_materno AS apellidomautorizador
+                aud.apellido_materno AS apellidomautorizador,
+                pru.id_prorroga_unidad_demo
             FROM asignacion_unidad_demo AS uda
             LEFT JOIN unidades AS unid 
             ON uda.id_unidad = unid.id_unidad
@@ -49,6 +51,8 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             ON uda.id_autorizador = aud.id_colaborador
             INNER JOIN colaboradores AS ca
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
+            LEFT JOIN prorrogas_unidades_demo AS pru
+            ON pru.id_asignacion_unidad_demo = uda.id_asignacion_unidad_demo
             WHERE uda.autorizacion = 'APROVADO'
             AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
             AND uda.solicitar_master_driver = 1
@@ -62,6 +66,12 @@ while ($fila = $resultado->fetch_assoc()) {
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<div class="card mb-3 card-solicitante tipo-' . $tipo_solicitante . '">';
+        if (!empty($fila['id_prorroga_unidad_demo']) && $fila['id_estado_prueba_demo'] != 5) {
+        echo '<div class="alerta d-flex align-items-center">
+                <img src="../../Cliente/videos/notificacion.gif" class="me-2 imgalertasucces">
+                <h6 class="txtvalidacioncomodato"><b>Prórroga solicitada</b></h6>
+            </div>';
+    }
         echo '<div class="cardheader">
             <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" class="card-img-top img-fluid imgcard" alt="...">
         </div>
@@ -81,12 +91,29 @@ while ($fila = $resultado->fetch_assoc()) {
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';
             if ($fila['id_estado_prueba_demo'] != 3 && $fila['id_estado_prueba_demo'] !=2 && $fila['id_estado_prueba_demo'] != 1 && $fila['id_estado_prueba_demo'] != NULL) {
-            echo '<button type="button" class="btn btn-primary btn-sm btnsolicitarprorrogademo" id="btnsolicitarprorrogademo" data-id_asignacion_demo ="' . $fila['id_asignacion_unidad_demo'] . '">Prórroga</button>
-            <button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Reporte</button>';
-            if ($fila['id_estado_prueba_demo'] != 5) {
-                echo '<button type="button" class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">Finalizar</button>';
-            }
-        }
+                //verificamos si tiene prorroga o no para mostrar el boton
+            if (empty($fila['id_prorroga_unidad_demo']) && $fila['id_estado_prueba_demo'] != 5) {
+        // ✅ No tiene prórroga → mostrar botón habilitado
+        echo '<button type="button" 
+                     class="btn btn-primary btn-sm btnsolicitarprorrogademo" 
+                     data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
+                 Prórroga
+              </button>';
+    }
+
+    echo '<button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" 
+                 data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
+             Reporte
+          </button>';
+
+    if ($fila['id_estado_prueba_demo'] != 5) {
+        echo '<button type="button" 
+                     class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" 
+                     data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
+                 Finalizar
+              </button>';
+    }
+}
         echo '</div>
         </div>';
     }

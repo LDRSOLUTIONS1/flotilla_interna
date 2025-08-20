@@ -33,6 +33,38 @@ if(isset($_POST['id_asignacion'])){
     if($result){
     echo "Prueba finalizada ccorrectamente";
 
+    $querinfobajaunidad = "SELECT 
+                                aud.id_asignacion_unidad_demo,
+                                un.id_unidad,
+                                un.id_modelo,
+                                un.placa,
+                                un.vin,
+                                un.numero_motor,
+                                model.nombre_modelo,
+                                marc.nombre_marca
+                            FROM asignacion_unidad_demo AS aud
+                            INNER JOIN unidades AS un
+                                ON aud.id_unidad = un.id_unidad
+                            INNER JOIN modelos AS model
+                                ON un.id_modelo = model.id_modelo
+                            INNER JOIN marcas AS marc
+                                ON model.id_marca = marc.id_marca
+                            WHERE aud.id_asignacion_unidad_demo = '$id_asignacion'";
+
+    $resultinfobajaunidad = mysqli_query($conexion, $querinfobajaunidad);
+
+    if($resultinfobajaunidad){
+        $data = mysqli_fetch_array($resultinfobajaunidad);
+
+        $id_asignacion_unidad_demo = $data['id_asignacion_unidad_demo'];
+        $id_unidad = $data['id_unidad'];
+        $placa = $data['placa'];
+        $vin = $data['vin'];
+        $numero_motor = $data['numero_motor'];
+        $marca = $data['nombre_marca'];
+        $modelo = $data['nombre_modelo'];
+    }
+
     // Obtener correos...
     $correos = [];
     $correo_sql = "SELECT u.id_colaborador, 
@@ -72,59 +104,48 @@ if(isset($_POST['id_asignacion'])){
         $mail->addBCC('uriel.cabello@ldrsolutions.com.mx');
 
         $mail->isHTML(true);
-                                $mail->Subject = utf8_decode('Solicitud de finalización de prueba unidad DEMO'); // Asunto del correo
-                                $mail->Body = utf8_decode("Estimado colaborador del área jurídico.
-                                                            <br>
-                                                            <br>
-                                                            Te enviamos este correo solicitando el <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular: 
-                                                            <br>
-                                                            <br>
-                                                            <strong>$marca $modelo: </strong>
-                                                            <br>
-                                                            <strong>Placa:</strong> $placa
-                                                            <br>
-                                                            <strong>Número de motor:</strong> $numero_motor
-                                                            <br>
-                                                            <strong>VIN:</strong> $VIN
-                                                            <br>
-                                                            <strong>Costo neto:</strong> $costo_neto
-                                                            <br>
-                                                            <strong>Año unidad:</strong> $año_unidad
-                                                            <br>
-                                                            Para el colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong> 
-                                                            <br>
-                                                            <strong>Puesto:</strong> $puesto_colaborador
-                                                            <br>
-                                                            del área : $area.
-                                                            <br> 
-                                                            <br>
-                                                            Una vez realizado el COMODATO debes subirlo en la plataforma <strong>Flotilla LDR.</strong>
-                                                            <br>
-                                                            Sigue los siguientes pasos para subir el documento:
-                                                            <br>
-                                                            <br>
-                                                            1. Ingresa a la plataforma Flotilla LDR con tu correo y contraseña.
-                                                            <br>
-                                                            2. Dirígete al menú en el apartado COMODATOS.
-                                                            <br>
-                                                            3. Selecciona al usuario con la unidad correspondiente y da clic en el botón SUBIR-COMODATO.
-                                                            <br>
-                                                            4. Sube el documento correspondiente.
-                                                            <br><br>
-                                                            <strong>¡Es de suma importancia que se verifique bien la información del comodatario.!</strong>
-                                                            <br>
-                                                            <br>
-                                                            Gracias por su atención.
-                                                            <br>
-                                                            Atentamente,
-                                                            <br>
-                                                            <br>
-                                                            <strong>Servicios Generales - Flotilla LDR</strong>
-                                                            <br>
-                                                            <br>
-                                                            <strong>Acceso a la plataforma: </strong>
-                                                            <br>
-                                                            <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a>");
+                                $mail->Subject = utf8_decode('Baja de unidad DEMO'); // Asunto del correo
+                                $mail->Body = utf8_decode("
+    <div style='font-family: Arial, sans-serif; font-size: 14px; color: #333;'>
+        <p>Estimado colaborador,</p>
+
+        <p>
+            Te enviamos este correo para solicitar la <strong style='color: #b20000;'>BAJA</strong> de información de la siguiente unidad vehicular <strong>DEMO</strong>:
+        </p>
+
+        <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px; margin-top: 10px;'>
+            <tr>
+                <td style='padding: 6px;'><strong>Marca / Modelo:</strong></td>
+                <td style='padding: 6px;'>$marca $modelo</td>
+            </tr>
+            <tr>
+                <td style='padding: 6px;'><strong>Placa:</strong></td>
+                <td style='padding: 6px;'>$placa</td>
+            </tr>
+            <tr>
+                <td style='padding: 6px;'><strong>Número de motor:</strong></td>
+                <td style='padding: 6px;'>$numero_motor</td>
+            </tr>
+            <tr>
+                <td style='padding: 6px;'><strong>VIN:</strong></td>
+                <td style='padding: 6px;'>$vin</td>
+            </tr>
+        </table>
+
+        <p style='margin-top: 20px;'>Gracias por tu atención.</p>
+
+        <p>
+            Atentamente,<br>
+            <strong>Comercial - Flotilla LDR</strong>
+        </p>
+
+        <p>
+            <strong>Acceso a la plataforma:</strong><br>
+            <a href='https://ldrhsys.ldrhumanresources.com/default.php' style='color: #1a73e8; text-decoration: none;'>
+                https://ldrhsys.ldrhumanresources.com/default.php
+            </a>
+        </p>
+    </div>");
 
                                 if ($mail->send()) {
                                     echo "Correo enviado exitosamente.";

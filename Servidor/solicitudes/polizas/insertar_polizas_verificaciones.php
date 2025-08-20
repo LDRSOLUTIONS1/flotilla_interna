@@ -7,8 +7,6 @@ error_reporting(E_ALL);
 include("../../conexion.php");
 
 if (isset($_POST['id_unidad'])
-&& isset($_POST['folioverificacion'])
-&& isset($_POST['montoverificacion'])
 && isset($_POST['añoverificacion'])
 && isset($_POST['semestreverificacion'])
 && isset($_POST['fechaverificacion'])

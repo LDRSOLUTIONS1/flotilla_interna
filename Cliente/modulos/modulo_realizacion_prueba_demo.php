@@ -220,21 +220,24 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     p.id_asignacion_unidad_demo,
                     p.fecha_prueba,
                     p.nombre_del_conductor,
-                    p.tipo_prueba,
+                    p.id_tipo_prueba_demo,
+                    p.origen_inicial,
+                    p.origen_destino,
                     p.temperatura,
                     p.revoluciones,
                     p.velocidad,
                     p.kilometraje,
-                    p.foto_tablero,
-                    p.foto_odometro,
+                    p.foto_cluster,
                     p.foto_unidad,
                     p.comentarios,
                     crp.nombre_1,
                     crp.nombre_2,
                     crp.apellido_paterno,
-                    crp.apellido_materno
+                    crp.apellido_materno,
+                    pru.prueba_demo
                 FROM pruebas_unidad_demo AS p
                 LEFT JOIN colaboradores AS crp ON p.id_colaborador_registra_prueba = crp.id_colaborador
+                LEFT JOIN tipos_pruebas_demo AS pru ON p.id_tipo_prueba_demo = pru.id_tipo_prueba_demo
                 WHERE p.id_asignacion_unidad_demo = ?
                 ORDER BY fecha_prueba ASC";
 
@@ -250,12 +253,13 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <th class='letratablapruebademo'>Fecha y Hora Prueba</th>
                     <th class='letratablapruebademo'>Nombre del Conductor</th>
                     <th class='letratablapruebademo'>Tipo Prueba</th>
+                    <th class='letratablapruebademo'>Origen Inicial</th>
+                    <th class='letratablapruebademo'>Destino Final</th>
                     <th class='letratablapruebademo'>Temperatura</th>
                     <th class='letratablapruebademo'>Revoluciones</th>
                     <th class='letratablapruebademo'>Velocidad</th>
-                    <th class='letratablapruebademo'>Kilometraje</th>
-                    <th class='letratablapruebademo'>Tablero</th>
-                    <th class='letratablapruebademo'>Odómetro</th>
+                    <th class='letratablapruebademo'>Kilometraje inicial</th>
+                    <th class='letratablapruebademo'>Clúster</th>
                     <th class='letratablapruebademo'>Unidad</th>
                     <th class='letratablapruebademo'>Registrador de prueba</th>
                     <th class='letratablapruebademo'>Comentarios</th>
@@ -284,19 +288,16 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 $fecha_prueba->setTimezone(new DateTimeZone('America/Mexico_City'));
                 echo "<td class='letratablapruebademo'>" . $fecha_prueba->format('d/m/Y H:i:s') . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['tipo_prueba']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['prueba_demo']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['origen_inicial']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['origen_destino']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . " °C</td>";
                 echo "<td class='letratablapruebademo'>" . number_format($fila['revoluciones'], 0, '', ',') . " RPM</td>";
                 echo "<td class='letratablapruebademo'>" . number_format($fila['velocidad'], 1, ',', '.') . " km/h</td>";
                 echo "<td class='letratablapruebademo'>" . number_format($fila['kilometraje'], 0, '', ',') . " km</td>";
                 echo "<td class='letratablapruebademo' style='text-align: center;'>
-                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_tablero/" . ($fila['foto_tablero']) . "' target='_blank'>
+                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_cluster/" . ($fila['foto_cluster']) . "' target='_blank'>
                     <button class='btn btn-sm btn-tablero'><i class='fas fa-dashboard'></i></button>
-                </a>
-              </td>";
-                echo "<td class='letratablapruebademo' style='text-align: center;'>
-                <a href='../../Servidor/archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_odometro/" . ($fila['foto_odometro']) . "' target='_blank'>
-                    <button class='btn btn-sm btn-odometro'><i class='fas fa-tachometer-alt'></i></button>
                 </a>
               </td>";
                 echo "<td class='letratablapruebademo' style='text-align: center;'>

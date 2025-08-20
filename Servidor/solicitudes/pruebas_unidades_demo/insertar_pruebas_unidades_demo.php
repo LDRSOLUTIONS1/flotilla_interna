@@ -19,12 +19,13 @@ $colaborador = $_SESSION['id_colaborador'];
 if (isset($_POST['id_asignacion_unidad_demo'])
 && isset($_POST['nombre_conductor'])
 && isset($_POST['tipo_prueba'])
+&& isset($_POST['origen_inicial'])
+&& isset($_POST['origen_destino'])
 && isset($_POST['temperatura'])
 && isset($_POST['revoluciones'])
 && isset($_POST['velocidad'])
 && isset($_POST['kilometraje'])
-&& isset($_FILES['foto_tablero'])
-&& isset($_FILES['foto_odometro'])
+&& isset($_FILES['foto_cluster'])
 && isset($_FILES['foto_unidad_exterior'])
 && isset($_POST['comentarios_pruebas_demo'])) {
 
@@ -32,38 +33,37 @@ if (isset($_POST['id_asignacion_unidad_demo'])
     $valorid_asignacion_unidad_demo = $_POST['id_asignacion_unidad_demo'];
     $valornombre_conductor = $_POST['nombre_conductor'];
     $valortipo_prueba = $_POST['tipo_prueba'];
+    $valororigen_inicial = $_POST['origen_inicial'];
+    $valororigen_destino = $_POST['origen_destino'];
     $valortemperatura = $_POST['temperatura'];
     $valorrevoluciones = $_POST['revoluciones'];
     $valorvelocidad = $_POST['velocidad'];
     $valorkilometraje = $_POST['kilometraje'];
-    $valorfoto_tablero = $_FILES['foto_tablero'];
-    $valorfoto_odometro = $_FILES['foto_odometro'];
+    $valorfoto_cluster = $_FILES['foto_cluster'];
     $valorfoto_unidad_exterior = $_FILES['foto_unidad_exterior'];
     $valorcomentarios_pruebas_demo = $_POST['comentarios_pruebas_demo'];
 
     echo "id_asignacion_unidad_demo: " . $valorid_asignacion_unidad_demo . " ";
     echo "nombre_conductor: " . $valornombre_conductor . " ";
     echo "tipo_prueba: " . $valortipo_prueba . " ";
+    echo "origen_inicial: " . $valororigen_inicial . " ";
+    echo "origen_destino: " . $valororigen_destino . " ";
     echo "temperatura: " . $valortemperatura . " ";
     echo "revoluciones: " . $valorrevoluciones . " ";
     echo "velocidad: " . $valorvelocidad . " ";
     echo "kilometraje: " . $valorkilometraje . " ";
-    echo "foto_tablero: " . $_FILES['foto_tablero']['name'] . " ";
-    echo "foto_odometro: " . $_FILES['foto_odometro']['name'] . " ";
+    echo "foto_cluster: " . $_FILES['foto_cluster']['name'] . " ";
     echo "foto_unidad_exterior: " . $_FILES['foto_unidad_exterior']['name'] . " ";
     echo "comentarios_pruebas_demo: " . $valorcomentarios_pruebas_demo . " ";
 
     //obtener las fotos correspondientes
-    $nombrefoto_tablero = 'foto_tablero_' . $valornombre_conductor . '_' . basename($_FILES['foto_tablero']['name']);
-    $nombrefoto_odometro = 'foto_odometro_' . $valornombre_conductor . '_' . basename($_FILES['foto_odometro']['name']);
+    $nombrefoto_cluster = 'foto_cluster_' . $valornombre_conductor . '_' . basename($_FILES['foto_cluster']['name']);
     $nombrefoto_unidad_exterior = 'foto_unidad_exterior_' . $valornombre_conductor . '_' . basename($_FILES['foto_unidad_exterior']['name']);
 
-    $rutafoto_tablero = "../../archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_tablero/";
-    $rutafoto_odometro = "../../archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_odometro/";
+    $rutafoto_cluster = "../../archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_cluster/";
     $rutafoto_unidad_exterior = "../../archivos/files/files_asignacion_demo/pruebas_unidades_demo/fotos_unidad_exterior/";
 
-    move_uploaded_file($_FILES['foto_tablero']['tmp_name'], $rutafoto_tablero . $nombrefoto_tablero);
-    move_uploaded_file($_FILES['foto_odometro']['tmp_name'], $rutafoto_odometro . $nombrefoto_odometro);
+    move_uploaded_file($_FILES['foto_cluster']['tmp_name'], $rutafoto_cluster . $nombrefoto_cluster);
     move_uploaded_file($_FILES['foto_unidad_exterior']['tmp_name'], $rutafoto_unidad_exterior . $nombrefoto_unidad_exterior);
 
     
@@ -84,13 +84,14 @@ if ($totalpruebas == 0) {
     $queryinsertarprueba = "INSERT INTO pruebas_unidad_demo (id_asignacion_unidad_demo,
                                                             fecha_prueba,
                                                             nombre_del_conductor,
-                                                            tipo_prueba,
+                                                            id_tipo_prueba_demo,
+                                                            origen_inicial,
+                                                            origen_destino,
                                                             temperatura,
                                                             revoluciones,
                                                             velocidad,
                                                             kilometraje,
-                                                            foto_tablero,
-                                                            foto_odometro,
+                                                            foto_cluster,
                                                             foto_unidad,
                                                             comentarios,
                                                             id_colaborador_registra_prueba)
@@ -98,12 +99,13 @@ if ($totalpruebas == 0) {
                                         NOW(),
                                         '$valornombre_conductor',
                                         '$valortipo_prueba',
+                                        '$valororigen_inicial',
+                                        '$valororigen_destino',
                                         '$valortemperatura',
                                         '$valorrevoluciones',
                                         '$valorvelocidad',
                                         '$valorkilometraje',
-                                        '$nombrefoto_tablero',
-                                        '$nombrefoto_odometro',
+                                        '$nombrefoto_cluster',
                                         '$nombrefoto_unidad_exterior',
                                         '$valorcomentarios_pruebas_demo',
                                         '$colaborador')";

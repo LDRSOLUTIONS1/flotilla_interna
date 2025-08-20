@@ -48,6 +48,8 @@ if (isset($_FILES['archivo_subir_comodato'])
                          col.apellido_paterno, 
                          col.apellido_materno,
                          asigpdf.archivo_comodato_sin_firmar,
+                         asigpdf.fecha_prestamo,
+                         asigpdf.fecha_devolucion,
                          pf.nombre_1 as nombre1_persona_fisica, 
                          pf.nombre_2 as nombre2_persona_fisica, 
                          pf.apellido_paterno as apellido_paterno_persona_fisica, 
@@ -79,6 +81,8 @@ if (isset($_FILES['archivo_subir_comodato'])
         $VIN = $row['VIN'];
         $marca = $row['nombre_marca'];
         $modelo = $row['nombre_modelo'];
+        $fecha_prestamo = $row['fecha_prestamo'];
+        $fecha_devolucion = $row['fecha_devolucion'];
         $archivo_comodato = $row['archivo_comodato_sin_firmar'];
         $ruta_archivo = $rutaarchivocomodato . $archivo_comodato;
 
@@ -125,6 +129,8 @@ if (isset($_FILES['archivo_subir_comodato'])
                     <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
                     <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
                     <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Fecha de prestamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Fecha de devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
                 </table>
 
                 <br>

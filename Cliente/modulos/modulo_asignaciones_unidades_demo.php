@@ -14,14 +14,14 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Solicitud de prorroga</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Solicitud de prórroga</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalprorrogaunidaddemo"></button>
             </div>
             <div class="modal-body" id="modalprorrogaunidaddemobody">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalprorrogaunidaddemo" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnenviarpolitica">Solicitar</button>
+                <button type="button" class="btn btn-primary btnsolicitarprorroga" id="btnsolicitarprorroga">Solicitar</button>
             </div>
         </div>
     </div>
