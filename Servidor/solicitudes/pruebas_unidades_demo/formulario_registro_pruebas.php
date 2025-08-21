@@ -32,7 +32,7 @@
         echo '</select>
         <label for="colaboradorldr">Tipo de prueba</label>
     </div>
-    <label class="" style="color: white;">*Campo obligatorio</label>
+    <label class="" style="color: white;"></label>
 </div>'; 
     }
     ?>
@@ -45,6 +45,7 @@
         </div>
         <label id="costoNetoLabel" style="color: black;"></label>
     </div>
+
     <div class="col-md-6">
         <div class="form-floating">
             <input type="text" class="form-control" id="origen_destino" placeholder="origen_destino" name="origen_destino">
@@ -52,6 +53,7 @@
         </div>
         <label id="costoNetoLabel" style="color: black;"></label>
     </div>
+
     <div class="col-md-3">
         <div class="form-floating">
             <input type="number" class="form-control" id="temperatura" placeholder="temperatura" name="temperatura">

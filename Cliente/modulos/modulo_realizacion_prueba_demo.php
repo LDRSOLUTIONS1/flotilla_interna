@@ -245,6 +245,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             $stmti->bind_param("i", $id_asignacion);
             $stmti->execute();
             $resultado = $stmti->get_result();
+
             echo "<div class='table-responsive'>
             <table class='table table-hover tablaunidades' id='tablaUnidades'>
             <thead class='table-light'>
@@ -263,6 +264,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <th class='letratablapruebademo'>Unidad</th>
                     <th class='letratablapruebademo'>Registrador de prueba</th>
                     <th class='letratablapruebademo'>Comentarios</th>
+                    <th class='letratablapruebademo'>Bitácora diaria</th>
                 </tr>
             </thead>
             <tbody>";
@@ -271,6 +273,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             $primer_fecha = null;
             $ultima_fecha = null;
             while ($fila = $resultado->fetch_assoc()) {
+                $id_prueba = $fila['id_prueba'];
                 // Guardar la primera fecha (solo la primera vez que entra al bucle)
     if ($primer_fecha === null) {
         $primer_fecha = new DateTime($fila['fecha_prueba']);
@@ -290,7 +293,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 echo "<td class='letratablapruebademo'>" . ($fila['nombre_del_conductor']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['prueba_demo']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['origen_inicial']) . "</td>";
-                echo "<td class='letratablapruebademo'>" . ($fila['origen_destino']) . "</td>";
+                echo "<td class='letratablapruebademo'>" . ($fila['origen_destino']) . "</td>"; 
                 echo "<td class='letratablapruebademo'>" . ($fila['temperatura']) . " °C</td>";
                 echo "<td class='letratablapruebademo'>" . number_format($fila['revoluciones'], 0, '', ',') . " RPM</td>";
                 echo "<td class='letratablapruebademo'>" . number_format($fila['velocidad'], 1, ',', '.') . " km/h</td>";
@@ -307,6 +310,9 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
               </td>";
               echo "<td class='letratablapruebademo'>" . ($fila['nombre_1'] . ' ' . $fila['nombre_2'] . ' ' . $fila['apellido_paterno'] . ' ' . $fila['apellido_materno']) . "</td>";
                 echo "<td class='letratablapruebademo'>" . ($fila['comentarios']) . "</td>";
+                echo "<td class='letratablapruebademo' style='text-align: center;'>
+                    <button class='fas fa-book btn btn-sm btn-bitacora btn_realizar_bitacora' data-idprueba='" . $id_prueba . "'></button>
+              </td>";
                 echo "</tr>";
             }
         // Ya fuera del bucle, formateamos el rango de fechas
@@ -516,8 +522,29 @@ document.getElementById('btnObtenerDatos').addEventListener('click', function ()
     </div>
 </div>
 
+<!----------------------------------------------------------------modal para registrar la bitacora diaria--------------------------------->
+<!--modal-->
+<div class="modal fade modalregistrarbitacora" id="modalregistrarbitacora" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Resultados</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalresultados"></button>
+            </div>
+            <div class="modal-body" id="modalregistrarbitacorabody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalresultados" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btnregistrarresultados" id="btnregistrarresultados">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--pruebas unidades demo-->
 <script src="../js/pruebas_unidades_demo/realizacion_pruebas_demos.js"></script>
+<!--pruebas unidades demo-->
+<script src="../js/pruebas_unidades_demo/realizacion_prueba_bitacora.js"></script>
 <!--js para subir el reporte final de la prueba demo-->
 <script src="../js/pruebas_unidades_demo/reporte_final_pruebas.js"></script>
 <!--js para filtrar la tabla de unidades-->

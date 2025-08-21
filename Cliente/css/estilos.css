@@ -140,7 +140,19 @@
         background-color: #f8f9fa; /* Fondo gris claro */
         transition: all 0.3s ease;
     }
+.form-select-prueba {
+    display: block;
+    width: 100%;
+    padding: .500rem .75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #ced4da;
+    border-radius: .25rem;
 
+}
     .form-select:focus {
         border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
         box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -2665,6 +2677,13 @@ height: auto;
   padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 
+/*estilos de los botones para mostrar las fotos de las pruebas*/
+.btn-bitacora{
+  background-color: #12a87e; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 6px; /* Adjust padding to make the button smaller */
+}
+
 
 .btn-odometro{
   background-color: #128aa8; /* tu color deseado */
@@ -2766,4 +2785,10 @@ height: auto;
     margin: 0;
     font-size: 0.9em;
 }
-
+/*estilos bitacoras de prueba diarias*/
+.cardontainer{
+  background-color: #91979e74;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
