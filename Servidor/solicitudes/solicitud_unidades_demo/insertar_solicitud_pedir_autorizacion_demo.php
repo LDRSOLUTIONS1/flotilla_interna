@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -9,71 +12,78 @@ require '../../lib/PHPMailer-master/src/PHPMailer.php';
 require '../../lib/PHPMailer-master/src/SMTP.php';
 
 include("../../conexion.php");
-$nombre_archivo = "";
-$ruta_archivo = "";
-$id_asignacion_unidad_demo = 0;
-$valorcolaboradorasignacion = 0;
+
+error_log("POST: " . print_r($_POST, true));
 
 if (
     isset($_POST['id_unidad']) &&
     isset($_POST['id_colaborador']) &&
     isset($_POST['fechasolicitudunidademo']) &&
-    isset($_POST['fechadevolucionunidademo']) &&
-    isset($_POST['requiere_master_driver'])
+    isset($_POST['fechadevolucionunidademo'])
 ) {
     $valoridunidad = mysqli_real_escape_string($conexion, $_POST['id_unidad']);
     $id_colaborador_que_asigna = mysqli_real_escape_string($conexion, $_POST['id_colaborador']);
 
-    $id_persona_fisica = isset($_POST['id_persona_fisica']) && $_POST['id_persona_fisica'] !== 'null'
-    ? mysqli_real_escape_string($conexion, $_POST['id_persona_fisica']) : null;
+    $id_persona_fisica = !empty($_POST['id_persona_fisica']) && $_POST['id_persona_fisica'] !== 'null'
+        ? mysqli_real_escape_string($conexion, $_POST['id_persona_fisica']) : null;
 
-    $id_persona_moral = isset($_POST['id_persona_moral']) && $_POST['id_persona_moral'] !== 'null'
-    ? mysqli_real_escape_string($conexion, $_POST['id_persona_moral']) : null;
+    $id_persona_moral = !empty($_POST['id_persona_moral']) && $_POST['id_persona_moral'] !== 'null'
+        ? mysqli_real_escape_string($conexion, $_POST['id_persona_moral']) : null;
 
     $fechasolicitudunidademo = mysqli_real_escape_string($conexion, $_POST['fechasolicitudunidademo']);
     $fechadevolucionunidademo = mysqli_real_escape_string($conexion, $_POST['fechadevolucionunidademo']);
     $requiere_master_driver = isset($_POST['requiere_master_driver']) && $_POST['requiere_master_driver'] == '1' ? 1 : 0;
-    $objetivo_prueba_demo = mysqli_real_escape_string($conexion, $_POST['objetivo_prueba_demo']);
-    $comentarios_pruebas_demo = mysqli_real_escape_string($conexion, $_POST['comentarios_pruebas_demo']);
 
-echo "requiere_master_driver: $requiere_master_driver";
+    $objetivo_prueba_demo = isset($_POST['objetivo_prueba_demo']) ? mysqli_real_escape_string($conexion, $_POST['objetivo_prueba_demo']) : '';
+    $comentarios_pruebas_demo = isset($_POST['comentarios_pruebas_demo']) ? mysqli_real_escape_string($conexion, $_POST['comentarios_pruebas_demo']) : '';
 
-    // Insertamos la unidad
-$columnas = [
-    "id_unidad",
-    "id_colaborador_que_asigna",
-    "fecha_prestamo",
-    "fecha_devolucion",
-    "objetivo_prestamo",
-    "comentarios",
-    "solicitar_master_driver"
-];
+    // Debug de variables
+    echo "📌 Datos recibidos:<br>";
+    echo "id_unidad=$valoridunidad<br>";
+    echo "id_colaborador=$id_colaborador_que_asigna<br>";
+    echo "fecha_prestamo=$fechasolicitudunidademo<br>";
+    echo "fecha_devolucion=$fechadevolucionunidademo<br>";
+    echo "requiere_master_driver=$requiere_master_driver<br>";
+    echo "persona_fisica=$id_persona_fisica<br>";
+    echo "persona_moral=$id_persona_moral<br>";
 
-$valores = [
-    "'$valoridunidad'",
-    "'$id_colaborador_que_asigna'",
-    "'$fechasolicitudunidademo'",
-    "'$fechadevolucionunidademo'",
-    "'$objetivo_prueba_demo'",
-    "'$comentarios_pruebas_demo'",
-    "'$requiere_master_driver'"
-];
+    // Armamos columnas
+    $columnas = [
+        "id_unidad",
+        "id_colaborador_que_asigna",
+        "fecha_prestamo",
+        "fecha_devolucion",
+        "objetivo_prestamo",
+        "comentarios",
+        "solicitar_master_driver"
+    ];
 
-if ($id_persona_fisica !== null) {
-    $columnas[] = "id_persona_fisica";
-    $valores[] = "'$id_persona_fisica'";
-} elseif ($id_persona_moral !== null) {
-    $columnas[] = "id_persona_moral";
-    $valores[] = "'$id_persona_moral'";
-} else {
-    echo "❌ Error: No se proporcionó persona física ni moral.";
-    exit;
-}
+    $valores = [
+        "'$valoridunidad'",
+        "'$id_colaborador_que_asigna'",
+        "'$fechasolicitudunidademo'",
+        "'$fechadevolucionunidademo'",
+        "'$objetivo_prueba_demo'",
+        "'$comentarios_pruebas_demo'",
+        "'$requiere_master_driver'"
+    ];
 
-$queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . implode(", ", $columnas) . ") VALUES (" . implode(", ", $valores) . ")";
+    if ($id_persona_fisica !== null) {
+        $columnas[] = "id_persona_fisica";
+        $valores[] = "'$id_persona_fisica'";
+    } elseif ($id_persona_moral !== null) {
+        $columnas[] = "id_persona_moral";
+        $valores[] = "'$id_persona_moral'";
+    } else {
+        die("❌ Error: No se proporcionó persona física ni moral.");
+    }
 
+    $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . implode(", ", $columnas) . ") VALUES (" . implode(", ", $valores) . ")";
+    echo "SQL Ejecutado: $queryinsertarsolicitudunidademo<br>";
 
-    if ($ejecutar = mysqli_query($conexion, $queryinsertarsolicitudunidademo)) {
+    if (!mysqli_query($conexion, $queryinsertarsolicitudunidademo)) {
+        die("❌ Error al insertar asignación: " . mysqli_error($conexion));
+    }
         $queryActualizarEstadoUnidad = "UPDATE unidades SET id_estado_unidad = 4 WHERE id_unidad = '$valoridunidad'";
 
         if (mysqli_query($conexion, $queryActualizarEstadoUnidad)) {
@@ -141,7 +151,7 @@ $queryinsertarsolicitudunidademo = "INSERT INTO asignacion_unidad_demo (" . impl
                 $numero_motor = $data['numero_motor'];
                 $VIN = $data['VIN'];
                 $costo_neto = $data['costo_neto'];
-                $año_unidad = $data['año_unidad'];
+                $anio_unidad = $data['año_unidad'];
                 $nombre_1_colaborador_asigna = $data['nombre_1_colaborador_asigna'];
                 $nombre_2_colaborador_asigna = $data['nombre_2_colaborador_asigna'];
                 $apellido_paterno_colaborador_asigna = $data['apellido_paterno_colaborador_asigna'];
@@ -203,7 +213,7 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
         <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
         <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$ $costo_neto MXN</td></tr>
-        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$año_unidad</td></tr>
+        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$anio_unidad</td></tr>
         <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
@@ -254,4 +264,6 @@ $mail->Body = utf8_decode("
     } else {
         echo "Error al insertar la asignación: " . mysqli_error($conexion);
     }
-}
+
+error_log("POST: " . print_r($_POST, true));
+
