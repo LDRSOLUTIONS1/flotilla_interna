@@ -31,7 +31,7 @@ $avatar = $datos_usuario['avatar'];
     </div>
 </a>
     <button class="menu-toggle">
-        ☰
+        ☰ 
     </button>
     <ul class="menu">
         <?php if ($id_tipo_usuario == 1): // Administrador Flotilla Interna?>
@@ -71,7 +71,7 @@ $avatar = $datos_usuario['avatar'];
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
             <li ><a class="menulist" href="asignaciones_unidades_demo.php">Asignaciones</a></li>
 
-        <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES (Francisco Chavez)?>
+        <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="autorizaciones_demos_personas_fisicas.php">Autorizaciones</a></li>
             <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
@@ -79,7 +79,7 @@ $avatar = $datos_usuario['avatar'];
         <?php elseif ($id_tipo_usuario == 9): // PERFIL MASTER DRIVER?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="pruebas_demos.php">Pruebas</a></li>
-            <li ><a class="menulist" href="estados_unidades_demos.php">Resultados finales</a></li>
+           <!-- <li ><a class="menulist" href="estados_unidades_demos.php">Resultados finales</a></li>-->
 
         <?php elseif ($id_tipo_usuario == 11): // PERFIL ADMINISTRADOR PRUEBAS DEMOS?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>

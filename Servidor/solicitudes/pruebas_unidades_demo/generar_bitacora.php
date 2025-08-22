@@ -27,12 +27,12 @@ function checkSN($val) {
 $html = '
 <style>
 body { font-family: DejaVu Sans, sans-serif; font-size: 11px; }
-h2 { text-align:center; margin-bottom:5px; color:#003366; }
-.header { border-bottom:2px solid #003366; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+h2 { text-align:center; margin-bottom:5px; color:#808080; }
+.header { border-bottom:2px solid #797877ff; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
 .header img { height:50px; }
-.section-title { background:#003366; color:#fff; font-weight:bold; padding:4px; margin-top:10px; }
+.section-title { background:#565656; color:#fff; font-weight:bold; padding:4px; margin-top:10px; }
 table { border-collapse: collapse; width: 100%; margin-top:5px; }
-th, td { border: 1px solid #444; padding: 4px; text-align: center; }
+th, td { border: 1px solid #808080; padding: 4px; text-align: center; }
 th { background: #f0f0f0; }
 .signature { height:50px; border-top:1px solid #000; text-align:center; margin-top:30px; width:45%; display:inline-block; }
 .footer { position: fixed; bottom: -10px; left: 0; right: 0; text-align: center; font-size: 10px; color:#555; }
@@ -40,7 +40,7 @@ th { background: #f0f0f0; }
 </style>
 
 <div class="header">
-  <img src="../../../../Cliente/img/logos/LDR-negro-Logo.png">
+  <img class="" src="../../../Cliente/img/LDR_LOGO.png" alt="">
   <div><h2>Bitácora Diaria (V1.0 2025)<br>Pruebas de Desempeño</h2></div>
 </div>
 
@@ -117,8 +117,8 @@ if (count($muestreos)>0) {
 }
 $html .= '</tbody></table>
 
-<h3>¿Durante la jornada ocurrió algún evento importante a destacar? (Seguridad y/o Consumo)</h3>
-<p>'.$bitacora["eventos_importantes"].'</p>
+<div class="section-title">¿Durante la jornada ocurrió algún evento importante a destacar? (Seguridad y/o Consumo)</div>
+<p style="margin-bottom:40px; font-size:0.8rem;">'.$bitacora["eventos_importantes"].'</p>
 
 <div class="footer">LDR Solutions / Dirección Operaciones / Capacitación Operaciones</div>
 ';
