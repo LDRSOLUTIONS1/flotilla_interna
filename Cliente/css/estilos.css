@@ -650,6 +650,96 @@ body {
     height: 90px;
   }
 }
+/*-----------------------------------------------------------------------FOTONS INICIO DEMOS PERFILES-------------------------------------------------------------------*/
+.inicioimg2foton,
+.inicioimg1foton,
+.inicioimg3foton {
+  position: absolute;
+  max-width: 300px;
+  height: auto;
+  animation: sube-baja 2.4s infinite alternate;
+}
+/*azul*/
+.inicioimg1foton {
+  top: 20%;
+  left: 160px;
+  height: 150px;
+  z-index: 10;
+}
+/*roja*/
+.inicioimg2foton {
+  top: 20%;
+  left: 10px;
+  height: 150px;
+}
+/*aveo*/
+.inicioimg3foton {
+  top: 19%;
+  left: 250px;
+  height: 160px;
+  z-index: 10;
+}
+
+@media (max-width: 992px) {
+  .inicioimg1foton,
+  .inicioimg2foton,
+  .inicioimg3foton {
+    position: absolute;
+    width: 100px;
+  }
+/*azul*/
+  .inicioimg1foton {
+    top: 130%;
+    left: 37%;
+    width: auto;
+    height: 140px;
+    z-index: 10;
+  }
+/*roja*/
+  .inicioimg2foton {
+    top: 130%;
+    left: 18%;
+    width: auto;
+    height: 140px;
+  }
+/*aveo*/
+  .inicioimg3foton {
+    top: 129%;
+    left: 53%;
+    width: auto;
+    height: 140px;
+  }
+}
+@media (max-width: 768px) {
+  .inicioimg1foton,
+  .inicioimg2foton,
+  .inicioimg3foton {
+    position: absolute;
+    width: 100px;
+  }
+/*azul*/
+  .inicioimg1foton {
+    top: 130%;
+    left: 35%;
+    width: auto;
+    height: 140px;
+    z-index: 10;
+  }
+/*roja*/
+  .inicioimg2foton {
+    top: 130%;
+    left: 3%;
+    width: auto;
+    height: 140px;
+  }
+/*aveo*/
+  .inicioimg3foton {
+    top: 126%;
+    left: 55%;
+    width: auto;
+    height: 150px;
+  }
+}
 
 @keyframes sube-baja {
   0% {
