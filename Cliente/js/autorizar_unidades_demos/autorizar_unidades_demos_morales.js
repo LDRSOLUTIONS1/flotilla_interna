@@ -37,13 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.addEventListener("click", function (event) {
     if (event.target && event.target.id === "btnaprovarunidademomoral") {
       Swal.fire({
-        title: "¿Estás seguro de aprovar esta unidad?",
-        text: "Una vez aprovada, no podrás revertir el proceso.",
+        title: "¿Estás seguro de autorizar esta unidad?",
+        text: "Una vez autorizada, no podrás revertir el proceso.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, aprovar",
+        confirmButtonText: "Sí, autorizar",
       }).then((result) => {
         if (result.isConfirmed) {
           const formData = new FormData();

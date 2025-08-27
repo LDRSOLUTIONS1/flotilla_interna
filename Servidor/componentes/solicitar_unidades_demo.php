@@ -402,4 +402,34 @@ function limpiarCamposPrincipales() {
     document.getElementById('sededevolucionunidademo').selectedIndex = 0;
     document.getElementById('fechadevolucionunidademo').value = '';
 }
+
+//----------------------------------funcion para bloquear los dias del input date
+const fechaInputSolicitud = document.getElementById('fechasolicitudunidademo');
+const fechaInputDevolucion = document.getElementById('fechadevolucionunidademo');
+
+// Establecer fecha mínima como hoy
+const hoy = new Date();
+const yyyy = hoy.getFullYear();
+const mm = String(hoy.getMonth() + 1).padStart(2, '0'); // Mes en formato 2 dígitos
+const dd = String(hoy.getDate()).padStart(2, '0'); // Día en formato 2 dígitos
+fechaInputSolicitud.min = `${yyyy}-${mm}-${dd}`;
+fechaInputDevolucion.min = `${yyyy}-${mm}-${dd}`;
+
+
+// Evitar sábados y domingos
+fechaInputSolicitud.addEventListener('input', function() {
+    const fechaSeleccionada = new Date(this.value);
+    const diaSemana = fechaSeleccionada.getDay(); // 0=Domingo, 6=Sábado
+    if (diaSemana === 0 || diaSemana === 6) {
+        alert('No se pueden seleccionar sábados o domingos');
+        this.value = ''; // Limpia la selección
+    }
+});
+
+// Bloquear los días seleccionados en el input de solicitud en el input de devolución
+fechaInputSolicitud.addEventListener('change', function() {
+    const fechaSeleccionada = new Date(this.value);
+    fechaInputDevolucion.min = this.value;
+});
+
 </script>

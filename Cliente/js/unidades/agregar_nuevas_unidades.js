@@ -28,21 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const foliofactura = document.getElementById("foliofactura");
   const arrendadora = document.getElementById("arrendadora");
   const imagen_unidad = document.getElementById("imagen_unidad");
-  //constantes de formulario unidades demos
-    const capacidad_carga = document.getElementById("capacidad_carga");
-  const capacidad_pasajeros = document.getElementById("capacidad_pasajeros");
-  const tipo_combustible = document.getElementById("tipo_combustible");
-  const traccion = document.getElementById("traccion");
-  const tipo_carroceria = document.getElementById("tipo_carroceria");
-  const numero_puertas = document.getElementById("numero_puertas");
-  const numero_asientos = document.getElementById("numero_asientos");
-  const tipo_caja = document.getElementById("tipo_caja");
-  const tipo_frenos = document.getElementById("tipo_frenos");
-  const suspension = document.getElementById("suspension");
-  const numero_ejes = document.getElementById("numero_ejes");
-  const uso_permitido = document.getElementById("uso_permitido");
-  const camara_reversa = document.getElementById("camara_reversa");
-  const sensores_reversa = document.getElementById("sensores_reversa");
+ 
 
   //declaracion del spinner de carga
   const contenedorspinner = document.getElementById("contenedorspinner");
@@ -64,21 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let valorfoliofactura;
   let valorarrendadora;
   let valorimagenunidad;
-  //valores para los campos de unidades demo y filtración
-  let valorcapacidad_carga;
-  let valorcapacidad_pasajeros;
-  let valortipo_combustible;
-  let valortraccion;
-  let valortipo_carroceria;
-  let valornumero_puertas;
-  let valornumero_asientos;
-  let valortipo_caja;
-  let valortipo_frenos;
-  let valorsuspension;
-  let valornumero_ejes;
-  let valoruso_permitido;
-  let valorcamara_reversa;
-  let valorsensores_reversa;
 
   btnregistrarunidad.addEventListener("click", async function () {
     // Desactiva el botón para evitar múltiples clics
@@ -124,22 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     valorarrendadora = arrendadora.value;
     valorimagen_unidad = imagen_unidad.value;
 
-    //obtener valores de unidades demo
-
-    valorcapacidad_carga = capacidad_carga.value;
-    valorcapacidad_pasajeros = capacidad_pasajeros.value;
-    valortipo_combustible = tipo_combustible.value;
-    valortraccion = traccion.value;
-    valortipo_carroceria = tipo_carroceria.value;
-    valornumero_puertas = numero_puertas.value;
-    valornumero_asientos = numero_asientos.value;
-    valortipo_caja = tipo_caja.value;
-    valortipo_frenos = tipo_frenos.value;
-    valorsuspension = suspension.value;
-    valornumero_ejes = numero_ejes.value;
-    valoruso_permitido = uso_permitido.value;
-    valorcamara_reversa = camara_reversa.value;
-    valorsensores_reversa = sensores_reversa.value;
+  
 
     console.log(valormarcaunidad);
     console.log(valormodelounidad);
@@ -161,20 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(valorarrendadora);
     console.log(valorimagen_unidad);
 
-    console.log(valorcapacidad_carga);
-    console.log(valorcapacidad_pasajeros);
-    console.log(valortipo_combustible);
-    console.log(valortraccion);
-    console.log(valortipo_carroceria);
-    console.log(valornumero_puertas);
-    console.log(valornumero_asientos);
-    console.log(valortipo_caja);
-    console.log(valortipo_frenos);
-    console.log(valorsuspension);
-    console.log(valornumero_ejes);
-    console.log(valoruso_permitido);
-    console.log(valorcamara_reversa);
-    console.log(valorsensores_reversa);
   }
 
   //validar que todos los campos esten llenos con toastify
@@ -294,20 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
       caja.append("arrendadora", valorarrendadora);
       caja.append("imagen_unidad", imagen_unidad.files[0]);
 
-      caja.append("capacidad_carga", valorcapacidad_carga);
-      caja.append("capacidad_pasajeros", valorcapacidad_pasajeros);
-      caja.append("tipo_combustible", valortipo_combustible);
-      caja.append("traccion", valortraccion);
-      caja.append("tipo_carroceria", valortipo_carroceria);
-      caja.append("numero_puertas", valornumero_puertas);
-      caja.append("numero_asientos", valornumero_asientos);
-      caja.append("tipo_caja", valortipo_caja);
-      caja.append("tipo_frenos", valortipo_frenos);
-      caja.append("suspension", valorsuspension);
-      caja.append("numero_ejes", valornumero_ejes);
-      caja.append("uso_permitido", valoruso_permitido);
-      caja.append("camara_reversa", valorcamara_reversa);
-      caja.append("sensores_reversa", valorsensores_reversa);
+
 
       $.ajax({
         type: "POST",

@@ -32,7 +32,21 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
     $valorfoliofactura = $_POST['foliofactura'];
     $valorarrendadora = $_POST['arrendadora'];
 
- 
+    //valores de unidades demos
+    $valorcapacidad_carga = $_POST['capacidad_carga'];
+    $valorcapacidad_pasajeros = $_POST['capacidad_pasajeros'];
+    $valortipo_combustible = $_POST['tipo_combustible'];
+    $valortraccion = $_POST['traccion'];
+    $valortipo_carroceria = $_POST['tipo_carroceria'];
+    $valornumero_puertas = $_POST['numero_puertas'];
+    $valornumero_asientos = $_POST['numero_asientos'];
+    $valortipo_caja = $_POST['tipo_caja'];
+    $valortipo_frenos = $_POST['tipo_frenos'];
+    $valorsuspension = $_POST['suspension'];
+    $valornumero_ejes = $_POST['numero_ejes'];
+    $valoruso_permitido = $_POST['uso_permitido'];
+    $valorcamara_reversa = $_POST['camara_reversa'];
+    $valorsensores_reversa = $_POST['sensores_reversa'];
 
     echo "marcaunidad: " . $valormarcaunidad . " ";
     echo "modelounidad: " . $valormodelounidad . " ";
@@ -51,7 +65,21 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
     echo "foliofactura: " . $valorfoliofactura . " ";
     echo "arrendadora: " . $valorarrendadora . " ";
 
- 
+    echo "capacidad_carga: " . $valorcapacidad_carga . " ";
+    echo "capacidad_pasajeros: " . $valorcapacidad_pasajeros . " ";
+    echo "tipo_combustible: " . $valortipo_combustible . " ";
+    echo "traccion: " . $valortraccion . " ";
+    echo "tipo_carroceria: " . $valortipo_carroceria . " ";
+    echo "numero_puertas: " . $valornumero_puertas . " ";
+    echo "numero_asientos: " . $valornumero_asientos . " ";
+    echo "tipo_caja: " . $valortipo_caja . " ";
+    echo "tipo_frenos: " . $valortipo_frenos . " ";
+    echo "suspension: " . $valorsuspension . " ";
+    echo "numero_ejes: " . $valornumero_ejes . " ";
+    echo "uso_permitido: " . $valoruso_permitido . " ";
+    echo "camara_reversa: " . $valorcamara_reversa . " ";
+    echo "sensores_reversa: " . $valorsensores_reversa . " ";
+
 
 
     //obtener documentos de la unidad  
@@ -81,7 +109,21 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
                                     fecha_adquisicion, 
                                     año_unidad,
                                     id_arrendadora,
-                                    folio_factura) 
+                                    folio_factura,
+                                    capacidad_carga,
+                                    capacidad_pasajeros,
+                                    id_tipo_combustible,
+                                    id_traccion,
+                                    tipo_carrceria,
+                                    numero_puertas,
+                                    numero_asientos,
+                                    id_tipo_caja,
+                                    id_tipo_freno,
+                                    id_tipo_suspencion,
+                                    numero_ejes,
+                                    id_tipo_uso,
+                                    camara_reversa,
+                                    sensores_reversa) 
                 VALUES ('$creador_unidad',
                         '$valormodelounidad', 
                         '$valorestadounidad', 
@@ -98,7 +140,21 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
                         '$valorfechaadquisicionunidad', 
                         '$valorañounidad',
                         '$valorarrendadora',
-                        '$valorfoliofactura')";
+                        '$valorfoliofactura',
+                        '$valorcapacidad_carga',
+                        '$valorcapacidad_pasajeros',
+                        '$valortipo_combustible',
+                        '$valortraccion',
+                        '$valortipo_carroceria',
+                        '$valornumero_puertas',
+                        '$valornumero_asientos',
+                        '$valortipo_caja',
+                        '$valortipo_frenos',
+                        '$valorsuspension',
+                        '$valornumero_ejes',
+                        '$valoruso_permitido',
+                        '$valorcamara_reversa',
+                        '$valorsensores_reversa')";
 
     $ejecutar = mysqli_query($conexion, $query);
 

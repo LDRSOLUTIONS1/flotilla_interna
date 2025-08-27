@@ -63,7 +63,6 @@ if ($resultado->num_rows > 0) {
             <td class='titulostablaunidades'>" . $fila['id_persona_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['organizacion_institucion'] . "</td>
             <td class='titulostablaunidades'>" . $fila['identificacion_representante_legal_seccion'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['vigencia'] . "</td>
             <td>
                 <button class='btn btn-sm btn-curp btnveridrepresentantelegal' data-id='" . $fila['id_persona_moral'] . "'>
                     <i class='fa-solid fa-file-pdf'></i> Identificación

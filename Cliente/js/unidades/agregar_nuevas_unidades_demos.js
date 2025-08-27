@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       $.ajax({
         type: "POST",
-        url: "../../Servidor/solicitudes/unidades/insertar_unidades.php",
+        url: "../../Servidor/solicitudes/unidades/insertar_unidades_demo.php",
         data: caja,
         processData: false, //permite mandar imagenes
         contentType: false, //permite mandar imagenes

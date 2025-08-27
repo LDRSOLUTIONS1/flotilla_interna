@@ -23,8 +23,8 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 <!--------------------------------------------------------------inicio de contenedor para dar de alta las unidades--------------------------------------->
 
 <div class="contenedoropcionesunidades">
-    
-        <h2 class="titulosletrasunidades text-nowrap">Registra nuevas unidades</h2>
+
+        <h2 class="titulosletrasunidades text-nowrap">Registra nuevas unidades demo</h2>
     <div class="contenedorformularioregistrounidades">
         <div class="row contenedormarcmodelo">
             <h2 class="tituloletraunidadmarmodel text-nowrap">Marca y modelo</h2>
@@ -398,6 +398,250 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             }
             $conexion->close();
             ?>
+            <!---------------------------------------------------------------- caracteisticas funcionales de la unidad---------------------------------------------------->
+                <div class="row contenedormarcmodelo" style="padding-top: 30px;">
+                    <h2 class="tituloletraunidadmarmodel text-nowrap">Características funcionales</h2>
+
+                    <!-- Capacidad de carga -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="capacidad_carga" name="capacidad_carga" placeholder="Capacidad de carga (kg)">
+                            <label for="capacidad_carga">Capacidad de carga (kg)</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+
+                    <!-- Capacidad de pasajeros -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="capacidad_pasajeros" name="capacidad_pasajeros" placeholder="Capacidad de pasajeros">
+                            <label for="capacidad_pasajeros">Capacidad de pasajeros</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+
+                    <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de combustibles
+            $sql = "SELECT id_tipo_combustible, combustible FROM tipos_combustibles";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    // Tipo de combustible -->
+                    echo '<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="tipo_combustible" name="tipo_combustible">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_tipo_combustible'] . '">' . $row['combustible'] . '</option>';
+                }
+                            echo '</select>
+                            <label for="tipo_combustible">Tipo de combustible</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';
+                    } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+            <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de combustibles
+            $sql = "SELECT id_traccion, traccion FROM tracciones";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    // Tracción -->
+                    echo '<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="traccion" name="traccion">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_traccion'] . '">' . $row['traccion'] . '</option>';
+                                }
+                            echo '</select>
+                            <label for="traccion">Tracción</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';
+                    } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+
+                    <!-- Tipo de carrocería -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="tipo_carroceria" name="tipo_carroceria" placeholder="Tipo de carrocería">
+                            <label for="tipo_carroceria">Tipo de carrocería</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+
+                    <!-- Número de puertas -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numero_puertas" name="numero_puertas" placeholder="Número de puertas">
+                            <label for="numero_puertas">Número de puertas</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+
+                    <!-- Número de asientos -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numero_asientos" name="numero_asientos" placeholder="Número de puertas">
+                            <label for="numero_asientos">Número de asientos</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+                    <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de cajas
+            $sql = "SELECT id_tipo_caja , tipo_caja FROM tipos_cajas";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    //-- Caja -->
+                    echo'<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="tipo_caja" name="tipo_caja">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_tipo_caja'] . '">' . $row['tipo_caja'] . '</option>';
+                                }
+                            echo'</select>
+                            <label for="tipo_caja">Tipo de caja</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';
+                    } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+
+                <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de frenos
+            $sql = "SELECT id_tipo_freno , tipo_freno FROM tipos_frenos";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    //-- Tipo de frenos -->
+                    echo '<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="tipo_frenos" name="tipo_frenos">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_tipo_freno'] . '">' . $row['tipo_freno'] . '</option>';
+                                }
+                            echo'</select>
+                            <label for="tipo_frenos">Tipo de frenos</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';
+                    } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+
+                <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de suspenciones
+            $sql = "SELECT id_tipo_suspencion , tipo_suspencion FROM tipos_suspenciones";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    //-- Suspensión -->
+                    echo'<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="suspension" name="suspension">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_tipo_suspencion'] . '">' . $row['tipo_suspencion'] . '</option>';
+                                }
+                            echo '</select>
+                            <label for="suspension">Suspensión</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';
+                    } else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+
+                    <!-- Número de ejes -->
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="numero_ejes" name="numero_ejes" placeholder="Número de ejes">
+                            <label for="numero_ejes">Número de ejes</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>
+
+                    <?php
+            include("../../Servidor/conexion.php");
+
+            // Realizar la consulta para obtener los tipos de usos
+            $sql = "SELECT id_tipo_uso , tipo_uso FROM tipos_usos";
+            $result = $conexion->query($sql);
+
+            // Verificar si hay resultados
+            if ($result->num_rows > 0) {
+                    //-- Uso permitido -->
+                    echo '<div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="uso_permitido" name="uso_permitido">
+                                <option value="">Selecciona...</option>';
+                                while ($row = $result->fetch_assoc()) {
+                    // Mostrar cada tipo de adquisicion como una opción
+                    echo '<option value="' . $row['id_tipo_uso'] . '">' . $row['tipo_uso'] . '</option>';
+                                }
+                            echo'</select>
+                            <label for="uso_permitido">Uso permitido</label>
+                        </div>
+                        <label class="" style="color: white;"> </label>
+                    </div>';} else {
+                echo "No hay tipos de adquisicion disponibles.";
+            }
+            $conexion->close();
+            ?>
+
+                    <!-- Extras tecnológicos -->
+                    <div class="col-md-6">
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="camara_reversa" id="camara_reversa" value="1">
+                            <label class="form-check-label" for="camara_reversa">Cámara de reversa</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="sensores_reversa" id="sensores_reversa" value="1">
+                            <label class="form-check-label" for="sensores_reversa">Sensores de reversa</label>
+                        </div>
+                    </div>
+
+                </div>
         </div>
         <div class="row contenedormarcmodelo" style="padding-top: 30px;">
                 <h2 class="tituloletraunidadmarmodel text-nowrap">Imagen de la unidad</h2>
@@ -427,4 +671,4 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     </div>
 </div>
 
-<script src="../js/unidades/agregar_nuevas_unidades.js"></script>
+<script src="../js/unidades/agregar_nuevas_unidades_demos.js"></script>
