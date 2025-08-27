@@ -22,7 +22,7 @@ $avatar = $datos_usuario['avatar'];
         <div class="icono">
             <h5 class="txtnombreusuario">
             <img src="<?php echo empty($avatar) 
-                        ? '../../../../Cliente/img/default_avatar.png' 
+                        ? '../img/iconos/default_avatar.png.png' 
                         : 'https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/' . $avatar . '.png'; ?>"
                         class="rounded-circle imgavatar" 
                         alt="avatar">

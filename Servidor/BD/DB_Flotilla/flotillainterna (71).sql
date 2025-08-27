@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2025 a las 00:15:48
+-- Tiempo de generación: 28-08-2025 a las 01:53:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -614,11 +614,86 @@ CREATE TABLE `asignacion_unidad_demo` (
 --
 
 INSERT INTO `asignacion_unidad_demo` (`id_asignacion_unidad_demo`, `id_unidad`, `id_colaborador_que_asigna`, `id_persona_fisica`, `id_persona_moral`, `fecha_prestamo`, `fecha_devolucion`, `objetivo_prestamo`, `comentarios`, `solicitar_master_driver`, `id_autorizador`, `id_asignar_prueba_demo_master_driver`, `autorizacion`, `motivo_rechazo_unidad_demo`, `id_creador_comodato_demo`, `fecha_creacion_comodato`, `archivo_comodato_sin_firmar`, `id_estatus_comodato_demo`, `archivo_comodato_firmado`, `motivo_rechazo_comodato`, `id_estado_prueba_demo`, `id_colaborador_sube_reporte_final`, `reporte_final_prueba`, `comentarios_finales`) VALUES
-(1, 13, 698, 1, NULL, '2025-07-03', '2025-07-07', 'Prueba Prueba', 'pruebas pruebas', '1', 39, 389, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 3, NULL, NULL, NULL),
-(2, 19, 698, NULL, 1, '2025-07-13', '2025-07-19', 'pruebas', 'pruebas', '1', 39, 516, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 3, NULL, NULL, NULL),
-(3, 26, 698, NULL, 1, '2025-07-14', '2025-07-28', 'no master driver', 'no master driver', '0', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
-(4, 15, 698, NULL, 2, '2025-07-21', '2025-07-25', 'pruebas pruebas pruebas', 'pruebas pruebas pruebas', '1', 39, 516, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 4, 520, 'reporte_final_4_Reporte Comercial - Prueba de Desempeño TRANLISUR.pdf', 'hewhfjafhjafkfn'),
-(5, 20, 698, 2, NULL, '2025-07-10', '2025-07-17', 'pruebas pruebas pruebas', 'pruebas pruebas pruebas', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL);
+(1, 143, 698, NULL, 1, '2025-08-20', '2025-09-03', 'Recorrer distancias largas en el menos tiempo posible', 'Se requiere de un Master Driver que registre todas las pruebas\r\n', '1', 281, 389, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(2, 15, 698, NULL, 1, '2025-07-01', '2025-07-09', 'pasar por lugares difíciles', 'Se requiere de un Master Driver que registre las pruebas ', '1', 374, 516, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 3, NULL, NULL, NULL),
+(3, 150, 202, 4, NULL, '2025-07-02', '2025-07-09', 'Realizar la prueba más difícil del mundo', 'Se requiere de un Master Driver que realice la prueba con el conductor abordo, realizar capacitaciones y la introducción del uso de la unidad', '1', 281, 389, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 4, 520, 'reporte_final_3_Reporte Comercial - Prueba de Desempeño TRANLISUR.pdf', 'prueba final'),
+(4, 142, 698, 2, NULL, '2025-08-22', '2025-09-03', 'prueba', 'Master driver', '1', 281, 389, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', 2, NULL, NULL, NULL),
+(5, 23, 698, NULL, 2, '2025-08-25', '2025-09-01', 'pruebas de desempeño', 'Se requiere Master driver\r\n', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(6, 21, 202, NULL, 3, '2025-08-27', '2025-09-03', 'La prueba mas difícil del mundo', 'Se requiere Master driver', '1', 281, NULL, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(7, 25, 202, 4, NULL, '2025-09-03', '2025-09-10', 'Pruebas', 'Pruebas', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(8, 26, 698, NULL, 1, '2025-08-26', '2025-09-02', 'pruebas', 'Un master driver', '1', 281, 389, 'APROVADO', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(9, 146, 698, 1, NULL, '2025-08-25', '2025-08-28', 'gg', 'gg', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(10, 1, 698, NULL, 2, '2025-08-25', '2025-09-01', 'sdsd', 'sdsd', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(11, 41, 698, NULL, 1, '2025-08-22', '2025-09-02', 'cc', 'cc', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL),
+(12, 4, 698, 1, NULL, '2025-08-28', '2025-09-03', 'q', 'q', '1', NULL, NULL, '', NULL, NULL, NULL, '', NULL, '', '', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bitacora_diaria`
+--
+
+CREATE TABLE `bitacora_diaria` (
+  `id_bitacora` int(11) NOT NULL,
+  `id_prueba` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `origen` varchar(100) NOT NULL,
+  `destino` varchar(100) NOT NULL,
+  `id_master_driver` int(11) NOT NULL,
+  `objetivo_prueba` varchar(100) NOT NULL,
+  `kilometraje_inicial` decimal(10,2) NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `combustible_inicio` tinyint(4) NOT NULL,
+  `urea_inicio` tinyint(4) NOT NULL,
+  `llantas_inicio` tinyint(4) NOT NULL,
+  `niveles_inicio` tinyint(4) NOT NULL,
+  `fallas_inicio` tinyint(4) NOT NULL,
+  `fugas_inicio` tinyint(4) NOT NULL,
+  `golpes_inicio` tinyint(4) NOT NULL,
+  `peso_carga` decimal(10,2) NOT NULL,
+  `kilometraje_final` decimal(10,2) NOT NULL,
+  `hora_fin` time NOT NULL,
+  `combustible_fin` tinyint(4) NOT NULL,
+  `urea_fin` tinyint(4) NOT NULL,
+  `fallas_fin` tinyint(4) NOT NULL,
+  `fugas_fin` tinyint(4) NOT NULL,
+  `golpes_fin` tinyint(4) NOT NULL,
+  `eventos_importantes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `bitacora_diaria`
+--
+
+INSERT INTO `bitacora_diaria` (`id_bitacora`, `id_prueba`, `fecha`, `origen`, `destino`, `id_master_driver`, `objetivo_prueba`, `kilometraje_inicial`, `hora_inicio`, `combustible_inicio`, `urea_inicio`, `llantas_inicio`, `niveles_inicio`, `fallas_inicio`, `fugas_inicio`, `golpes_inicio`, `peso_carga`, `kilometraje_final`, `hora_fin`, `combustible_fin`, `urea_fin`, `fallas_fin`, `fugas_fin`, `golpes_fin`, `eventos_importantes`) VALUES
+(1, 1, '2025-08-20', 'santa fe', 'cdmx', 516, 'Rendimiento', 12.00, '17:39:00', 1, 1, 0, 1, 1, 0, 0, 123.00, 21.00, '18:40:00', 1, 0, 1, 0, 1, 'Durante las pruebas se fueron encontrando anomalias con el pedal');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bitacora_muestreos`
+--
+
+CREATE TABLE `bitacora_muestreos` (
+  `id_muestreo` int(11) NOT NULL,
+  `id_bitacora` int(11) NOT NULL,
+  `hora` time NOT NULL,
+  `rpm_relacion` varchar(50) NOT NULL,
+  `velocidad` decimal(10,2) NOT NULL,
+  `temperatura` decimal(10,2) NOT NULL,
+  `presion_aceite` decimal(10,2) NOT NULL,
+  `presion_aire` decimal(10,2) NOT NULL,
+  `odometro` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `bitacora_muestreos`
+--
+
+INSERT INTO `bitacora_muestreos` (`id_muestreo`, `id_bitacora`, `hora`, `rpm_relacion`, `velocidad`, `temperatura`, `presion_aceite`, `presion_aire`, `odometro`) VALUES
+(1, 1, '18:54:00', '2', 2.00, 4.00, 4.00, 3.00, 3),
+(2, 1, '19:12:00', '3', 4.00, 5.00, 6.00, 7.00, 8),
+(3, 1, '19:37:00', '4', 5.00, 6.00, 7.00, 8.00, 9);
 
 -- --------------------------------------------------------
 
@@ -983,7 +1058,7 @@ INSERT INTO `colaboradores` (`id_colaborador`, `numero_colaborador`, `nombre_1`,
 (278, '230278', 'GERALDINE', 'ELIZABETH', 'GERALDINE', 'ESPARZA', 'PEREZ', '2005-03-31', 'F', 'EAPG050331MJCSRRA3', '18200576652', 'SIN ASIGNAR', 5, 0, '', 'AV. LEONARDO PEREZ LARIOS #232 COL: CRISTEROS C.P 47472', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'linnyelizabethperezl@gmail.com', 1, 'SIN ASIGNAR', '', '', '2023-11-24', '2000-01-01', 3, 17, 25, 37, 87, 1, 1, 0, '2023-11-24', 2, 0, 0, 2, 1, '0', '0', 6, 2, '0000-00-00', '0000-00-00', 0, 0),
 (279, '230279', 'JORGE', 'ALEJANDRO', 'JORGE', 'IBARRA', 'E IBARRA', '0000-00-00', 'M', 'SIN ASIGNAR', 'SIN ASIGNAR', 'SIN ASIGNAR', 1, 0, '', 'SIN ASIGNAR', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'SIN ASIGNAR', 1, 'SIN ASIGNAR', '', '', '0000-00-00', '2024-03-15', 3, 8, 1, 16, 31, 1, 1, 0, '0000-00-00', 6, 0, 0, 3, 1, '0', '0', 6, 2, '0000-00-00', '0000-00-00', 0, 0),
 (280, '230280', 'LUIS', 'REY', 'LUIS', 'PICAZO', 'CAMACHO', '1983-08-25', 'M', 'PICL830825HDFCMS11', '30048319591', 'PICL830825SA0', 1, 0, '', 'C CONDOR 7 12 COL BELLAVISTA 01140 ALVARO OBREGON, CDMX', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'mc.camarillo@gmail.com', 1, 'luis.picazo@ldrsolutions.com.mx', '', '', '2023-11-29', '0000-00-00', 6, 37, 13, 78, 187, 1, 1, 22, '0000-00-00', 6, 0, 0, 1, 10, '00110512079', '127180001105120797', 3, 1, '0000-00-00', '2025-05-29', 0, 202),
-(281, '230281', 'PABLO', '', 'PABLO', 'TORREJON', 'BECERRIL', '1975-10-13', 'M', 'TOBP751013HDFRCB09', '37937526210', 'TOBP7510135T3', 1, 0, '', 'VIA DE GAVIA NO. EXT 2235 SUR, LOTE 51, MZA 28 CONJUNTO URBANO CONDADO DEL VALLE SAN MIGUEL TOTOCUITLAPILCO', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'pgr8681@gmail.com', 1, 'pablo.torrejon@ldrsolutions.com.mx', '', '3318363101', '2024-01-15', '0000-00-00', 3, 4, 11, 5, 11, 1, 1, 21, '0000-00-00', 6, 0, 0, 1, 14, '07770013415', '002180077700134156', 3, 1, '0000-00-00', '0000-00-00', 0, 0),
+(281, '230281', 'PABLO', '', 'PABLO', 'TORREJON', 'BECERRIL', '1975-10-13', 'M', 'TOBP751013HDFRCB09', '37937526210', 'TOBP7510135T3', 1, 0, '', 'VIA DE GAVIA NO. EXT 2235 SUR, LOTE 51, MZA 28 CONJUNTO URBANO CONDADO DEL VALLE SAN MIGUEL TOTOCUITLAPILCO', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'pgr8681@gmail.com', 1, 'pablo.torrejon@ldrsolutions.com', '', '3318363101', '2024-01-15', '0000-00-00', 3, 4, 11, 5, 11, 1, 1, 21, '0000-00-00', 6, 0, 0, 1, 14, '07770013415', '002180077700134156', 3, 1, '0000-00-00', '0000-00-00', 0, 0),
 (282, '230282', 'EVER', '', 'EVER', 'HERNANDEZ', 'GUTIERREZ', '1967-09-20', 'M', 'HEGE670920HHGRTV09', '21906753393', 'HEGE670920C41', 1, 0, '', 'RET JALAPA NUM 97 ENTRE AV MEXICO Y JALAPA COL BENITO JUAREZ F B DE SAHAGUN, HG C.P. 43994', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'hever548@aol.com', 1, 'ever.hernandez@ldrsolutions.com.mx', '', '3311930241', '2025-04-28', '0000-00-00', 6, 41, 13, 86, 226, 1, 1, 1, '0000-00-00', 6, 0, 0, 1, 20, '0420128887', '072294004201288872', 4, 1, '0000-00-00', '2025-05-07', 0, 208),
 (283, '230283', 'CRISTIAN', '', 'CRISTIAN', 'CORTES', 'RANGEL', '0000-00-00', 'M', 'SIN ASIGNAR', 'SIN ASIGNAR', 'SIN ASIGNAR', 1, 0, '', 'SIN ASIGNAR', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'SIN ASIGNAR', 1, 'SIN ASIGNAR', '', '', '0000-00-00', '2000-01-01', 3, 20, 1, 40, 92, 1, 1, 0, '0000-00-00', 6, 0, 0, 3, 1, '0', '0', 6, 2, '0000-00-00', '0000-00-00', 0, 0),
 (284, '230284', 'DIANA', 'PAOLA', 'DIANA', 'MONTALVO', 'PEDROZA', '2004-04-28', 'F', 'MOPD040428MGTNDNA6', '08200474149', 'MOPD040428HI1', 4, 0, '', 'PADRE MIGUEL GOMEZ LOZA #136 COL: CRISTEROS C.P 47472', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'peque.montalvo2804@gmail.com', 1, 'SIN ASIGNAR', '', '', '2023-12-04', '0000-00-00', 3, 12, 25, 27, 72, 1, 1, 32, '2023-12-04', 2, 7968, 8382, 2, 20, '01253546976', '072362012535469760', 4, 1, '0000-00-00', '0000-00-00', 0, 0),
@@ -1068,7 +1143,7 @@ INSERT INTO `colaboradores` (`id_colaborador`, `numero_colaborador`, `nombre_1`,
 (371, '240371', 'FIORELA', '', 'FIORELA', 'SANCHEZ', 'MEDINA', '1979-06-16', 'F', 'SAMF790616MZSNDR03', '28997902391', 'SAMF790616GH6', 4, 0, '', 'SIN ASIGNAR', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'fiorelasame@gmail.com', 1, 'SIN ASIGNAR', '', '', '2024-02-27', '2024-07-31', 3, 5, 11, 11, 21, 1, 1, 51, '2024-02-27', 2, 0, 0, 1, 26, '1575500821', '012180015755008218', 6, 2, '0000-00-00', '0000-00-00', 0, 0),
 (372, '240372', 'ROLANDO', '', 'ROLANDO', 'ELIGIO', 'SALAZAR', '1983-08-27', 'M', 'EISR830827HMCLLL02', '90018323049', 'EISR830827IJ5', 2, 0, '', 'FUENTE DE LA INSPIRACION 11 COL. FUENTE DE SAN JOSE, NICOLAS ROMERO ESTADO DE MEXICO C.P. 54466', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'therehernandez28@gmail.com', 1, 'rolando.eligio@ldrsolutions.com.mx', '', '3318252428', '2024-03-01', '0000-00-00', 3, 4, 11, 5, 7, 1, 1, 27, '2024-03-01', 2, 0, 0, 1, 14, '70027283274', '002180700272832745', 3, 1, '0000-00-00', '2025-05-28', 0, 202),
 (373, '240373', 'DANIEL', '', 'DANIEL', 'HERNANDEZ', 'MARTINEZ', '1992-09-18', 'M', 'HEMD920918HPLRRN01', '48129220454', 'HEMD920918LL2', 4, 0, '', 'C IGNACIO COMONFORT 5 A COL SANTA BARBARA C.P. 76906 CORREGIDORA QRO.', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'dany.cazul100@gmail.com', 1, 'SIN ASIGNAR', '', '', '2024-03-01', '2024-05-30', 6, 41, 26, 93, 270, 1, 1, 23, '2024-03-01', 2, 0, 0, 1, 26, '1515189792', '012650015151897922', 6, 2, '0000-00-00', '0000-00-00', 0, 0),
-(374, '240374', 'JAVIER', '', 'JAVIER', 'RODRIGUEZ', 'MURRIETA', '1964-05-06', 'M', 'ROMJ640506HPLDRV02', '62856426069', 'ROMJ640506DA3', 2, 0, '', 'VISTA BELLA 642-8A. LA VISTA COUNTRY CLUB. SAN ANDRES CHOLULA, PUEBLA. CP 72830', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'elbukirodriguez@yahoo.com', 1, 'javier.rodriguez@ldrsolutions.com.mx', '', '3316026901', '2024-03-01', '0000-00-00', 6, 39, 13, 83, 211, 1, 1, 0, '2024-03-01', 2, 0, 0, 1, 26, '00468221308', '012650004682213086', 3, 1, '0000-00-00', '0000-00-00', 0, 0),
+(374, '240374', 'JAVIER', '', 'JAVIER', 'RODRIGUEZ', 'MURRIETA', '1964-05-06', 'M', 'ROMJ640506HPLDRV02', '62856426069', 'ROMJ640506DA3', 2, 0, '', 'VISTA BELLA 642-8A. LA VISTA COUNTRY CLUB. SAN ANDRES CHOLULA, PUEBLA. CP 72830', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'elbukirodriguez@yahoo.com', 1, 'javier.rodriguez@ldrsolutions.com', '', '3316026901', '2024-03-01', '0000-00-00', 6, 39, 13, 83, 211, 1, 1, 0, '2024-03-01', 2, 0, 0, 1, 26, '00468221308', '012650004682213086', 3, 1, '0000-00-00', '0000-00-00', 0, 0),
 (375, '240375', 'DIEGO', 'FEDERICO', 'DIEGO', 'GONZALEZ', 'GUEVARA', '1995-04-12', 'M', 'GOGD950412HTSNVG02', '09149504434', 'GOGD950412LN8', 4, 0, '', 'PEREZ DE LEON #8 COL. NIÑOS HEROES 03440 ALCALDIA BENITO JUAREZ CDMX', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'diegoFD112@gmail.com', 1, 'diego.gonzalez@ldrsolutions.com.mx', '', '', '2024-03-01', '0000-00-00', 6, 41, 13, 88, 243, 1, 1, 135, '2024-03-01', 2, 13824, 16003, 1, 26, '01504620026', '012180015046200262', 4, 1, '0000-00-00', '2025-06-06', 0, 202),
 (376, '240376', 'PIEDAD', '', 'PIEDAD', 'GUILLEN', 'SAENZ', '1989-08-31', 'F', 'GUSP890831HDFLND02', '30088913527', 'GUSP8908315V3', 4, 0, '', 'CALLE 5 DE FEBRERO MZ.10 LT.10 COL. POLVORA CP 01100', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'SIN ASIGNAR', 1, 'piedad.guillen@ldrsolutions.com.mx', '', '', '2024-03-04', '0000-00-00', 10, 62, 28, 127, 411, 1, 1, 95, '2024-03-04', 2, 0, 0, 1, 20, '01066365229', '072180010663652296', 3, 1, '0000-00-00', '0000-00-00', 0, 0),
 (377, '240377', 'AISLINN', 'ALEJANDRA', 'AISLINN', 'AGUIRRE', 'VELAZQUEZ', '1995-09-06', 'F', 'AUVA950906MMCGLS04', '94129515840', 'AUVA950906H73', 2, 0, '', 'CALLE DOLORES MZ 4 LT 12 CASA 7 HEROES 5TA SECCION ECATEPEC DE MORELOS CP55060', 1, 'SIN ASIGNAR', 'SIN ASIGNAR', 'dany.cazul100@gmail.com', 1, 'aislinn.aguirre@ldrsolutions.com.mx', '', '', '2024-03-04', '0000-00-00', 10, 62, 28, 127, 351, 1, 1, 141, '2024-03-04', 2, 0, 0, 1, 26, '01567830993', '012180015678309939', 3, 1, '0000-00-00', '2025-06-16', 0, 209),
@@ -2167,7 +2242,25 @@ INSERT INTO `modelos` (`id_modelo`, `id_marca`, `nombre_modelo`) VALUES
 (20, 1, 'FOTON TUNLAND 4x4'),
 (21, 1, 'S3 AUMARK'),
 (22, 1, 'TM 1.5'),
-(23, 9, 'SIN ASIGNAR');
+(23, 9, 'SIN ASIGNAR'),
+(24, 1, 'EST-A 6X4 X13-E6'),
+(25, 1, 'GALAXY 3256'),
+(26, 1, 'S5-E6 AMT'),
+(27, 1, 'TUNLAND V9 (MHEV)'),
+(28, 1, 'TUNLAND E5'),
+(29, 1, 'TUNLAND G7 AT'),
+(30, 1, 'TUNLAND G9 AT'),
+(31, 1, 'S3 EV'),
+(32, 1, 'WONDER EV'),
+(33, 1, 'TUNLAND EV'),
+(36, 1, 'HI VAN PANEL '),
+(37, 1, 'S12 EV'),
+(38, 1, 'EST-A EV '),
+(39, 1, 'EST-A - HIDROGENO '),
+(40, 1, 'VIEW EV PANEL'),
+(41, 1, 'TM EV -  2021'),
+(42, 1, 'AURORA EV '),
+(43, 1, 'VIEW EV');
 
 -- --------------------------------------------------------
 
@@ -2194,9 +2287,16 @@ CREATE TABLE `monitoreos_prueba_unidad_demos` (
 --
 
 INSERT INTO `monitoreos_prueba_unidad_demos` (`id_monitoreo_prueba_demo`, `id_asignacion_unidad_demo`, `fecha`, `consumo_combustible`, `distancia_recorrida`, `horas_motor`, `horas_motor_ralenti`, `combustible_ralenti`, `adblue_level`, `uso_freno_total`, `precio_combustible`) VALUES
-(1, 1, '2025-07-04', 59.60, 82.20, 6.15, 4.24, 20.97, 44.40, 60, 26.33),
-(2, 1, '2025-07-03', 76.03, 92.70, 8.45, 6.03, 29.68, 48.80, 88, 26.23),
-(3, 1, '2025-07-02', 28.66, 27.40, 3.57, 2.56, 12.39, 53.20, 61, 26.23);
+(15, 1, '2025-07-04', 59.60, 82.20, 6.15, 4.24, 20.97, 44.40, 60, 26.33),
+(16, 1, '2025-07-03', 76.03, 92.70, 8.45, 6.03, 29.68, 48.80, 88, 26.23),
+(17, 1, '2025-07-02', 28.66, 27.40, 3.57, 2.56, 12.39, 53.20, 61, 26.23),
+(18, 2, '2025-07-04', 59.60, 82.20, 6.15, 4.24, 20.97, 44.40, 60, 26.33),
+(19, 2, '2025-07-03', 76.03, 92.70, 8.45, 6.03, 29.68, 48.80, 88, 26.23),
+(20, 2, '2025-07-02', 28.66, 27.40, 3.57, 2.56, 12.39, 53.20, 61, 26.23),
+(21, 3, '2025-07-04', 59.60, 82.20, 6.15, 4.24, 20.97, 44.40, 60, 26.33),
+(22, 3, '2025-07-03', 76.03, 92.70, 8.45, 6.03, 29.68, 48.80, 88, 26.23),
+(23, 3, '2025-07-02', 28.66, 27.40, 3.57, 2.56, 12.39, 53.20, 61, 26.23),
+(24, 3, '2025-07-01', 79.81, 93.30, 9.07, 6.29, 32.41, 53.20, 158, 26.23);
 
 -- --------------------------------------------------------
 
@@ -2321,9 +2421,11 @@ INSERT INTO `polizas` (`id_polizas`, `id_tipo_poliza`, `id_unidad`, `identificad
 CREATE TABLE `prorrogas_unidades_demo` (
   `id_prorroga_unidad_demo` int(11) NOT NULL,
   `id_asignacion_unidad_demo` int(11) DEFAULT NULL,
-  `fecha_fin_prorroga` date NOT NULL,
+  `fecha_prolongacion` date NOT NULL,
   `motivo_prorroga` text NOT NULL,
-  `archivo_domicilio` varchar(200) DEFAULT NULL
+  `archivo_domicilio` varchar(200) DEFAULT NULL,
+  `archivo_constancia_situacion_fiscal` varchar(200) NOT NULL,
+  `comodato_prorroga_demo` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -2337,13 +2439,14 @@ CREATE TABLE `pruebas_unidad_demo` (
   `id_asignacion_unidad_demo` int(11) NOT NULL,
   `fecha_prueba` datetime NOT NULL,
   `nombre_del_conductor` varchar(200) NOT NULL,
-  `tipo_prueba` varchar(100) NOT NULL,
+  `id_tipo_prueba_demo` int(11) NOT NULL,
+  `origen_inicial` text NOT NULL,
+  `origen_destino` text NOT NULL,
   `temperatura` decimal(10,2) NOT NULL,
   `revoluciones` decimal(10,2) NOT NULL,
   `velocidad` decimal(10,2) NOT NULL,
   `kilometraje` decimal(10,2) NOT NULL,
-  `foto_tablero` varchar(200) NOT NULL,
-  `foto_odometro` varchar(200) NOT NULL,
+  `foto_cluster` varchar(200) NOT NULL,
   `foto_unidad` varchar(200) NOT NULL,
   `comentarios` text NOT NULL,
   `id_colaborador_registra_prueba` int(11) NOT NULL,
@@ -2356,14 +2459,11 @@ CREATE TABLE `pruebas_unidad_demo` (
 -- Volcado de datos para la tabla `pruebas_unidad_demo`
 --
 
-INSERT INTO `pruebas_unidad_demo` (`id_prueba`, `id_asignacion_unidad_demo`, `fecha_prueba`, `nombre_del_conductor`, `tipo_prueba`, `temperatura`, `revoluciones`, `velocidad`, `kilometraje`, `foto_tablero`, `foto_odometro`, `foto_unidad`, `comentarios`, `id_colaborador_registra_prueba`, `id_colaborador_sube_reporte_final`, `reporte_final_prueba`, `comentarios_finales`) VALUES
-(1, 4, '2025-08-02 09:26:01', 'DEMO DEMO  DEMO ', 'TECNICA', 123.00, 123.00, 123.00, 123.00, 'foto_tablero_DEMO DEMO  DEMO _LDR_IMG.png', 'foto_odometro_DEMO DEMO  DEMO _carro_desconocido.png', 'foto_unidad_exterior_DEMO DEMO  DEMO _documento.png', 'DEMO ', 516, NULL, NULL, NULL),
-(2, 1, '2025-07-02 11:13:51', 'MARIO ALBERTO CORTEZ MENDOZA', 'TECNICA', 3443.00, 2356.00, 5332.00, 6543.00, 'foto_tablero_MARIO ALBERTO CORTEZ MENDOZA_atención.gif', 'foto_odometro_MARIO ALBERTO CORTEZ MENDOZA_carro_desconocido.png', 'foto_unidad_exterior_MARIO ALBERTO CORTEZ MENDOZA_JETOUR_360_x70plus_negro.png', 'Durante la prueba de observaron complicaciones al utilizar el pedal de freno, cada que se realizaba un frenado brusco no funcionaban bien ', 389, NULL, NULL, NULL),
-(3, 1, '2025-07-03 13:40:17', 'MARIANO CORTEZ MUNGLARI', 'PRUEBA DE DESEMPEÑO', 6453.00, 2345.00, 3245.00, 5463.00, 'foto_tablero_MARIANO CORTEZ MUNGLARI_licencia_conducir_ejemplo.jpeg', 'foto_odometro_MARIANO CORTEZ MUNGLARI_carro_desconocido.png', 'foto_unidad_exterior_MARIANO CORTEZ MUNGLARI_atención.gif', 'No presento ningun tipo de anomalia urante la prueba', 389, NULL, NULL, NULL),
-(4, 1, '2025-07-04 17:01:45', 'MARIANA GARCIA FERNANDEZ', 'PRUEBA DE DISTANCIA', 234.00, 543.00, 542.00, 754.00, 'foto_tablero_MARIANA GARCIA FERNANDEZ_carro_desconocido.png', 'foto_odometro_MARIANA GARCIA FERNANDEZ_documento.png', 'foto_unidad_exterior_MARIANA GARCIA FERNANDEZ_JETOUR_360_x70_negro.png', 'Durante la prueba se detectaron ruidos extraños en la caja de velocidades', 389, NULL, NULL, NULL),
-(5, 2, '2025-07-12 14:24:31', 'KJFKJSAJDBKJ', 'WAHSVDAVKA', 6543.00, 2345.00, 6544.00, 2344.00, 'foto_tablero_KJFKJSAJDBKJ_aveo_rojo-.png', 'foto_odometro_KJFKJSAJDBKJ_JETOUR_360_x70plus_azul.png', 'foto_unidad_exterior_KJFKJSAJDBKJ_JETOUR_360_x70plus_blanco.png', 'jvhjgd,vkdsdkhfkjdgflkdjjfkjbe,fms', 516, NULL, NULL, NULL),
-(6, 2, '2025-07-12 14:25:18', 'HGJKFDHJNKLFCAHDKLS', 'EFW<WFGEW<GW<SG', 24343.00, 4355.00, 5354.00, 54664.00, 'foto_tablero_HGJKFDHJNKLFCAHDKLS_JETOUR_360_x70plus_azul.png', 'foto_odometro_HGJKFDHJNKLFCAHDKLS_JETOUR_360_dashing_verde.png', 'foto_unidad_exterior_HGJKFDHJNKLFCAHDKLS_JETOUR_360_dashing_azul_cyan.png', 'KDHFLAHFKJHFJVFJHHJDDHBDBSHBHVBHAMBDJNSDMQBSJ', 516, NULL, NULL, NULL),
-(7, 2, '2025-07-12 14:26:12', 'KJFKJFHJVSKH<ADJDJBF', 'LKHJFBMJDSBDMBC', 7458.00, 6756.00, 2448.00, 4321.00, 'foto_tablero_KJFKJFHJVSKH<ADJDJBF_LDR_LOGO.png', 'foto_odometro_KJFKJFHJVSKH<ADJDJBF_JETOUR_360_x70plus_azul.png', 'foto_unidad_exterior_KJFKJFHJVSKH<ADJDJBF_JETOUR_360_x70_blanco.png', 'KHFWAGFJDJVCMJBDMhvxkjsbdkufkhsafkjgafkjaf', 516, NULL, NULL, NULL);
+INSERT INTO `pruebas_unidad_demo` (`id_prueba`, `id_asignacion_unidad_demo`, `fecha_prueba`, `nombre_del_conductor`, `id_tipo_prueba_demo`, `origen_inicial`, `origen_destino`, `temperatura`, `revoluciones`, `velocidad`, `kilometraje`, `foto_cluster`, `foto_unidad`, `comentarios`, `id_colaborador_registra_prueba`, `id_colaborador_sube_reporte_final`, `reporte_final_prueba`, `comentarios_finales`) VALUES
+(1, 2, '2025-08-20 17:38:37', 'MARIO CONTRERAS RAMIREZ', 1, 'CDMX', 'SANTA FE', 12.00, 21.00, 12.00, 21.00, 'foto_cluster_MARIO CONTRERAS RAMIREZ_carro_desconocido.png', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_JETOUR_360_dashing_blanco_.png', 'Realizacion de la prueba', 516, NULL, NULL, NULL),
+(2, 2, '2025-08-21 12:50:46', 'MARIBEL CONTRERAS BENITEZ', 2, 'SANTA FE', 'CDMX', 12.00, 32.00, 43.00, 54.00, 'foto_cluster_MARIBEL CONTRERAS BENITEZ_LDR_IMG.png', 'foto_unidad_exterior_MARIBEL CONTRERAS BENITEZ_licencia_conducir_ejemplo.jpeg', 'Realización de la prueba', 516, NULL, NULL, NULL),
+(3, 3, '2025-08-21 12:53:36', 'HERNEZTO CABRERA BENITEZ', 3, 'LAGOS DE MORENO', 'GUADALAJARA', 12.00, 32.00, 23.00, 43.00, 'foto_cluster_HERNEZTO CABRERA BENITEZ_carro_desconocido.png', 'foto_unidad_exterior_HERNEZTO CABRERA BENITEZ_carro_desconocido (2).png', 'Prueba', 389, NULL, NULL, NULL),
+(4, 4, '2025-08-22 17:26:13', 'MARIO CONTRERAS RAMIREZ', 1, 'SANTA FE', 'EDO MEX', 1.00, 2.00, 3.00, 4.00, 'foto_cluster_MARIO CONTRERAS RAMIREZ_cluster.jpg', 'foto_unidad_exterior_MARIO CONTRERAS RAMIREZ_tracto.jpg', 'prueba', 389, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3150,6 +3250,28 @@ INSERT INTO `tipos_frenos` (`id_tipo_freno`, `tipo_freno`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipos_pruebas_demo`
+--
+
+CREATE TABLE `tipos_pruebas_demo` (
+  `id_tipo_prueba_demo` int(11) NOT NULL,
+  `prueba_demo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipos_pruebas_demo`
+--
+
+INSERT INTO `tipos_pruebas_demo` (`id_tipo_prueba_demo`, `prueba_demo`) VALUES
+(1, 'PRUEBAS FUNCIONALES'),
+(2, 'PRUEBAS DE USABILIDAD'),
+(3, 'PRUEBAS DE RENDIMIENTO'),
+(4, 'PRUEBAS DE SEGURIDAD'),
+(5, 'PRUEBAS DE ACEPTACIÓN');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tipos_recidencias_externos`
 --
 
@@ -3479,6 +3601,7 @@ CREATE TABLE `unidades` (
   `id_creador_unidad` int(11) DEFAULT NULL,
   `id_modelo` int(11) NOT NULL,
   `id_telematics` int(11) DEFAULT NULL,
+  `fecha_alta` date DEFAULT NULL,
   `id_estado_unidad` int(11) NOT NULL,
   `id_estatus_unidad` int(11) NOT NULL,
   `id_tipo_unidad` int(11) NOT NULL,
@@ -3516,147 +3639,160 @@ CREATE TABLE `unidades` (
 -- Volcado de datos para la tabla `unidades`
 --
 
-INSERT INTO `unidades` (`id_unidad`, `id_creador_unidad`, `id_modelo`, `id_telematics`, `id_estado_unidad`, `id_estatus_unidad`, `id_tipo_unidad`, `id_tipo_adquisicion`, `id_sede`, `placa`, `vin`, `numero_motor`, `costo_neto`, `id_color`, `img_unidad`, `fecha_adquisicion`, `año_unidad`, `id_arrendadora`, `folio_factura`, `ultimo_kilometraje`, `ultima_ubicacion`, `capacidad_carga`, `capacidad_pasajeros`, `id_tipo_combustible`, `id_traccion`, `tipo_carrceria`, `numero_puertas`, `numero_asientos`, `id_tipo_caja`, `id_tipo_freno`, `id_tipo_suspencion`, `numero_ejes`, `id_tipo_uso`, `camara_reversa`, `sensores_reversa`) VALUES
-(1, NULL, 13, 702319, 1, 1, 3, 1, 2, '7GPK25', 'LVCB2NBA3KS052508', 'Q210740132S', 7535.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 0.00, '', 6501.00, 4, 1, 1, 'Crossover', 2, 4, 1, 1, 2, 2, 1, 1, 1),
-(2, NULL, 11, 0, 4, 1, 2, 1, 5, 'H37BPS', 'HJRPBGJB9SB200721', 'SQRF4J20BBR', 0.00, 1, '', '0000-00-00', '2025', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(3, NULL, 3, 0, 3, 1, 2, 1, 5, 'H72BPX', 'LVUDB21B1RF023430', 'J00450', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(4, NULL, 6, 702319, 1, 1, 3, 2, 1, 'HU1471F', 'LVAV2JVB9RE301163', '233000886ZL', 4433.00, 1, '', '0000-00-00', '2024', 1, 'V22267', 328.93, '20.57053,-103.31003', 2000.00, 6, 2, 1, 'Pick-up', 4, 6, 1, 1, 2, 2, 2, 0, 0),
-(5, NULL, 6, 702319, 1, 1, 3, 2, 1, 'HU1472A', 'LVAV2JVB1RE300878', '233000574ZL', 433.00, 1, '', '0000-00-00', '2023', 1, 'V22265', 327.61, '20.57039,-103.30887', 3000.00, 4, 1, 2, 'Familiar', 4, 4, 2, 2, 1, 2, 3, 0, 1),
-(6, NULL, 6, 0, 3, 1, 2, 2, 5, 'HU1473A', 'LVAV2JVB7RE300884', '2330006668Z', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22263', 11182.88, '19.28281,-99.51749', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(7, NULL, 6, 702319, 1, 1, 3, 2, 1, 'HU1474A', 'LVAV2JVB3RE301160', '233000879ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22268', 15019.86, '20.62525,-103.32881', 1000.00, 10, 3, 2, 'Pick-up', 6, 10, 3, 1, 1, 3, 2, 1, NULL),
-(8, NULL, 6, 702319, 1, 1, 3, 2, 1, 'HU1475A', 'LVAV2JVB6RE301122', '233000584ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22269', 21732.19, '20.46367,-103.44196', 1200.00, 4, 1, 1, 'Familiar', 2, 4, 3, 2, 1, 4, 1, 0, NULL),
-(9, NULL, 16, 0, 3, 1, 2, 2, 5, 'HU1476A', 'LVAV2MWB7RU012692', 'ABJ3960', 446.00, 1, '', '0000-00-00', '2024', 1, 'V22117', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(10, NULL, 6, 0, 3, 1, 2, 2, 5, 'HU1477A', 'LVAV2JVB0RE300869', '233000666ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22262', 15874.58, '17.06313,-96.78574', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(11, NULL, 11, 702319, 1, 1, 3, 1, 5, 'HVT618A', 'HJRPBGJB6SB200014', 'SQRF4J20BBR', 716.00, 1, 'img_HVT618A_carro_desconocido (2).png', '0000-00-00', '2025', 3, 'V3227', 0.00, '', 2567.00, 4, 1, 2, 'Pick-up', 4, 4, 1, 1, 1, 2, 1, 1, 1),
-(12, NULL, 3, 702319, 1, 1, 3, 1, 5, 'J33BPX', 'LVUDB21B2RF023405', 'J00455', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 3000.00, 2, 2, 1, 'Pick-up', 2, 2, 2, 2, 2, 2, 2, 1, 1),
-(13, NULL, 10, 702319, 3, 1, 3, 1, 2, 'JV96330', '3N6AD33A2JK900761', 'Q2107DGCG', 5423.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 1134.00, 6, 2, 1, 'Familiar', 4, 4, 2, 3, 2, 4, 1, 1, 1),
-(14, NULL, 10, 702319, 1, 1, 3, 1, 2, 'JV96331', '3N6AD35C8JK870888', 'Q21074016TR', 2358.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 6451.00, 6, 5, 2, 'Pick-up', 2, 4, 2, 3, 1, 3, 1, 1, 1),
-(15, NULL, 22, 702319, 3, 1, 3, 1, 4, 'JW69517', 'LVAV2JVB8KE140701', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 5000.00, 4, 1, 2, '1', 4, 6, 1, 1, 2, 1, 1, 1, 1),
-(16, NULL, 20, 702319, 1, 1, 3, 1, 5, 'JX09360', 'LVAV2MBB9KC060115', '89739149', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 200362.59, '19.36431,-99.26767', 123453.00, 2, 3, 1, 'Crossover', 2, 4, 3, 3, 1, 2, 3, 1, 1),
-(17, NULL, 12, 702319, 1, 1, 3, 1, 3, 'JY52011', 'LVAV2JBB5NE200846', 'Q210644822D', 0.00, 1, 'img_JY52011_carro_desconocido (2).png', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 2340.00, 4, 1, 1, '1', 2, 4, 1, 1, 1, 1, 1, 1, 1),
-(18, NULL, 12, 702319, 1, 1, 3, 1, 2, 'JY52012', 'LVAV2JBB1NE200844', 'Q210740142D', 3456.00, 1, 'img_JY52012_JETOUR_360_dashing_gris_cenizo.png', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 2034.00, 4, 2, 1, 'Pick-up', 4, 4, 1, 2, 2, 4, 1, 1, 1),
-(19, NULL, 21, 702319, 3, 1, 3, 1, 3, 'JY52013', '3LD122J5PA000505', '77121352', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 13212.00, 2, 1, 1, '1', 2, 2, 2, 1, 1, 1, 1, 1, 1),
-(20, NULL, 19, 702319, 4, 1, 3, 2, 3, 'LF97684', 'LVAV2MAB4SU303020', 'R001566', 815.00, 1, '', '0000-00-00', '2025', 1, 'V22119', 7013.65, '25.7714,-100.29097', 76453.00, 4, 2, 2, '1', 2, 2, 3, 1, 2, 1, 1, 1, 1),
-(21, NULL, 21, 702319, 1, 1, 3, 2, 7, 'LG25822', '3LD12B2J5RA002144', '776182123', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22296', 2733.16, '19.73732,-98.97562', 6423.00, 6, 1, 1, '1', 2, 2, 1, 3, 1, 1, 1, 1, 1),
-(22, NULL, 21, 702319, 1, 1, 3, 2, 7, 'LG25825', '3LD12B2J1RA002142', '77176393', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22295', 2433.38, '20.571,-103.31036', 5643.00, 2, 4, 1, '1', 4, 4, 2, 1, 2, 1, 1, 1, 1),
-(23, NULL, 17, 702319, 1, 1, 3, 2, 7, 'LG31152', 'LVAV2MAB6SU302242', 'R004952', 750.00, 1, '', '0000-00-00', '2025', 1, 'V22118', 4727.11, '19.36521,-99.26724', 5432.00, 4, 1, 1, '1', 4, 4, 1, 2, 1, 1, 1, 1, 1),
-(24, NULL, 14, 702319, 1, 1, 3, 2, 5, 'LG31153', '3LDA2A2F6PA001359', '77143002', 1.00, 1, 'img_LG31153_img_MKJ769A_20250610_121816.jpg', '0000-00-00', '2023', 1, 'V22247', 0.00, '', 54665.00, 2, 5, 2, 'Pick-up', 4, 6, 4, 1, 2, 3, 3, 1, 1),
-(25, NULL, 18, 702319, 1, 1, 3, 2, 6, 'LG31161', 'LVAV2MAB2SU307020', 'R003422', 1.00, 1, 'img_LG31161_img_MKJ769A_20250610_121816.jpg', '0000-00-00', '2023', 1, 'V22116', 12604.94, '19.36525,-99.26746', 2648.00, 4, 1, 2, '1', 2, 2, 1, 1, 1, 1, 1, 1, 1),
-(26, NULL, 17, 702319, 4, 1, 3, 1, 5, 'LLJ153B', 'LVAV2MAB8PC001162', 'N009678', 598.00, 1, '', '0000-00-00', '2023', 3, 'V6765', 0.00, '', 56435.00, 4, 2, 1, 'Crossover', 4, 8, 1, 2, 1, 2, 1, 1, 1),
-(27, NULL, 15, 702319, 1, 1, 3, 1, 5, 'LMF630B', '5TDYZRAH1MS081840', '', 0.00, 1, '', '0000-00-00', '2021', 3, 'SIN FACTURA', 0.00, '', 3434.00, 6, 3, 2, 'Crossover', 2, 6, 2, 3, 2, 4, 2, 1, 1),
-(28, NULL, 9, 702319, 1, 1, 3, 1, 5, 'M17BMX', '3HGRZ1858PM002056', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 6543.00, 6, 2, 1, 'Pick-up', 4, 6, 3, 1, 1, 4, 3, 1, 1),
-(29, NULL, 2, 0, 3, 1, 1, 2, 5, 'MAF244B', 'HJRPBGGB2RF003268', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1126', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(30, NULL, 2, 0, 3, 1, 1, 2, 5, 'MEF305A', 'HJRPBGGB1RF003293', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12290', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(31, NULL, 2, 0, 3, 1, 1, 2, 5, 'MEF356A', 'HJRPBGGB0RF003270', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12288', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(32, NULL, 2, 0, 3, 1, 1, 2, 5, 'MEF357A', 'HJRPBGGB6RF003290', 'SQRF4J16AVN', 530.00, 1, 'img_MEF357A_JETOUR_360_x70_blanco.png', '0000-00-00', '2024', 1, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(33, NULL, 2, 702319, 1, 1, 3, 2, 4, 'MEF358A', 'HJRPBGGB0RF003284', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12285', 0.00, '', 7354.00, 6, 1, 1, '1', 4, 4, 1, 2, 1, 1, 1, 1, 1),
-(34, NULL, 2, 0, 3, 1, 1, 2, 5, 'MJE761A', 'HJRPBGGB7RF003296', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(35, NULL, 2, 702319, 1, 1, 3, 2, 5, 'MJE763A', 'HJRPBGGB5RF003295', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12287', 0.00, '', 8543.00, 3, 3, 2, 'Familiar', 4, 4, 4, 2, 2, 3, 2, 1, 1),
-(36, NULL, 2, 702319, 1, 1, 3, 2, 5, 'MJE779A', 'HJRPBGGB1RF003309', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12292', 0.00, '', 7453.00, 1, 1, 1, 'Crossover', 2, 2, 1, 2, 1, 3, 2, 1, 1),
-(37, NULL, 2, 702319, 1, 1, 3, 2, 5, 'MJE780A', 'HJRPBGGB0RF003303', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12291', 0.00, '', 4532.00, 1, 1, 1, 'Pick-up', 4, 4, 2, 3, 2, 4, 1, 1, 1),
-(38, NULL, 2, 0, 1, 1, 1, 2, 5, 'MJE784A', 'HJRPBGGB3RF003294', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12283', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(39, NULL, 2, 0, 1, 1, 1, 2, 5, 'MJE834A', 'HJRPBGGB0RF003267', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12286', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(40, NULL, 23, 0, 1, 1, 1, 1, 5, 'MJS202A', 'LVAV2KWBXPC001161', 'AAH5466', 466.00, 1, '', '0000-00-00', '2023', 3, 'V10151', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(41, NULL, 22, 702319, 1, 1, 3, 1, 4, 'MJV717A', 'LVAV2JVB1PE301283', '225002210ZL', 0.00, 1, '', '0000-00-00', '2023', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(42, NULL, 20, 0, 1, 1, 2, 1, 2, 'MKD694A', 'LVAV2MAB0PC003214', '', 0.00, 1, '', '0000-00-00', '2023', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(43, NULL, 2, 0, 1, 1, 1, 2, 5, 'MKJ603A', 'HJRPBGGB1RF003276', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(44, NULL, 2, 0, 1, 1, 4, 2, 5, 'MKJ606A', 'HJRPBGGB2RF003271', '', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(45, NULL, 2, 0, 1, 1, 1, 2, 5, 'MKJ682A', 'HJRPBGGB2RF003285', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1121', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(46, NULL, 2, 0, 1, 1, 1, 2, 5, 'MKJ694A', 'HJRPBGGB3RF003277', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V185', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(47, NULL, 3, 0, 3, 1, 1, 2, 5, 'MKJ695A', 'LVUDB21B1PF018063', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2024', 1, 'V1123', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(48, NULL, 3, 0, 1, 1, 4, 2, 5, 'MKJ697A', 'LVUDB21B5PF024531', 'SQRE4T15BAH', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(49, NULL, 3, 0, 1, 1, 4, 2, 5, 'MKJ699A', 'LVUDB21B2PF018038', 'SQRE4T15BAH', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(50, NULL, 2, 0, 1, 1, 1, 2, 5, 'MKJ769A', 'HJRPBGGB8RF003291', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(51, NULL, 1, 0, 3, 1, 1, 2, 5, 'MKP495A', 'HJRPBGGB5PB351800', 'SQRF4J16AVN', 580.00, 1, '', '0000-00-00', '2023', 1, 'V13332', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(52, NULL, 2, 0, 1, 1, 1, 2, 5, 'MKS598A', 'HJRPBGGB3RF003280', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(53, NULL, 1, 0, 1, 1, 4, 2, 5, 'MNM736A', 'HJRPBGGB3RB150030', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(54, NULL, 2, 0, 1, 1, 1, 2, 5, 'MSH442A', 'HJRPBGGB9RF003297', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1079', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(55, NULL, 1, 0, 3, 1, 1, 2, 5, 'MSH449A', 'HJRPBGGB6RB151012', 'SQRF4J16AVN', 576.00, 1, '', '0000-00-00', '2024', 1, 'V3318', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(56, NULL, 1, 0, 3, 1, 1, 2, 5, 'MTM989A', 'HJRPBGGB4RB151705', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1132', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(57, NULL, 3, 0, 1, 1, 1, 2, 5, 'MTM990A', 'LVUDB21B5PF018163', 'LVUDB2B5PF0', 420.00, 1, '', '0000-00-00', '2023', 1, 'V1288', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(58, NULL, 3, 0, 1, 1, 1, 2, 5, 'MTM995A', 'LVUDB21B2PF018105', 'HECHO EN CH', 420.00, 1, '', '0000-00-00', '2023', 1, 'V1289', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(59, NULL, 1, 0, 1, 1, 4, 2, 5, 'MUG246A', 'HJRPBGGB8RB151741', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1133', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(60, NULL, 1, 0, 4, 1, 1, 2, 5, 'MUG274A', 'HJRPBGGB9RB151618', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1134', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(61, NULL, 2, 0, 1, 1, 1, 2, 5, 'MVH331A', 'HJRPBGGB5PF025097', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2023', 1, 'V1327', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(62, NULL, 2, 0, 1, 1, 1, 2, 5, 'MVH333A', 'HJRPBGGB0PB350795', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(63, NULL, 1, 0, 1, 1, 1, 2, 5, 'MVH393A', 'HJRPBGGBXRB151580', 'SQRF4J16AVP', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(64, NULL, 3, 0, 1, 1, 1, 2, 5, 'MZJ621A', 'LVUDB21B4PF024438', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1603', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(65, NULL, 3, 0, 1, 1, 1, 2, 5, 'MZJ624A', 'LVUDB21B5PF024495', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1606', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(66, NULL, 3, 0, 1, 1, 1, 2, 5, 'MZJ626A', 'LVUDB21B8PF022904', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1605', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(67, NULL, 3, 0, 1, 1, 1, 2, 5, 'MZJ637A', 'LVUDB21B2PF022929', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1601', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(68, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZP510A', 'LZWPRMGN9RF961880', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '391/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(69, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZP512A', 'LZWPRMGN2RF953636', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '402/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(70, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZP513A', 'LZWPRMGN7RF960162', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '400/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(71, NULL, 1, 0, 1, 1, 1, 2, 5, 'MZP515A', 'HJRPBGGB9RB151559', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 2, 'V1599', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(72, NULL, 1, 0, 1, 1, 1, 2, 5, 'MZP526A', 'HJRPBGGB9RB151537', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 2, 'V1600', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(73, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZP528A', 'LZWPRMGN3RF962250', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '406/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(74, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZV225A', 'LZWPRMGN9RF967498', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '393/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(75, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZV235A', 'LZWPRMGN1RF963557', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '934/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(76, NULL, 4, 0, 3, 1, 1, 2, 5, 'MZV238A', 'LZWPRMGN1RF960173', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '396/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(77, NULL, 2, 0, 1, 1, 1, 2, 5, 'MZW072A', 'HJRPBGGB2RF003299', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(78, NULL, 3, 0, 1, 1, 1, 2, 5, 'NAP818A', 'LVUDB21B1PF024431', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(79, NULL, 3, 0, 1, 1, 1, 2, 5, 'NAP833A', 'LVUDB21B7PF024448', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1604', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(80, NULL, 3, 0, 1, 1, 1, 2, 5, 'NBN711A', 'LVUDB21B8PF024877', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1642', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(81, NULL, 3, 0, 1, 1, 1, 2, 5, 'NBN718A', 'LVUDB21B0PF023735', 'LVUDB21B5PF', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1640', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(82, NULL, 3, 0, 1, 1, 1, 2, 5, 'NBN719A', 'LVUDB21B0PF023772', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(83, NULL, 2, 0, 1, 1, 1, 2, 5, 'NBN724A', 'HJRPBGGB4RF003269', 'SQRF4JI6AVN', 530.00, 1, '', '0000-00-00', '2024', 2, 'V1639', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(84, NULL, 1, 0, 1, 1, 1, 2, 5, 'NDF463A', 'HJRPGGB8RB161752', 'SQRF4J16AVP', 583.00, 1, '', '0000-00-00', '2024', 1, 'V2720', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(85, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF659A', 'LVUDB21B4PF018039', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2948', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(86, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF753A', 'LVUDB21BXPF024881', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2947', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(87, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF757A', 'LVUDB21BXPF024900', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2945', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(88, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF760A', 'LVUDB21B8PF024846', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2946', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(89, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF813A', 'LVUDB21B1PF024851', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2950', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(90, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF820A', 'LVUDB21B7PF024840', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2951', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(91, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDF836A', 'LVUDB21B6PF024831', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2952', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(92, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG211A', 'LVUDB21B2PF024860', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2949', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(93, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG213A', 'LVUDB21B9PF024855', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2942', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(94, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG214A', 'LVUDB21BXPF018062', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2944', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(95, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG223A', 'LVUDB21BXPF023746', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2943', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(96, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG264A', 'LVUDB21B5PF023749', 'SQRE4TI5BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2953', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(97, NULL, 3, 0, 1, 1, 1, 2, 5, 'NDG273A', 'LVUDB21BXRF006531', 'SQRE4T15BAH', 504.00, 1, '', '0000-00-00', '2024', 2, 'V2954', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(98, NULL, 2, 0, 1, 1, 1, 2, 5, 'NDG281A', 'HJRPBGGB4RF003272', 'SQRF4J16AVN', 639.00, 1, '', '0000-00-00', '2024', 2, 'V2955', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(99, NULL, 1, 0, 1, 1, 1, 2, 5, 'NEH457A', 'HJRPBGGB4RB176197', 'SQRF4J16AVP', 699.00, 1, '', '0000-00-00', '2024', 2, 'V3052', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(100, NULL, 5, 0, 3, 1, 1, 2, 5, 'NFX906A', 'LNBSCCAKZPD896969', 'DC01P011651', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22014', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(101, NULL, 5, 0, 1, 1, 1, 2, 1, 'NFX911A', 'LNBSCCAK9PD896970', 'DC01P011641', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22012', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(102, NULL, 5, 0, 1, 1, 1, 2, 1, 'NFX912A', 'LNBSCCAHXPD880197', 'LNBSCCAHXPD', 289.00, 1, '', '0000-00-00', '2023', 1, 'V22011', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(103, NULL, 5, 0, 3, 1, 1, 2, 5, 'NFX915A', 'LNBSCCAK7PD896885', 'DC01P011180', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22018', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(104, NULL, 5, 0, 1, 1, 1, 2, 5, 'NFX916A', 'LNBSCCAK1PD880198', 'LNBSCCAH1PD', 289.00, 1, '', '0000-00-00', '2023', 1, 'V22007', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(105, NULL, 5, 0, 1, 1, 1, 2, 5, 'NFX918A', 'LNBSCCAKOPD896971', 'DC01P011640', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22019', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(106, NULL, 5, 0, 1, 1, 1, 2, 5, 'NFX919A', 'LNBSCCAKXPD897044', 'DC01P011488', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22020', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(107, NULL, 5, 0, 1, 1, 1, 2, 5, 'NGB964A', 'LNBSCCAK0PD896968', 'DC01P011637', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22016', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(108, NULL, 5, 0, 1, 1, 1, 2, 5, 'NGB978A', 'LNBSCCAK1PD897045', 'DC01P011486', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22017', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(109, NULL, 4, 0, 1, 1, 1, 2, 5, 'NXB598B', 'LZWPRMGN0RF975845', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003608', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(110, NULL, 4, 0, 1, 1, 1, 2, 5, 'NXE604B', 'LZWPRMGN0RF983573', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003616', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(111, NULL, 4, 0, 1, 1, 1, 2, 5, 'NXE614B', 'LZWPRMGN4RF988551', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003606', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(112, NULL, 4, 0, 3, 1, 1, 2, 5, 'NXE638B', 'LZWPRMGN9RF978632', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003607', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(113, NULL, 4, 0, 1, 1, 1, 2, 5, 'NXE649B', 'LZWPRMGN8RF967458', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003599', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(114, NULL, 4, 0, 3, 1, 1, 2, 5, 'NXJ971B', 'LZWPRMGN4RF983513', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003614', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(115, NULL, 4, 0, 3, 1, 1, 2, 5, 'NXJ974B', 'LZWPRMGN8RF968304', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CFSFA000003609', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(116, NULL, 4, 0, 1, 1, 1, 2, 5, 'NXJ984B', 'LZWPRMGNXRF854028', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CFSFA000003615', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(117, NULL, 20, 0, 1, 1, 1, 1, 5, 'PBC9124', 'LVAV2MBB0KC060116', '89739303', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(118, NULL, 8, 0, 1, 1, 1, 1, 5, 'PEP5236', '19XRW1892NE601794', 'L15BE646944', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(119, NULL, 7, 0, 1, 2, 1, 1, 5, 'PEP5268', 'MAKGN2549N4300452', 'L15ZD170745', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12275', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(120, NULL, 7, 0, 3, 1, 1, 1, 5, 'PEP5270', 'MAKGN2543N4300494', 'L15ZD170749', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12276', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(121, NULL, 7, 0, 3, 1, 1, 1, 5, 'PEP5352', 'MAKGN2548N4300393', 'L15ZD170701', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12277', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(122, NULL, 7, 0, 1, 1, 1, 1, 5, 'PEP5353', 'MAKGN2549N4300354', 'L15ZD170695', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12278', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(123, NULL, 11, 0, 1, 1, 1, 1, 1, 'PXW667E', 'HJRPBGJB1SB200017', 'SQRF4J20BBR', 0.00, 1, '', '0000-00-00', '2025', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(124, NULL, 1, 0, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB1RB151418', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(125, NULL, 1, 0, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGBXRB151496', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(126, NULL, 1, 0, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB2PB351799', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(127, NULL, 3, 0, 1, 1, 4, 1, 5, 'SIN PLACA', 'LVUDB21B5PF024867', '', 0.00, 1, '', '0000-00-00', '2000', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(128, NULL, 2, 0, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB2PF023646', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(129, NULL, 2, 0, 1, 1, 1, 1, 5, 'SIN PLACA', 'HJRPBGGB2RF027909', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(130, NULL, 2, 0, 1, 1, 1, 2, 5, 'Z19BNC', 'HJRPBGGB1RF003312', '', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(131, NULL, 2, 0, 1, 1, 1, 2, 5, 'Z59BNC', 'HJRPBGGB0RF003298', '', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12289', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(133, NULL, 1, 0, 1, 1, 1, 2, 5, '4REFSGG4', '654345678', '4567890OIUJ', 23000.00, 2, 'img_4REFSGG4_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2025', 1, '7654345678', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(140, NULL, 18, 0, 1, 1, 1, 2, 5, '23456rtyu', '5678', '345678', 345678.00, 2, 'img_23456rtyu_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2025', 1, '345678', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(141, NULL, 1, 0, 1, 1, 1, 2, 5, 'QAWSE45', '1234ED', '23456TRYTY', 32555.00, 2, 'img_QAWSE45_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2023', 1, '23457', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(142, NULL, 5, 0, 1, 1, 3, 2, 6, '12ASEGF', '3LD12B1J0RA001081', '123456', 453268.00, 3, 'img_12ASEGF_', '0000-00-00', '2023', 1, '12234', 18825.47, '20.71039,-103.45774', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(143, 48, 6, 702319, 1, 1, 3, 2, 5, 'RFD245', '12345678', '73EDHUDYU', 245676.00, 5, 'img_RFD245_JETOUR_360_x70plus_negro.png', '0000-00-00', '2020', 1, '123456587', 0.00, '', 9834.00, 8, 3, 2, 'Familiar', 2, 4, 3, 3, 1, 2, 3, 1, 1),
-(144, 698, 5, 702319, 1, 1, 3, 1, 1, 'ASDFVBN67', '3LD12B1J1RA001087', '1234567SDFG', 566666.00, 3, 'img_ASDFVBN67_JETOUR_360_x70plus_azul.png', '0000-00-00', '2025', 1, '2345678', 24319.76, '21.16441,-86.83893', 3456.00, 8, 2, 1, 'Crossover', 4, 8, 2, 2, 2, 3, 2, 1, 1),
-(145, 516, 13, 0, 1, 1, 1, 1, 5, '76TFRD', '655656', '54RDD11', 6789.00, 2, 'img_34rdefrg_', '0000-00-00', '2020', 1, '', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(146, 698, 6, 702319, 1, 1, 3, 1, 5, '234WEDFG', '345REDS', 'QWE34RES', 23456.00, 1, 'img_234WEDFG_JETOUR_360_x70plus_blanco.png', '0000-00-00', '2020', 1, '23457654', 0.00, '', 3564.00, 8, 1, 1, 'Pick-up', 2, 2, 4, 1, 2, 3, 1, 1, 1),
-(149, 698, 6, 702319, 1, 1, 3, 1, 1, '43526VCGDJ', '5454TEG', '6363TEYSD', 123466.00, 1, 'img_43526VCGDJ_', '2025-06-11', '2020', 1, '234532', 0.00, '', 2345.00, 4, 3, 1, 'Familiar', 2, 4, 1, 1, 2, 4, 3, 1, NULL);
+INSERT INTO `unidades` (`id_unidad`, `id_creador_unidad`, `id_modelo`, `id_telematics`, `fecha_alta`, `id_estado_unidad`, `id_estatus_unidad`, `id_tipo_unidad`, `id_tipo_adquisicion`, `id_sede`, `placa`, `vin`, `numero_motor`, `costo_neto`, `id_color`, `img_unidad`, `fecha_adquisicion`, `año_unidad`, `id_arrendadora`, `folio_factura`, `ultimo_kilometraje`, `ultima_ubicacion`, `capacidad_carga`, `capacidad_pasajeros`, `id_tipo_combustible`, `id_traccion`, `tipo_carrceria`, `numero_puertas`, `numero_asientos`, `id_tipo_caja`, `id_tipo_freno`, `id_tipo_suspencion`, `numero_ejes`, `id_tipo_uso`, `camara_reversa`, `sensores_reversa`) VALUES
+(1, NULL, 13, 702319, '2024-07-16', 4, 1, 3, 1, 2, '7GPK25', 'LVCB2NBA3KS052508', 'Q210740132S', 7535.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 0.00, '', 6501.00, 4, 1, 1, 'Crossover', 2, 4, 1, 1, 2, 2, 1, 1, 1),
+(2, NULL, 11, 0, NULL, 4, 1, 2, 1, 5, 'H37BPS', 'HJRPBGJB9SB200721', 'SQRF4J20BBR', 0.00, 1, '', '0000-00-00', '2025', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(3, NULL, 3, 0, NULL, 3, 1, 2, 1, 5, 'H72BPX', 'LVUDB21B1RF023430', 'J00450', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(4, NULL, 6, 702319, '2019-08-21', 4, 1, 3, 2, 1, 'HU1471F', 'LVAV2JVB9RE301163', '233000886ZL', 4433.00, 1, '', '0000-00-00', '2024', 1, 'V22267', 328.93, '20.57053,-103.31003', 2000.00, 6, 2, 1, 'Pick-up', 4, 6, 1, 1, 2, 2, 2, 0, 0),
+(5, NULL, 6, 702319, '2016-08-21', 1, 1, 3, 2, 1, 'HU1472A', 'LVAV2JVB1RE300878', '233000574ZL', 433.00, 1, '', '0000-00-00', '2023', 1, 'V22265', 327.61, '20.57039,-103.30887', 3000.00, 4, 1, 2, 'Familiar', 4, 4, 2, 2, 1, 2, 3, 0, 1),
+(6, NULL, 6, 0, NULL, 3, 1, 2, 2, 5, 'HU1473A', 'LVAV2JVB7RE300884', '2330006668Z', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22263', 11182.88, '19.28281,-99.51749', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(7, NULL, 6, 702319, '2022-08-21', 1, 1, 3, 2, 1, 'HU1474A', 'LVAV2JVB3RE301160', '233000879ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22268', 15019.86, '20.62525,-103.32881', 1000.00, 10, 3, 2, 'Pick-up', 6, 10, 3, 1, 1, 3, 2, 1, NULL),
+(8, NULL, 6, 702319, NULL, 1, 1, 3, 2, 1, 'HU1475A', 'LVAV2JVB6RE301122', '233000584ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22269', 21732.19, '20.46367,-103.44196', 1200.00, 4, 1, 1, 'Familiar', 2, 4, 3, 2, 1, 4, 1, 0, NULL),
+(9, NULL, 16, 0, NULL, 3, 1, 2, 2, 5, 'HU1476A', 'LVAV2MWB7RU012692', 'ABJ3960', 446.00, 1, '', '0000-00-00', '2024', 1, 'V22117', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(10, NULL, 6, 0, NULL, 3, 1, 2, 2, 5, 'HU1477A', 'LVAV2JVB0RE300869', '233000666ZL', 433.00, 1, '', '0000-00-00', '2024', 1, 'V22262', 15874.58, '17.06313,-96.78574', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(11, NULL, 11, 702319, NULL, 1, 1, 3, 1, 5, 'HVT618A', 'HJRPBGJB6SB200014', 'SQRF4J20BBR', 716.00, 1, '', '0000-00-00', '2025', 3, 'V3227', 0.00, '', 2567.00, 4, 1, 2, 'Pick-up', 4, 4, 1, 1, 1, 2, 1, 1, 1),
+(12, NULL, 3, 702319, NULL, 1, 1, 3, 1, 5, 'J33BPX', 'LVUDB21B2RF023405', 'J00455', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 3000.00, 2, 2, 1, 'Pick-up', 2, 2, 2, 2, 2, 2, 2, 1, 1),
+(13, NULL, 10, 702319, NULL, 1, 1, 3, 1, 2, 'JV96330', '3N6AD33A2JK900761', 'Q2107DGCG', 5423.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 1134.00, 6, 2, 1, 'Familiar', 4, 4, 2, 3, 2, 4, 1, 1, 1),
+(14, NULL, 10, 702319, NULL, 1, 1, 3, 1, 2, 'JV96331', '3N6AD35C8JK870888', 'Q21074016TR', 2358.00, 1, '', '0000-00-00', '2018', 3, 'SIN FACTURA', 0.00, '', 6451.00, 6, 5, 2, 'Pick-up', 2, 4, 2, 3, 1, 3, 1, 1, 1),
+(15, NULL, 22, 702319, NULL, 3, 1, 3, 1, 4, 'JW69517', 'LVAV2JVB8KE140701', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 5000.00, 4, 1, 2, '1', 4, 6, 1, 1, 2, 1, 1, 1, 1),
+(16, NULL, 20, 702319, NULL, 1, 1, 3, 1, 5, 'JX09360', 'LVAV2MBB9KC060115', '89739149', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 200362.59, '19.36431,-99.26767', 123453.00, 2, 3, 1, 'Crossover', 2, 4, 3, 3, 1, 2, 3, 1, 1),
+(17, NULL, 12, 702319, NULL, 1, 1, 3, 1, 3, 'JY52011', 'LVAV2JBB5NE200846', 'Q210644822D', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 2340.00, 4, 1, 1, '1', 2, 4, 1, 1, 1, 1, 1, 1, 1),
+(18, NULL, 12, 702319, NULL, 1, 1, 3, 1, 2, 'JY52012', 'LVAV2JBB1NE200844', 'Q210740142D', 3456.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 2034.00, 4, 2, 1, 'Pick-up', 4, 4, 1, 2, 2, 4, 1, 1, 1),
+(19, NULL, 21, 702319, NULL, 1, 1, 3, 1, 3, 'JY52013', '3LD122J5PA000505', '77121352', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 13212.00, 2, 1, 1, '1', 2, 2, 2, 1, 1, 1, 1, 1, 1),
+(20, NULL, 19, 702319, NULL, 1, 1, 3, 2, 3, 'LF97684', 'LVAV2MAB4SU303020', 'R001566', 815.00, 1, '', '0000-00-00', '2025', 1, 'V22119', 7013.65, '25.7714,-100.29097', 76453.00, 4, 2, 2, '1', 2, 2, 3, 1, 2, 1, 1, 1, 1),
+(21, NULL, 21, 702319, NULL, 3, 1, 3, 2, 7, 'LG25822', '3LD12B2J5RA002144', '776182123', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22296', 2733.16, '19.73732,-98.97562', 6423.00, 6, 1, 1, '1', 2, 2, 1, 3, 1, 1, 1, 1, 1),
+(22, NULL, 21, 702319, NULL, 1, 1, 3, 2, 7, 'LG25825', '3LD12B2J1RA002142', '77176393', 900.00, 1, '', '0000-00-00', '2024', 1, 'V22295', 2433.38, '20.571,-103.31036', 5643.00, 2, 4, 1, '1', 4, 4, 2, 1, 2, 1, 1, 1, 1),
+(23, NULL, 17, 702319, NULL, 4, 1, 3, 2, 7, 'LG31152', 'LVAV2MAB6SU302242', 'R004952', 750.00, 1, '', '0000-00-00', '2025', 1, 'V22118', 4727.11, '19.36521,-99.26724', 5432.00, 4, 1, 1, '1', 4, 4, 1, 2, 1, 1, 1, 1, 1),
+(24, NULL, 14, 702319, NULL, 1, 1, 3, 2, 5, 'LG31153', '3LDA2A2F6PA001359', '77143002', 1.00, 1, '', '0000-00-00', '2023', 1, 'V22247', 0.00, '', 54665.00, 2, 5, 2, 'Pick-up', 4, 6, 4, 1, 2, 3, 3, 1, 1),
+(25, NULL, 18, 702319, NULL, 4, 1, 3, 2, 6, 'LG31161', 'LVAV2MAB2SU307020', 'R003422', 1.00, 1, '', '0000-00-00', '2023', 1, 'V22116', 12604.94, '19.36525,-99.26746', 2648.00, 4, 1, 2, '1', 2, 2, 1, 1, 1, 1, 1, 1, 1),
+(26, NULL, 17, 702319, NULL, 3, 1, 3, 1, 5, 'LLJ153B', 'LVAV2MAB8PC001162', 'N009678', 598.00, 1, '', '0000-00-00', '2023', 3, 'V6765', 0.00, '', 56435.00, 4, 2, 1, 'Crossover', 4, 8, 1, 2, 1, 2, 1, 1, 1),
+(27, NULL, 15, 702319, NULL, 1, 1, 3, 1, 5, 'LMF630B', '5TDYZRAH1MS081840', '', 0.00, 1, '', '0000-00-00', '2021', 3, 'SIN FACTURA', 0.00, '', 3434.00, 6, 3, 2, 'Crossover', 2, 6, 2, 3, 2, 4, 2, 1, 1),
+(28, NULL, 9, 702319, NULL, 1, 1, 3, 1, 5, 'M17BMX', '3HGRZ1858PM002056', '', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 6543.00, 6, 2, 1, 'Pick-up', 4, 6, 3, 1, 1, 4, 3, 1, 1),
+(29, NULL, 2, 0, NULL, 3, 1, 1, 2, 5, 'MAF244B', 'HJRPBGGB2RF003268', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1126', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(30, NULL, 2, 0, NULL, 3, 1, 1, 2, 5, 'MEF305A', 'HJRPBGGB1RF003293', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12290', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(31, NULL, 2, 0, NULL, 3, 1, 1, 2, 5, 'MEF356A', 'HJRPBGGB0RF003270', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12288', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(32, NULL, 2, 0, NULL, 3, 1, 1, 2, 5, 'MEF357A', 'HJRPBGGB6RF003290', 'SQRF4J16AVN', 530.00, 1, 'img_MEF357A_JETOUR_360_x70_blanco.png', '0000-00-00', '2024', 1, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(33, NULL, 2, 702319, NULL, 1, 1, 3, 2, 4, 'MEF358A', 'HJRPBGGB0RF003284', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12285', 0.00, '', 7354.00, 6, 1, 1, '1', 4, 4, 1, 2, 1, 1, 1, 1, 1),
+(34, NULL, 2, 0, NULL, 3, 1, 1, 2, 5, 'MJE761A', 'HJRPBGGB7RF003296', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(35, NULL, 2, 702319, NULL, 1, 1, 3, 2, 5, 'MJE763A', 'HJRPBGGB5RF003295', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12287', 0.00, '', 8543.00, 3, 3, 2, 'Familiar', 4, 4, 4, 2, 2, 3, 2, 1, 1),
+(36, NULL, 2, 702319, NULL, 1, 1, 3, 2, 5, 'MJE779A', 'HJRPBGGB1RF003309', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12292', 0.00, '', 7453.00, 1, 1, 1, 'Crossover', 2, 2, 1, 2, 1, 3, 2, 1, 1),
+(37, NULL, 2, 702319, NULL, 1, 1, 3, 2, 5, 'MJE780A', 'HJRPBGGB0RF003303', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12291', 0.00, '', 4532.00, 1, 1, 1, 'Pick-up', 4, 4, 2, 3, 2, 4, 1, 1, 1),
+(38, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MJE784A', 'HJRPBGGB3RF003294', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12283', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(39, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MJE834A', 'HJRPBGGB0RF003267', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12286', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(40, NULL, 23, 0, NULL, 1, 1, 1, 1, 5, 'MJS202A', 'LVAV2KWBXPC001161', 'AAH5466', 466.00, 1, '', '0000-00-00', '2023', 3, 'V10151', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(41, NULL, 22, 702319, NULL, 4, 1, 3, 1, 4, 'MJV717A', 'LVAV2JVB1PE301283', '225002210ZL', 0.00, 1, '', '0000-00-00', '2023', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(42, NULL, 20, 0, NULL, 1, 1, 2, 1, 2, 'MKD694A', 'LVAV2MAB0PC003214', '', 0.00, 1, '', '0000-00-00', '2023', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(43, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MKJ603A', 'HJRPBGGB1RF003276', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(44, NULL, 2, 0, NULL, 1, 1, 4, 2, 5, 'MKJ606A', 'HJRPBGGB2RF003271', '', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(45, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MKJ682A', 'HJRPBGGB2RF003285', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1121', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(46, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MKJ694A', 'HJRPBGGB3RF003277', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V185', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(47, NULL, 3, 0, NULL, 3, 1, 1, 2, 5, 'MKJ695A', 'LVUDB21B1PF018063', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2024', 1, 'V1123', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(48, NULL, 3, 0, NULL, 1, 1, 4, 2, 5, 'MKJ697A', 'LVUDB21B5PF024531', 'SQRE4T15BAH', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(49, NULL, 3, 0, NULL, 1, 1, 4, 2, 5, 'MKJ699A', 'LVUDB21B2PF018038', 'SQRE4T15BAH', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(50, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MKJ769A', 'HJRPBGGB8RF003291', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(51, NULL, 1, 0, NULL, 3, 1, 1, 2, 5, 'MKP495A', 'HJRPBGGB5PB351800', 'SQRF4J16AVN', 580.00, 1, '', '0000-00-00', '2023', 1, 'V13332', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(52, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MKS598A', 'HJRPBGGB3RF003280', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(53, NULL, 1, 0, NULL, 1, 1, 4, 2, 5, 'MNM736A', 'HJRPBGGB3RB150030', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(54, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MSH442A', 'HJRPBGGB9RF003297', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2024', 1, 'V1079', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(55, NULL, 1, 0, NULL, 3, 1, 1, 2, 5, 'MSH449A', 'HJRPBGGB6RB151012', 'SQRF4J16AVN', 576.00, 1, '', '0000-00-00', '2024', 1, 'V3318', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(56, NULL, 1, 0, NULL, 3, 1, 1, 2, 5, 'MTM989A', 'HJRPBGGB4RB151705', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1132', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(57, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MTM990A', 'LVUDB21B5PF018163', 'LVUDB2B5PF0', 420.00, 1, '', '0000-00-00', '2023', 1, 'V1288', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(58, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MTM995A', 'LVUDB21B2PF018105', 'HECHO EN CH', 420.00, 1, '', '0000-00-00', '2023', 1, 'V1289', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(59, NULL, 1, 0, NULL, 1, 1, 4, 2, 5, 'MUG246A', 'HJRPBGGB8RB151741', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1133', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(60, NULL, 1, 0, NULL, 4, 1, 1, 2, 5, 'MUG274A', 'HJRPBGGB9RB151618', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 1, 'V1134', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(61, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MVH331A', 'HJRPBGGB5PF025097', 'SQRF4J16AVN', 530.00, 1, '', '0000-00-00', '2023', 1, 'V1327', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(62, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MVH333A', 'HJRPBGGB0PB350795', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2023', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(63, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'MVH393A', 'HJRPBGGBXRB151580', 'SQRF4J16AVP', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(64, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MZJ621A', 'LVUDB21B4PF024438', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1603', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(65, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MZJ624A', 'LVUDB21B5PF024495', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1606', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(66, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MZJ626A', 'LVUDB21B8PF022904', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1605', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(67, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'MZJ637A', 'LVUDB21B2PF022929', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1601', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(68, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZP510A', 'LZWPRMGN9RF961880', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '391/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(69, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZP512A', 'LZWPRMGN2RF953636', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '402/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(70, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZP513A', 'LZWPRMGN7RF960162', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '400/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(71, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'MZP515A', 'HJRPBGGB9RB151559', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 2, 'V1599', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(72, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'MZP526A', 'HJRPBGGB9RB151537', 'SQRF4J16AVP', 576.00, 1, '', '0000-00-00', '2024', 2, 'V1600', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(73, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZP528A', 'LZWPRMGN3RF962250', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '406/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(74, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZV225A', 'LZWPRMGN9RF967498', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '393/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(75, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZV235A', 'LZWPRMGN1RF963557', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '934/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(76, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'MZV238A', 'LZWPRMGN1RF960173', 'IMPORTADO', 338.00, 1, '', '0000-00-00', '2024', 2, '396/FNS', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(77, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'MZW072A', 'HJRPBGGB2RF003299', 'SQRF4J16AVN', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(78, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NAP818A', 'LVUDB21B1PF024431', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(79, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NAP833A', 'LVUDB21B7PF024448', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1604', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(80, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NBN711A', 'LVUDB21B8PF024877', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1642', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(81, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NBN718A', 'LVUDB21B0PF023735', 'LVUDB21B5PF', 420.00, 1, '', '0000-00-00', '2023', 2, 'V1640', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(82, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NBN719A', 'LVUDB21B0PF023772', 'SQRE4T15BAH', 420.00, 1, '', '0000-00-00', '2023', 2, 'CARTA FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(83, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'NBN724A', 'HJRPBGGB4RF003269', 'SQRF4JI6AVN', 530.00, 1, '', '0000-00-00', '2024', 2, 'V1639', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(84, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'NDF463A', 'HJRPGGB8RB161752', 'SQRF4J16AVP', 583.00, 1, '', '0000-00-00', '2024', 1, 'V2720', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(85, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF659A', 'LVUDB21B4PF018039', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2948', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(86, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF753A', 'LVUDB21BXPF024881', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2947', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(87, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF757A', 'LVUDB21BXPF024900', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2945', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(88, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF760A', 'LVUDB21B8PF024846', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2946', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(89, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF813A', 'LVUDB21B1PF024851', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2950', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(90, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF820A', 'LVUDB21B7PF024840', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2951', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(91, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDF836A', 'LVUDB21B6PF024831', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2952', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(92, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG211A', 'LVUDB21B2PF024860', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2949', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(93, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG213A', 'LVUDB21B9PF024855', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2942', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(94, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG214A', 'LVUDB21BXPF018062', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2944', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(95, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG223A', 'LVUDB21BXPF023746', 'SQRE4T15BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2943', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(96, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG264A', 'LVUDB21B5PF023749', 'SQRE4TI5BAH', 489.00, 1, '', '0000-00-00', '2023', 2, 'V2953', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(97, NULL, 3, 0, NULL, 1, 1, 1, 2, 5, 'NDG273A', 'LVUDB21BXRF006531', 'SQRE4T15BAH', 504.00, 1, '', '0000-00-00', '2024', 2, 'V2954', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(98, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'NDG281A', 'HJRPBGGB4RF003272', 'SQRF4J16AVN', 639.00, 1, '', '0000-00-00', '2024', 2, 'V2955', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(99, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'NEH457A', 'HJRPBGGB4RB176197', 'SQRF4J16AVP', 699.00, 1, '', '0000-00-00', '2024', 2, 'V3052', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(100, NULL, 5, 0, NULL, 3, 1, 1, 2, 5, 'NFX906A', 'LNBSCCAKZPD896969', 'DC01P011651', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22014', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(101, NULL, 5, 0, NULL, 1, 1, 1, 2, 1, 'NFX911A', 'LNBSCCAK9PD896970', 'DC01P011641', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22012', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(102, NULL, 5, 0, NULL, 1, 1, 1, 2, 1, 'NFX912A', 'LNBSCCAHXPD880197', 'LNBSCCAHXPD', 289.00, 1, '', '0000-00-00', '2023', 1, 'V22011', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(103, NULL, 5, 0, NULL, 3, 1, 1, 2, 5, 'NFX915A', 'LNBSCCAK7PD896885', 'DC01P011180', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22018', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(104, NULL, 5, 0, NULL, 1, 1, 1, 2, 5, 'NFX916A', 'LNBSCCAK1PD880198', 'LNBSCCAH1PD', 289.00, 1, '', '0000-00-00', '2023', 1, 'V22007', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(105, NULL, 5, 0, NULL, 1, 1, 1, 2, 5, 'NFX918A', 'LNBSCCAKOPD896971', 'DC01P011640', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22019', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(106, NULL, 5, 0, NULL, 1, 1, 1, 2, 5, 'NFX919A', 'LNBSCCAKXPD897044', 'DC01P011488', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22020', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(107, NULL, 5, 0, NULL, 1, 1, 1, 2, 5, 'NGB964A', 'LNBSCCAK0PD896968', 'DC01P011637', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22016', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(108, NULL, 5, 0, NULL, 1, 1, 1, 2, 5, 'NGB978A', 'LNBSCCAK1PD897045', 'DC01P011486', 322.00, 1, '', '0000-00-00', '2023', 1, 'V22017', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(109, NULL, 4, 0, NULL, 1, 1, 1, 2, 5, 'NXB598B', 'LZWPRMGN0RF975845', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003608', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(110, NULL, 4, 0, NULL, 1, 1, 1, 2, 5, 'NXE604B', 'LZWPRMGN0RF983573', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003616', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(111, NULL, 4, 0, NULL, 1, 1, 1, 2, 5, 'NXE614B', 'LZWPRMGN4RF988551', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003606', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(112, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'NXE638B', 'LZWPRMGN9RF978632', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003607', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(113, NULL, 4, 0, NULL, 1, 1, 1, 2, 5, 'NXE649B', 'LZWPRMGN8RF967458', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003599', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(114, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'NXJ971B', 'LZWPRMGN4RF983513', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CSFA000003614', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(115, NULL, 4, 0, NULL, 3, 1, 1, 2, 5, 'NXJ974B', 'LZWPRMGN8RF968304', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CFSFA000003609', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(116, NULL, 4, 0, NULL, 1, 1, 1, 2, 5, 'NXJ984B', 'LZWPRMGNXRF854028', 'HECHO EN CH', 345.00, 1, '', '0000-00-00', '2024', 2, 'CFSFA000003615', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(117, NULL, 20, 0, NULL, 1, 1, 1, 1, 5, 'PBC9124', 'LVAV2MBB0KC060116', '89739303', 0.00, 1, '', '0000-00-00', '2019', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(118, NULL, 8, 0, NULL, 1, 1, 1, 1, 5, 'PEP5236', '19XRW1892NE601794', 'L15BE646944', 0.00, 1, '', '0000-00-00', '2022', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(119, NULL, 7, 0, NULL, 1, 2, 1, 1, 5, 'PEP5268', 'MAKGN2549N4300452', 'L15ZD170745', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12275', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(120, NULL, 7, 0, NULL, 3, 1, 1, 1, 5, 'PEP5270', 'MAKGN2543N4300494', 'L15ZD170749', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12276', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(121, NULL, 7, 0, NULL, 3, 1, 1, 1, 5, 'PEP5352', 'MAKGN2548N4300393', 'L15ZD170701', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12277', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(122, NULL, 7, 0, NULL, 1, 1, 1, 1, 5, 'PEP5353', 'MAKGN2549N4300354', 'L15ZD170695', 359.00, 1, '', '0000-00-00', '2022', 3, 'FNA12278', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(123, NULL, 11, 0, NULL, 1, 1, 1, 1, 1, 'PXW667E', 'HJRPBGJB1SB200017', 'SQRF4J20BBR', 0.00, 1, '', '0000-00-00', '2025', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(124, NULL, 1, 0, NULL, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB1RB151418', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(125, NULL, 1, 0, NULL, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGBXRB151496', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(126, NULL, 1, 0, NULL, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB2PB351799', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(127, NULL, 3, 0, NULL, 1, 1, 4, 1, 5, 'SIN PLACA', 'LVUDB21B5PF024867', '', 0.00, 1, '', '0000-00-00', '2000', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(128, NULL, 2, 0, NULL, 1, 1, 4, 1, 5, 'SIN PLACA', 'HJRPBGGB2PF023646', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(129, NULL, 2, 0, NULL, 1, 1, 1, 1, 5, 'SIN PLACA', 'HJRPBGGB2RF027909', '', 0.00, 1, '', '0000-00-00', '2024', 3, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(130, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'Z19BNC', 'HJRPBGGB1RF003312', '', 0.00, 1, '', '0000-00-00', '2024', 1, 'SIN FACTURA', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(131, NULL, 2, 0, NULL, 1, 1, 1, 2, 5, 'Z59BNC', 'HJRPBGGB0RF003298', '', 530.00, 1, '', '0000-00-00', '2024', 1, 'V12289', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(133, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, '4REFSGG4', '654345678', '4567890OIUJ', 23000.00, 2, 'img_4REFSGG4_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2025', 1, '7654345678', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(140, NULL, 18, 0, NULL, 1, 1, 1, 2, 5, '23456rtyu', '5678', '345678', 345678.00, 2, 'img_23456rtyu_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2025', 1, '345678', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(141, NULL, 1, 0, NULL, 1, 1, 1, 2, 5, 'QAWSE45', '1234ED', '23456TRYTY', 32555.00, 2, 'img_QAWSE45_JETOUR_360_dashing_blanco_.png', '0000-00-00', '2023', 1, '23457', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(142, NULL, 5, 702319, NULL, 3, 1, 3, 2, 6, '12ASEGF', '3LD12B1J0RA001081', '123456', 453268.00, 3, '', '0000-00-00', '2023', 1, '12234', 18825.47, '20.71039,-103.45774', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(143, 48, 6, 702319, NULL, 3, 1, 3, 2, 5, 'RFD245', '12345678', '73EDHUDYU', 245676.00, 5, '', '0000-00-00', '2020', 1, '123456587', 0.00, '', 9834.00, 8, 3, 2, 'Familiar', 2, 4, 3, 3, 1, 2, 3, 1, 1),
+(144, 698, 5, 702319, NULL, 1, 1, 3, 1, 1, 'ASDFVBN67', '3LD12B1J1RA001087', '1234567SDFG', 566666.00, 3, '', '0000-00-00', '2025', 1, '2345678', 24319.76, '21.16441,-86.83893', 3456.00, 8, 2, 1, 'Crossover', 4, 8, 2, 2, 2, 3, 2, 1, 1),
+(145, 516, 13, 0, NULL, 1, 1, 1, 1, 5, '76TFRD', '655656', '54RDD11', 6789.00, 2, 'img_34rdefrg_', '0000-00-00', '2020', 1, '', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(146, 698, 6, 702319, NULL, 4, 1, 3, 1, 5, '234WEDFG', '345REDS', 'QWE34RES', 23456.00, 1, '', '0000-00-00', '2020', 1, '23457654', 0.00, '', 3564.00, 8, 1, 1, 'Pick-up', 2, 2, 4, 1, 2, 3, 1, 1, 1),
+(149, 698, 6, 702319, NULL, 1, 1, 3, 1, 1, '43526VCGDJ', '5454TEG', '6363TEYSD', 123466.00, 1, '', '2025-06-11', '2020', 1, '234532', 0.00, '', 2345.00, 4, 3, 1, 'Familiar', 2, 4, 1, 1, 2, 4, 3, 1, NULL),
+(150, 698, 6, 702319, NULL, 3, 1, 3, 1, 3, '123', '123', '123', 123.00, 1, '', '2025-08-13', '2020', 3, '123', 0.00, '', 123.00, 4, 4, 2, 'PICK-UP', 4, 4, 2, 1, 1, 4, 3, 1, 1),
+(153, 48, 6, NULL, NULL, 1, 1, 3, 1, 5, '1', '1', '1', 1.00, 3, 'img_1_', '2025-08-26', '2001', 1, '1', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(154, 48, 6, NULL, NULL, 1, 1, 3, 1, 5, '1', '1', '1', 1.00, 3, 'img_1_', '2025-08-26', '2001', 1, '1', 0.00, '', 1.00, 1, 1, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(159, 48, 42, NULL, NULL, 1, 1, 3, 1, 3, '2', '2', '2', 2.00, 4, 'img_2_', '2025-08-26', '2002', 2, '2', 0.00, '', 2.00, 2, 5, 1, '2', 2, 2, 1, 1, 2, 2, 1, 1, 1),
+(160, 48, 42, NULL, NULL, 1, 1, 3, 1, 3, '2', '2', '2', 2.00, 4, 'img_2_', '2025-08-26', '2002', 2, '2', 0.00, '', 2.00, 2, 5, 1, '2', 2, 2, 1, 1, 2, 2, 1, 1, 1),
+(162, 48, 21, NULL, NULL, 2, 1, 3, 1, 1, '1', '1', '1', 1.00, 1, 'img_1_', '2025-08-27', '2001', 1, '1', 0.00, '', 1.00, 1, 4, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(165, 698, 4, NULL, NULL, 1, 1, 1, 1, 7, '6', '6', '6', 6.00, 3, 'img_6_', '2025-08-26', '2006', 3, '6', 0.00, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(166, 48, 42, NULL, NULL, 1, 1, 3, 2, 2, '9', '9', '9', 9.00, 1, 'img_9_', '2025-08-26', '2009', 1, '9', 0.00, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(167, 48, 42, NULL, NULL, 1, 1, 3, 2, 2, '9', '9', '9', 9.00, 1, 'img_9_', '2025-08-26', '2009', 1, '9', 0.00, '', 9.00, 9, 5, 1, '9', 9, 9, 1, 1, 1, 9, 1, 1, 1),
+(168, 48, 12, NULL, NULL, 1, 1, 3, 2, 4, '3', '3', '3', 4.00, 1, 'img_3_', '2025-08-26', '2003', 2, '3', 0.00, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(169, 48, 2, NULL, NULL, 2, 1, 3, 2, 4, '8', '8', '8', 8.00, 1, 'img_8_Foton_Hi_Van.png', '2025-08-27', '2008', 2, '8', 0.00, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(172, 698, 15, NULL, NULL, 1, 1, 1, 1, 5, '1', '1', '1', 1.00, 1, 'img_1_Foton_Hi_Van.png', '2025-08-26', '2001', 1, '1', 0.00, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(173, 48, 42, NULL, NULL, 1, 1, 3, 1, 4, '1', '1', '1', 1.00, 2, 'img_1_Foton_GTL_EV.png', '2025-08-26', '2001', 1, '1', 0.00, '', 1.00, 1, 4, 1, '1', 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3701,7 +3837,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `id_tipo_usuario`, `id_colaborador`, `correo`, `contraseña`, `avatar`) VALUES
-(1, 6, 698, 'uriel.cabello@ldrsolutions.com.mx', '123456789', '250685_f'),
+(1, 6, 698, 'uriel.cabello@ldrsolutions.com.mx', '123456789', ''),
 (2, 1, 230, 'carlos.roman@ldrsolutions.com.mx', 'K85T84', '230230_f'),
 (3, 1, 565, 'sharon.leon@ldrsolutions.com.mx', 'Q42O20', '240565_f'),
 (4, 2, 214, 'jorgel.martinez@ldrsolutions.com.mx', 'K86P31', '230214_f'),
@@ -3712,11 +3848,13 @@ INSERT INTO `usuarios` (`id_usuario`, `id_tipo_usuario`, `id_colaborador`, `corr
 (10, 9, 389, 'isaura.hernandez@ldrsolutions.com.mx', 'P45C25', '240389_f'),
 (12, 2, 539, 'jesus.farango@ldrsolutions.com.mx', 'X84N27', '240539_f'),
 (13, 4, 48, 'nora.segura@ldrsolutions.com.mx', 'K77Y29', '220048_f'),
-(14, 7, 39, 'francisco.chavez@ldrsolutions.com.mx', 'A39M99', '220039_f'),
+(14, 7, 281, 'pablo.torrejon@ldrsolutions.com.mx', 'I63Q14', '230281_f'),
 (16, 10, 10000, 'raul.tellez@ldrsolutions.com.mx', '5D24LK', '000001_f'),
 (17, 11, 520, 'abraham.hernandez@ldrsolutions.com.mx', 'Z36J79', '240520_f'),
-(18, 12, 557, 'ramiro.gonzalez@ldrsolutions.com.mx', '123456', 'cvcv'),
-(19, 12, 134, 'sarahi.ruiz@ldrsolutions.com.mx', '1234567', 'khgkfkhf');
+(18, 12, 557, 'ramiro.gonzalez@ldrsolutions.com.mx', '123456', '240557_f'),
+(19, 12, 134, 'sarahi.ruiz@ldrsolutions.com.mx', '1234567', '230134_f'),
+(20, 7, 374, 'javier.rodriguez@ldrsolutions.com.mx', '12345678', '240374_f'),
+(21, 7, 39, 'francisco.chavez@ldrsolutions.com.mx', '12345678', '220039_f');
 
 -- --------------------------------------------------------
 
@@ -3935,7 +4073,9 @@ INSERT INTO `verificaciones` (`id_verificaciones`, `id_unidad`, `id_estatus_veri
 (133, 4, 1, '2025-05-14', '2025-07-31', '2025', 1, '1234576', 380),
 (134, 4, 1, '2025-05-23', '2025-07-31', '2025', 1, '1234', 234),
 (135, 4, 1, '2025-05-21', '2025-08-01', '2025', 2, '43reerd', 545),
-(136, 143, 1, '2025-06-02', '2025-08-27', '2020', 1, '456545', 2358);
+(136, 143, 1, '2025-06-02', '2025-08-27', '2020', 1, '456545', 2358),
+(137, 145, 1, '2025-08-20', '2025-12-25', '2020', 2, '', 111),
+(138, 145, 1, '2025-08-27', '2025-10-23', '2020', 2, '23ESWE4', 0);
 
 -- --------------------------------------------------------
 
@@ -4076,6 +4216,21 @@ ALTER TABLE `asignacion_unidad_demo`
   ADD KEY `id_estatus_comodato_demo FK estatus_comodato` (`id_estatus_comodato_demo`),
   ADD KEY `id_estado_prueba_demo FK estado_prueba_demo` (`id_estado_prueba_demo`),
   ADD KEY `id_colaborador_sube_reporte_final FK colab` (`id_colaborador_sube_reporte_final`);
+
+--
+-- Indices de la tabla `bitacora_diaria`
+--
+ALTER TABLE `bitacora_diaria`
+  ADD PRIMARY KEY (`id_bitacora`),
+  ADD KEY `id_prueba FK pru_un_dem` (`id_prueba`),
+  ADD KEY `id_master_driver FK colabs` (`id_master_driver`);
+
+--
+-- Indices de la tabla `bitacora_muestreos`
+--
+ALTER TABLE `bitacora_muestreos`
+  ADD PRIMARY KEY (`id_muestreo`),
+  ADD KEY `id_bitacora FK bitacora_diaria` (`id_bitacora`);
 
 --
 -- Indices de la tabla `catalogos_revisiones`
@@ -4341,7 +4496,8 @@ ALTER TABLE `pruebas_unidad_demo`
   ADD PRIMARY KEY (`id_prueba`),
   ADD KEY `id_asignacion_unidad_demo FK asignacion demo` (`id_asignacion_unidad_demo`),
   ADD KEY `id_colaborador_registra_prueba FK colab` (`id_colaborador_registra_prueba`),
-  ADD KEY `id_colaborador_sube_reporte_final FK col` (`id_colaborador_sube_reporte_final`);
+  ADD KEY `id_colaborador_sube_reporte_final FK col` (`id_colaborador_sube_reporte_final`),
+  ADD KEY `id_tipo_prueba_demo FK tip_prue_dem` (`id_tipo_prueba_demo`);
 
 --
 -- Indices de la tabla `puestos`
@@ -4396,6 +4552,12 @@ ALTER TABLE `tipos_combustibles`
 --
 ALTER TABLE `tipos_frenos`
   ADD PRIMARY KEY (`id_tipo_freno`);
+
+--
+-- Indices de la tabla `tipos_pruebas_demo`
+--
+ALTER TABLE `tipos_pruebas_demo`
+  ADD PRIMARY KEY (`id_tipo_prueba_demo`);
 
 --
 -- Indices de la tabla `tipos_recidencias_externos`
@@ -4608,7 +4770,19 @@ ALTER TABLE `asignacion_unidad_colaborador`
 -- AUTO_INCREMENT de la tabla `asignacion_unidad_demo`
 --
 ALTER TABLE `asignacion_unidad_demo`
-  MODIFY `id_asignacion_unidad_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_asignacion_unidad_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `bitacora_diaria`
+--
+ALTER TABLE `bitacora_diaria`
+  MODIFY `id_bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `bitacora_muestreos`
+--
+ALTER TABLE `bitacora_muestreos`
+  MODIFY `id_muestreo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos_revisiones`
@@ -4674,7 +4848,7 @@ ALTER TABLE `estado_pruebas_demos`
 -- AUTO_INCREMENT de la tabla `estado_unidad`
 --
 ALTER TABLE `estado_unidad`
-  MODIFY `id_estado_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_estado_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estatus_aseguradora`
@@ -4794,13 +4968,13 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `modelos`
 --
 ALTER TABLE `modelos`
-  MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_modelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `monitoreos_prueba_unidad_demos`
 --
 ALTER TABLE `monitoreos_prueba_unidad_demos`
-  MODIFY `id_monitoreo_prueba_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_monitoreo_prueba_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
@@ -4836,7 +5010,7 @@ ALTER TABLE `prorrogas_unidades_demo`
 -- AUTO_INCREMENT de la tabla `pruebas_unidad_demo`
 --
 ALTER TABLE `pruebas_unidad_demo`
-  MODIFY `id_prueba` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_prueba` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `puestos`
@@ -4885,6 +5059,12 @@ ALTER TABLE `tipos_combustibles`
 --
 ALTER TABLE `tipos_frenos`
   MODIFY `id_tipo_freno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_pruebas_demo`
+--
+ALTER TABLE `tipos_pruebas_demo`
+  MODIFY `id_tipo_prueba_demo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_recidencias_externos`
@@ -4986,7 +5166,7 @@ ALTER TABLE `tracciones`
 -- AUTO_INCREMENT de la tabla `unidades`
 --
 ALTER TABLE `unidades`
-  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id_unidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT de la tabla `unidad_color`
@@ -4998,7 +5178,7 @@ ALTER TABLE `unidad_color`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_externos`
@@ -5010,7 +5190,7 @@ ALTER TABLE `usuarios_externos`
 -- AUTO_INCREMENT de la tabla `verificaciones`
 --
 ALTER TABLE `verificaciones`
-  MODIFY `id_verificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id_verificaciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `verificacion_semestre`
@@ -5086,6 +5266,19 @@ ALTER TABLE `asignacion_unidad_demo`
   ADD CONSTRAINT `id_unidad FK unidades` FOREIGN KEY (`id_unidad`) REFERENCES `unidades` (`id_unidad`);
 
 --
+-- Filtros para la tabla `bitacora_diaria`
+--
+ALTER TABLE `bitacora_diaria`
+  ADD CONSTRAINT `id_master_driver FK colabs` FOREIGN KEY (`id_master_driver`) REFERENCES `colaboradores` (`id_colaborador`),
+  ADD CONSTRAINT `id_prueba FK pru_un_dem` FOREIGN KEY (`id_prueba`) REFERENCES `pruebas_unidad_demo` (`id_prueba`);
+
+--
+-- Filtros para la tabla `bitacora_muestreos`
+--
+ALTER TABLE `bitacora_muestreos`
+  ADD CONSTRAINT `id_bitacora FK bitacora_diaria` FOREIGN KEY (`id_bitacora`) REFERENCES `bitacora_diaria` (`id_bitacora`);
+
+--
 -- Filtros para la tabla `constancias_situacion_fiscal`
 --
 ALTER TABLE `constancias_situacion_fiscal`
@@ -5123,7 +5316,8 @@ ALTER TABLE `pruebas_unidad_demo`
   ADD CONSTRAINT `id_asignacion_unidad_demo FK asignacion demo` FOREIGN KEY (`id_asignacion_unidad_demo`) REFERENCES `asignacion_unidad_demo` (`id_asignacion_unidad_demo`),
   ADD CONSTRAINT `id_colaborador_registra_prueba FK colab` FOREIGN KEY (`id_colaborador_registra_prueba`) REFERENCES `colaboradores` (`id_colaborador`),
   ADD CONSTRAINT `id_colaborador_sube_reporte_final FK col` FOREIGN KEY (`id_colaborador_sube_reporte_final`) REFERENCES `colaboradores` (`id_colaborador`),
-  ADD CONSTRAINT `id_colaborador_sube_reporte_final fk colabs` FOREIGN KEY (`id_colaborador_sube_reporte_final`) REFERENCES `colaboradores` (`id_colaborador`);
+  ADD CONSTRAINT `id_colaborador_sube_reporte_final fk colabs` FOREIGN KEY (`id_colaborador_sube_reporte_final`) REFERENCES `colaboradores` (`id_colaborador`),
+  ADD CONSTRAINT `id_tipo_prueba_demo FK tip_prue_dem` FOREIGN KEY (`id_tipo_prueba_demo`) REFERENCES `tipos_pruebas_demo` (`id_tipo_prueba_demo`);
 
 --
 -- Filtros para la tabla `unidades`

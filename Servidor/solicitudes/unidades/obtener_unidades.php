@@ -54,9 +54,9 @@ if ($resultado->num_rows > 0) {
                             <i class='fas fa-edit'></i> Editar
                         </button>
                     </td>
-                    <td class='titulostablaunidades'>" . $fila['id_unidad'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['nombre_marca'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['nombre_modelo'] . "</td>
+                    <td class='titulostablaunidades sticky-left-25'>" . $fila['id_unidad'] . "</td>
+                    <td class='titulostablaunidades sticky-left-50'>" . $fila['nombre_marca'] . "</td>
+                    <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['estado'] . "</td>
@@ -93,9 +93,9 @@ if ($resultado->num_rows > 0) {
                             <i class='fas fa-edit'></i> Editar
                         </button>
                     </td>
-                    <td class='titulostablaunidades'>" . $fila['id_unidad'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['nombre_marca'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['nombre_modelo'] . "</td>
+                    <td class='titulostablaunidades sticky-left-25'>" . $fila['id_unidad'] . "</td>
+                    <td class='titulostablaunidades sticky-left-50'>" . $fila['nombre_marca'] . "</td>
+                    <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
                     <td class='titulostablaunidades'>" . $fila['estado'] . "</td>

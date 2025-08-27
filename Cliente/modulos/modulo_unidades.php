@@ -55,12 +55,12 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     <?php endif; ?>
   </div>
 </div>
+<!-- Campo de búsqueda para filtrar la tabla -->
+<div class="buscador" style="padding-left: 30px;">
+  <input type="text" id="filtroBusqueda" class="form-control filtroBusqueda sticky-left-0" placeholder="Buscar unidades..." onkeyup="filtrarTabla()">
+</div>
 <!----------------------------------------------------------------------- Tabla Responsiva de las unidades ------------------------------------------------------------------->
 <div class="contendortablaunidades" id="contendortablaunidades">
-  <!-- Campo de búsqueda para filtrar la tabla -->
-  <div class="buscador">
-    <input type="text" id="filtroBusqueda" class="form-control filtroBusqueda" placeholder="Buscar unidades..." onkeyup="filtrarTabla()">
-  </div>
   <!--tabla de las unidades-->
   <table class="table table-hover tablaunidades" id="tablaUnidades">
     <thead>
@@ -84,9 +84,9 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
       <tr>
         <th class="titulostablaunidades sticky-left-0"></th>
-        <th class="titulostablaunidades ">ID</th>
-        <th class="titulostablaunidades ">Marca</th>
-        <th class="titulostablaunidades ">Modelo</th>
+        <th class="titulostablaunidades sticky-left-25">ID</th>
+        <th class="titulostablaunidades sticky-left-50">Marca</th>
+        <th class="titulostablaunidades sticky-left-75">Modelo</th>
         <th class="titulostablaunidades">Placa</th>
         <th class="titulostablaunidades">VIN</th>
         <th class="titulostablaunidades">Estado</th>

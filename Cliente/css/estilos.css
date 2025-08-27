@@ -850,13 +850,12 @@ body {
   justify-content: center;
 }
 .contendortablaunidades {
-  padding: 50px;
   width: 100%;
   height: auto;
   overflow-x: auto;
   margin-left: 0px;
   margin-right: 0px;
-  padding-top: 30px;
+  padding: 5px;
 }
 .opcionesunidades {
   width: 100%;
@@ -1167,21 +1166,28 @@ body {
 }
 .sticky-left-25 {
   position: sticky;
-  left: 70px;
+  left: 63px;
   top: 0;
 }
 .sticky-left-50 {
   position: sticky;
   left: 98px;
   top: 0;
-  background-color: white;
 }
 .sticky-left-75 {
   position: sticky;
   left: 160px;
   top: 0;
-  background-color: white;
 }
+/* Debe ir después de bootstrap.css */
+.table {
+  --bs-table-bg: #f0f0f0;        /* fondo base de todas las celdas */
+  /* Opcional, si usas .table-striped y .table-hover: */
+  --bs-table-striped-bg: #e9e9e9; /* rayas */
+  --bs-table-hover-bg: #e3e3e3;   /* hover */
+}
+
+
 
 /*---------------------------------------------------------------------------------estilos registro de nuevas unidades---------------------------------------------------------------------------*/
 .contenedoropcionesregistrarunidades {

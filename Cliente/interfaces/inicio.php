@@ -22,7 +22,7 @@ error_reporting(E_ALL);
 
 <body >
     <!-- Video de fondo -->
-    <video autoplay muted loop id="background-video">
+    <video autoplay muted loop playsinline poster="../videos/Video_fotograma.png" id="background-video">
         <source src="../videos/videoLogo.mp4" type="video/mp4">
     </video>
 <?php

@@ -12,7 +12,7 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
     <!--estilos de boostrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" >
     <!-- CDN para poder utilizar los toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!--estilos de FontAwesome -->
