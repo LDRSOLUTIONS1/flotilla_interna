@@ -43,7 +43,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                         $conectar->close();
                         ?>
                     </select>
-                    <label for="marcaunidad">Marca</label>
+                    <label for="marcaunidad">Marca <span style="color:red">*</span></label>
                 </div>
                     <label for="marcaunidad"></label>
 
@@ -55,7 +55,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <select class="form-control" id="modelounidad" name="modelounidades">
                         <option value="">Seleccionar</option>
                     </select>
-                    <label for="modelounidad">Modelo</label>
+                    <label for="modelounidad">Modelo <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -89,7 +89,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="number" class="form-control" id="tarjetacirculacionunidad" placeholder="tarjetacirculacionunidad" name="tarjetacirculacionunidades" oninput="document.getElementById('costoNetoLabel').innerText = this.value ? parseFloat(this.value).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' }) + ' MXN' : '';">
-                    <label for="tarjetacirculacionunidadesldr">Costo neto</label>
+                    <label for="tarjetacirculacionunidadesldr">Costo neto <span style="color:red">*</span></label>
                 </div>
                 <label id="costoNetoLabel" style="color: black;"></label>
             </div>
@@ -114,7 +114,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-            <label for="colorunidadldr">Color</label>
+            <label for="colorunidadldr">Color <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -129,7 +129,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" id="placaunidad" placeholder="placaunidad" name="placaunidades">
-                    <label for="placaunidadldr">Placa</label>
+                    <label for="placaunidadldr">Placa <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -137,7 +137,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" id="VIN" placeholder="VIN" name="VINunidades">
-                    <label for="vinunidadldr">VIN</label>
+                    <label for="vinunidadldr">VIN <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -146,7 +146,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="text" class="form-control" id="motorunidad" placeholder="motorunidad" name="motorunidades">
-                    <label for="motorunidadesldr">Número de motor</label>
+                    <label for="motorunidadesldr">Número de motor <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -154,7 +154,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="number" class="form-control" id="añounidad" placeholder="añounidad" name="añounidades">
-                    <label for="motorunidadesldr">Año de la unidad</label>
+                    <label for="motorunidadesldr">Año de la unidad <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -183,7 +183,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-            <label for="estadounidadldr">Estado de la unidad</label>
+            <label for="estadounidadldr">Estado de la unidad <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -216,7 +216,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-            <label for="estatusunidadldr">Estatus de la unidad</label>
+            <label for="estatusunidadldr">Estatus de la unidad <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -247,7 +247,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     }
 
                     echo '</select>
-            <label for="tipounidadldr">Tipo de unidad</label>
+            <label for="tipounidadldr">Tipo de unidad <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -275,7 +275,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     }
 
                     echo '</select>
-            <label for="tipounidadldr">Tipo de unidad</label>
+            <label for="tipounidadldr">Tipo de unidad <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -289,7 +289,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="number" class="form-control" id="foliofactura" placeholder="foliofactura" name="foliofacturaunidades">
-                    <label for="motorunidadesldr">Folio de factura</label>
+                    <label for="motorunidadesldr">Folio de factura <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -317,7 +317,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-            <label for="sedeunidadldr">Sedes</label>
+            <label for="sedeunidadldr">Sedes <span style="color:red">*</span></label>
         </div>
         <label class="" style="color: white;"> </label>
     </div>';
@@ -331,7 +331,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             <div class="col-md-6">
                 <div class="form-floating">
                     <input type="date" class="form-control" id="fechaadquisicionunidad" placeholder="fechaadquisicionunidad" name="fechaadquisicionunidades">
-                    <label for="fechaadquisicionunidadldr">Fecha de adquisición</label>
+                    <label for="fechaadquisicionunidadldr">Fecha de adquisición <span style="color:red">*</span></label>
                 </div>
                 <label class="" style="color: white;"> </label>
             </div>
@@ -357,7 +357,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-        <label for="tipounidadldr">Tipo de adquisición</label>
+        <label for="tipounidadldr">Tipo de adquisición <span style="color:red">*</span></label>
     </div>
     <label class="" style="color: white;"> </label>
 </div>';
@@ -389,7 +389,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
 
                 echo '</select>
-        <label for="tipounidadldr">Arrendadoras</label>
+        <label for="tipounidadldr">Arrendadoras <span style="color:red">*</span></label>
     </div>
     <label class="" style="color: white;"> </label>
 </div>';
@@ -406,7 +406,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="capacidad_carga" name="capacidad_carga" placeholder="Capacidad de carga (kg)">
-                            <label for="capacidad_carga">Capacidad de carga (kg)</label>
+                            <label for="capacidad_carga">Capacidad de carga (kg) <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -415,7 +415,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="capacidad_pasajeros" name="capacidad_pasajeros" placeholder="Capacidad de pasajeros">
-                            <label for="capacidad_pasajeros">Capacidad de pasajeros</label>
+                            <label for="capacidad_pasajeros">Capacidad de pasajeros <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -439,7 +439,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_tipo_combustible'] . '">' . $row['combustible'] . '</option>';
                 }
                             echo '</select>
-                            <label for="tipo_combustible">Tipo de combustible</label>
+                            <label for="tipo_combustible">Tipo de combustible <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';
@@ -467,7 +467,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_traccion'] . '">' . $row['traccion'] . '</option>';
                                 }
                             echo '</select>
-                            <label for="traccion">Tracción</label>
+                            <label for="traccion">Tracción <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';
@@ -481,7 +481,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="tipo_carroceria" name="tipo_carroceria" placeholder="Tipo de carrocería">
-                            <label for="tipo_carroceria">Tipo de carrocería</label>
+                            <label for="tipo_carroceria">Tipo de carrocería <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -490,7 +490,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="numero_puertas" name="numero_puertas" placeholder="Número de puertas">
-                            <label for="numero_puertas">Número de puertas</label>
+                            <label for="numero_puertas">Número de puertas <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -499,7 +499,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="numero_asientos" name="numero_asientos" placeholder="Número de puertas">
-                            <label for="numero_asientos">Número de asientos</label>
+                            <label for="numero_asientos">Número de asientos <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -522,7 +522,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_tipo_caja'] . '">' . $row['tipo_caja'] . '</option>';
                                 }
                             echo'</select>
-                            <label for="tipo_caja">Tipo de caja</label>
+                            <label for="tipo_caja">Tipo de caja <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';
@@ -551,7 +551,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_tipo_freno'] . '">' . $row['tipo_freno'] . '</option>';
                                 }
                             echo'</select>
-                            <label for="tipo_frenos">Tipo de frenos</label>
+                            <label for="tipo_frenos">Tipo de frenos <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';
@@ -580,7 +580,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_tipo_suspencion'] . '">' . $row['tipo_suspencion'] . '</option>';
                                 }
                             echo '</select>
-                            <label for="suspension">Suspensión</label>
+                            <label for="suspension">Suspensión <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';
@@ -594,7 +594,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="numero_ejes" name="numero_ejes" placeholder="Número de ejes">
-                            <label for="numero_ejes">Número de ejes</label>
+                            <label for="numero_ejes">Número de ejes <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>
@@ -618,7 +618,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                     echo '<option value="' . $row['id_tipo_uso'] . '">' . $row['tipo_uso'] . '</option>';
                                 }
                             echo'</select>
-                            <label for="uso_permitido">Uso permitido</label>
+                            <label for="uso_permitido">Uso permitido <span style="color:red">*</span></label>
                         </div>
                         <label class="" style="color: white;"> </label>
                     </div>';} else {
@@ -627,19 +627,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             $conexion->close();
             ?>
 
-                    <!-- Extras tecnológicos -->
-                    <div class="col-md-6">
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="camara_reversa" id="camara_reversa" value="1">
-                            <label class="form-check-label" for="camara_reversa">Cámara de reversa</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="sensores_reversa" id="sensores_reversa" value="1">
-                            <label class="form-check-label" for="sensores_reversa">Sensores de reversa</label>
-                        </div>
-                    </div>
 
                 </div>
         </div>
