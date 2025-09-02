@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const campos = [
         {
           campo: valor_archivo_subir_comodato,
-          nombre: "archivo_subir_comodato",
+          nombre: "Archivo del comodato",
         },
       ];
 

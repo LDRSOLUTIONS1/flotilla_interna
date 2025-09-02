@@ -371,3 +371,13 @@ if (resultado == "prorrogaenviada") {
   });
   limpiarparametros();
 }
+//alerta de comodato firmado demo
+if (resultado == "Comodatodemosubido") {
+  Swal.fire({
+    title: "Comodato subido correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}

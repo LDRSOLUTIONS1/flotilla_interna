@@ -20,7 +20,7 @@
       </div>
 
       <div class="col-md-3">
-        <div class="card text-center bg-primary text-white p-1">
+        <div class="card text-center text-white p-1"  style="background-color: #5586cee7;">
           <div class="card-body">
             <h6>Activas (&lt; 48 meses)</h6>
             <h6 id="totalActivas" class="fs-6">0</h6>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="col-md-3">
-        <div class="card text-center bg-warning text-dark p-1">
+        <div class="card text-center text-dark p-1" style="background-color: #e2ba35ff;">
           <div class="card-body">
             <h6>Próximas venta (48-59 meses)</h6>
             <h6 id="totalProximas" class="fs-6">0</h6>
@@ -38,7 +38,7 @@
       </div>
 
       <div class="col-md-3">
-        <div class="card text-center bg-danger text-white p-1">
+        <div class="card text-center text-white p-1" style="background-color: #4abb83ff;">
           <div class="card-body">
             <h6>Para vender (&ge; 60 meses)</h6>
             <h6 id="totalVenta" class="fs-6">0</h6>
@@ -98,46 +98,51 @@
               }
 
               foreach ($unidades as $u) {
-                $fecha_alta = new DateTime($u['fecha_alta']);
-                $fecha_alta_iso = $fecha_alta->format('Y-m-d');   // para ordenar
-                $fecha_alta_vista = $fecha_alta->format('d/m/Y'); // para mostrar
+    $fecha_alta = new DateTime($u['fecha_alta']);
+    $fecha_alta_iso = $fecha_alta->format('Y-m-d');   // para ordenar
+    $fecha_alta_vista = $fecha_alta->format('d/m/Y'); // para mostrar
 
-                $diff = $fecha_actual->diff($fecha_alta);
-                $meses_usados = ($diff->y * 12) + $diff->m;
-                $porcentaje = min(100, max(0, ($meses_usados / $vida_util_meses) * 100));
+    $diff = $fecha_actual->diff($fecha_alta);
+    $meses_usados = ($diff->y * 12) + $diff->m;
+    $porcentaje = min(100, max(0, ($meses_usados / $vida_util_meses) * 100));
 
-                if ($meses_usados < 48) {
-                  $estado = "Activa";
-                  $colorBarra = "bg-primary";
-                  $contadorEstados["Activa"]++;
-                } elseif ($meses_usados < 60) {
-                  $estado = "Próxima a venta";
-                  $colorBarra = "bg-warning";
-                  $contadorEstados["Próxima"]++;
-                } else {
-                  $estado = "Para vender";
-                  $colorBarra = "bg-danger";
-                  $contadorEstados["Venta"]++;
-                }
+    if ($meses_usados < 48) {
+        $estado = "Activa";
+        $colorBarra = "progress-bar-activa";
+        $colorBadge = "badge-activa";
+        $contadorEstados["Activa"]++;
+    } elseif ($meses_usados < 60) {
+        $estado = "Próxima a venta";
+        $colorBarra = "progress-bar-proxima";
+        $colorBadge = "badge-proxima";
+        $contadorEstados["Próxima"]++;
+    } else {
+        $estado = "Para vender";
+        $colorBarra = "progress-bar-venta";
+        $colorBadge = "badge-venta";
+        $contadorEstados["Venta"]++;
+    }
 
-                echo "<tr>
-                        <td><strong>".htmlspecialchars($u['marca'])." ".htmlspecialchars($u['modelo'])."</strong><br>
-                            <small>VIN: ".htmlspecialchars($u['vin'])."<br>
-                            Placas: ".htmlspecialchars($u['placa'])."<br>
-                            Sede: ".htmlspecialchars($u['ubicacion'])."</small>
-                        </td>
-                        <td data-order=\"{$fecha_alta_iso}\">{$fecha_alta_vista}</td>
-                        <td>{$meses_usados} meses</td>
-                        <td>
-                          <div class='progress'>
-                            <div class='progress-bar {$colorBarra}' role='progressbar' style='width: {$porcentaje}%;'>
-                              ".max(0, $vida_util_meses - $meses_usados)." meses restantes
-                            </div>
-                          </div>
-                        </td>
-                        <td><span class='badge {$colorBarra}'>{$estado}</span></td>
-                      </tr>";
-              }
+    echo "<tr>
+            <td><strong>".htmlspecialchars($u['marca'])." ".htmlspecialchars($u['modelo'])."</strong><br>
+                <small>VIN: ".htmlspecialchars($u['vin'])."<br>
+                Placas: ".htmlspecialchars($u['placa'])."<br>
+                Sede: ".htmlspecialchars($u['ubicacion'])."<br>
+                Kilometraje: ".htmlspecialchars($u['ultimo_kilometraje'])." Km</small>
+            </td>
+            <td data-order=\"{$fecha_alta_iso}\">{$fecha_alta_vista}</td>
+            <td>{$meses_usados} meses</td>
+            <td>
+              <div class='progress'>
+                <div class='progress-bar {$colorBarra}' role='progressbar' style='width: {$porcentaje}%;'>
+                  ".max(0, $vida_util_meses - $meses_usados)." meses restantes
+                </div>
+              </div>
+            </td>
+            <td><span class='badge {$colorBadge}'>{$estado}</span></td>
+          </tr>";
+}
+
               ?>
             </tbody>
           </table>
@@ -162,7 +167,7 @@
       labels: ['Activas', 'Próximas', 'Para vender'],
       datasets: [{
         data: [<?php echo $contadorEstados["Activa"]; ?>, <?php echo $contadorEstados["Próxima"]; ?>, <?php echo $contadorEstados["Venta"]; ?>],
-        backgroundColor: ['#0d6efd', '#ffc107', '#dc3545']
+        backgroundColor: ['#5586cee7', '#cfa935ff', '#4abb83ff']
       }]
     }
   });

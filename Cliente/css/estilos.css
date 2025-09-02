@@ -2901,3 +2901,28 @@ height: auto;
   padding: 20px;
   margin-bottom: 20px;
 }
+/*------------------------------------------estilos vida util de unidades demo----------------*/
+.progress-bar-activa {
+  background-color: #5586cee7 !important;
+}
+.progress-bar-proxima {
+  background-color: #cfa935ff !important;
+}
+.progress-bar-venta {
+  background-color: #4abb83ff !important;
+}
+
+/* Para que los badges también se pinten igual */
+.badge-activa {
+  background-color: #5586cee7 !important;
+  color: #fff;
+}
+.badge-proxima {
+  background-color: #cfa935ff !important;
+  color: #fff;
+}
+.badge-venta {
+  background-color: #4abb83ff !important;
+  color: #fff;
+}
+
