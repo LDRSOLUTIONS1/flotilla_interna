@@ -420,11 +420,29 @@ fechaInputDevolucion.min = `${yyyy}-${mm}-${dd}`;
 fechaInputSolicitud.addEventListener('input', function() {
     const fechaSeleccionada = new Date(this.value);
     const diaSemana = fechaSeleccionada.getDay(); // 0=Domingo, 6=Sábado
-    if (diaSemana === 0 || diaSemana === 6) {
-        alert('No se pueden seleccionar sábados o domingos');
+    if (diaSemana === 5 || diaSemana === 6) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No se pueden seleccionar sábados o domingos',
+            text: 'Por favor, seleccione otro día',
+        });
         this.value = ''; // Limpia la selección
     }
 });
+// Evitar sábados y domingos en devolución también
+fechaInputDevolucion.addEventListener('input', function() {
+    const fechaSeleccionada = new Date(this.value);
+    const diaSemana = fechaSeleccionada.getDay();
+    if (diaSemana === 5 || diaSemana === 6) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'No se pueden seleccionar sábados o domingos',
+            text: 'Por favor, seleccione otro día',
+        });
+        this.value = '';
+    }
+});
+
 
 // Bloquear los días seleccionados en el input de solicitud en el input de devolución
 fechaInputSolicitud.addEventListener('change', function() {
