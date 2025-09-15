@@ -37,7 +37,9 @@ document.body.addEventListener("click", function (event) {
   let valorrfcpersonamoral;
   let valorarchivoRFCpersonamoral;
   let valordomiciliodomiciliopersonamoral;
-  let  valorarchivodomiciliopersonamoral;
+  let valorarchivodomiciliopersonamoral;
+  let valordomicilioresguardounidad;
+  let valorarchivodomicilioresguardounidad;
   let valorarchivoescrituraconstitutiva;
   let valorarchivoestatusociales;
 
@@ -57,13 +59,18 @@ document.body.addEventListener("click", function (event) {
       const archivoRFCpersonamoral = document.getElementById("archivoRFCpersonamoral");
       const domiciliodomiciliopersonamoral = document.getElementById("domiciliodomiciliopersonamoral");
       const archivodomiciliopersonamoral = document.getElementById("archivodomiciliopersonamoral");
+      const domicilioresguardounidad = document.getElementById("domicilioresguardounidad");
+      const archivodomicilioresguardounidad = document.getElementById("archivodomicilioresguardounidad");
       const archivoescrituraconstitutiva = document.getElementById("archivoescrituraconstitutiva");
       const archivoestatusociales = document.getElementById("archivoestatusociales");
 
       contenedorspinner.style.display = "flex";
       obtenervalores();
-      validarllenado();
-      insertardatos();
+      if(validarllenado()){
+        insertardatos();
+      } else {
+        contenedorspinner.style.display = "none";
+      }
     }
   });
 
@@ -77,8 +84,24 @@ document.body.addEventListener("click", function (event) {
     valorarchivoRFCpersonamoral = archivoRFCpersonamoral.files[0];
     valordomiciliodomiciliopersonamoral = domiciliodomiciliopersonamoral.value.toUpperCase();
     valorarchivodomiciliopersonamoral = archivodomiciliopersonamoral.files[0];
-    valorarchivoescrituraconstitutiva = archivoescrituraconstitutiva.files[0];
-    valorarchivoestatusociales = archivoestatusociales.files[0];
+    valordomicilioresguardounidad = domicilioresguardounidad.value.toUpperCase();
+    valorarchivodomicilioresguardounidad = archivodomicilioresguardounidad.files[0];
+
+    // 👇 Cambiado: obtener todos los archivos de escritura constitutiva
+  valorarchivoescrituraconstitutiva = [];
+  document.querySelectorAll('input[name="archivoescrituraconstitutiva[]"]').forEach(input => {
+    if (input.files.length > 0) {
+      valorarchivoescrituraconstitutiva.push(input.files[0]);
+    }
+  });
+
+    // 👇 Cambiado: obtener todos los archivos de escritura constitutiva
+  valorarchivoestatusociales = [];
+  document.querySelectorAll('input[name="archivoestatusociales[]"]').forEach(input => {
+    if (input.files.length > 0) {
+      valorarchivoestatusociales.push(input.files[0]);
+    }
+  });
 
     console.log(valorinstitucionorganizacion);
     console.log(valoridentificacionlegal);
@@ -89,6 +112,8 @@ document.body.addEventListener("click", function (event) {
     console.log(valorarchivoRFCpersonamoral);
     console.log(valordomiciliodomiciliopersonamoral);
     console.log(valorarchivodomiciliopersonamoral);
+    console.log(valordomicilioresguardounidad);
+    console.log(valorarchivodomicilioresguardounidad);
     console.log(valorarchivoescrituraconstitutiva);
     console.log(valorarchivoestatusociales);
   }
@@ -97,19 +122,19 @@ document.body.addEventListener("click", function (event) {
     const campos = [
       {
         campo: valorinstitucionorganizacion,
-        nombre: "institucionorganizacion",
+        nombre: "Nombre de la persona moral",
       },
       {
         campo: valoridentificacionlegal,
-        nombre: "identificacionlegal",
+        nombre: "Identificación del Representante Legal",
       },
       {
         campo: valorviegnciarepresentantelegal,
-        nombre: "viegnciarepresentantelegal",
+        nombre: "Vigencia de la Identificación del Representante Legal",
       },
       {
         campo: valorarchivoidentificacionrepresentantelegal,
-        nombre: "archivoidentificacionrepresentantelegal",
+        nombre: "Archivo de identificación del Representante Legal",
       },
       {
         campo: valorarchivopoderepresentantelegal,
@@ -132,6 +157,14 @@ document.body.addEventListener("click", function (event) {
         nombre: "archivodomiciliopersonamoral",
       },
       {
+        campo: valordomicilioresguardounidad,
+        nombre: "domicilioresguardounidad",
+      },
+      {
+        campo: valorarchivodomicilioresguardounidad,
+        nombre: "archivodomicilioresguardounidad",
+      },
+      {
         campo: valorarchivoescrituraconstitutiva,
         nombre: "archivoescrituraconstitutiva",
       },
@@ -143,14 +176,14 @@ document.body.addEventListener("click", function (event) {
     for (let i = 0; i < campos.length; i++) {
       if (!campos[i].campo) {
         Toastify({
-          text: "No obtuve " + campos[i].nombre,
+          text: "No obtuve: " + campos[i].nombre,
           duration: 3000,
           gravity: "top",
           position: "right",
           stopOnFocus: true,
           style: {
             background:
-              "linear-gradient(to right,rgb(255, 230, 0),rgb(231, 208, 0))",
+              "linear-gradient(to right,rgba(255, 0, 0, 1),rgba(231, 0, 0, 1))",
           },
         }).showToast();
         return false;
@@ -171,8 +204,16 @@ document.body.addEventListener("click", function (event) {
     formData.append("archivoRFCpersonamoral", valorarchivoRFCpersonamoral);
     formData.append("domiciliodomiciliopersonamoral", valordomiciliodomiciliopersonamoral);
     formData.append("archivodomiciliopersonamoral", valorarchivodomiciliopersonamoral);
-    formData.append("archivoescrituraconstitutiva", valorarchivoescrituraconstitutiva);
-    formData.append("archivoestatusociales", valorarchivoestatusociales);
+    formData.append("domicilioresguardounidad", valordomicilioresguardounidad);
+    formData.append("archivodomicilioresguardounidad", valorarchivodomicilioresguardounidad);
+    // Agregar los archivos de escritura constitutiva (pueden ser varios)
+    valorarchivoescrituraconstitutiva.forEach((file, index) => {
+      formData.append("archivoescrituraconstitutiva[]", file);
+    });
+    // Agregar los archivos de escritura estatus sociales (pueden ser varios)
+    valorarchivoestatusociales.forEach((file, index) => {
+      formData.append("archivoestatusociales[]", file);
+    });
 
     $.ajax({
       type: "POST",
@@ -188,7 +229,11 @@ document.body.addEventListener("click", function (event) {
       },
     });
   }
+
+  
   //---------------------------------------------------------------------modales para ver documentos------------------------------------------------------
+
+  //modal para ver el id del representante legal
   const modalveridrepresentantelegal = new bootstrap.Modal(document.getElementById("modalveridrepresentantelegal"));
   const modalveridrepresentantelegalbody = document.getElementById("modalveridrepresentantelegalbody");
 
@@ -302,7 +347,79 @@ document.body.addEventListener("click", function (event) {
      }
    })
 
+   // Manejo de agregar/quitar archivos de Escritura Constitutiva
+document.body.addEventListener("click", function (event) {
+  // Botón para agregar archivo
+  if (event.target.id === "btnAgregarEscritura") {
+    const contenedor = document.getElementById("contenedor-escrituras");
+    const div = document.createElement("div");
+    div.className = "form-floating mb-2 d-flex align-items-center";
 
+    div.innerHTML = `
+      <input type="file" class="form-control" name="archivoescrituraconstitutiva[]" accept=".pdf">
+      <button type="button" class="btn btn-sm btn-danger ms-2 quitarArchivo">✖</button>
+    `;
 
+    contenedor.appendChild(div);
+    updateRequired();
+  }
+
+  // Botón para quitar archivo
+  if (event.target.classList.contains("quitarArchivo")) {
+    const fila = event.target.closest(".form-floating");
+    if (fila) fila.remove();
+    updateRequired();
+  }
+});
+
+   // Manejo de agregar/quitar archivos de Escritura Estatus Sociales
+document.body.addEventListener("click", function (event) {
+  // Botón para agregar archivo
+  if (event.target.id === "btnAgregarEstatus") {
+    const contenedor2 = document.getElementById("contenedor-estatus");
+    const div = document.createElement("div");
+    div.className = "form-floating mb-2 d-flex align-items-center";
+
+    div.innerHTML = `
+      <input type="file" class="form-control" name="archivoestatusociales[]" accept=".pdf">
+      <button type="button" class="btn btn-sm btn-danger ms-2 quitarArchivo">✖</button>
+    `;
+
+    contenedor2.appendChild(div);
+    updateRequired();
+  }
+
+  // Botón para quitar archivo
+  if (event.target.classList.contains("quitarArchivo")) {
+    const fila = event.target.closest(".form-floating");
+    if (fila) fila.remove();
+    updateRequired();
+  }
+});
+
+function updateRequired() {
+  const contenedor = document.getElementById("contenedor-escrituras");
+  const contenedor2 = document.getElementById("contenedor-estatus");
+  const inputs = contenedor.querySelectorAll('input[type="file"][name="archivoescrituraconstitutiva[]"]');
+  const inputs2 = contenedor2.querySelectorAll('input[type="file"][name="archivoestatusociales[]"]');
+  if (inputs.length === 0) {
+    const div = document.createElement("div");
+    div.className = "form-floating mb-2";
+    div.innerHTML = `<input type="file" class="form-control" name="archivoescrituraconstitutiva[]" accept=".pdf" required>`;
+    contenedor.appendChild(div);
+    return;
+  }
+  if (inputs2.length === 0) {
+    const div = document.createElement("div");
+    div.className = "form-floating mb-2";
+    div.innerHTML = `<input type="file" class="form-control" name="archivoestatusociales[]" accept=".pdf" required>`;
+    contenedor2.appendChild(div);
+    return;
+  }
+  inputs.forEach(inp => inp.removeAttribute("required"));
+  inputs[0].setAttribute("required", "required");
+  inputs2.forEach(inp => inp.removeAttribute("required"));
+  inputs2[0].setAttribute("required", "required");
+}
 
 });

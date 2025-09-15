@@ -44,7 +44,7 @@ $avatar = $datos_usuario['avatar'];
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
-            <li ><a class="menulist" href="unidades.php">Unidades</a></li>
+            <li ><a class="menulist" href="unidades_demo.php">Unidades</a></li>
             <!--<li ><a class="menulist" href="unidades_demo_asignadas.php">Unidades demo asignadas</a></li>-->
 
         <?php elseif ($id_tipo_usuario == 2): // juridico ?>

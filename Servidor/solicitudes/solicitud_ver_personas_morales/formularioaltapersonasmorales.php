@@ -1,110 +1,170 @@
 
 <div class="row">
-    <h3>Nombre de la institución o organización.</h3>
     <!-- Nombre de la institucion o organizacion -->
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="form-floating">
-            <input type="text" class="form-control institucionorganizacion" id="institucionorganizacion" placeholder="institucionorganizacion" name="institucionorganizacion">
-            <label for="domiciliounidadldr">Institución o organización</label>
+            <input type="text" class="form-control institucionorganizacion" id="institucionorganizacion" placeholder="institucionorganizacion" name="institucionorganizacion" required>
+            <label for="domiciliounidadldr">Nombre de la Persona Moral <span class="text-danger">*</span></label>
         </div>
         <label class="" style="color: black;"> </label>
     </div>
-    <h3>Identificación oficial y vigente del Representante Legal.</h3>
+    
     <!-- identificacion del representante legal -->
+    <p class="letrasaltapersonasmorales">Identificación oficial y vigente del Representante Legal.</p>
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="text" class="form-control identificacionlegal" id="identificacionlegal" placeholder="identificacionlegal" name="identificacionlegal">
-            <label for="nombre1unidadldr">Sección o pasaporte</label>
+            <input type="text" class="form-control identificacionlegal" id="identificacionlegal" placeholder="identificacionlegal" name="identificacionlegal" required>
+            <label for="nombre1unidadldr">Sección o pasaporte<span class="text-danger">*</span></label>
         </div>
-        <label class="float-end" style="color: black;"> Ejemplo : 1727 ó el id del pasaporte</label>
+        <label class="float-end letrasaltapersonasmorales" > Ejemplo : 1727 ó el id del pasaporte</label>
     </div>
+
     <!-- vigencia del representante legal -->
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="text" class="form-control viegnciarepresentantelegal" id="viegnciarepresentantelegal" placeholder="viegnciarepresentantelegal" name="viegnciarepresentantelegal">
-            <label for="nombre2unidadldr">Vigencia</label>
+            <input type="text" class="form-control viegnciarepresentantelegal" id="viegnciarepresentantelegal" placeholder="viegnciarepresentantelegal" name="viegnciarepresentantelegal" required>
+            <label for="nombre2unidadldr">Vigencia<span class="text-danger">*</span></label>
         </div>
-        <label class="float-end" style="color: black;"> Ejemplo : 2020-2030</label>
+        <label class="float-end letrasaltapersonasmorales"> Ejemplo : 2020-2030</label>
     </div>
+
     <!--archivo identificacion oficial del representante-->
-    <h5><b>•	Archivo identificación o pasaporte</b></h5>
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <p class="letrasaltapersonasmorales">•	Archivo de Identificación o Pasaporte<span class="text-danger">*</span></p>
         <div class="form-floating">
-            <input type="file" class="form-control archivoidentificacionrepresentantelegal" id="archivoidentificacionrepresentantelegal" placeholder="archivoidentificacionrepresentantelegal" name="archivoidentificacionrepresentantelegal" accept=".pdf">
-            <label for="archivodomicilioldr">Archivo identificación</label>
+            <input type="file" class="form-control archivoidentificacionrepresentantelegal" id="archivoidentificacionrepresentantelegal" placeholder="archivoidentificacionrepresentantelegal" name="archivoidentificacionrepresentantelegal" accept=".pdf" required>
         </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
+        <label class="" style="color: white;"></label>
     </div>
+
     <!--archivo identificacion oficial del representante-->
-    <h5><b>•	Archivo poder del representante legal</b></h5>
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <p class="letrasaltapersonasmorales">•	Archivo Poder del Representante Legal con datos de inscripción en el Registro Público.<span class="text-danger">*</span></p>
         <div class="form-floating">
-            <input type="file" class="form-control archivopoderepresentantelegal" id="archivopoderepresentantelegal" placeholder="archivopoderepresentantelegal" name="archivopoderepresentantelegal" accept=".pdf">
-            <label for="archivodomicilioldr">Archivo del poder del representante legal</label>
+            <input type="file" class="form-control archivopoderepresentantelegal" id="archivopoderepresentantelegal" placeholder="archivopoderepresentantelegal" name="archivopoderepresentantelegal" accept=".pdf" required>
         </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
+        <label class="" style="color: white;"></label>
     </div>
     
 </div>
 
 <div class="row">
-    <h3>RFC</h3>
     <!--curp-->
+    <p class="letrasaltapersonasmorales">Constancia de Situación Fiscal de la Moral (con vigencia no mayor a 2 meses).</p>
     <div class="col-md-6">
         <div class="form-floating">
-            <input type="text" class="form-control rfcpersonamoral" id="rfcpersonamoral" placeholder="rfcpersonamoral" name="rfcpersonamoral">
-            <label for="curpunidadldr">RFC</label>
+            <input type="text" class="form-control rfcpersonamoral" id="rfcpersonamoral" placeholder="rfcpersonamoral" name="rfcpersonamoral" required>
+            <label for="curpunidadldr">RFC <span class="text-danger">*</span></label>
         </div>
         <label class="" style="color: black;"> </label>
     </div>
-    <!--archivo comprobande curp-->
-    <h5><b>•	Archivo Constancia de Situación Fiscal</b></h5>
-    <div class="col-md-8">
+
+    <!--archivo constancia de situacion fiscal-->
+    <div class="col-md-6">
         <div class="form-floating">
-            <input type="file" class="form-control archivoRFCpersonamoral" id="archivoRFCpersonamoral" placeholder="archivoRFCpersonamoral" name="archivoRFCpersonamoral" accept=".pdf">
-            <label for="archivodomicilioldr">Archivo Constancia de Situación Fiscal</label>
+            <input type="file" class="form-control archivoRFCpersonamoral" id="archivoRFCpersonamoral" placeholder="archivoRFCpersonamoral" name="archivoRFCpersonamoral" accept=".pdf" required>
+                    <label for="archivodomiciliopersonamoralldr">Archivo Constancia de Situación Fiscal<span class="text-danger">*</span></label>
         </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
+        <label class="" style="color: white;"></label>
     </div>
 </div>
 
 <div class="row">
-    <h3>Domicilio</h3>
+
     <!-- domicilio -->
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <p class="letrasaltapersonasmorales">Domicilio de la persona moral</p>
         <div class="form-floating">
-            <input type="text" class="form-control domiciliodomiciliopersonamoral" id="domiciliodomiciliopersonamoral" placeholder="domiciliodomiciliopersonamoral" name="domiciliodomiciliopersonamoral">
-            <label for="domiciliounidadldr">Domicilio</label>
+            <input type="text" class="form-control domiciliodomiciliopersonamoral" id="domiciliodomiciliopersonamoral" placeholder="domiciliodomiciliopersonamoral" name="domiciliodomiciliopersonamoral" required>
+            <label for="domiciliounidadldr">Domicilio <span class="text-danger">*</span></label>
         </div>
         <label class="" style="color: black;"> </label>
     </div>
+
     <!--archivo comprobande de domicilio-->
-    <h5><b>•	Archivo comprobande de domicilio</b></h5>
-    <div class="col-md-8">
+    <div class="col-md-12">
+        <h5 class="letrasaltapersonasmorales">•	Archivo comprobande de domicilio <span class="text-danger">*</span></h5>
         <div class="form-floating">
-            <input type="file" class="form-control archivodomiciliopersonamoral" id="archivodomiciliopersonamoral" placeholder="archivodomiciliopersonamoral" name="archivodomiciliopersonamoral" accept=".pdf">
-            <label for="archivodomiciliopersonamoralldr">Archivo domicilio</label>
+            <input type="file" class="form-control archivodomiciliopersonamoral" id="archivodomiciliopersonamoral" placeholder="archivodomiciliopersonamoral" name="archivodomiciliopersonamoral" accept=".pdf" required>
         </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
+        <label class="" style="color: white;"></label>
     </div>
+
 </div>
+
+<div class="row">
+
+    <!-- domicilio de resguardo de unidad-->
+    <div class="col-md-12">
+        <p class="letrasaltapersonasmorales">Domicilio del resguardo de la unidad</p>
+        <div class="form-floating">
+            <input type="text" class="form-control domicilioresguardounidad" id="domicilioresguardounidad" placeholder="domicilioresguardounidad" name="domicilioresguardounidad" required>
+            <label for="domiciliounidadldr">Domicilio <span class="text-danger">*</span></label>
+        </div>
+        <label class="" style="color: black;"> </label>
+    </div>
+
+    <!--archivo comprobande de domicilio resguardo de -->
+    <div class="col-md-12">
+        <h5 class="letrasaltapersonasmorales">•	Archivo comprobande de domicilio del resguardo de la unidad<span class="text-danger">*</span></h5>
+        <div class="form-floating">
+            <input type="file" class="form-control archivodomicilioresguardounidad" id="archivodomicilioresguardounidad" placeholder="archivodomicilioresguardounidad" name="archivodomicilioresguardounidad" accept=".pdf" required>
+        </div>
+        <label class="" style="color: white;"></label>
+    </div>
+
+</div>
+
 <div class="row">
     <!--archivo escritura constitutativa-->
-    <h5><b>•	Archivo escritura Constitutiva con datos de inscripción en el Registro Público.</b></h5>
-    <div class="col-md-8">
-        <div class="form-floating">
-            <input type="file" class="form-control archivoescrituraconstitutiva" id="archivoescrituraconstitutiva" placeholder="archivoescrituraconstitutiva" name="archivoescrituraconstitutiva" accept=".pdf">
-            <label for="archivoescrituraconstitutivaldr">Archivo escritura constitutiva</label>
-        </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
+    <div class="col-md-12" id="contenedor-escrituras">
+    <h5 class="letrasaltapersonasmorales">
+        • Archivos de Escritura Constitutiva con datos de inscripción en el Registro Público
+        <span class="text-danger">*</span>
+    </h5>
+
+    <!-- primer input obligatorio -->
+    <div class="form-floating mb-2">
+        <input type="file" class="form-control" 
+               name="archivoescrituraconstitutiva[]" 
+               accept=".pdf" required>
     </div>
-    <!--archivo comprobande de domicilio-->
-    <h5><b>•	Archivo escrituras de sus principales modificaciones a sus estatutos sociales.</b></h5>
-    <div class="col-md-8">
-        <div class="form-floating">
-            <input type="file" class="form-control archivoestatusociales" id="archivoestatusociales" placeholder="archivoestatusociales" name="archivoestatusociales" accept=".pdf">
-            <label for="archivoestatusocialesldr">Archivo escritura de estatus sociales</label>
+</div>
+
+<div class="col-md-4">
+<!-- botón modificado: sin onclick -->
+<button type="button" id="btnAgregarEscritura" class="btn btn-secondary mt-2">
+  ➕ Agregar otro archivo
+</button>
+</div>
+<label class="" style="color: white;">.</label>
+
+<div id="contenedor-escrituras"></div>
+
+
+    <!--archivo escrituras de estatus sociales-->
+    <div class="col-md-12" id="contenedor-estatus">
+        <h5 class="letrasaltapersonasmorales">
+            •	Archivo Escrituras de sus principales modificaciones a sus Estatutos Sociales. 
+            <span class="text-danger">*</span>
+        </h5>
+
+        <!-- primer input obligatorio -->
+        <div class="form-floating mb-2">
+            <input type="file" class="form-control"
+                   name="archivoestatusociales[]" 
+                   accept=".pdf" required>
         </div>
-        <label class="" style="color: white;">*Campo obligatorio</label>
     </div>
+
+    <div class="col-md-4">
+        <!-- botón modificado: sin onclick -->
+        <button type="button" id="btnAgregarEstatus" class="btn btn-secondary mt-2">
+            ➕ Agregar otro archivo
+        </button>
+    </div>
+    <label class="" style="color: white;">.</label>
+
+    <div id="contenedor-estatus"></div>
+
 </div>

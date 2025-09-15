@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           }).showToast();
 
-          window.location.href = "./unidades.php?resultado=Unidadactualizada";
+          window.location.href = "./unidades_demo.php?resultado=Unidadactualizada";
           modalEditarUnidadesdemo.hide();
         } else if (response.includes("Duplicate")) {
           Toastify({

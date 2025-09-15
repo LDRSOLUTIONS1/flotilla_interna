@@ -22,13 +22,14 @@
       <tr>
         <th class="titulostablaunidades"></th>
         <th class="titulostablaunidades">ID</th>
-        <th class="titulostablaunidades">Organizacion o institucion</th>
-        <th class="titulostablaunidades">Identificacion o pasaporte</th>
-        <th class="titulostablaunidades">Id representante legal</th>
+        <th class="titulostablaunidades">Persona moral</th>
+        <th class="titulostablaunidades">Identificación o pasaporte</th>
         <th class="titulostablaunidades">Archivo poder</th>
         <th class="titulostablaunidades">RFC</th>
         <th class="titulostablaunidades">Domicilio</th>
+        <?php if($id_tipo_usuario == 4): ?>
         <th class="titulostablaunidades">Creador de la persona</th>
+        <?php endif; ?>
         <th class="titulostablaunidades">Archivo RFC</th>
         <th class="titulostablaunidades">Archivo domicilio</th>
         <th class="titulostablaunidades">Escritura constitutiva</th>

@@ -22,17 +22,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!--Aqui comienza el contenedor de unidades-->
 <div class="contenedoropcionesunidades">
-
-  <?php if ($id_tipo_usuario == 1): // Administrador ?>
   <h2 class="titulosletrasunidades text-nowrap">Administración de unidades</h2>
-  <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
-  <h2 class="titulosletrasunidades text-nowrap">Administración de unidades demo</h2>
-  <?php endif; ?>
-
-
+  
   <div class="container mt-4">
    <!-------------------------------------------------------------- Botones de unidades dependiendo del tipo de usuario ADMIN o ADMIN DEMOS -->
-    <?php if ($id_tipo_usuario == 1): // Administrador ?>
+    
     <div class="d-flex flex-wrap justify-content-center contenedor_botones">
       <!-- Botón estilizado -->
       <button onclick="window.location.href='../interfaces/agrega_nuevas_unidades.php'" class="btn btn-agregarunidad m-2 "> <i class="fa-solid fa-car"> </i>   Agregar</button>
@@ -41,18 +35,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       <!-- Botón estilizado -->
       <button class="btn m-2 btn-asignarexterno btnasignarunidadesexternos"> <i class="fa-solid fa-person-walking-arrow-right"> </i>   Asignar externos</button>
     </div>
-
-    
-    <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
-    <div class="d-flex flex-wrap justify-content-center contenedor_botones">
-      <!-- Botón estilizado -->
-      <button onclick="window.location.href='../interfaces/agrega_nuevas_unidades.php'" class="btn btn-agregarunidad m-2 "> <i class="fa-solid fa-car"> </i>   Agregar</button>
-      <!-- Botón estilizado -->
-      <button onclick="window.location.href='../interfaces/personas_fisicas.php'" class="btn m-2 btn-asignarunidadfisica "> <i class="fa-solid fa-person"> </i>   Personas físicas</button> 
-      <!-- Botón estilizado -->
-      <button onclick="window.location.href='../interfaces/personas_morales.php'" class="btn m-2 btn-asignarunidadmoral "> <i class="fa-solid fa-building-user"> </i>   Personas morales</button>
-    </div>
-    <?php endif; ?>
   </div>
 </div>
 <!-- Campo de búsqueda para filtrar la tabla -->
@@ -64,7 +46,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
   <!--tabla de las unidades-->
   <table class="table table-hover tablaunidades" id="tablaUnidades">
     <thead>
-      <?php if ($id_tipo_usuario == 1): // Administrador ?>
       <tr>
         <th class="titulostablaunidades sticky-left-0"></th>
         <th class="titulostablaunidades sticky-left-25">ID</th>
@@ -81,24 +62,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <th class="titulostablaunidades">Tenencias</th>
         <th class="titulostablaunidades">Verificaciones</th>
       </tr>
-      <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
-      <tr>
-        <th class="titulostablaunidades sticky-left-0"></th>
-        <th class="titulostablaunidades sticky-left-25">ID</th>
-        <th class="titulostablaunidades sticky-left-50">Marca</th>
-        <th class="titulostablaunidades sticky-left-75">Modelo</th>
-        <th class="titulostablaunidades">Placa</th>
-        <th class="titulostablaunidades">VIN</th>
-        <th class="titulostablaunidades">Estado</th>
-        <th class="titulostablaunidades">Tipo de unidad</th>
-        <th class="titulostablaunidades">Sede</th>
-        <th class="titulostablaunidades">Kilometraje</th>
-        <th class="titulostablaunidades">Maps</th>
-        <th class="titulostablaunidades">Seguros</th>
-        <th class="titulostablaunidades">Tenencias</th>
-        <th class="titulostablaunidades">Verificaciones</th>
-      </tr>
-      <?php endif; ?>
     </thead>
     <tbody>
       <?php include("../../Servidor/solicitudes/unidades/obtener_unidades.php"); ?>
@@ -124,24 +87,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
   </div>
 </div>
 
-<!----------------------------------------------------------------------- modal de edicion de unidades demo------------------------------------------------------------------->
-<!-- Modal -->
-<div class="modal fade modalEditarUnidadesdemo" id="modalEditarUnidadesdemo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar unidades DEMO</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modalEditarUnidadesdemoBody">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btnactualizarunidademo">Actualizar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!----------------------------------------------------------------------- modal de registro de aseguradoras ------------------------------------------------------------------->
 <!-- Modal -->
 <div class="modal fade modalpolizasunidades" id="modalPolizasUnidades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -153,23 +99,12 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       </div>
       <div class="modal-body" id="modalPolizasUnidadesBody">
         <?php 
-        if ($id_tipo_usuario == 1): // Administrador
         include("../../Servidor/componentes/formularioPolizas.php"); 
-        elseif ($id_tipo_usuario == 4): // Administrador DEMOS
-          include("../../Servidor/componentes/formularioPolizas.php"); 
-        endif;
         ?>
 
-        <?php if ($id_tipo_usuario == 1): // Administrador ?>
         <div class="d-flex " style="padding-left: 20px;">
           <button type="button" class="btn btn-primary btn" id="btnguardaraseguradora">Guardar</button>
         </div>
-        <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS?>
-        <div class="d-flex " style="padding-left: 20px;">
-          <button type="button" class="btn btn-primary btn" id="btnguardaraseguradora">Guardar</button>
-        </div>
-        <?php endif; ?>
-
         <div>
           <div class="contenedor_tabla_polizas">
             <div class="row">
@@ -220,26 +155,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       </div>
       <div class="modal-body" id="modalTenenciasunidadesBody">
         <?php 
-        if ($id_tipo_usuario == 1): // Administrador
         include("../../Servidor/componentes/formularioTenencias.php"); 
-        elseif ($id_tipo_usuario == 4): // Administrador DEMOS
-        include("../../Servidor/componentes/formularioTenencias.php"); 
-
-        endif;
         ?>
-
-        
-
-        <?php if ($id_tipo_usuario == 1): // Administrador ?>
         <div class="d-flex " style="padding-left: 20px;">
           <button type="button" class="btn btn-primary btn" id="btnguardartenencia">Guardar</button>
         </div>
-        <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS?>
-        <div class="d-flex " style="padding-left: 20px;">
-          <button type="button" class="btn btn-primary btn" id="btnguardartenencia">Guardar</button>
-        </div>
-        <?php endif; ?>
-
         <div>
           <div class="contenedor_tabla_polizas">
             <div class="row">
@@ -291,23 +211,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <?php  ?>
 
         <?php 
-        if ($id_tipo_usuario == 1): // Administrador
         include("../../Servidor/componentes/formularioVerificaciones.php");
-        elseif ($id_tipo_usuario == 4): // Administrador DEMOS
-        include("../../Servidor/componentes/formularioVerificaciones.php");
-        endif;
-        ?>
-
-        <?php if ($id_tipo_usuario == 1): // Administrador ?>
+         ?>
         <div class="d-flex " style="padding-left: 20px;">
           <button type="button" class="btn btn-primary btn" id="btnguardarverificacion">Guardar</button>
         </div>
-        <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS?>
-        <div class="d-flex " style="padding-left: 20px;">
-          <button type="button" class="btn btn-primary btn" id="btnguardarverificacion">Guardar</button>
-        </div>
-        <?php endif; ?>
-
         <div>
           <div class="contenedor_tabla_polizas">
             <div class="row">
@@ -422,9 +330,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 <!--js para mandar a llamar el modal de edicion de unidades-->
-<script src="../js/unidades/editarunidades.js"></script>
-<!--js para mandar a llamar el modal de edicion de unidades demo-->
-<script src="../js/unidades/editarunidadesdemo.js"></script>
+<script src="../js/unidades/editarunidades.js"></script>y
 <!--js para mandar a llamar el modal de polizas aseguradoras-->
 <script src="../js/polizas/modulo_poliza_aseguradora.js"></script>
 <!--js para mandar a llamar el modal de polizas tenencias-->

@@ -2379,6 +2379,18 @@ height: auto;
     padding-left: 0px;
   }
 }
+
+/*------------------------------------------------------------estilos para el alta de personas morales----------------------------------------*/
+.letrasaltapersonasmorales{
+  font-size: 1.1rem;
+  color: rgb(68, 67, 67);
+}
+@media (max-width: 768px) {
+  .letrasaltapersonasmorales {
+    font-size: 0.9rem;
+  }
+}
+
 /*-------------------------------------------------------------estilos para el autorizador de unidades demos personas morales------------------------------*/
 
 /*contnedor para el buscador de las unidades demos*/
