@@ -21,21 +21,11 @@ $fila_tipo = $resultado->fetch_assoc();
 $id_tipo_usuario = $fila_tipo['id_tipo_usuario'] ?? null;
 
 // Consulta según tipo de usuario
-$sql = "SELECT pm.id_persona_moral, 
-               pm.id_registrador_persona_moral,
+$sql = "SELECT pm.*, 
                col.nombre_1 AS nombre_1_colaborador,
                col.nombre_2 AS nombre_2_colaborador,
                col.apellido_paterno AS apellido_paterno_colaborador,
-               col.apellido_materno AS apellido_materno_colaborador,
-               pm.organizacion_institucion,
-               pm.identificacion_representante_legal_seccion,
-               pm.vigencia,
-               pm.archivo_identificacion_representante_legal,
-               pm.archivo_poder_representante_legal,
-               pm.rfc_moral,
-               pm.archivo_rfc_moral,
-               pm.domicilio,
-               pm.archivo_domiclio_moral
+               col.apellido_materno AS apellido_materno_colaborador
         FROM personas_morales AS pm
         LEFT JOIN colaboradores col ON pm.id_registrador_persona_moral = col.id_colaborador";
 
@@ -60,18 +50,10 @@ if ($resultado->num_rows > 0) {
             echo"</td>
             <td class='titulostablaunidades'>" . $fila['id_persona_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['organizacion_institucion'] . "</td>
-            <td>
-                <button class='btn btn-sm btn-curp btnveridrepresentantelegal' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Identificación
-                </button>
-            </td>
-            <td>
-                <button class='btn btn-sm btn-curp btnverpoderrepresentantelegal' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Poder
-                </button>
-            </td>
             <td class='titulostablaunidades'>" . $fila['rfc_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['contacto_persona_moral'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['domicilio_resguardo_unidad'] . "</td>
             ";
 
         // Mostrar nombre del creador solo si el usuario es admin tipo 4
@@ -85,26 +67,32 @@ if ($resultado->num_rows > 0) {
         }
 
         echo "
+            <td style='text-align: center;'>
+                <button class='btn fas fa-id-card btn-identificacion btnveridrepresentantelegal' data-id='" . $fila['id_persona_moral'] . "'></button>
+            </td>
             
-            <td>
-                <button class='btn btn-sm btn-curp btnverrfc' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> RFC
-                </button>
+            <td style='text-align: center;'>
+                <button class='btn fas fa-file-pdf btn-poder btnverpoderrepresentantelegal' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-rfc btnverdomicilio' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Domicilio
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-file-pdf btn-rfc btnverrfc' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-domicilio btnverescrituraconstitutiva' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i>Constitutiva
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-map-marker-alt btn-domicilio' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-domicilio btnverestatusociales' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Estatus sociales
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-file-pdf btn-constitutiva btnverescrituraconstitutiva' data-id='" . $fila['id_persona_moral'] . "'></button>
+            </td>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-file-pdf btn-estatutos btnverestatusociales' data-id='" . $fila['id_persona_moral'] . "'></button>
+            </td>
+            
+            <td style='text-align: center;'>
+                <button class='btn fas fa-file-pdf btn-resguardounidad btndomicilioresguardo' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
         </tr>";
     }

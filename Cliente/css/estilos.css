@@ -343,7 +343,7 @@ body {
 .navbar {
   width: 100%;
   height: 80px;
-  background: white;
+  background: rgb(247, 247, 247);
   position: fixed;
   top: 0;
   left: 0;
@@ -443,7 +443,7 @@ body {
     top: 60px;
     left: 0;
     width: 100%;
-    background: white;
+    background: rgb(235, 234, 234);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 10px 0;
   }
@@ -2058,28 +2058,64 @@ height: auto;
 .btn-curp {
   background-color: #386e9b; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*btn identificacion o pasaporte*/
+.btn-identificacion {
+  background-color: #386e9b; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*btn poder*/
+.btn-poder {
+  background-color: #388f9b; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
 }
 /*btn ines*/
 .btn-ine{
   background-color: #709b38; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
 }
 /*btn verificaciones*/
 .btn-rfc {
   background-color: #ce6b14; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
 }
+/*btn domicilio*/
 .btn-domicilio{
   background-color: #868f0b; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*btn escritura constitutiva*/
+.btn-constitutiva{
+  background-color: #330b8f; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*btn escritura estatutos*/
+.btn-estatutos{
+  background-color: #8f4b0b; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+/*btn resguardo de la unidad*/
+.btn-resguardounidad{
+  background-color: #7a082ecc; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 9px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
 }
 /*btn editar persona fisica*/
 .btn-editar_persona_fisica{
@@ -2390,6 +2426,17 @@ height: auto;
     font-size: 0.9rem;
   }
 }
+/*------------------------------------------------------------estilos para el alta de personas fisicas----------------------------------------*/
+.letrasaltapersonasfisicas{
+  font-size: 1.1rem;
+  color: rgb(68, 67, 67);
+}
+@media (max-width: 768px) {
+  .letrasaltapersonasfisicas {
+    font-size: 0.9rem;
+  }
+}
+
 
 /*-------------------------------------------------------------estilos para el autorizador de unidades demos personas morales------------------------------*/
 

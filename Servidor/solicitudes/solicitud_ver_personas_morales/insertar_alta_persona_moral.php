@@ -27,7 +27,8 @@ if (isset($_POST['institucionorganizacion'])
 && isset($_POST['domiciliodomiciliopersonamoral'])
 && isset($_FILES['archivodomiciliopersonamoral'])
 && isset($_POST['domicilioresguardounidad'])
-&& isset($_FILES['archivodomicilioresguardounidad'])){
+&& isset($_FILES['archivodomicilioresguardounidad'])
+&& isset($_POST['contactopersonamoral'])) {
 
     $valorinstitucionorganizacion = $_POST['institucionorganizacion'];
     $valoridentificacionlegal = $_POST['identificacionlegal'];
@@ -40,6 +41,7 @@ if (isset($_POST['institucionorganizacion'])
     $valorarchivodomiciliopersonamoral = $_FILES['archivodomiciliopersonamoral'];
     $valordomicilioresguardounidad = $_POST['domicilioresguardounidad'];
     $valorarchivodomicilioresguardounidad = $_FILES['archivodomicilioresguardounidad'];
+    $valorcontactopersonamoral = $_POST['contactopersonamoral'];
 
     echo "institucionorganizacion: " . $valorinstitucionorganizacion . " ";
     echo "identificacionlegal: " . $valoridentificacionlegal . " ";
@@ -52,6 +54,7 @@ if (isset($_POST['institucionorganizacion'])
     echo "archivodomiciliopersonamoral: " . $valorarchivodomiciliopersonamoral . " ";
     echo "domicilioresguardounidad: " . $valordomicilioresguardounidad . " ";
     echo "archivodomicilioresguardounidad: " . $valorarchivodomicilioresguardounidad . " ";
+    echo "contactopersonamoral: " . $valorcontactopersonamoral . " ";
 
     //obtener los documentos correspondientes
 
@@ -117,7 +120,8 @@ if (isset($_FILES['archivoestatusociales'])) {
                                                 domicilio,
                                                 archivo_domiclio_moral,
                                                 domicilio_resguardo_unidad,
-                                                archivo_domicilio_resguardo_unidad
+                                                archivo_domicilio_resguardo_unidad,
+                                                contacto_persona_moral
                                     ) VALUES (
                                         '$colaborador',
                                         '$valorinstitucionorganizacion',
@@ -130,7 +134,8 @@ if (isset($_FILES['archivoestatusociales'])) {
                                         '$valordomiciliodomiciliopersonamoral',
                                         '$nombredarchivodomiciliopersonamoral',
                                         '$valordomicilioresguardounidad',
-                                        '$nombrearchivodomicilioresguardounidad'
+                                        '$nombrearchivodomicilioresguardounidad',
+                                        '$valorcontactopersonamoral'
                                     )";
 
                         

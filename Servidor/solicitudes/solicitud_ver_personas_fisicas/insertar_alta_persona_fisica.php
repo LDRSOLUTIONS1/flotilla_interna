@@ -16,8 +16,7 @@ $colaborador = $_SESSION['id_colaborador'];
 
 
 //-----------------------------------------------------------Inicia el flujo de asignacion solicitando por post la informacion del js
-if (isset($_POST['nombrepersonafisica1']) 
-&& isset($_POST['nombrepersonafisica2'])
+if (isset($_POST['nombrepersonafisica1'])
 && isset($_POST['apaternopersonafisica'])
 && isset($_POST['amaternopersonafisica'])
 && isset($_POST['generopersonafisica'])
@@ -29,7 +28,10 @@ if (isset($_POST['nombrepersonafisica1'])
 && isset($_POST['rfcpersonafisica'])
 && isset($_FILES['archivoRFCpersonafisica'])
 && isset($_POST['domiciliodomiciliopersonafisica'])
-&& isset($_FILES['archivodomicilio'])) {
+&& isset($_FILES['archivodomicilio'])
+&& isset($_POST['domicilioresguardounidad'])
+&& isset($_FILES['archivodomicilioresguardounidad'])
+&& isset($_POST['contactopersonafisica'])) {
 
     $valornombrepersonafisica1 = $_POST['nombrepersonafisica1'];
     $valornombrepersonafisica2 = $_POST['nombrepersonafisica2'];
@@ -45,6 +47,9 @@ if (isset($_POST['nombrepersonafisica1'])
     $valornarchivoRFCpersonafisica = $_FILES['archivoRFCpersonafisica'];
     $valordomiciliodomiciliopersonafisica = $_POST['domiciliodomiciliopersonafisica'];
     $valordarchivodomicilio = $_FILES['archivodomicilio'];
+    $valordomiciliodomicilioresguardounidad = $_POST['domicilioresguardounidad'];
+    $valordarchivodomicilioresguardounidad = $_FILES['archivodomicilioresguardounidad'];
+    $valorncontactopersonafisica = $_POST['contactopersonafisica'];
 
     echo "nombrepersonafisica1: " . $valornombrepersonafisica1 . " ";
     echo "nombrepersonafisica2: " . $valornombrepersonafisica2 . " ";
@@ -60,22 +65,28 @@ if (isset($_POST['nombrepersonafisica1'])
     echo "archivoRFCpersonafisica: " . $valornarchivoRFCpersonafisica . " ";
     echo "domiciliodomiciliopersonafisica: " . $valordomiciliodomiciliopersonafisica . " ";
     echo "archivodomicilio: " . $valordarchivodomicilio . " ";
+    echo "domicilioresguardounidad: " . $valordomiciliodomicilioresguardounidad . " ";
+    echo "archivodomicilioresguardounidad: " . $valordarchivodomicilioresguardounidad . " ";
+    echo "contactopersonafisica: " . $valorncontactopersonafisica . " ";
 
     //obtener  los documentos correspondientes
     $nombrearchivoINEpersonafisica = 'INE_' . $valorninepersonafisica . '_' . basename($_FILES['archivoINEpersonafisica']['name']);
     $nombrearchivoCURPpersonafisica = 'CURP_' . $valorncurppersonafisica . '_' . basename($_FILES['archivoCURPpersonafisica']['name']);
     $nombrearchivoRFCpersonafisica = 'RFC_' . $valornrfcpersonafisica . '_' . basename($_FILES['archivoRFCpersonafisica']['name']);
     $nombredarchivodomicilio = 'domicilio_' . $valornombrepersonafisica1 . '_' . basename($_FILES['archivodomicilio']['name']);
+    $nombrearchivodomicilioresguardounidad = 'domicilio_resguardo_' . $valornombrepersonafisica1 . '_' . basename($_FILES['archivodomicilioresguardounidad']['name']);
 
     $rutaarchivoINEpersonafisica = "../../archivos/files/files_asignacion_demo/personas_fisicas/files_ines/";
     $rutaarchivoCURPpersonafisica = "../../archivos/files/files_asignacion_demo/personas_fisicas/files_CURP/";
     $rutaarchivoRFCpersonafisica = "../../archivos/files/files_asignacion_demo/personas_fisicas/files_RFC/";
     $routadarchivodomicilio = "../../archivos/files/files_asignacion_demo/personas_fisicas/files_domicilio/";
+    $rutarchivodomicilioresguardounidad = "../../archivos/files/files_asignacion_demo/personas_fisicas/files_domicilio/";
 
     move_uploaded_file($_FILES['archivoINEpersonafisica']['tmp_name'], $rutaarchivoINEpersonafisica . $nombrearchivoINEpersonafisica);
     move_uploaded_file($_FILES['archivoCURPpersonafisica']['tmp_name'], $rutaarchivoCURPpersonafisica . $nombrearchivoCURPpersonafisica);
     move_uploaded_file($_FILES['archivoRFCpersonafisica']['tmp_name'], $rutaarchivoRFCpersonafisica . $nombrearchivoRFCpersonafisica);
     move_uploaded_file($_FILES['archivodomicilio']['tmp_name'], $routadarchivodomicilio . $nombredarchivodomicilio);
+    move_uploaded_file($_FILES['archivodomicilioresguardounidad']['tmp_name'], $rutarchivodomicilioresguardounidad . $nombrearchivodomicilioresguardounidad);
     
     //insertar los datos y los archivos
 
@@ -93,7 +104,10 @@ if (isset($_POST['nombrepersonafisica1'])
                                                                 rfc,
                                                                 archivo_rfc,
                                                                 domicilio,
-                                                                archivo_domicilio)
+                                                                archivo_domicilio,
+                                                                domicilio_resguardo_unidad,
+                                                                archivo_domicilio_resguardo_unidad,
+                                                                contacto_persona_fisica)
                                     VALUES ('$colaborador',
                                             '$valornombrepersonafisica1',
                                             '$valornombrepersonafisica2',
@@ -108,7 +122,10 @@ if (isset($_POST['nombrepersonafisica1'])
                                             '$valornrfcpersonafisica',
                                             '$nombrearchivoRFCpersonafisica',
                                             '$valordomiciliodomiciliopersonafisica',
-                                            '$nombredarchivodomicilio')";
+                                            '$nombredarchivodomicilio',
+                                            '$valordomiciliodomicilioresguardounidad',
+                                            '$nombrearchivodomicilioresguardounidad',
+                                            '$valorncontactopersonafisica');";
 
     echo $queryinsertarpersonafisica;
 

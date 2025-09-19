@@ -29,6 +29,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos ?>
       <!-- Botón estilizado -->
       <button  class="btn btn-agregarunidad m-2 btnagregarpersonafisica"> <i class="fa-solid fa-user"> </i>   Registrar</button>
+      <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i>   Regresar</button>
       <?php endif; ?>
     </div>
   </div>
@@ -47,10 +48,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <th class="titulostablaunidades">ID</th>
         <th class="titulostablaunidades">Nombre</th>
         <th class="titulostablaunidades">Género</th>
-        <th class="titulostablaunidades">Sección INE</th>
         <th class="titulostablaunidades">Curp</th>
         <th class="titulostablaunidades">RFC</th>
         <th class="titulostablaunidades">Domicilio</th>
+        <th class="titulostablaunidades">Contacto</th>
+        <th class="titulostablaunidades">Resguardo de unidad</th>
         <?php if ($id_tipo_usuario == 4): // Administrador demos ?>
         <th class="titulostablaunidades">Creador de la persona</th>
         <?php endif; ?>
@@ -197,6 +199,24 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalverdomiciliobody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------modal para ver el archivo del domicilio---------------------------------->
+<!--modal-->
+<div class="modal fade modalverdomicilioresguardo" id="modalverdomicilioresguardo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Domicilio resguardo de la unidad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalverdomicilioresguardobody">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

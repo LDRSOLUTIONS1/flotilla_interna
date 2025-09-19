@@ -6,6 +6,8 @@
       <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos ?>
       <!-- Botón estilizado -->
       <button  class="btn btn-resgistrar_moral m-2 btnagregarpersonamoral"> <i class="fa-solid fa-building-user"> </i>   Registrar</button>
+      <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i>   Regresar</button>
+
       <?php endif; ?>
     </div>
   </div>
@@ -23,17 +25,20 @@
         <th class="titulostablaunidades"></th>
         <th class="titulostablaunidades">ID</th>
         <th class="titulostablaunidades">Persona moral</th>
-        <th class="titulostablaunidades">Identificación o pasaporte</th>
-        <th class="titulostablaunidades">Archivo poder</th>
         <th class="titulostablaunidades">RFC</th>
         <th class="titulostablaunidades">Domicilio</th>
+        <th class="titulostablaunidades">Contacto</th>
+        <th class="titulostablaunidades">Resguardo de unidad</th>
         <?php if($id_tipo_usuario == 4): ?>
         <th class="titulostablaunidades">Creador de la persona</th>
         <?php endif; ?>
-        <th class="titulostablaunidades">Archivo RFC</th>
-        <th class="titulostablaunidades">Archivo domicilio</th>
+         <th class="titulostablaunidades">Identificación o pasaporte</th>
+        <th class="titulostablaunidades">Poder representante legal</th>
+        <th class="titulostablaunidades">Constancia situación fiscal</th>
+        <th class="titulostablaunidades">Domicilio</th>
         <th class="titulostablaunidades">Escritura constitutiva</th>
-        <th class="titulostablaunidades">Escritura estatus sociales</th>
+        <th class="titulostablaunidades">Escritura estatutos sociales</th>
+        <th class="titulostablaunidades">Resguardo de la unidad</th>
       </tr>
     </thead>
     <tbody>
@@ -286,6 +291,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalverdomiciliobody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------------modal para ver el archivo del domicilio---------------------------------->
+<!--modal-->
+<div class="modal fade modalverdomicilioresguardo" id="modalverdomicilioresguardo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Domicilio resguardo de la unidad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalverdomicilioresguardobody">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

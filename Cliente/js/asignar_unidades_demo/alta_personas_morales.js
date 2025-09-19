@@ -42,6 +42,7 @@ document.body.addEventListener("click", function (event) {
   let valorarchivodomicilioresguardounidad;
   let valorarchivoescrituraconstitutiva;
   let valorarchivoestatusociales;
+  let valorcontactopersonamoral;
 
   document.body.addEventListener("click", function (event) {
     if (event.target.id === "btnguardarpersonamoral") {
@@ -63,6 +64,7 @@ document.body.addEventListener("click", function (event) {
       const archivodomicilioresguardounidad = document.getElementById("archivodomicilioresguardounidad");
       const archivoescrituraconstitutiva = document.getElementById("archivoescrituraconstitutiva");
       const archivoestatusociales = document.getElementById("archivoestatusociales");
+      const contactopersonamoral = document.getElementById("contactopersonamoral");
 
       contenedorspinner.style.display = "flex";
       obtenervalores();
@@ -86,6 +88,8 @@ document.body.addEventListener("click", function (event) {
     valorarchivodomiciliopersonamoral = archivodomiciliopersonamoral.files[0];
     valordomicilioresguardounidad = domicilioresguardounidad.value.toUpperCase();
     valorarchivodomicilioresguardounidad = archivodomicilioresguardounidad.files[0];
+    valorcontactopersonamoral = contactopersonamoral.value;
+
 
     // 👇 Cambiado: obtener todos los archivos de escritura constitutiva
   valorarchivoescrituraconstitutiva = [];
@@ -116,6 +120,7 @@ document.body.addEventListener("click", function (event) {
     console.log(valorarchivodomicilioresguardounidad);
     console.log(valorarchivoescrituraconstitutiva);
     console.log(valorarchivoestatusociales);
+    console.log(valorcontactopersonamoral);
   }
 
   function validarllenado(){
@@ -138,39 +143,43 @@ document.body.addEventListener("click", function (event) {
       },
       {
         campo: valorarchivopoderepresentantelegal,
-        nombre: "archivopoderepresentantelegal",
+        nombre: "Archivo de poder del Representante Legal",
       },
       {
         campo: valorrfcpersonamoral,
-        nombre: "rfcpersonamoral",
+        nombre: "RFC",
       },
       {
         campo: valorarchivoRFCpersonamoral,
-        nombre: "archivoRFCpersonamoral",
+        nombre: "Archivo Constancia de Situación Fiscal",
       },
       {
         campo: valordomiciliodomiciliopersonamoral,
-        nombre: "domiciliodomiciliopersonamoral",
+        nombre: "Domicilio moral",
       },
       {
         campo: valorarchivodomiciliopersonamoral,
-        nombre: "archivodomiciliopersonamoral",
+        nombre: "Archivo comprobante de domicilio moral",
       },
       {
         campo: valordomicilioresguardounidad,
-        nombre: "domicilioresguardounidad",
+        nombre: "Resguardo de la unidad",
       },
       {
         campo: valorarchivodomicilioresguardounidad,
-        nombre: "archivodomicilioresguardounidad",
+        nombre: "Archivo domicilio de resguardo de la unidad",
+      },
+      {
+        campo: valorcontactopersonamoral,
+        nombre: "Contacto de la persona",
       },
       {
         campo: valorarchivoescrituraconstitutiva,
-        nombre: "archivoescrituraconstitutiva",
+        nombre: "Archivo de la escritura constitutiva",
       },
       {
         campo: valorarchivoestatusociales,
-        nombre: "archivoestatusociales",
+        nombre: "Archivo de las modificaciones a sus Estatutos Sociales",
       },
     ];
     for (let i = 0; i < campos.length; i++) {
@@ -178,8 +187,8 @@ document.body.addEventListener("click", function (event) {
         Toastify({
           text: "No obtuve: " + campos[i].nombre,
           duration: 3000,
-          gravity: "top",
-          position: "right",
+          gravity: "center",
+          position: "center",
           stopOnFocus: true,
           style: {
             background:
@@ -206,6 +215,7 @@ document.body.addEventListener("click", function (event) {
     formData.append("archivodomiciliopersonamoral", valorarchivodomiciliopersonamoral);
     formData.append("domicilioresguardounidad", valordomicilioresguardounidad);
     formData.append("archivodomicilioresguardounidad", valorarchivodomicilioresguardounidad);
+    formData.append("contactopersonamoral", valorcontactopersonamoral);
     // Agregar los archivos de escritura constitutiva (pueden ser varios)
     valorarchivoescrituraconstitutiva.forEach((file, index) => {
       formData.append("archivoescrituraconstitutiva[]", file);
@@ -346,6 +356,27 @@ document.body.addEventListener("click", function (event) {
        });
      }
    })
+
+   //modal para ver domicilio de resguardo
+  const modalverdomicilioresguardo = new bootstrap.Modal(document.getElementById("modalverdomicilioresguardo"));
+  const modalverdomicilioresguardobody = document.getElementById("modalverdomicilioresguardobody");
+
+  document.body.addEventListener("click", function (event) {
+    if (event.target.classList.contains("btndomicilioresguardo")) {
+      persona_domicilio_resguardo = event.target.getAttribute("data-id");
+      $.ajax({
+        type: "POST",
+        data: { id_persona_domicilio_resguardo: persona_domicilio_resguardo },
+        url: "../../Servidor/solicitudes/solicitud_ver_personas_morales/verdomicilioresguardomoral.php",
+        success: function (response) {
+          console.log("entro a success");
+          console.log(response);
+          modalverdomicilioresguardobody.innerHTML = response;
+          modalverdomicilioresguardo.show();
+        },
+      });
+    }
+  });
 
    // Manejo de agregar/quitar archivos de Escritura Constitutiva
 document.body.addEventListener("click", function (event) {

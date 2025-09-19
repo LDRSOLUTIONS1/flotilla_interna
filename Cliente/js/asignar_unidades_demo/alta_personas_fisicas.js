@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let valorarchivoRFCpersonafisica;
   let valordomiciliodomiciliopersonafisica;
   let valorarchivodomicilio;
+  let valordomiciliodomicilioresguardounidad;
+  let valorarchivodomicilioresguardounidad;
+  let valorcontactopersonafisica;
 
 
   document.body.addEventListener("click", function (event) {
@@ -67,11 +70,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const archivoRFCpersonafisica = document.getElementById("archivoRFCpersonafisica");
     const domiciliodomiciliopersonafisica = document.getElementById("domiciliodomiciliopersonafisica");
     const archivodomicilio = document.getElementById("archivodomicilio");
+    const domiciliodomicilioresguardounidad = document.getElementById("domiciliodomicilioresguardounidad");
+    const archivodomicilioresguardounidad = document.getElementById("archivodomicilioresguardounidad");
+    const contactopersonafisica = document.getElementById("contactopersonafisica");
 
       contenedorspinner.style.display = "flex";
       obtenervalores();
-      validarllenado();
-      insertardatos();
+      if(validarllenado()){
+        insertardatos();
+      } else {
+        contenedorspinner.style.display = "none";
+      };
     }
   });
 
@@ -90,6 +99,9 @@ document.addEventListener("DOMContentLoaded", function () {
     valorarchivoRFCpersonafisica = archivoRFCpersonafisica.files[0];
     valordomiciliodomiciliopersonafisica = domiciliodomiciliopersonafisica.value.toUpperCase();
     valorarchivodomicilio = archivodomicilio.files[0];
+    valordomiciliodomicilioresguardounidad = domiciliodomicilioresguardounidad.value.toUpperCase();
+    valorarchivodomicilioresguardounidad = archivodomicilioresguardounidad.files[0];
+    valorcontactopersonafisica = contactopersonafisica.value;
 
     console.log(valornombrepersonafisica1);
     console.log(valornombrepersonafisica2);
@@ -105,82 +117,95 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(valorarchivoRFCpersonafisica);
     console.log(valordomiciliodomiciliopersonafisica);
     console.log(valorarchivodomicilio);
+    console.log(valordomiciliodomicilioresguardounidad);
+    console.log(valorarchivodomicilioresguardounidad);
+    console.log(valorcontactopersonafisica);
   }
 
   function validarllenado(){
     const campos = [
       {
         campo: valornombrepersonafisica1,
-        nombre: "nombrepersonafisica1",
-      },
-      {
-        campo: valornombrepersonafisica2,
-        nombre: "nombrepersonafisica2",
+        nombre: "Nombre de la persona física",
       },
       {
         campo: valorapaternopersonafisica,
-        nombre: "apaternopersonafisica",
+        nombre: "Apellido paterno",
       },
       {
         campo: valoramaternopersonafisica,
-        nombre: "amaternopersonafisica",
+        nombre: "Apellido materno",
       },
       {
         campo: valorgeneropersonafisica,
-        nombre: "generopersonafisica",
+        nombre: "Género",
       },
       {
         campo: valorinepersonafisica,
-        nombre: "inepersonafisica",
+        nombre: "Identificación",
       },
       {
         campo: valorvigenciainepersonafisica,
-        nombre: "vigenciainepersonafisica",
+        nombre: "Vigencia de la identificación",
       },
       {
         campo: valorarchivoINEpersonafisica,
-        nombre: "archivoINEpersonafisica",
+        nombre: "Archivo de identificación",
       },
       {
         campo: valorcurppersonafisica,
-        nombre: "curppersonafisica",
+        nombre: "CURP",
       },
       {
         campo: valorarchivoCURPpersonafisica,
-        nombre: "archivoCURPpersonafisica",
+        nombre: "Archivo CURP",
       },
       {
         campo: valorrfcpersonafisica,
-        nombre: "rfcpersonafisica",
+        nombre: "RFC",
       },
       {
         campo: valorarchivoRFCpersonafisica,
-        nombre: "archivoRFCpersonafisica",
+        nombre: "Archivo Constancia de Situación Fiscal",
       },
       {
         campo: valordomiciliodomiciliopersonafisica,
-        nombre: "domiciliodomiciliopersonafisica",
+        nombre: "Domicilio",
       },
       {
         campo: valorarchivodomicilio,
-        nombre: "archivodomicilio",
+        nombre: "Archivo domicilio",
+      },
+      {
+        campo: valordomiciliodomicilioresguardounidad,
+        nombre: "Domicilio resguardo de la unidad",
+      },
+      {
+        campo: valorarchivodomicilioresguardounidad,
+        nombre: "Archivo domicilio resguardo de la unidad",
+      },
+      {
+        campo: valorcontactopersonafisica,
+        nombre: "Contacto",
       },
     ];
 
     for (let i = 0; i < campos.length; i++) {
       if (!campos[i].campo) {
         Toastify({
-          text: "No obtuve " + campos[i].nombre,
+          text: "No obtuve: " + campos[i].nombre,
           duration: 3000,
-          gravity: "top",
-          position: "right",
+          gravity: "center",
+          position: "center",
           stopOnFocus: true,
           style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            background: "linear-gradient(to right,rgba(255, 0, 0, 1),rgba(231, 0, 0, 1))",
           },
         }).showToast();
+        return false
       }
     }
+    return true;
   }
 
   function insertardatos(){
@@ -200,6 +225,9 @@ document.addEventListener("DOMContentLoaded", function () {
     formData.append("archivoRFCpersonafisica", valorarchivoRFCpersonafisica);
     formData.append("domiciliodomiciliopersonafisica", valordomiciliodomiciliopersonafisica);
     formData.append("archivodomicilio", valorarchivodomicilio);
+    formData.append("domicilioresguardounidad", valordomiciliodomicilioresguardounidad);
+    formData.append("archivodomicilioresguardounidad", valorarchivodomicilioresguardounidad);
+    formData.append("contactopersonafisica", valorcontactopersonafisica);
 
     $.ajax({
       type: "POST",
@@ -296,6 +324,27 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log(response);
           modalverdomiciliobody.innerHTML = response;
           modalverdomicilio.show();
+        },
+      });
+    }
+  });
+
+  //modal para ver domicilio de resguardo
+  const modalverdomicilioresguardo = new bootstrap.Modal(document.getElementById("modalverdomicilioresguardo"));
+  const modalverdomicilioresguardobody = document.getElementById("modalverdomicilioresguardobody");
+
+  document.body.addEventListener("click", function (event) {
+    if (event.target.classList.contains("btndomicilioresguardo")) {
+      persona_domicilio_resguardo = event.target.getAttribute("data-id");
+      $.ajax({
+        type: "POST",
+        data: { id_persona_domicilio_resguardo: persona_domicilio_resguardo },
+        url: "../../Servidor/solicitudes/solicitud_ver_personas_fisicas/verdomicilioresguardo.php",
+        success: function (response) {
+          console.log("entro a success");
+          console.log(response);
+          modalverdomicilioresguardobody.innerHTML = response;
+          modalverdomicilioresguardo.show();
         },
       });
     }

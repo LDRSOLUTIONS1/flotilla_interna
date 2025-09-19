@@ -1,6 +1,6 @@
 
 <div class="row">
-    <!-- Nombre de la institucion o organizacion -->
+    <!-- Nombre de la institucion u organizacion -->
     <div class="col-md-12">
         <div class="form-floating">
             <input type="text" class="form-control institucionorganizacion" id="institucionorganizacion" placeholder="institucionorganizacion" name="institucionorganizacion" required>
@@ -111,6 +111,16 @@
             <input type="file" class="form-control archivodomicilioresguardounidad" id="archivodomicilioresguardounidad" placeholder="archivodomicilioresguardounidad" name="archivodomicilioresguardounidad" accept=".pdf" required>
         </div>
         <label class="" style="color: white;"></label>
+    </div>
+
+    <!-- Contacto de la persona-->
+    <div class="col-md-6">
+        <p class="letrasaltapersonasfisicas">Contacto de la persona</p>
+        <div class="form-floating">
+            <textarea class="form-control" id="contactopersonamoral" placeholder="contactopersonamoral" name="contactopersonamoral" rows="5"></textarea>
+            <label for="domiciliounidadldr">Número telefónico o correo electrónico<span class="text-danger">*</span></label>
+        </div>
+        <label class="" style="color: black;"> </label>
     </div>
 
 </div>

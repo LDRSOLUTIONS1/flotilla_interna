@@ -21,26 +21,11 @@ $fila_tipo = $resultado->fetch_assoc();
 $id_tipo_usuario = $fila_tipo['id_tipo_usuario'] ?? null;
 
 // Consulta según tipo de usuario
-$sql = "SELECT pf.id_persona_fisica, 
-               pf.id_registrador_persona_fisica,
+$sql = "SELECT pf.*, 
                col.nombre_1 AS nombre_1_colaborador,
                col.nombre_2 AS nombre_2_colaborador,
                col.apellido_paterno AS apellido_paterno_colaborador,
-               col.apellido_materno AS apellido_materno_colaborador,
-               pf.nombre_1,
-               pf.nombre_2,
-               pf.apellido_paterno,
-               pf.apellido_materno,
-               pf.genero,
-               pf.seccion,
-               pf.vigencia,
-               pf.curp,
-               pf.rfc,
-               pf.domicilio,
-               pf.archivo_ine,
-               pf.archivo_curp,
-               pf.archivo_rfc,
-               pf.archivo_domicilio
+               col.apellido_materno AS apellido_materno_colaborador
         FROM personas_fisicas pf
         LEFT JOIN colaboradores col ON pf.id_registrador_persona_fisica = col.id_colaborador";
 
@@ -65,11 +50,14 @@ if ($resultado->num_rows > 0) {
             echo"</td>
             <td class='titulostablaunidades'>" . $fila['id_persona_fisica'] . "</td>
             <td class='titulostablaunidades'>" . $fila['nombre_1'] . " " . $fila['nombre_2'] . " " . $fila['apellido_paterno'] . " " . $fila['apellido_materno'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['genero'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['seccion'] . "</td>
+            <td class='titulostablaunidades'>";
+                 if ($fila['genero'] == 'M') echo "MASCULINO"; else if ($fila['genero'] == 'F') echo "FEMENINO"; 
+            echo "</td>
             <td class='titulostablaunidades'>" . $fila['curp'] . "</td>
             <td class='titulostablaunidades'>" . $fila['rfc'] . "</td>
-            <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>";
+            <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['contacto_persona_fisica'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['domicilio_resguardo_unidad'] . "</td>";
 
         // Mostrar nombre del creador solo si el usuario es admin tipo 4
         if ($id_tipo_usuario == 4) {
@@ -100,6 +88,11 @@ if ($resultado->num_rows > 0) {
             <td>
                 <button class='btn btn-sm btn-domicilio btndomicilio' data-id='" . $fila['id_persona_fisica'] . "'>
                     <i class='fa-solid fa-file-pdf'></i> Domicilio
+                </button>
+            </td>
+            <td>
+                <button class='btn btn-sm btn-domicilio btndomicilioresguardo' data-id='" . $fila['id_persona_fisica'] . "'>
+                    <i class='fa-solid fa-file-pdf'></i> Resguardo
                 </button>
             </td>
         </tr>";
