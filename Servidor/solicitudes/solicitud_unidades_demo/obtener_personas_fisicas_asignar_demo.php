@@ -42,7 +42,8 @@ $sql = "SELECT pf.id_persona_fisica,
 
 // Si no es tipo administrador (4), limitar a sus registros
 if ($id_tipo_usuario !== null && $id_tipo_usuario != 4) {
-    $sql .= " WHERE pf.id_registrador_persona_fisica = '$colaborador'";
+    $sql .= " WHERE pf.id_registrador_persona_fisica = '$colaborador'
+            ORDER BY pf.id_persona_fisica DESC";
 }
 
 $resultado = $conexion->query($sql);
@@ -72,14 +73,13 @@ if ($resultado->num_rows > 0) {
                 <td class='titulostablaunidades'>{$fila['rfc']}</td>
                 <td class='titulostablaunidades'>{$fila['domicilio']}</td>
                 <td class='titulostablaunidades'>
-                    <button class='btn btn-warning btn-sm btnasignarunidademo' 
+                    <button class='btn fa-solid fa-eye btnasignarunidademo' 
                         data-id_persona_fisica='{$fila['id_persona_fisica']}' 
                         data-id_unidad='{$id_unidad}' 
                         data-id_colaborador='{$colaborador}' 
                         data-fecha_solicitudemo='{$data_fecha_solicitudemo}' 
                         data-fecha_devoluciondemo='{$data_fecha_devoluciondemo}'>
-                        <i class='fa-solid fa-eye'></i> Asignar
-                    </button>
+                        </button>
                 </td>
             </tr>";
     }

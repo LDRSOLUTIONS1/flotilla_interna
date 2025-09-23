@@ -15,6 +15,13 @@ $resultado = $conexion->query($sql);
 $datos_usuario = $resultado->fetch_assoc();
 $id_tipo_usuario = $datos_usuario['id_tipo_usuario'];
 $avatar = $datos_usuario['avatar'];
+
+//saber si el usuario es jefe directo
+// Verificar si es jefe directo
+$sql_jefe = "SELECT id_jefe_directo FROM jefes_directos WHERE id_colaborador = $colaborador LIMIT 1";
+$result_jefe = $conexion->query($sql_jefe);
+$es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
+
 ?>
 
 <nav class="navbar">
@@ -68,11 +75,19 @@ $avatar = $datos_usuario['avatar'];
 
         <?php elseif ($id_tipo_usuario == 6): // Cliente solicitar demo?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <?php if ($es_jefe_directo): ?>
+            <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
+            <?php endif; ?>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
-            <li ><a class="menulist" href="asignaciones_unidades_demo.php">Asignaciones</a></li>
+            <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
+            
+
 
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <?php if ($es_jefe_directo): ?>
+            <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
+            <?php endif; ?>
             <li ><a class="menulist" href="autorizaciones_demos_personas_fisicas.php">Autorizaciones</a></li>
             <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
 

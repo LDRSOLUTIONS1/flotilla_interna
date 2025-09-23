@@ -995,13 +995,13 @@ body {
   font-size: 0.9rem;
 }
 .btn-asignarunidadmoral{
-  background-color: #f17704c7; /* tu color deseado */
+  background-color: #aa6060; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 .btn-asignarunidadfisica{
-  background-color: #1f9bcce0; /* tu color deseado */
+  background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
@@ -2054,7 +2054,7 @@ height: auto;
   }
 }
 /*-------------------------------------------------------estilos para unidades demo Admin asignador de demos*/
-/*btn tenencias*/
+/*btn CURP*/
 .btn-curp {
   background-color: #386e9b; /* tu color deseado */
   color: white; /* color del texto */
@@ -2077,7 +2077,7 @@ height: auto;
 }
 /*btn ines*/
 .btn-ine{
-  background-color: #709b38; /* tu color deseado */
+  background-color: #2f8363; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
@@ -2121,7 +2121,7 @@ height: auto;
 .btn-editar_persona_fisica{
   background-color: #e6ac10; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
+  padding: 7px 7px; /* Adjust padding to make the button smaller */
   font-size: 0.7rem;
 }
 .btn-resgistrar_moral{
@@ -2193,12 +2193,12 @@ height: auto;
   padding: 1px 9px; /* Adjust padding to make the button smaller */
 }
 .btn-asignar_persona_fisica{
-  background-color: #4c8fce; /* tu color deseado */
+  background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 4px 9px; /* Adjust padding to make the button smaller */
 }
 .btn-asignar-persona-moral{
-  background-color: #c9b60e; /* tu color deseado */
+  background-color: #aa6060; /* tu color deseado */
   color: white; /* color del texto */
   padding: 4px 9px; /* Adjust padding to make the button smaller */
 }
@@ -2258,6 +2258,12 @@ height: auto;
   border: 2px solid #585858;
   padding: 5px;
   font-size: 16px;
+}
+/*boton ver la unidad demo fisica y moral para asignarla*/
+.btnasignarunidademo{
+  background-color: #d1930c; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 4px 9px; /* Adjust padding to make the button smaller */
 }
 /*-------------------------------------------------------------estilo para el mapa y ver la unidadcon la api de telematics*/
 #mapaUnidad {
@@ -2336,13 +2342,13 @@ height: auto;
   }
 }
 .btn-persona-fisica{
-  background-color: #49a315; /* tu color deseado */
+  background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 .btn-persona-moral{
-  background-color: #3615ad; /* tu color deseado */
+  background-color: #bd7727; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
@@ -2435,6 +2441,14 @@ height: auto;
   .letrasaltapersonasfisicas {
     font-size: 0.9rem;
   }
+}
+
+/*-------------------------------------------------------------estilos para autorizar jefes directos------------------------------------------------------*/
+.btnMosrarModalUnidad{
+  background-color: #4ea5c0; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 9px; /* Adjust padding to make the button smaller */
+  font-size: 0.9rem;
 }
 
 

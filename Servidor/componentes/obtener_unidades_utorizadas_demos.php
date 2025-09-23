@@ -55,7 +55,6 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             ON pru.id_asignacion_unidad_demo = uda.id_asignacion_unidad_demo
             WHERE uda.autorizacion = 'APROVADO'
             AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
-            AND uda.solicitar_master_driver = 1
             ORDER BY uda.id_asignacion_unidad_demo ASC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
@@ -74,10 +73,8 @@ while ($fila = $resultado->fetch_assoc()) {
     }
         echo '<div class="cardheader">
             <button type="button" class="fa-solid fa-file me-2 btn btn-sm btn-secondary btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '"> </button>
-            <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" class="card-img-top img-fluid imgcard" alt="...">
-            
-                        <button onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'" type="button" class="fas fa-car btn btntablaverificarcomodatodemojuridico""></button>
-                    
+            <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
+            onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'">
         </div>
         <div class="card-body">';
         if (isset($fila['id_persona_fisica']) && $fila['id_persona_fisica']) {

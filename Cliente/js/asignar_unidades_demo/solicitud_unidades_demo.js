@@ -353,6 +353,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     caja1.append("id_persona_moral", id_persona_moral.value);
                   }
                   const requiereMasterDriver = document.getElementById("requiere_master_driverldr");
+                  const emplacamiento_ldr = document.getElementById("emplacamiento_ldr");
+                  const asegurar_ldr = document.getElementById("asegurar_ldr");
                   const comentarios_pruebas_demo = document.getElementById("comentarios_pruebas_demo");
                   const objetivo_prueba_demo = document.getElementById("objetivo_prueba_demo");
 
@@ -360,6 +362,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     caja1.append("requiere_master_driver", "1");
                   } else {
                     caja1.append("requiere_master_driver", "0");
+                  }
+
+                  if (emplacamiento_ldr && emplacamiento_ldr.checked) {
+                    caja1.append("emplacamiento_ldr", "1");
+                  } else {
+                    caja1.append("emplacamiento_ldr", "0");
+                  }
+
+                  if (asegurar_ldr && asegurar_ldr.checked) {
+                    caja1.append("asegurar_ldr", "1");
+                  } else {
+                    caja1.append("asegurar_ldr", "0");
                   }
 
                   caja1.append("objetivo_prueba_demo",objetivo_prueba_demo.value);

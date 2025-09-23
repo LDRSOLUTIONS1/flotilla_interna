@@ -38,7 +38,26 @@ $id_prueba = isset($_GET['id_prueba']) ? (int)$_GET['id_prueba'] : 0;
 <body class="bg-light">
     <?php
     include("../include/menu.php");
+
+    //obtenemos el id del colaborador para saber quien es el que esta logeado
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$colaborador = $_SESSION['id_colaborador'];
+
+// Obtener el id del usuario
+$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
+$resultado = $conexion->query($sql);
+$id_usuario = $resultado->fetch_assoc()['id_usuario'];
+
+// Obtener el tipo de usuario
+$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
+$resultado = $conexion->query($sql);
+$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
     ?>
+<!--------------------------------------mostramos el formulario del registro de la bitacora diaria solo a los master drivers------------------------------->
+    <?php if ($id_tipo_usuario == 9): ?>
     <div class="container py-4">
         <div class="row mb-3">
             <div class="col">
@@ -224,6 +243,8 @@ $id_prueba = isset($_GET['id_prueba']) ? (int)$_GET['id_prueba'] : 0;
             </div>
         </form>
     </div>
+    <?php endif; ?>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -306,14 +327,18 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 ?>
 
-<h2 class="titulosletrasunidadescliente">Registros de Bitácora</h2>
+
+<div class="d-flex justify-content-between align-items-center">
+    <h2 class="titulosletrasunidadescliente">Registros de Bitácora</h2>
+    <button class="btn btn-registrar m-2" onclick="window.history.back()"><i class="fa-solid fa-arrow-left"></i> Regresar </button>
+</div>
 <?php foreach ($bitacoras as $b): 
     $d = $b["datos"]; ?>
-    <div style="border:1px solid #ccc; padding:12px; margin-bottom:20px; border-radius:8px;">
+    <div style="border:1px solid #b1aeaeff; padding:12px; margin-bottom:20px; border-radius:8px;">
         <p><strong>Fecha:</strong> <?= $d["fecha"] ?> | <strong>Origen:</strong> <?= $d["origen"] ?> → <strong>Destino:</strong> <?= $d["destino"] ?></p>
         <p><strong>Master Driver:</strong> <?= $d["nombre_1"] . " " . $d["nombre_2"] . " " . $d["apellido_paterno"] . " " . $d["apellido_materno"] ?> | <strong>Objetivo:</strong> <?= $d["objetivo_prueba"] ?></p>
-        <p><strong>Inicio:</strong> Km <?= $d["kilometraje_inicial"] ?> | Hora <?= $d["hora_inicio"] ?> | Combustible <?= $d["combustible_inicio"] ?> | Urea <?= $d["urea_inicio"] ?></p>
-        <p><strong>Fin:</strong> Km <?= $d["kilometraje_final"] ?> | Hora <?= $d["hora_fin"] ?> | Combustible <?= $d["combustible_fin"] ?> | Urea <?= $d["urea_fin"] ?></p>
+        <p><strong>Inicio:</strong> Km <?= $d["kilometraje_inicial"] ?> | Hora <?= $d["hora_inicio"] ?></p>
+        <p><strong>Fin:</strong> Km <?= $d["kilometraje_final"] ?> | Hora <?= $d["hora_fin"] ?></p>
         <p><strong>Eventos Importantes:</strong> <?= $d["eventos_importantes"] ?></p>
 
         <h4 class="titulosletrasunidadescliente">Muestreos</h4>

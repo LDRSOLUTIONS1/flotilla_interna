@@ -43,9 +43,7 @@ if ($resultado->num_rows > 0) {
         echo "<tr>
             <td class='sticky-left-0'>";
                    if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos 
-                echo "<button class='btn btn-editar_persona_fisica btn-sm btneditarpersonafisica' data-id='" . $fila['id_persona_moral'] . "'>
-                    <i class='fas fa-edit'></i> Editar
-                </button>";
+                echo "<button class='btn fas fa-edit btn-editar_persona_fisica btneditarpersonafisica' data-id='" . $fila['id_persona_moral'] . "'></button>";
             endif;
             echo"</td>
             <td class='titulostablaunidades'>" . $fila['id_persona_moral'] . "</td>
@@ -80,7 +78,7 @@ if ($resultado->num_rows > 0) {
             </td>
 
             <td style='text-align: center;'>
-                <button class='btn fas fa-map-marker-alt btn-domicilio' data-id='" . $fila['id_persona_moral'] . "'></button>
+                <button class='btn fas fa-map-marker-alt btn-domicilio btnverdomicilio' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
 
             <td style='text-align: center;'>
@@ -90,9 +88,9 @@ if ($resultado->num_rows > 0) {
             <td style='text-align: center;'>
                 <button class='btn fas fa-file-pdf btn-estatutos btnverestatusociales' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
-            
+
             <td style='text-align: center;'>
-                <button class='btn fas fa-file-pdf btn-resguardounidad btndomicilioresguardo' data-id='" . $fila['id_persona_moral'] . "'></button>
+                <button class='btn fas fa-map-marker-alt btn-resguardounidad btndomicilioresguardo' data-id='" . $fila['id_persona_moral'] . "'></button>
             </td>
         </tr>";
     }

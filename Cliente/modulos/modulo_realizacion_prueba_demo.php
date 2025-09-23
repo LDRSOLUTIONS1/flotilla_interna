@@ -22,6 +22,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 <!-- Contenedor -->
 <div class="contenedoropcionesunidades">
     <h2 class="titulosletrarealizacionpruebademo text-nowrap">Administración de prueba</h2>
+    <div class="d-flex justify-content-end">
+        <?php if ($id_tipo_usuario == 6 || $id_tipo_usuario == 11): // tipos de usuario solicitantes demos ?>
+        <button class="btn btn-registrar m-2" onclick="window.history.back()"><i class="fa-solid fa-arrow-left"></i> Regresar </button>
+        <?php endif; ?>
+    </div>
 </div>
 <!-----------------------------------------------------------------card con informacion de la unidad y solicitud demo--------------------------------------->
 <div class="contenedorrealizacionprueba">
@@ -336,9 +341,9 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </div>
 
 <!--codigo que muestra la tabla de la prueba monitoriada por telematics-->
-<?php if ($id_tipo_usuario == 11): ?>
+<?php if ($id_tipo_usuario == 11 || $id_tipo_usuario == 6): ?>
 <div class="container-fluid" id="contenedorrealizacionpruebademoestatus">
-    <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Telematics</h2>
+    <h2 class='text-center titulosletrarealizacionpruebademoestatus'>Monitoreo Smart Connect</h2>
     <h2 class='text-right titulosletrafechasmonitoreo'>
     Fecha estimada de monitoreo: <?php echo $fecha_prueba_estimada; ?>
 </h2>

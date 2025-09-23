@@ -47,7 +47,8 @@ $sql = "SELECT pm.id_persona_moral,
 // Aplicar condición según tipo
 if ($id_tipo_usuario !== null && $id_tipo_usuario != 4) {
     // Usuarios comunes solo ven lo que registraron
-    $sql .= " WHERE pm.id_registrador_persona_moral = '$colaborador'";
+    $sql .= " WHERE pm.id_registrador_persona_moral = '$colaborador'
+            ORDER BY pm.id_persona_moral DESC";
 }
 
 $resultado = $conexion->query($sql);
@@ -77,8 +78,12 @@ if ($resultado->num_rows > 0) {
             <td class='titulostablaunidades'>" . $fila['rfc_moral'] . "</td>
             <td class='titulostablaunidades'>" . $fila['domicilio'] . "</td>
             <td class='titulostablaunidades'>
-                <button class='btn btn-warning btn-sm btnasignarunidademo' data-id_persona_moral='" . $fila['id_persona_moral'] . "' data-id_unidad='" . $id_unidad . "' data-id_colaborador='" . $colaborador . "' data-fecha_solicitudemo='" . $data_fecha_solicitudemo . "' data-fecha_devoluciondemo='" . $data_fecha_devoluciondemo . "'>
-                    <i class='fa-solid fa-eye'></i> Asignar
+                <button class='btn fa-solid fa-eye btnasignarunidademo' 
+                    data-id_persona_moral='" . $fila['id_persona_moral'] . "' 
+                    data-id_unidad='" . $id_unidad . "' 
+                    data-id_colaborador='" . $colaborador . "' 
+                    data-fecha_solicitudemo='" . $data_fecha_solicitudemo . "' 
+                    data-fecha_devoluciondemo='" . $data_fecha_devoluciondemo . "'>
                 </button>
             </td>
               </tr>";

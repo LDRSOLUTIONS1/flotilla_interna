@@ -43,9 +43,7 @@ if ($resultado->num_rows > 0) {
         echo "<tr>
             <td class='sticky-left-0'>";
                    if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos 
-                echo "<button class='btn btn-editar_persona_fisica btn-sm btneditarpersonafisica' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fas fa-edit'></i> Editar
-                </button>";
+                echo "<button class='btn fas fa-edit btn-editar_persona_fisica btneditarpersonafisica' data-id='" . $fila['id_persona_fisica'] . "'> </button>";
             endif;
             echo"</td>
             <td class='titulostablaunidades'>" . $fila['id_persona_fisica'] . "</td>
@@ -70,30 +68,25 @@ if ($resultado->num_rows > 0) {
         }
 
         echo "
-            <td class='titulostablaunidades'>
-                <button class='btn btn-sm btn-ine btnine' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> INE
+            <td style='text-align: center;'>
+                <button class='btn fas fa-id-card btn-ine btnine' data-id='" . $fila['id_persona_fisica'] . "'></button>
+            </td>
+
+            <td style='text-align: center;'>
+                <button class='btn fa-solid fa-file-pdf btn-curp btncurp' data-id='" . $fila['id_persona_fisica'] . "'>
                 </button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-curp btncurp' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> CURP
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fa-solid fa-file-pdf btn-rfc btnrfc' data-id='" . $fila['id_persona_fisica'] . "'></button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-rfc btnrfc' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> RFC
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-map-marker-alt btn-domicilio btndomicilio' data-id='" . $fila['id_persona_fisica'] . "'></button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-domicilio btndomicilio' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Domicilio
-                </button>
-            </td>
-            <td>
-                <button class='btn btn-sm btn-domicilio btndomicilioresguardo' data-id='" . $fila['id_persona_fisica'] . "'>
-                    <i class='fa-solid fa-file-pdf'></i> Resguardo
-                </button>
+
+            <td style='text-align: center;'>
+                <button class='btn fas fa-map-marker-alt btn-resguardounidad btndomicilioresguardo' data-id='" . $fila['id_persona_fisica'] . "'></button>
             </td>
         </tr>";
     }

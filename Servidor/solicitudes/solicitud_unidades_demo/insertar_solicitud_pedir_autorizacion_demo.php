@@ -33,6 +33,8 @@ if (
     $fechasolicitudunidademo = mysqli_real_escape_string($conexion, $_POST['fechasolicitudunidademo']);
     $fechadevolucionunidademo = mysqli_real_escape_string($conexion, $_POST['fechadevolucionunidademo']);
     $requiere_master_driver = isset($_POST['requiere_master_driver']) && $_POST['requiere_master_driver'] == '1' ? 1 : 0;
+    $emplacamiento_ldr = isset($_POST['emplacamiento_ldr']) && $_POST['emplacamiento_ldr'] == '1' ? 1 : 0;
+    $asegurar_ldr = isset($_POST['asegurar_ldr']) && $_POST['asegurar_ldr'] == '1' ? 1 : 0;
 
     $objetivo_prueba_demo = isset($_POST['objetivo_prueba_demo']) ? mysqli_real_escape_string($conexion, $_POST['objetivo_prueba_demo']) : '';
     $comentarios_pruebas_demo = isset($_POST['comentarios_pruebas_demo']) ? mysqli_real_escape_string($conexion, $_POST['comentarios_pruebas_demo']) : '';
@@ -44,8 +46,15 @@ if (
     echo "fecha_prestamo=$fechasolicitudunidademo<br>";
     echo "fecha_devolucion=$fechadevolucionunidademo<br>";
     echo "requiere_master_driver=$requiere_master_driver<br>";
+    echo "emplacamiento_ldr=$emplacamiento_ldr<br>";
+    echo "asegurar_ldr=$asegurar_ldr<br>";
     echo "persona_fisica=$id_persona_fisica<br>";
     echo "persona_moral=$id_persona_moral<br>";
+
+    // Obtener el jefe directo del colaborador que asigna
+$sql_jefe = "SELECT id_jefe_directo FROM colaboradores WHERE id_colaborador = '$id_colaborador_que_asigna'";
+$result_jefe = $conexion->query($sql_jefe);
+$jefe = $result_jefe->fetch_assoc()['id_jefe_directo'];
 
     // Armamos columnas
     $columnas = [
@@ -55,7 +64,11 @@ if (
         "fecha_devolucion",
         "objetivo_prestamo",
         "comentarios",
-        "solicitar_master_driver"
+        "solicitar_master_driver",
+        "solicitar_emplacamiento_ldr",
+        "solicitar_seguro_ldr",
+        "autorizacion",
+        "id_autorizacion_jefe_directo" // agregamos el campo del jefe directo
     ];
 
     $valores = [
@@ -65,7 +78,11 @@ if (
         "'$fechadevolucionunidademo'",
         "'$objetivo_prueba_demo'",
         "'$comentarios_pruebas_demo'",
-        "'$requiere_master_driver'"
+        "'$requiere_master_driver'",
+        "'$emplacamiento_ldr'",
+        "'$asegurar_ldr'",
+        "'PENDIENTE'",
+        "'$jefe'" // agregamos el valor del jefe directo
     ];
 
     if ($id_persona_fisica !== null) {
@@ -93,6 +110,10 @@ if (
                                 notificar.id_asignacion_unidad_demo, 
                                 notificar.fecha_prestamo, 
                                 notificar.fecha_devolucion,
+                                notificar.objetivo_prestamo,
+                                notificar.solicitar_master_driver,
+                                notificar.solicitar_emplacamiento_ldr,
+                                notificar.solicitar_seguro_ldr,
                                 pf.nombre_1, 
                                 pf.nombre_2, 
                                 pf.apellido_paterno, 
@@ -152,6 +173,10 @@ if (
                 $VIN = $data['VIN'];
                 $costo_neto = $data['costo_neto'];
                 $anio_unidad = $data['año_unidad'];
+                $objetivo_prestamo = $data['objetivo_prestamo'];
+                $solicitar_master_driver = $data['solicitar_master_driver'];
+                $solicitar_seguro_ldr = $data['solicitar_seguro_ldr'];
+                $solicitar_emplacamiento_ldr = $data['solicitar_emplacamiento_ldr'];
                 $nombre_1_colaborador_asigna = $data['nombre_1_colaborador_asigna'];
                 $nombre_2_colaborador_asigna = $data['nombre_2_colaborador_asigna'];
                 $apellido_paterno_colaborador_asigna = $data['apellido_paterno_colaborador_asigna'];
@@ -161,100 +186,124 @@ if (
                 $fecha_prestamo = $data['fecha_prestamo'];
                 $fecha_devolucion = $data['fecha_devolucion'];
 
-                // Obtener correos de usuarios tipo 7 autorizador de asignacion demo
-                $correos = [];
-                $correo_sql = "SELECT u.id_colaborador, 
-                                                 u.id_tipo_usuario,
-                                                 cor.id_colaborador,
-                                                 cor.email_corporativo
-                                         FROM usuarios AS u 
-                                         INNER JOIN colaboradores AS cor
-                                         ON u.id_colaborador = cor.id_colaborador
-                                         WHERE u.id_tipo_usuario = 7";
-                $correo_result = $conexion->query($correo_sql);
-                while ($correo_row = $correo_result->fetch_assoc()) {
-                    if (!empty($correo_row['email_corporativo'])) {
-                        $correos[] = $correo_row['email_corporativo'];
-                    }
-                }
+                //cadena para ver si requiere master driver y mandarlo por correo
+                $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+                $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
+                $requiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
 
-                //$correos = ["uriel.cabello@ldrsolutions.com.mx"];
+        // --------------------------------------------------------
+        // Obtener correo del jefe directo del colaborador solicitante
+        // --------------------------------------------------------
+        $correos = [];
+        $nombre_completo_jefe_directo = '';
 
-                foreach ($correos as $correo) {
-                    echo "Correo: $correo <br>";
-                }
+        $correo_sql = "
+            SELECT 
+                c.email_corporativo,
+                CONCAT(c.nombre_1, ' ', IFNULL(c.nombre_2,''), ' ', c.apellido_paterno, ' ', IFNULL(c.apellido_materno,'')) AS nombre_completo_jefe_directo
+            FROM colaboradores col
+            INNER JOIN jefes_directos jd ON col.id_jefe_directo = jd.id_jefe_directo
+            INNER JOIN colaboradores c ON jd.id_colaborador = c.id_colaborador
+            WHERE col.id_colaborador = '$id_colaborador_que_asigna'
+            LIMIT 1
+        ";
 
-                try {
-                    $mail = new PHPMailer();
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'notificacion@ldrsolutions.com.mx';
-                    $mail->Password = 'ppiz zylc bpod tczi';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+        $correo_result = $conexion->query($correo_sql);
+        while ($correo_row = $correo_result->fetch_assoc()) {
+            $nombre_completo_jefe_directo = $correo_row['nombre_completo_jefe_directo'];
+            if (!empty($correo_row['email_corporativo'])) {
+                $correos[] = $correo_row['email_corporativo'];
+            }
+        }
 
-                    $mail->setFrom('dscrgoficial@gmail.com', 'Flotilla LDR');
-                    foreach ($correos as $correo) {
-                        $mail->addAddress($correo);
-                    }
-                    $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+        // Debug (opcional)
+        foreach ($correos as $correo) {
+            echo "Correo jefe directo: $correo<br>";
+        }
 
-                    $mail->isHTML(true);
-                    $mail->Subject = utf8_decode('Solicitud de Autorización unidad DEMO');
-$mail->Body = utf8_decode("
-    <p>Estimados colaboradores autorizadores,</p>
+        // --------------------------------------------------------
+        // Envío del correo con PHPMailer
+        // --------------------------------------------------------
+        try {
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'notificacion@ldrsolutions.com.mx';
+            $mail->Password = 'ppiz zylc bpod tczi';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-    <p>Por medio del presente, solicitamos su <strong>AUTORIZACIÓN</strong> para la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
+            $mail->setFrom('dscrgoficial@gmail.com', 'Flotilla LDR');
+            foreach ($correos as $correo) {
+                $mail->addAddress($correo);
+            }
+            $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
-    <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
-        <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
-        <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
-        <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
-        <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
-        <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$ $costo_neto MXN</td></tr>
-        <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$anio_unidad</td></tr>
-        <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
-        <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
-    </table>
+            $mail->isHTML(true);
+            $mail->Subject = utf8_decode('Solicitud de Autorización unidad DEMO');
+            $mail->Body = utf8_decode("
+                <p>Estimado(a) $nombre_completo_jefe_directo,</p>
 
-    <p><strong>Usuario / Institución:</strong><br>
-    $nombre_1 $nombre_2 $apaterno $amaterno $organizacion</p>
+                <p>Por medio del presente, solicitamos su <strong>AUTORIZACIÓN</strong> para la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
 
-    <p><strong>Solicitante:</strong><br>
-    $nombre_1_colaborador_asigna $nombre_2_colaborador_asigna $apellido_paterno_colaborador_asigna $apellido_materno_colaborador_asigna<br>
-    <strong>Área:</strong> $area<br>
-    <strong>Puesto:</strong> $puesto</p>
+                <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
+                    <tr><td style='padding: 6px;'><strong>Marca / Modelo:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
+                    <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Costo neto:</strong></td><td style='padding: 6px;'>$ $costo_neto MXN</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Año de la unidad:</strong></td><td style='padding: 6px;'>$anio_unidad</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
+                </table>
 
-    <hr style='margin: 20px 0;'>
+                <p><strong>Usuario / Institución:</strong><br>
+                $nombre_1 $nombre_2 $apaterno $amaterno $organizacion</p>
 
-    <p><strong>Pasos para autorizar:</strong></p>
-    <ol>
-        <li>Ingresa a la plataforma <strong>Flotilla LDR</strong> desde la <strong>INTRANET</strong>.</li>
-        <li>Dirígete al menú en el apartado <strong>Autorizaciones</strong>.</li>
-        <li>Selecciona al usuario con la unidad correspondiente y haz clic en <strong>Verificar</strong>.</li>
-        <li>Presiona <strong>AUTORIZAR</strong> si estás de acuerdo con la asignación, o bien <strong>RECHAZAR</strong> y especifica el motivo.</li>
-    </ol>
+                <p><strong>Objetivo del préstamo:</strong><br>
+                $objetivo_prestamo</p>
 
-    <p style='color: #b20000;'><strong>¡Es de suma importancia verificar correctamente la autorización para evitar asignaciones erróneas!</strong></p>
+                <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
+                <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
+                <strong>¿LDR asegura?:</strong> <strong style='color: #b20000;'>$requiere_seguro_ldr</strong></p>
 
-    <p>Gracias por tu atención.</p>
 
-    <p>Atentamente,<br>
-    <strong>Comercial - Flotilla LDR</strong></p>
 
-    <p><strong>Acceso a la plataforma:</strong><br>
-    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
-");
+                <p><strong>Solicitante:</strong><br>
+                $nombre_1_colaborador_asigna $nombre_2_colaborador_asigna $apellido_paterno_colaborador_asigna $apellido_materno_colaborador_asigna<br>
+                <strong>Área:</strong> $area<br>
+                <strong>Puesto:</strong> $puesto</p>
 
-                    if ($mail->send()) {
-                        echo "Correo enviado exitosamente.";
-                    } else {
-                        echo "Error al enviar el correo: " . $mail->ErrorInfo;
-                    }
-                } catch (Exception $e) {
-                    echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
-                }
+                <hr style='margin: 20px 0;'>
+
+                <p><strong>Pasos para autorizar:</strong></p>
+                <ol>
+                    <li>Ingresa a la plataforma <strong>Flotilla LDR</strong> desde la <strong>INTRANET</strong>.</li>
+                    <li>Dirígete al menú en el apartado <strong>Solicitudes por autorizar</strong>.</li>
+                    <li>Selecciona al usuario con la unidad correspondiente y haz clic en <strong>Verificar</strong>.</li>
+                    <li>Presiona <strong>AUTORIZAR</strong> si estás de acuerdo con la asignación, o bien <strong>RECHAZAR</strong> y especifica el motivo.</li>
+                </ol>
+
+                <p style='color: #b20000;'><strong>¡Es de suma importancia verificar correctamente la autorización para evitar asignaciones erróneas!</strong></p>
+
+                <p>Gracias por tu atención.</p>
+
+                <p>Atentamente,<br>
+                <strong>Comercial - Flotilla LDR</strong></p>
+
+                <p><strong>Acceso a la plataforma:</strong><br>
+                <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
+            ");
+
+            if ($mail->send()) {
+                echo "Correo enviado exitosamente.";
+            } else {
+                echo "Error al enviar el correo: " . $mail->ErrorInfo;
+            }
+        } catch (Exception $e) {
+            echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+        }
             } else {
                 echo "Error al obtener los datos del último registro insertado.";
             }

@@ -83,6 +83,8 @@ if (isset($_POST['id_unidad'])
                             pf.archivo_domicilio,
                             aud.objetivo_prestamo,
                             aud.solicitar_master_driver,
+                            aud.solicitar_emplacamiento_ldr,
+                            aud.solicitar_seguro_ldr,
                             aud.comentarios,
                             aud.fecha_prestamo,
                             aud.fecha_devolucion,
@@ -145,6 +147,8 @@ if (isset($_POST['id_unidad'])
         $id_colaborador = $row['id_colaborador'];
         $objetivo_prestamo = $row['objetivo_prestamo'];
         $solicitar_master_driver = $row['solicitar_master_driver'];
+        $solicitar_emplacamiento_ldr = $row['solicitar_emplacamiento_ldr'];
+        $solicitar_seguro_ldr = $row['solicitar_seguro_ldr'];
         $comentarios = $row['comentarios'];
         $fecha_prestamo = $row['fecha_prestamo'];
         $fecha_devolucion = $row['fecha_devolucion'];
@@ -152,6 +156,11 @@ if (isset($_POST['id_unidad'])
         $nombre_2_colaborador_autorizador = $row['nombre_2_colaborador_autorizador'];
         $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
         $apellido_materno_colaborador_autorizador = $row['apellido_materno_colaborador_autorizador'];
+
+        //cadena para ver si requiere master driver y mandarlo por correo
+        $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+        $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
+        $requiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
 
         //rutas de los archivos
         $ruta_archivo_ine = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_ines/" . $archivo_ine;
@@ -205,8 +214,10 @@ $mail1->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
-
-    <br>
+    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo</p>
+    <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
+    <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
+    <strong>¿LDR asegura?:</strong><strong style='color: #b20000;'> $requiere_seguro_ldr</strong></p>
 
     <p>En este momento se está enviando la información y los documentos correspondientes al área jurídica para la elaboración del contrato de <strong>COMODATO</strong>.</p>
 
@@ -286,19 +297,21 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
-    <br>
+     <p><strong>Autorizado por: $nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
     <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
         <strong>Área:</strong> $area<br>
         <strong>Puesto:</strong> $puesto</p>
 
-    <br>
-
-    <p><strong>Datos del comodatario:</strong><br>
-    $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica<br>
+    <p><strong>Datos de la Persona Física:</strong><br>
+    <strong>Nombre:</strong> $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica<br>
     <strong>CURP:</strong> $curp<br>
     <strong>RFC:</strong> $rfc<br>
     <strong>Domicilio:</strong> $domicilio</p>
+
+    <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
+    <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
+    <strong>¿LDR asegura?:</strong> <strong style='color: #b20000;'>$requiere_seguro_ldr</strong></p>
 
     <hr style='margin: 20px 0;'>
 
@@ -367,8 +380,7 @@ $mail->Body = utf8_decode("
                             echo "Correo: $correo <br>";
                         }
                 $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
-                //cadena para ver si requiere master driver y mandarlo por correo
-$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+
 
                 try {
                                 $mail = new PHPMailer();
@@ -389,7 +401,7 @@ $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER 
                                 $mail->isHTML(true);
                                $mail->Subject = utf8_decode('Autorización de unidad DEMO');
 $mail->Body = utf8_decode("
-    <p>Estimado colaborador,</p>
+    <p>Estimado colaborador Administrador de Pruebas Demo,</p>
 
     <p>Te notificamos que ha sido <strong>autorizada</strong> la asignación de la siguiente unidad vehicular <strong>DEMO</strong> por parte de:</p>
 
@@ -407,17 +419,16 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
-    <br>
-
     <p><strong>Solicitante: $nombre_1 $nombre_2 $apaterno $amaterno</strong><br>
         <strong>Área:</strong> $area<br>
         <strong>Puesto:</strong> $puesto</p>
 
-    <br>
-
     <p><strong>Usuario:</strong> $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica</p>
-    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo<br>
-    <strong>¿Requiere Master Driver?:</strong> <strong style='color: red;'>$requiere_master_driver</strong></p>
+    <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo</p>
+
+    <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
+    <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
+    <strong>¿LDR asegura?:</strong> <strong style='color: #b20000;'>$requiere_seguro_ldr</strong></p>
 
     <p>Gracias por tu atención.</p>
 
@@ -463,8 +474,7 @@ $mail->Body = utf8_decode("
                             echo "Correo: $correo <br>";
                         }
                 $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
-                //cadena para ver si requiere master driver y mandarlo por correo
-$requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+                
                 try {
                                 $mail = new PHPMailer();
                                 $mail->isSMTP();
@@ -484,7 +494,7 @@ $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER 
                                 $mail->isHTML(true);
                                 $mail->Subject = utf8_decode('Alta de unidad DEMO');
 $mail->Body = utf8_decode("
-    <p>Estimado colaborador,</p>
+    <p>Estimado colaborador del area Telematics,</p>
 
     <p>Por medio del presente te solicitamos el alta de la unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
 
@@ -502,17 +512,12 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
 
-    <br>
-
     <p style='color: #b20000; font-weight: bold;'>Es muy importante que se realice el alta de esta unidad para que comience el monitoreo correspondiente.</p>
 
     <p>Gracias por tu atención.</p>
 
     <p>Atentamente,<br>
     <strong>Flotilla - LDR</strong></p>
-
-    <p><strong>Acceso a la plataforma:</strong><br>
-    <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
 ");
 
 

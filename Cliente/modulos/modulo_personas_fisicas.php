@@ -56,7 +56,11 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <?php if ($id_tipo_usuario == 4): // Administrador demos ?>
         <th class="titulostablaunidades">Creador de la persona</th>
         <?php endif; ?>
-        <th class="titulostablaunidades">Archivos</th>
+        <th class="titulostablaunidades">Identificación o pasaporte</th>
+        <th class="titulostablaunidades">CURP</th>
+        <th class="titulostablaunidades">Constancia de situación fiscal</th>
+        <th class="titulostablaunidades">Comprobante de domicilio</th>
+        <th class="titulostablaunidades">Resguardo de la unidad</th>
       </tr>
     </thead>
     <tbody>

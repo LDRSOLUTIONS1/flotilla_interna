@@ -11,7 +11,7 @@
             <button onclick="window.location.href='../interfaces/personas_morales.php'" class="btn m-2 btn-asignarunidadmoral "> <i class="fa-solid fa-building-user"> </i> Personas morales</button>
         </div>
     </div>
-    <h1 class="letrasolicitudemo text-nowrap">Después de registrar a la persona física/moral, asígnele una unidad</h1>
+    <h1 class="letrasolicitudemo text-nowrap">Después de registrar a la persona física/moral, asigna una unidad</h1>
     <!--contenedor de las cards de las unidades por asignar-->
     <div class="">
         <?php include("../../Servidor/componentes/solicitar_unidades_demo.php"); ?>
