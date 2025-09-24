@@ -44,7 +44,8 @@ if (!isset($_SESSION)) {
             ON uda.id_colaborador_que_asigna = ca.id_colaborador
             INNER JOIN usuarios AS usr 
             ON usr.id_colaborador = ca.id_colaborador
-            WHERE uda.autorizacion = 'APROVADO'";
+            WHERE uda.autorizacion = 'APROVADO'
+            ORDER BY uda.id_asignacion_unidad_demo DESC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 

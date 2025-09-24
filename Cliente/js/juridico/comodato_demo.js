@@ -86,6 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
       formData.append("id_colaborador_que_asigna", colaborador);
       formData.append("id_unidad", unidad);
       formData.append("archivo_subir_comodato", valor_archivo_subir_comodato);
+
+      // ⬇️ Validamos si existe el campo de nueva placa
+  const campoPlaca = document.getElementById("nueva_placa_demo");
+  if (campoPlaca) {
+    formData.append("nueva_placa_demo", campoPlaca.value.trim());
+  }
+
       console.log(valor_archivo_subir_comodato);
       console.log(asignacion + ": asignacion");
       console.log(colaborador + ": colaborador");

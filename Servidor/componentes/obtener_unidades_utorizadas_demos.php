@@ -17,6 +17,7 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 uda.id_persona_fisica,
                 uda.autorizacion,
                 uda.id_estado_prueba_demo,
+                uda.id_estatus_comodato_demo,
                 pf.id_persona_fisica,
                 pf.nombre_1,
                 pf.nombre_2,
@@ -55,13 +56,19 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
             ON pru.id_asignacion_unidad_demo = uda.id_asignacion_unidad_demo
             WHERE uda.autorizacion = 'APROVADO'
             AND uda.id_colaborador_que_asigna = $id_colaborador_que_asigna
-            ORDER BY uda.id_asignacion_unidad_demo ASC";
+            ORDER BY uda.id_asignacion_unidad_demo DESC";
 
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 
 
+    
+
 echo '<div id="vistaCards">';
 while ($fila = $resultado->fetch_assoc()) {
+
+    // Definir la clase del botón según el estatus del comodato
+    $claseBotonComodato = ($fila['id_estatus_comodato_demo'] == 3) ? 'btn-success' : 'btn-secondary';
+
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<div class="card mb-3 card-solicitante tipo-' . $tipo_solicitante . '">';
@@ -72,7 +79,7 @@ while ($fila = $resultado->fetch_assoc()) {
             </div>';
     }
         echo '<div class="cardheader">
-            <button type="button" class="fa-solid fa-file me-2 btn btn-sm btn-secondary btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '"> </button>
+            <button type="button" class="fa-solid fa-file me-2 btn btn-sm ' . $claseBotonComodato . ' btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '"> </button>
             <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
             onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'">
         </div>

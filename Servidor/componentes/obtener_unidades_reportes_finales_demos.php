@@ -61,7 +61,7 @@ while ($fila = $resultado->fetch_assoc()) {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<div class="card mb-3 card-solicitante tipo-' . $tipo_solicitante . '">';
         echo '<div class="cardheader">
-            <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'" class="card-img-top img-fluid imgcard" alt="...">
+            <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="...">
         </div>
         <div class="card-body">';
         if (isset($fila['id_persona_fisica']) && $fila['id_persona_fisica']) {

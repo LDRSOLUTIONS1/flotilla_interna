@@ -23,6 +23,7 @@ if (
     $objetivo_prestamo = '';
     $comentarios = '';
     $colaboradorqueasigna = '';
+    $$colaboradorqueasigna = '';
     $persona_moral = '';
     $solicitar_master_driver = '';
     $color = '';
@@ -49,6 +50,7 @@ if (
                     asigun.comentarios, 
                     asigun.solicitar_master_driver,
                     asigun.solicitar_emplacamiento_ldr,
+                    asigun.solicitar_seguro_ldr,
                     unidcolor.color_unidad,
                     pm.organizacion_institucion
             FROM asignacion_unidad_demo AS asigun
@@ -75,6 +77,7 @@ if (
         $comentarios = $fila['comentarios'];
         $solicitar_master_driver = $fila['solicitar_master_driver'];
         $solicitar_emplacamiento_ldr = $fila['solicitar_emplacamiento_ldr'];
+        $solicitar_seguro_ldr = $fila['solicitar_seguro_ldr'];
         $ubicacion = $fila['ubicacion'];
         $vin = $fila['vin'];
         $numero_motor = $fila['numero_motor'];
@@ -91,7 +94,7 @@ if (
                class="img-fluid rounded shadow-sm" 
                style="max-height: 180px; object-fit: contain;"
                alt="Imagen unidad" 
-               onerror="this.src=\'../../Cliente/img/unidades/carro_desconocido.png\'">
+               onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'">
         </div>
       </div>
       
@@ -116,14 +119,19 @@ if (
           <input type="text" class="form-control" value="' . htmlspecialchars($persona_moral) . '" disabled>
         </div>
 
-       <div class="col-md-3">
+       <div class="col-md-4">
           <label class="form-label">¿Requiere Master Driver?</label>
           <input type="text" class="form-control" style="font-weight: bold;" value="' . ($solicitar_master_driver == 1 ? 'Sí requiere Master Driver' : 'No requiere Master Driver') . '" disabled>
         </div>
 
-       <div class="col-md-3">
+       <div class="col-md-4">
           <label class="form-label">¿Requiere Master Driver?</label>
           <input type="text" class="form-control" style="font-weight: bold;" value="' . ($solicitar_emplacamiento_ldr == 1 ? 'Sí requiere Emplacar LDR' : 'No requiere Emplacar LDR') . '" disabled>
+        </div>
+
+       <div class="col-md-4">
+          <label class="form-label">¿Requiere Master Driver?</label>
+          <input type="text" class="form-control" style="font-weight: bold;" value="' . ($solicitar_seguro_ldr == 1 ? 'Sí requiere seguro' : 'No requiere seguro') . '" disabled>
         </div>
         
         <div class="col-md-3">

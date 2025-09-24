@@ -88,7 +88,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 $ruta_servidor = "../../Servidor/archivos/imagenes/imagenes_unidades/";
                 $ruta_completa = $ruta_servidor . $img;
                 $ruta_url = $ruta_servidor . $img;
-                $ruta_fallback = "../../Cliente/img/unidades/carro_desconocido.png";
+                $ruta_fallback = "../../Cliente/img/unidades/silueta_tracto3.png";
 
                 echo "<div class='contenido-card'>";
 

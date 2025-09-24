@@ -81,6 +81,8 @@ if (isset($_POST['id_unidad'])
                             pf.archivo_rfc,
                             pf.domicilio,
                             pf.archivo_domicilio,
+                            pf.domicilio_resguardo_unidad,
+                            pf.archivo_domicilio_resguardo_unidad,
                             aud.objetivo_prestamo,
                             aud.solicitar_master_driver,
                             aud.solicitar_emplacamiento_ldr,
@@ -137,6 +139,8 @@ if (isset($_POST['id_unidad'])
         $archivo_rfc = $row['archivo_rfc'];
         $domicilio = $row['domicilio'];
         $archivo_domicilio = $row['archivo_domicilio'];
+        $domicilio_resguardo_unidad = $row['domicilio_resguardo_unidad'];
+        $archivo_domicilio_resguardo_unidad = $row['archivo_domicilio_resguardo_unidad'];
         $placa = $row['placa'];
         $numero_motor = $row['numero_motor'];
         $VIN = $row['VIN'];
@@ -167,6 +171,7 @@ if (isset($_POST['id_unidad'])
         $ruta_archivo_curp = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_CURP/" . $archivo_curp;
         $ruta_archivo_rfc = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_RFC/" . $archivo_rfc;
         $ruta_archivo_domicilio = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_domicilio/" . $archivo_domicilio;
+        $ruta_archivo_domicilio_resguardo_unidad = "../../../Servidor/archivos/files/files_asignacion_demo/personas_fisicas/files_domicilio/" . $archivo_domicilio_resguardo_unidad;
 
         // Obtener correo del colaborador que esta solicitando la unidad demo
          $correo_query = "SELECT email_corporativo FROM colaboradores WHERE id_colaborador ='$id_colaborador'";
@@ -214,6 +219,7 @@ $mail1->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+    
     <p><strong>Objetivo del préstamo:</strong> $objetivo_prestamo</p>
     <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
     <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
@@ -307,7 +313,8 @@ $mail->Body = utf8_decode("
     <strong>Nombre:</strong> $nombre_1_persona_fisica $nombre_2_persona_fisica $apellido_paterno_persona_fisica $apellido_materno_persona_fisica<br>
     <strong>CURP:</strong> $curp<br>
     <strong>RFC:</strong> $rfc<br>
-    <strong>Domicilio:</strong> $domicilio</p>
+    <strong>Domicilio:</strong> $domicilio<br>
+    <strong>Domicilio de resguardo de la unidad:</strong>$domicilio_resguardo_unidad</p>
 
     <p><strong>¿Requiere Master Driver?:</strong> <strong style='color: #b20000;'>$requiere_master_driver</strong><br>
     <strong>¿LDR emplaca?:</strong> <strong style='color: #b20000;'>$requiere_emplacamiento_ldr</strong><br>
@@ -320,7 +327,7 @@ $mail->Body = utf8_decode("
     <ol>
         <li>Ingresa a la plataforma desde la <strong>INTRANET</strong>.</li>
         <li>Dirígete al menú <strong>COMODATOS DEMOS</strong>.</li>
-        <li>Selecciona al usuario correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
+        <li>Selecciona a la persona física correspondiente y haz clic en <strong>SUBIR-COMODATO</strong>.</li>
         <li>Adjunta el documento generado.</li>
     </ol>
 
@@ -340,11 +347,14 @@ $mail->Body = utf8_decode("
                                 $mail->addAttachment('' . $ruta_archivo_curp . '');
                                 $mail->addAttachment('' . $ruta_archivo_rfc . '');
                                 $mail->addAttachment('' . $ruta_archivo_domicilio . '');
+                                $mail->addAttachment('' . $ruta_archivo_domicilio_resguardo_unidad . '');
+                                
 
                                 $mail->addAttachment($ruta_archivo_ine); // Adjuntar el archivo PDF
                                 $mail->addAttachment($ruta_archivo_curp);
                                 $mail->addAttachment($ruta_archivo_rfc);
                                 $mail->addAttachment($ruta_archivo_domicilio);
+                                $mail->addAttachment($ruta_archivo_domicilio_resguardo_unidad);
 
                                 if ($mail->send()) {
                                     echo "Correo enviado exitosamente.";

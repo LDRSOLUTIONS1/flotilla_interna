@@ -48,13 +48,13 @@ echo '<div class="table-responsive">
         <table class="table table-hover tablaunidades" id="tablaUnidades">
             <thead class="table-light">
                 <tr>
-                    <th>Usuario / Institución</th>
-                    <th>Modelo</th>
-                    <th>Placa</th>
-                    <th>Asignación</th>
-                    <th>Devolución</th>
-                    <th>Solicitante</th>
-                    <th>Acción</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-user"></i> Usuario / Institución</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-car-side"></i> Modelo</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-car"></i> Placa</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-calendar"></i> Asignación</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-undo-alt me-2""></i>Devolución</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-user-tie me-2""></i>Solicitante</th>
+                    <th class="letratablajefedirecto"><i class="fas fa-ellipsis-h"></i>Acción</th>
                 </tr>
             </thead>
             <tbody>';
@@ -71,16 +71,16 @@ while ($fila = $resultado->fetch_assoc()) {
                 : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"] . ".png";
 
     echo '<tr>
-            <td>' . $usuario . '</td>
-            <td>' . $fila['nombre_modelo'] . '</td>
-            <td>' . $fila['placa'] . '</td>
-            <td>' . $fila['fecha_prestamo'] . '</td>
-            <td>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
-            <td style="text-align: center;">
+            <td class="letratablajefedirecto">' . $usuario . '</td>
+            <td class="letratablajefedirecto">' . $fila['nombre_modelo'] . '</td>
+            <td class="letratablajefedirecto">' . $fila['placa'] . '</td>
+            <td class="letratablajefedirecto">' . $fila['fecha_prestamo'] . '</td>
+            <td class="letratablajefedirecto">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
+            <td class="letratablajefedirecto" style="text-align: center;">
                 <img src="' . $avatar . '" class="rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;" alt="avatar">
                 ' . $solicitante . '
             </td>
-            <td>
+            <td class="letratablajefedirecto">
                 <button type="button" class="btn btn-sm btn-verunidad_autorizar btnMosrarModalUnidad" 
                     data-idunidad="' . $fila['id_unidad'] . '" 
                     data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '" 

@@ -136,7 +136,7 @@ if (isset($_POST['id_asignacion'])) {
                 <div class="form-floating">
                     <div class="form-label">
                         <label for="comodato_firmado_demo" class="form-label">
-                            Sube el comodato firmado por el cliente
+                            Sube el comodato firmado por los usuarios involucrados
                         </label>
                         <input class="form-control" type="file" id="comodato_firmado_demo" 
                                name="comodato_firmado_demo" accept=".pdf">

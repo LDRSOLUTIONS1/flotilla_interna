@@ -2450,7 +2450,9 @@ height: auto;
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-
+.letratablajefedirecto{
+  font-size: 0.9rem;
+}
 
 /*-------------------------------------------------------------estilos para el autorizador de unidades demos personas morales------------------------------*/
 

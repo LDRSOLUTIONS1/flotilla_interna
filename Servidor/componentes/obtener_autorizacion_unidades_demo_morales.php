@@ -77,7 +77,7 @@ while ($fila = $resultado->fetch_assoc()) {
         echo '<h6 class="card-text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';
 
         if ($nombreJefe) {
-            echo '<h6 class="card-text txtvalidacioncomodato"><b>Autorizó: </b>
+            echo '<h6 class="card-text txtvalidacioncomodato"><b>Autorizó: </b><br>
                 <img src="' . (empty($fila["avatar_jefe_directo"]) ? "../../Cliente/img/iconos/default_avatar.png" : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_jefe_directo"]) . '.png" class="rounded-circle me-2" style="margin-top:5px;width:30px;height:30px;object-fit:cover;" alt="avatar"> ' . $nombreJefe . '</h6>';
         }
 

@@ -34,6 +34,18 @@ if (isset($_FILES['archivo_subir_comodato'])
                 fecha_creacion_comodato = NOW(),
                 archivo_comodato_sin_firmar = '$nombrearchivocomodato'
                 WHERE id_asignacion_unidad_demo = $valor_idasignacion";
+                
+                // guardar la placa en la tabla unidades
+             // guardar la placa en la tabla unidades y quien la capturó
+                if (isset($_POST['nueva_placa_demo']) && !empty(trim($_POST['nueva_placa_demo']))) {
+                    $nueva_placa_demo = mysqli_real_escape_string($conexion, trim($_POST['nueva_placa_demo']));
+
+                    // actualizar placa en tabla unidades
+                    mysqli_query($conexion, "UPDATE unidades SET placa = '$nueva_placa_demo' WHERE id_unidad = $valor_idunidad");
+
+                    // registrar quién capturó la placa
+                    mysqli_query($conexion, "UPDATE asignacion_unidad_demo SET id_usuario_captura_placa = $id_creador_comodato WHERE id_asignacion_unidad_demo = $valor_idasignacion");
+                }
         $ejecutar = mysqli_query($conexion, $sql);
 
 
@@ -47,6 +59,10 @@ if (isset($_FILES['archivo_subir_comodato'])
                          col.nombre_2, 
                          col.apellido_paterno, 
                          col.apellido_materno,
+                         cap.nombre_1 AS nombre1_capturador,
+                        cap.nombre_2 AS nombre2_capturador,
+                        cap.apellido_paterno AS apellido_paterno_capturador,
+                        cap.apellido_materno AS apellido_materno_capturador,
                          asigpdf.archivo_comodato_sin_firmar,
                          asigpdf.fecha_prestamo,
                          asigpdf.fecha_devolucion,
@@ -57,6 +73,7 @@ if (isset($_FILES['archivo_subir_comodato'])
                          pm.organizacion_institucion
                   FROM asignacion_unidad_demo AS asigpdf
                   INNER JOIN colaboradores AS col ON asigpdf.id_colaborador_que_asigna = col.id_colaborador
+                  LEFT JOIN colaboradores AS cap ON asigpdf.id_usuario_captura_placa = cap.id_colaborador
                   INNER JOIN unidades AS uni ON asigpdf.id_unidad = uni.id_unidad
                   INNER JOIN modelos AS model ON uni.id_modelo = model.id_modelo
                   INNER JOIN marcas AS mar ON model.id_marca = mar.id_marca
@@ -85,6 +102,12 @@ if (isset($_FILES['archivo_subir_comodato'])
         $fecha_devolucion = $row['fecha_devolucion'];
         $archivo_comodato = $row['archivo_comodato_sin_firmar'];
         $ruta_archivo = $rutaarchivocomodato . $archivo_comodato;
+        $nombre_capturador = trim(
+        $row['nombre1_capturador'] . ' ' .
+        $row['nombre2_capturador'] . ' ' .
+        $row['apellido_paterno_capturador'] . ' ' .
+        $row['apellido_materno_capturador']
+        );
 
         //------------------------------------------ Envío del archivo PDF por correo con PHPMailer -----------------------------------------
 
@@ -126,6 +149,7 @@ if (isset($_FILES['archivo_subir_comodato'])
 
                 <table style='border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;'>
                     <tr><td style='padding: 6px;'><strong>Unidad:</strong></td><td style='padding: 6px;'>$marca $modelo</td></tr>
+                    <tr><td style='padding: 6px;'><strong>Placa capturada por:</strong></td><td style='padding: 6px;'>$nombre_capturador</td></tr>
                     <tr><td style='padding: 6px;'><strong>Placa:</strong></td><td style='padding: 6px;'>$placa</td></tr>
                     <tr><td style='padding: 6px;'><strong>Número de motor:</strong></td><td style='padding: 6px;'>$numero_motor</td></tr>
                     <tr><td style='padding: 6px;'><strong>VIN:</strong></td><td style='padding: 6px;'>$VIN</td></tr>

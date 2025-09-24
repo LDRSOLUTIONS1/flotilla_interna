@@ -78,7 +78,7 @@ if (!empty($data['id_persona_fisica'])) {
 <div class="container-fluid">
   <div class="row mb-3">
     <div class="col-md-4 text-center">
-      <img src="../../Servidor/archivos/imagenes/imagenes_unidades/<?= $data['img_unidad'] ?>" class="img-fluid rounded" alt="Imagen unidad" onerror="this.src='../../Cliente/img/unidades/carro_desconocido.png'">
+      <img src="../../Servidor/archivos/imagenes/imagenes_unidades/<?= $data['img_unidad'] ?>" class="img-fluid rounded" alt="Imagen unidad" onerror="this.src='../../Cliente/img/unidades/silueta_tracto3.png'">
     </div>
     <div class="col-md-8">
       <h5 class="mb-3"><strong>Información de la Unidad</strong></h5>

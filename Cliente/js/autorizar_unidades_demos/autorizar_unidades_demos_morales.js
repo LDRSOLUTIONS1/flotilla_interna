@@ -63,8 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
               console.log(response);
               contenedorspinner.style.display = "none";
               if (response.includes("correctamente")) {
-                window.location.href =
-                  "./autorizaciones_demos_personas_morales.php?resultado=Autorizacionunidademo";
+                window.location.href ="./autorizaciones_demos_personas_morales.php?resultado=Autorizacionunidademo";
               } else {
                 Toastify({
                   text: "Hubo un error al realizar la autorización.",
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   gravity: "top",
                   position: "right",
                   style: {
-                    background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                    background: "linear-gradient(to right, #ff0015ff, #ff0000ff)",
                   },
                 }).showToast();
               }

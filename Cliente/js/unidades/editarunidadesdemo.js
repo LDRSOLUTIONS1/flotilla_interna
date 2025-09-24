@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       $.ajax({
         type: "POST",
-        url: "../../Servidor/solicitudes/unidades/formularioeditarunidades.php",
+        url: "../../Servidor/solicitudes/unidades/formularioeditarunidadesdemo.php",
         data: { idunidad: id_unidad_seleccionado },
         success: function (response) {
           console.log(response);

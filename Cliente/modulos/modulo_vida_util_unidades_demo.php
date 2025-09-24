@@ -106,29 +106,34 @@
     $meses_usados = ($diff->y * 12) + $diff->m;
     $porcentaje = min(100, max(0, ($meses_usados / $vida_util_meses) * 100));
 
-    if ($meses_usados < 48) {
-        $estado = "Activa";
-        $colorBarra = "progress-bar-activa";
-        $colorBadge = "badge-activa";
-        $contadorEstados["Activa"]++;
-    } elseif ($meses_usados < 60) {
+    $kilometraje = intval($u['ultimo_kilometraje']);
+    $vida_util_km = 25000;
+
+    // ----- Determinar estado -----
+    if ($kilometraje >= $vida_util_km || $meses_usados >= 18) {
+        $estado = "Para vender";
+        $colorBarra = "progress-bar-venta";
+        $colorBadge = "badge-venta";
+        $contadorEstados["Venta"]++;
+    } elseif ($meses_usados >= 48) {
         $estado = "Próxima a venta";
         $colorBarra = "progress-bar-proxima";
         $colorBadge = "badge-proxima";
         $contadorEstados["Próxima"]++;
     } else {
-        $estado = "Para vender";
-        $colorBarra = "progress-bar-venta";
-        $colorBadge = "badge-venta";
-        $contadorEstados["Venta"]++;
+        $estado = "Activa";
+        $colorBarra = "progress-bar-activa";
+        $colorBadge = "badge-activa";
+        $contadorEstados["Activa"]++;
     }
 
+    // Mostrar la fila
     echo "<tr>
             <td><strong>".htmlspecialchars($u['marca'])." ".htmlspecialchars($u['modelo'])."</strong><br>
                 <small>VIN: ".htmlspecialchars($u['vin'])."<br>
                 Placas: ".htmlspecialchars($u['placa'])."<br>
                 Sede: ".htmlspecialchars($u['ubicacion'])."<br>
-                Kilometraje: ".htmlspecialchars($u['ultimo_kilometraje'])." Km</small>
+                Kilometraje: ".number_format($kilometraje)." Km</small>
             </td>
             <td data-order=\"{$fecha_alta_iso}\">{$fecha_alta_vista}</td>
             <td>{$meses_usados} meses</td>
@@ -138,10 +143,14 @@
                   ".max(0, $vida_util_meses - $meses_usados)." meses restantes
                 </div>
               </div>
+              <div><small>".($vida_util_km - $kilometraje > 0 
+                  ? number_format($vida_util_km - $kilometraje)." km restantes"
+                  : "Vida útil de km agotada")."</small></div>
             </td>
             <td><span class='badge {$colorBadge}'>{$estado}</span></td>
           </tr>";
 }
+
 
               ?>
             </tbody>
