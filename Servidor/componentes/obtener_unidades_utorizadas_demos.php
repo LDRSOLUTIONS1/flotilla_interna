@@ -66,8 +66,6 @@ $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 echo '<div id="vistaCards">';
 while ($fila = $resultado->fetch_assoc()) {
 
-    // Definir la clase del botón según el estatus del comodato
-    $claseBotonComodato = ($fila['id_estatus_comodato_demo'] == 3) ? 'btn-success' : 'btn-secondary';
 
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
@@ -78,9 +76,15 @@ while ($fila = $resultado->fetch_assoc()) {
                 <h6 class="txtvalidacioncomodato"><b>Prórroga solicitada</b></h6>
             </div>';
     }
-        echo '<div class="cardheader">
-            <button type="button" class="fa-solid fa-file me-2 btn btn-sm ' . $claseBotonComodato . ' btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '"> </button>
-            <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
+        echo '<div class="cardheader">';
+//habilitar y desabilitar botón de comodato solo si juridico ya lo subio
+                if ($fila['id_estatus_comodato_demo'] == 3) {
+                    echo '<button type="button" 
+                            class="fa-solid fa-file me-2 btn btn-sm btn-success btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" 
+                            data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
+                        </button>';
+                }
+            echo '<img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
             onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'">
         </div>
         <div class="card-body">';

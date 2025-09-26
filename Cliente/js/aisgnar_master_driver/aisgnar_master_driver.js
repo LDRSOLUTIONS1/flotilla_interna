@@ -20,6 +20,20 @@ document.addEventListener("DOMContentLoaded", function () {
         success: function (response) {
           modalasugnarrmasterdriverbody.innerHTML = response;
           modalasugnarrmasterdriver.show();
+          // Mostrar/ocultar fechas al seleccionar master driver
+$("#id_master_driver").on("change", function () {
+    if ($(this).val() !== "") {
+        $("#fechasContainer").show();
+    } else {
+        $("#fechasContainer").hide();
+    }
+});
+
+// Agregar nuevo input date
+$("#agregarFecha").on("click", function () {
+    $("#fechasInputs").append('<input type="date" name="fechas_prueba[]" class="form-control mb-2">');
+});
+
         },
       });
     }
@@ -100,6 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = new FormData();
     formData.append("id_master_driver", valor_id_master_driver);
     formData.append("id_asignacion", valor_id_asignacion);
+    // Obtener todos los inputs de fecha
+document.querySelectorAll('input[name="fechas_prueba[]"]').forEach((input, index) => {
+    formData.append('fechas_prueba[]', input.value);
+});
+
     $.ajax({
       type: "POST",
       url: "../../Servidor/solicitudes/unidades/asignacion_unidades_demo/asignar_master_driver.php",

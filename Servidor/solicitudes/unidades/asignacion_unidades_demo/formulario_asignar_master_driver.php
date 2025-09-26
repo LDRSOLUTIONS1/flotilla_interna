@@ -20,19 +20,31 @@ ORDER BY colaboradores.numero_colaborador ASC";
 
 $resultado = $conexion->query($sqltipodirectivos);
 
- $id_asignacion = $_POST['id_asignacion'];
-echo '
+$id_asignacion = $_POST['id_asignacion'];
+?>
+
 <h3>Asignar Máster Driver</h3>
 
-    <div class="form-floating">
-        <select class="form-control" id="id_master_driver" name="id_master_driver">
-            <option value="" selected>Seleccione un Máster Driver</option>';
-            while ($row = $resultado->fetch_assoc()) {
-                echo '<option value="' . $row['id_colaborador'] . '">' . $row['numero_colaborador'] . ' - ' . $row['nombre_1'] . ' ' . $row['nombre_2'] . ' ' . $row['apellido_paterno'] . ' ' . $row['apellido_materno'] . '</option>';
-            }
-            echo '
-        </select>
-        <label for="id_master_driver">Máster Driver:</label>
+<div class="form-floating mb-3">
+    <select class="form-control" id="id_master_driver" name="id_master_driver" required>
+        <option value="" selected>Seleccione un Máster Driver</option>
+        <?php while ($row = $resultado->fetch_assoc()) { ?>
+            <option value="<?= $row['id_colaborador'] ?>">
+                <?= $row['numero_colaborador'] ?> - <?= $row['nombre_1'] . ' ' . $row['nombre_2'] . ' ' . $row['apellido_paterno'] . ' ' . $row['apellido_materno'] ?>
+            </option>
+        <?php } ?>
+    </select>
+    <label for="id_master_driver">Máster Driver:</label>
+</div>
+
+<input type="hidden" name="id_asignacion" id="id_asignacion" value="<?= $id_asignacion ?>">
+
+<!-- Campo de fechas oculto inicialmente -->
+<div class="mb-3" id="fechasContainer" style="display:none;">
+    <label class="form-label">Fechas de la prueba:</label>
+    <div id="fechasInputs">
+        <input type="date" name="fechas_prueba[]" class="form-control mb-2">
     </div>
-<input type="hidden" name="id_asignacion" id="id_asignacion" value="' . $id_asignacion . '">
-';
+    <button type="button" id="agregarFecha" class="btn btn-sm btn-outline-primary">Agregar otra fecha</button>
+</div>
+
