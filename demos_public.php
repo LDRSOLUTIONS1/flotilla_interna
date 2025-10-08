@@ -42,8 +42,7 @@ if(!isset($_SESSION['visita_publica'])) {
         <?php
         include("Cliente/include/menu_public.php");
         ?>
-        <!-- Video de fondo -->
-        <img class="imagenfondo" src="Cliente/img/fondohexagonal.png" alt="">
+        
 
         <div class="cuadroblancocontenido">
 
@@ -79,14 +78,14 @@ if(!isset($_SESSION['visita_publica'])) {
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://files.foton.mx/v2/assets/static/images/products/detail/AUMANR/Banner.jpg" class="d-block w-100" alt="Pickup Demo">
+                                <img src="Cliente/img/unidades/Banner.jpg" class="d-block w-100" alt="Pickup Demo">
                                 <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
                                     <h5>AUMAN R EST-A</h5>
                                     <p>Robusta, confiable y preparada para cualquier terreno.</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://files.foton.mx/v2/assets/static/images/products/detail/AUMARKS12/Interior/Exterior/S12-5.jpg" class="d-block w-100" alt="Camión Demo">
+                                <img src="Cliente/img/unidades/aumark.jpg" class="d-block w-100" alt="Camión Demo">
                                 <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
                                     <h5>Aumark S8</h5>
                                     <p>Eficiencia en transporte y tecnología avanzada.</p>

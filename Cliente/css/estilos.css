@@ -3021,6 +3021,16 @@ height: auto;
   padding: 6px 6px; /* Adjust padding to make the button smaller */
   transition: background-color 0.3s ease-in-out;
 }
+/*btn contacto*/
+.btn-filtrar_demo_public:hover{
+  background-color: #476e7a; /* tu color deseado */
+}
+.btn-filtrar_demo_public{
+  background-color: #476e7a; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 6px; /* Adjust padding to make the button smaller */
+  transition: background-color 0.3s ease-in-out;
+}
 /*estilos del navhe*/
 .navbar-brand, .nav-link {
       color: rgb(0, 0, 0) !important;
@@ -3028,7 +3038,7 @@ height: auto;
     }
     /*estilos del fondo de la imagen del inicio*/
     .hero-section {
-      background: url('https://files.foton.mx/v2/assets/static/images/products/detail/AUMANC/S35/EST-A_S35_30_front_right.jpg') no-repeat center center/cover;
+      background: url('../img/unidades/banner_unid.jpg') no-repeat center center/cover;
       color: white;
       height: 90vh;
       display: flex;
@@ -3044,23 +3054,7 @@ height: auto;
       background: rgba(0, 0, 0, 0.5);
     }
     
-    /*estilos del fondo de la imagen del la solicitud de unidades demo public*/
-.hero-section_demo {
-  background: url('https://files.foton.mx/v2/assets/static/images/aboutUs-1/banner.jpg') no-repeat center center/cover;
-  color: rgb(255, 255, 255);
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
-  .hero-section_demo::before {
-  content: "";
-  position: absolute;
-                inset: 0;
-  background: rgba(0, 0, 0, 0.377);
-}
+
 
   .hero-content {
   position: relative;
