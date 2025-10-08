@@ -25,7 +25,7 @@ error_reporting(E_ALL);
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!---estilos de los botones para descragar archhivos csv pdf excel--->>
+    <!---estilos de los botones para descragar archhivos csv pdf excel--->
     <link rel="stylesheet" href="../datatable/buttons.dataTables.css">
     <link rel="stylesheet" href="../datatable/dataTables.dataTables.css">
     <!-- Leaflet JS -->

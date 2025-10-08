@@ -3001,3 +3001,109 @@ height: auto;
   color: #fff;
 }
 
+/*-----------------------------------------estilos para la interfaz publica de personas por fuera-----------------------*/
+/*btn para ver las unidades demo*/
+.btn_ver_unidades_demo:hover{
+  background-color: #89a0c4; /* tu color deseado */
+}
+.btn_ver_unidades_demo{
+  background-color: #6a7c97; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 8px; /* Adjust padding to make the button smaller */
+}
+/*btn contacto*/
+.btn_contacto:hover{
+  background-color: #10a57b; /* tu color deseado */
+}
+.btn_contacto{
+  background-color: #0e7a5c; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 6px 6px; /* Adjust padding to make the button smaller */
+  transition: background-color 0.3s ease-in-out;
+}
+/*estilos del navhe*/
+.navbar-brand, .nav-link {
+      color: rgb(0, 0, 0) !important;
+      font-weight: 500;
+    }
+    /*estilos del fondo de la imagen del inicio*/
+    .hero-section {
+      background: url('https://files.foton.mx/v2/assets/static/images/products/detail/AUMANC/S35/EST-A_S35_30_front_right.jpg') no-repeat center center/cover;
+      color: white;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    
+    /*estilos del fondo de la imagen del la solicitud de unidades demo public*/
+.hero-section_demo {
+  background: url('https://files.foton.mx/v2/assets/static/images/aboutUs-1/banner.jpg') no-repeat center center/cover;
+  color: rgb(255, 255, 255);
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+  .hero-section_demo::before {
+  content: "";
+  position: absolute;
+                inset: 0;
+  background: rgba(0, 0, 0, 0.377);
+}
+
+  .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+  .section-title {
+  font-weight: 600;
+  color: rgb(75, 75, 75);
+  margin-bottom: 1rem;
+}
+/*estilos del pie*/
+  footer {
+  background-color: #777777;
+  color: white;
+  padding: 1rem 0;
+}
+/*letras de las cards de las unidades disponibles*/
+.text-demo_public{
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+}
+/*estilos de las cards de la sunidades public demo*/
+/* Imagen de unidad responsive */
+.img-unidad {
+    width: 100%;
+    height: 200px;       /* altura por defecto */
+    object-fit: cover;   /* mantiene proporción y recorta si es necesario */
+}
+
+/* Ajustes para móviles */
+@media (max-width: 576px) {
+    .img-unidad {
+        max-width: 230px; /* reducir el ancho */
+        max-height: 110px; /* más pequeña en celulares */
+        object-fit: cover; /* mantiene proporción y recorta si es necesario */
+    }
+
+    .col-sm-12.d-flex {
+        margin-bottom: 15px; /* separación entre cards */
+    }
+}
+
+
