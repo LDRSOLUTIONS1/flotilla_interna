@@ -61,30 +61,53 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 
 
-    
+
 
 echo '<div id="vistaCards">';
 while ($fila = $resultado->fetch_assoc()) {
+
+    $id_asignacion_demo = $fila['id_asignacion_unidad_demo'];
+
+    // Verificar si existen observaciones
+    $sqlObs = "SELECT COUNT(*) AS total_obs 
+           FROM observaciones_documentos_juridico 
+           WHERE id_asignacion_unidad_demo = $id_asignacion_demo 
+           AND comentario IS NOT NULL 
+           AND comentario != ''";
+    $resObs = $conexion->query($sqlObs);
+    $obsData = $resObs->fetch_assoc();
+    $tieneObservaciones = $obsData['total_obs'] > 0;
+
 
 
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
         $tipo_solicitante = isset($fila['id_persona_fisica']) && $fila['id_persona_fisica'] ? 'fisica' : 'moral';
         echo '<div class="card mb-3 card-solicitante tipo-' . $tipo_solicitante . '">';
         if (!empty($fila['id_prorroga_unidad_demo']) && $fila['id_estado_prueba_demo'] != 5) {
-        echo '<div class="alerta d-flex align-items-center">
+            echo '<div class="alerta d-flex align-items-center">
                 <img src="../../Cliente/videos/notificacion.gif" class="me-2 imgalertasucces">
                 <h6 class="txtvalidacioncomodato"><b>Prórroga solicitada</b></h6>
             </div>';
-    }
+        }
         echo '<div class="cardheader">';
-//habilitar y desabilitar botón de comodato solo si juridico ya lo subio
-                if ($fila['id_estatus_comodato_demo'] == 3) {
-                    echo '<button type="button" 
+        //--------------------------------habilitar y desabilitar botón de comodato solo si juridico ya lo subio-------------------------------------------------
+        if ($fila['id_estatus_comodato_demo'] == 3) {
+            echo '<button type="button" 
                             class="fa-solid fa-file me-2 btn btn-sm btn-success btncomodatodemo position-absolute top-0 end-0 mt-2 me-2" 
                             data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
                         </button>';
-                }
-            echo '<img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
+        }
+
+        // ------------------------------------------------------------Botón para ver observaciones jurídicas------------------------------------
+        if ($tieneObservaciones) {
+            echo '<button type="button" 
+                class="fa-solid fa-comment me-2 btn btn-warning btn-sm btnVerObservaciones position-absolute top-0 start-0 mt-2 ms-2" 
+                data-id-asignacion-demo="' . $id_asignacion_demo . '">
+          </button>';
+        }
+
+
+        echo '<img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" onerror="this.src=\'../../Cliente/img/unidades/silueta_tracto3.png\'" class="card-img-top img-fluid imgcard" alt="..."
             onclick="window.location.href = \'realizacion_prueba_demo.php?id_unidad=' . $fila['id_asignacion_unidad_demo'] . '\'">
         </div>
         <div class="card-body">';
@@ -102,30 +125,32 @@ while ($fila = $resultado->fetch_assoc()) {
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';
-            if ($fila['id_estado_prueba_demo'] != 3 && $fila['id_estado_prueba_demo'] !=2 && $fila['id_estado_prueba_demo'] != 1 && $fila['id_estado_prueba_demo'] != NULL) {
-                //verificamos si tiene prorroga o no para mostrar el boton
+
+
+        if ($fila['id_estado_prueba_demo'] != 3 && $fila['id_estado_prueba_demo'] != 2 && $fila['id_estado_prueba_demo'] != 1 && $fila['id_estado_prueba_demo'] != NULL) {
+            //verificamos si tiene prorroga o no para mostrar el boton
             if (empty($fila['id_prorroga_unidad_demo']) && $fila['id_estado_prueba_demo'] != 5) {
-        // ✅ No tiene prórroga → mostrar botón habilitado
-        echo '<button type="button" 
+                // ✅ No tiene prórroga → mostrar botón habilitado
+                echo '<button type="button" 
                      class="btn btn-primary btn-sm btnsolicitarprorrogademo" 
                      data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
                  Prórroga
               </button>';
-    }
+            }
 
-    echo '<button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" 
+            echo '<button type="button" class="btn btn-success btn-sm btnreportefinalunidademo" 
                  data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
              Reporte
           </button>';
 
-    if ($fila['id_estado_prueba_demo'] != 5) {
-        echo '<button type="button" 
+            if ($fila['id_estado_prueba_demo'] != 5) {
+                echo '<button type="button" 
                      class="btn btn-warning btn-sm btnfinalizarpruebaunidademo" 
                      data-id_asignacion_demo="' . $fila['id_asignacion_unidad_demo'] . '">
                  Finalizar
               </button>';
-    }
-}
+            }
+        }
         echo '</div>
         </div>';
     }

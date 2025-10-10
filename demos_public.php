@@ -59,7 +59,7 @@ if(!isset($_SESSION['visita_publica'])) {
             <section id="empresa" class="py-5">
                 <div class="container text-center">
                     <h2 class="section-title">¿Quiénes Somos?</h2>
-                    <p class="lead">En <strong>LDR Solutions</strong> Somos una empresa dedicada a ofrecer soluciones integrales de transporte y demostración de vehículos.
+                    <p class="lead">En <strong>LDR Solutions,</strong> somos una empresa dedicada a ofrecer soluciones integrales de transporte y demostración de vehículos.
                         Nuestro objetivo es brindar experiencias únicas a nuestros clientes mediante la gestión, monitoreo y prueba de unidades demo de alta calidad.</p>
                 </div>
             </section>

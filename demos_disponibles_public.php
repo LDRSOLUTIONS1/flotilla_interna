@@ -50,7 +50,7 @@
                 <section id="solicitud" class="py-5">
                     <div class="container text-center">
                         <h2 class="section-title">¿Quieres solicitar una prueba?</h2>
-                        <p class="lead">Para poder solicitar una prueba deves seleccionar la unidad que deceas y la sede en la que se encuentra.</p>
+                        <p class="lead">Para poder solicitar una prueba debes seleccionar la sede y el modelo.</p>
                     </div>
                 </section>
 
@@ -84,7 +84,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-filtrar_demo_public w-100"><i class="fas fa-filter"></i> Filtrar</button>
+                                <button type="submit" class="btn btn-filtrar_demo_public w-100"><i class="fas fa-filter"></i> Seleccionar</button>
                             </div>
                         </form>
                     </div>

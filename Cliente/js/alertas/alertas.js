@@ -381,3 +381,13 @@ if (resultado == "Comodatodemosubido") {
   });
   limpiarparametros();
 }
+//alerta observaciones de documentos solicitantes demos
+if (resultado == "Observaciones") {
+  Swal.fire({
+    title: "Observaciones enviadas correctamente",
+    text: "Operación realizada correctamente",
+    icon: "success",
+    confirmButtonText: "Aceptar",
+  });
+  limpiarparametros();
+}

@@ -64,11 +64,38 @@
     </div>
 </div>
 
+<!--modal para ver las observaciones de la documentacion por parte de juridico-->
+<!--modal-->
+<div class="modal fade" id="modalObservaciones" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Observaciones y Archivos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="contenidoModalObservaciones">
+        <!-- Aquí se cargará por AJAX:
+             - Observaciones existentes
+             - Archivos existentes con vista previa
+             - Input para subir nuevo archivo -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarArchivoModal">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <!--js solicitar prorroga de la unidad-->
 <script src="../js/unidades_demo_autorizadas/asignaciones_unidades_demo.js"></script>
 <!--js para subir el comodato firmado para la institucion o persona fisica-->
 <script src="../js/unidades_demo_autorizadas/subir_comodato_demo.js"></script>
+<!--js para verificar los comentarios del area juridica-->
+<script src="../js/unidades_demo_autorizadas/comentarios_juridico_documentos.js"></script>
 <!--js para vizualisar el reporte final de la prueba demo-->
 <script src="../js/reporte_final_prueba_demo/reportes_finales_demos.js"></script>
 

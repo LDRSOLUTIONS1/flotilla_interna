@@ -48,7 +48,35 @@
     </div>
 </div>
 
+<!----------------------------------------modal para ver los archivos de las personas fisicas o morales------------------------------>
+<!--modal-->
+<div class="modal fade" id="modalArchivos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Archivos del solicitante</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="contenidoModalArchivos">
+        <!-- Aquí se cargará el HTML desde AJAX -->
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="guardarComentarios">Guardar comentarios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-------------------------------------js para subir el comodato correspondiente al usuario-------------------------------->
 <script src="../js/juridico/comodato_demo.js"></script>
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards_tabla.js"></script>
+<!--js para verificar los archivos de las personas fisicas o morales-->
+<script src="../js/juridico/ver_archivos.js"></script>

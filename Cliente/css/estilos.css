@@ -1311,13 +1311,19 @@ height: auto;
   font-size: 0.6rem;
 }
 .btnmosrarmodalunidadcomodato{
-  background-color: #7971e2; /* tu color deseado */
+  background-color: #736fb3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 .btnmosrarmodalunidadcomodatodemo{
   background-color: #078899; /* tu color deseado */
+  color: white; /* color del texto */
+  padding: 5px 8px; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem;
+}
+.btnverarchivos{
+  background-color: #6d9aa3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
@@ -1788,7 +1794,7 @@ height: auto;
 }
 /*estilo del boton*/
 .btn-comodato_interna{
-  background-color: #7971e2; /* tu color deseado */
+  background-color: #736fb3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
@@ -1899,7 +1905,7 @@ height: auto;
 
 /* Estilos del botón */
 .btn-cambiar_vista_juridico {
-  background-color: #7971e2; /* tu color deseado */
+  background-color: #736fb3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
 }
