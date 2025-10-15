@@ -94,7 +94,7 @@
                 <!-- SECCIÓN UNIDADES DEMO DISPONIBLES -->
                 <section id="unidades_demo" class="py-5 bg-light">
                     <div class="container">
-                        <h2 class="section-title text-center mb-4">Unidades Demo Disponibles</h2>
+                        <h2 class="section-title text-center mb-4">Unidades</h2>
 
                         <div id="resultado-unidades" class="row g-4">
                             <?php

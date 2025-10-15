@@ -52,7 +52,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" id="btncerrarmodalasugnarrmasterdriver" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnasignarmasterdriver">Asignar</button>
             </div>
         </div>
     </div>

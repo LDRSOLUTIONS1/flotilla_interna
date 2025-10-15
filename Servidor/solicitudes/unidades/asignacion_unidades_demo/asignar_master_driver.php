@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("../../../conexion.php");
 
 if (isset($_POST['id_master_driver']) && isset($_POST['id_asignacion'])) {
@@ -6,70 +6,131 @@ if (isset($_POST['id_master_driver']) && isset($_POST['id_asignacion'])) {
     $id_master_driver = $_POST['id_master_driver'];
     $id_asignacion = $_POST['id_asignacion'];
 
-    // 1️⃣ Actualizar el master driver en la asignación
-    $query = "UPDATE asignacion_unidad_demo 
-              SET id_asignar_prueba_demo_master_driver = '$id_master_driver' 
-              WHERE id_asignacion_unidad_demo = '$id_asignacion'";
+    // 1️⃣ Obtener fechas de la asignación
+    $row = $conexion->query("SELECT fecha_prestamo, fecha_devolucion 
+        FROM asignacion_unidad_demo 
+        WHERE id_asignacion_unidad_demo = '$id_asignacion'
+    ")->fetch_assoc();
 
-
-    if ($conexion->query($query) === TRUE) {
-        echo "Asignación del Master Driver realizada con éxito.<br>";
-        echo "Master Driver asignado: " . $id_master_driver . "<br>";
-        echo "Asignación: " . $id_asignacion . "<br>";
-    } else {
-        echo "Error al asignar Master Driver: " . $conexion->error;
+    if (!$row) {
+        echo json_encode([
+            "success" => false,
+            "message" => "No se encontró la asignación solicitada."
+        ]);
+        exit;
     }
 
-    // 2️⃣ Guardar las fechas en calendario_prueba_demo e insertar en API externa
-    if (isset($_POST['fechas_prueba']) && is_array($_POST['fechas_prueba'])) {
+    $fechaAsignacion = new DateTime($row['fecha_prestamo']);
+    $fechaDevolucion = new DateTime($row['fecha_devolucion']);
 
-        $stmt = $conexion->prepare("INSERT INTO calendario_prueba_demo (id_asignacion_unidad_demo, fecha_prueba) VALUES (?, ?)");
-        echo "Fechas de prueba recibidas: " . implode(", ", $_POST['fechas_prueba']) . "<br>";
-        
-        $url_api = "http://192.168.12.70:8000/api/storeDemo"; // Endpoint remoto
+    // 2️⃣ Consultar API externa (endpoint de cursos)
+    $url_api_validacion = "https://apipic.ldrhumanresources.com/api/course-schedules/dates";
 
-        foreach ($_POST['fechas_prueba'] as $fecha) {
-            $fecha = trim($fecha);
-            if (!empty($fecha)) {
-                // Insertar en tu base de datos local
-                $stmt->bind_param("is", $id_asignacion, $fecha);
-                if ($stmt->execute()) {
+    $ch = curl_init($url_api_validacion);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response_validacion = curl_exec($ch);
+    curl_close($ch);
 
-                    // Si el insert fue correcto, enviar la misma info al endpoint remoto
-                    $payload = json_encode([
-                        "instructor_id" => $id_master_driver,
-                        "reference_id"  => $id_asignacion,
-                        "start_date"    => $fecha
-                    ]);
+    $data_validacion = json_decode($response_validacion, true);
 
-                    $ch = curl_init($url_api);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                        'Content-Type: application/json'
-                    ]);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    // Si la API no devuelve un array válido
+    if (!is_array($data_validacion)) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Error: la API de validación no devolvió un formato válido.",
+            "response" => $response_validacion
+        ]);
+        exit;
+    }
 
-                    $response = curl_exec($ch);
-                    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                    curl_close($ch);
+    // 3️⃣ Validar disponibilidad solo usando start_date
+    $disponible = true;
+    $log = []; // ← Aquí almacenamos los mensajes de depuración
 
-                    // Puedes mostrar la respuesta para depurar (o guardar en logs)
-                    echo "<br>📡 Enviado al API → Código HTTP: $http_code<br>";
-                    echo "Respuesta del servidor: $response<br>";
-                } else {
-                    echo "❌ Error al insertar fecha $fecha: " . $stmt->error . "<br>";
-                }
-            }
+    foreach ($data_validacion as $evento) {
+        if (!isset($evento['instructor_id']) || !isset($evento['start_date'])) {
+            $log[] = "Evento ignorado por datos incompletos.";
+            continue;
         }
 
-        $stmt->close();
-        echo "✅ Fechas de prueba guardadas correctamente.";
-    } else {
-        echo "⚠️ No se enviaron fechas de prueba.";
+        // Solo analizamos si el instructor coincide
+        if ($evento['instructor_id'] != $id_master_driver) {
+            $log[] = "Evento ignorado: instructor {$evento['instructor_id']} distinto al solicitado ($id_master_driver).";
+            continue;
+        }
+
+        $curso_fecha = new DateTime($evento['start_date']);
+        $log[] = "📅 Evaluando fecha curso: " . $curso_fecha->format('Y-m-d H:i:s');
+
+        // Validamos si la fecha está dentro del rango asignado
+        if ($curso_fecha >= $fechaAsignacion && $curso_fecha <= $fechaDevolucion) {
+            $disponible = false;
+            $log[] = "❌ Conflicto detectado: el curso del Master Driver ($id_master_driver) está en el rango solicitado.";
+            $fecha_conflicto = $curso_fecha->format('Y-m-d H:i:s');
+            break;
+        } else {
+            $log[] = "✅ Sin conflicto: la fecha no interfiere con el rango (" .
+                $fechaAsignacion->format('Y-m-d') . " al " . $fechaDevolucion->format('Y-m-d') . ")";
+        }
     }
 
+    // Si se detecta conflicto, no se permite la asignación
+    if (!$disponible) {
+        echo json_encode([
+            "success" => false,
+            "message" => "El Master Driver ya tiene un curso asignado en la fecha: $fecha_conflicto",
+            "log" => $log,
+            "response_api" => $data_validacion
+        ]);
+        exit;
+    }
+
+    // 4️⃣ Asignar Master Driver en tu base de datos
+    $stmt = $conexion->prepare("UPDATE asignacion_unidad_demo 
+                                SET id_asignar_prueba_demo_master_driver = ? 
+                                WHERE id_asignacion_unidad_demo = ?");
+    $stmt->bind_param("ii", $id_master_driver, $id_asignacion);
+
+    if (!$stmt->execute()) {
+        echo json_encode([
+            "success" => false,
+            "message" => "Error al asignar Master Driver: " . $stmt->error,
+            "log" => $log
+        ]);
+        exit;
+    }
+    $stmt->close();
+
+    // 5️⃣ Enviar fechas a la API externa
+    $url_api_insert = "https://apipic.ldrhumanresources.com/api/storeDemo";
+    $payload_insert = json_encode([
+        "instructor_id" => $id_master_driver,
+        "reference_id"  => $id_asignacion,
+        "start_date"    => $fechaAsignacion->format('Y-m-d'),
+        "end_date"      => $fechaDevolucion->format('Y-m-d')
+    ]);
+
+    $ch = curl_init($url_api_insert);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload_insert);
+    $response_insert = curl_exec($ch);
+    $http_code_insert = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    echo json_encode([
+        "success" => true,
+        "message" => "Master Driver asignado correctamente y fechas registradas en la API.",
+        "http_code" => $http_code_insert,
+        "log" => $log, // 👀 Mostrar log completo
+        "response_insert" => $response_insert
+    ]);
+
 } else {
-    echo "❌ Faltan datos: id_master_driver o id_asignacion.";
+    echo json_encode([
+        "success" => false,
+        "message" => "Faltan datos: id_master_driver o id_asignacion."
+    ]);
 }
 ?>
