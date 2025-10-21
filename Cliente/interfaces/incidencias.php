@@ -8,9 +8,19 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
+    <!--estilos de boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css">
-    <title>Incidencias</title>
+    <!-- CDN para poder utilizar los toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!--estilos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!--estIlos de interfaz-->
+    <link rel="stylesheet" href="../css/estilos.css?v=1">
+    <!--cdn para icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+    integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Validación de unidades</title>
 
 </head>
 
@@ -21,14 +31,14 @@
     include("../include/menu.php");
     ?>
     <div class="cuadroblancocontenido">
-
-
-    
     <!-- INICIO BLOQUE PARA EL CUERPO -->
         <?php include("../modulos/modulo_incidencias.php"); ?>
-
     </div>
 
+    <div class="contenedorspinner" id="contenedorspinner">
+        <span class="loader"></span>
+    </div>
+    
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->

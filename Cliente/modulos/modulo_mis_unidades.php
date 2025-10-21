@@ -12,5 +12,28 @@
     </div>
 </div>
 
+<!-----------------------------------------modal registrar incidencia---------------------------------->
+<!--modal-->
+<div class="modal fade modalregistrarincidencia" id="modalregistrarincidencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar incidencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalregistrarincidencia"></button>
+            </div>
+            <div class="modal-body" id="modalregistrarincidenciabody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalregistrarincidencia" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnregistrarincidencia">Registrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards.js"></script>
+<!--js para las incidencias-->
+<script src="../js/mis_unidades_cliente/incidencias_cliente.js"></script>

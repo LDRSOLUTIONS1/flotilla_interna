@@ -41,7 +41,7 @@ if (isset($_POST['id_unidad'], $_POST['id_asignacion_demo'], $_POST['id_persona_
     echo "Consulta UPDATE exitosa<br>";
 
     // Obtener datos y archivos de la unidad y persona moral
-                $query = "SELECT 
+    $query = "SELECT 
                     uni.placa, 
                     uni.numero_motor, 
                     uni.VIN, 
@@ -143,97 +143,75 @@ if (isset($_POST['id_unidad'], $_POST['id_asignacion_demo'], $_POST['id_persona_
     $apellido_paterno_colaborador_autorizador = $row['apellido_paterno_colaborador_autorizador'];
     $apellido_materno_colaborador_autorizador = $row['apellido_materno_colaborador_autorizador'];
 
-            //cadena para ver si requiere master driver y mandarlo por correo
-        $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
-        $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
-        $requiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
+    //cadena para ver si requiere master driver y mandarlo por correo
+    $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+    $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
+    $requiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
 
-    // Carpeta base de archivos
-$ruta_base = '../../../Servidor/archivos/files/files_asignacion_demo/personas_morales/';
+    // Carpeta base de archivos en el servidor
+    $base_url = "http://localhost/flotilla_interna/Servidor/archivos/files/files_asignacion_demo/personas_morales/";
 
-// Verificar que la extensión zip esté habilitada
-    if (!class_exists('ZipArchive')) {
-        die("Error: La extensión PHP 'zip' no está habilitada en este servidor.");
-    }
-
-// Crear un ZIP temporal
-$zip_filename = tempnam(sys_get_temp_dir(), 'comodato_') . '.zip';
-    $zip = new ZipArchive();
-
-if ($zip->open($zip_filename, ZipArchive::CREATE) === TRUE) {
-
-    // Archivos de persona moral
-    $archivos_persona = [
-        'files_id/' . $row['archivo_identificacion_representante_legal'],
-        'files_poder/' . $row['archivo_poder_representante_legal'],
-        'files_RFC/' . $row['archivo_rfc_moral'],
-        'files_domicilio/' . $row['archivo_domiclio_moral'],
-        'files_domicilioresguardounidad/' . $row['archivo_domicilio_resguardo_unidad']
+    // Construimos lista de enlaces principales
+    $enlaces = [
+        "Identificación representante legal" => $base_url . "files_id/" . $row['archivo_identificacion_representante_legal'],
+        "Poder representante legal" => $base_url . "files_poder/" . $row['archivo_poder_representante_legal'],
+        "RFC moral" => $base_url . "files_RFC/" . $row['archivo_rfc_moral'],
+        "Comprobante domicilio" => $base_url . "files_domicilio/" . $row['archivo_domiclio_moral'],
+        "Comprobante domicilio resguardo unidad" => $base_url . "files_domicilioresguardounidad/" . $row['archivo_domicilio_resguardo_unidad']
     ];
 
-    foreach ($archivos_persona as $archivo) {
-        $ruta_completa = $ruta_base . $archivo;
-        if (file_exists($ruta_completa)) {
-            $zip->addFile($ruta_completa, basename($ruta_completa));
-        } else {
-                echo "Archivo no encontrado: $ruta_completa<br>";
-            }
-    }
-
-    // Archivos de escrituras
+    // Agregamos archivos de escrituras
     $query_archivos = "SELECT nombre_archivo FROM archivos_escritura_constitutiva WHERE id_persona_moral = '$id_persona_moral'";
     $res_archivos = mysqli_query($conexion, $query_archivos);
     while ($fila_archivo = mysqli_fetch_assoc($res_archivos)) {
-        $ruta_archivo = $ruta_base . 'files_escrituras/' . $fila_archivo['nombre_archivo'];
-        if (file_exists($ruta_archivo)) {
-            $zip->addFile($ruta_archivo, $fila_archivo['nombre_archivo']);
-        }
+        $enlaces["Escritura constitutiva - " . $fila_archivo['nombre_archivo']] = $base_url . "files_escrituraconstitutiva/" . $fila_archivo['nombre_archivo'];
     }
 
-    // Archivos de estatutos
+    // Agregamos archivos de estatutos
     $query_estatutos = "SELECT nombre_archivo_estatus_sociales FROM archivos_escritura_estatus_sociales WHERE id_persona_moral = '$id_persona_moral'";
     $res_estatutos = mysqli_query($conexion, $query_estatutos);
     while ($fila_estatuto = mysqli_fetch_assoc($res_estatutos)) {
-        $ruta_archivo = $ruta_base . 'files_estatutos/' . $fila_estatuto['nombre_archivo_estatus_sociales'];
-        if (file_exists($ruta_archivo)) {
-            $zip->addFile($ruta_archivo, $fila_estatuto['nombre_archivo_estatus_sociales']);
-        }
+        $enlaces["Estatuto social - " . $fila_estatuto['nombre_archivo_estatus_sociales']] = $base_url . "files_estatusociales/" . $fila_estatuto['nombre_archivo_estatus_sociales'];
     }
 
-    $zip->close();
-} else {
-    die("No se pudo crear el archivo ZIP");
-}
+    // Generar lista HTML de enlaces
+    $lista_enlaces = "<ul>";
+    foreach ($enlaces as $nombre => $url) {
+        if (!empty($url)) {
+            $lista_enlaces .= "<li><a href='$url' target='_blank'>$nombre</a></li>";
+        }
+    }
+    $lista_enlaces .= "</ul>";
 
+    //enviar correo al colaborador
+    // Obtener correo del colaborador que esta solicitando la unidad demo
+    $correo_query = "SELECT email_corporativo FROM colaboradores WHERE id_colaborador ='$id_colaborador'";
+    $correo_result = mysqli_query($conexion, $correo_query);
+    if (!$correo_result) {
+        die("Error en consulta SELECT correo colaborador: " . mysqli_error($conexion));
+    }
+    $correo_row = mysqli_fetch_assoc($correo_result);
+    $correo = $correo_row['email_corporativo'];
+    //$correo = "uriel.cabello@ldrsolutions.com.mx";
 
-        // Obtener correo del colaborador que esta solicitando la unidad demo
-         $correo_query = "SELECT email_corporativo FROM colaboradores WHERE id_colaborador ='$id_colaborador'";
-         $correo_result = mysqli_query($conexion, $correo_query);
-         if (!$correo_result) {
-             die("Error en consulta SELECT correo colaborador: " . mysqli_error($conexion));
-         }
-        $correo_row = mysqli_fetch_assoc($correo_result);
-        $correo = $correo_row['email_corporativo'];
-        //$correo = "uriel.cabello@ldrsolutions.com.mx";
+    // Enviar correo al colaborador
+    try {
+        $mail1 = new PHPMailer();
+        $mail1->isSMTP();
+        $mail1->Host = 'smtp.gmail.com';
+        $mail1->SMTPAuth = true;
+        $mail1->Username = 'notificacion@ldrsolutions.com.mx';
+        $mail1->Password = 'ppiz zylc bpod tczi';
+        $mail1->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail1->Port = 587;
 
-        // Enviar correo al colaborador
-        try {
-            $mail1 = new PHPMailer();
-            $mail1->isSMTP();
-            $mail1->Host = 'smtp.gmail.com';
-            $mail1->SMTPAuth = true;
-            $mail1->Username = 'notificacion@ldrsolutions.com.mx';
-            $mail1->Password = 'ppiz zylc bpod tczi';
-            $mail1->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail1->Port = 587;
+        $mail1->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+        $mail1->addAddress($correo);
+        $mail1->addBCC('uriel.cabello@ldrsolutions.com.mx');
 
-            $mail1->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
-            $mail1->addAddress($correo);
-            $mail1->addBCC('uriel.cabello@ldrsolutions.com.mx');
-
-            $mail1->isHTML(true);
-          $mail1->Subject = utf8_decode('Notificación de unidad DEMO autorizada');
-$mail1->Body = utf8_decode("
+        $mail1->isHTML(true);
+        $mail1->Subject = utf8_decode('Notificación de unidad DEMO autorizada');
+        $mail1->Body = utf8_decode("
     <p>Estimado colaborador <strong>$nombre_1 $nombre_2 $apaterno $amaterno</strong>,</p>
 
     <p>Te informamos que la unidad vehicular <strong>DEMO</strong> que solicitaste para la empresa o institución:</p>
@@ -268,20 +246,19 @@ $mail1->Body = utf8_decode("
 ");
 
 
-            if ($mail1->send()) {
-                echo "Correo enviado al colaborador.<br>";
-            } else {
-                echo "Error al enviar correo al colaborador: " . $mail1->ErrorInfo;
-            }
-
-        } catch (Exception $e) {
-            echo "Excepción al enviar correo: {$mail1->ErrorInfo}<br>";
+        if ($mail1->send()) {
+            echo "Correo enviado al colaborador.<br>";
+        } else {
+            echo "Error al enviar correo al colaborador: " . $mail1->ErrorInfo;
         }
+    } catch (Exception $e) {
+        echo "Excepción al enviar correo: {$mail1->ErrorInfo}<br>";
+    }
 
-        //enviamos correo a juridico con la informacion de la unidad cuando se autoriza por parte del usuario
-         // Obtener correos de usuarios tipo 2 juridicos
-                         $correos = [];
-                         $correo_sql = "SELECT u.id_colaborador, 
+    //enviamos correo a juridico con la informacion de la unidad cuando se autoriza por parte del usuario
+    // Obtener correos de usuarios tipo 2 juridicos
+    $correos = [];
+    $correo_sql = "SELECT u.id_colaborador, 
                                                  u.id_tipo_usuario,
                                                  cor.id_colaborador,
                                                  cor.email_corporativo
@@ -289,39 +266,39 @@ $mail1->Body = utf8_decode("
                                          INNER JOIN colaboradores AS cor
                                          ON u.id_colaborador = cor.id_colaborador
                                          WHERE u.id_tipo_usuario = 2";
-                         $correo_result = $conexion->query($correo_sql);
-                         while ($correo_row = $correo_result->fetch_assoc()) {
-                             if (!empty($correo_row['email_corporativo'])) {
-                                 $correos[] = $correo_row['email_corporativo'];
-                             }
-                         }
+    $correo_result = $conexion->query($correo_sql);
+    while ($correo_row = $correo_result->fetch_assoc()) {
+        if (!empty($correo_row['email_corporativo'])) {
+            $correos[] = $correo_row['email_corporativo'];
+        }
+    }
 
-                        //$correos = ["uriel.cabello@ldrsolutions.com.mx"];
+    //$correos = ["uriel.cabello@ldrsolutions.com.mx"];
 
-                        foreach ($correos as $correo) {
-                            echo "Correo: $correo <br>";
-                        }
-                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+    foreach ($correos as $correo) {
+        echo "Correo: $correo <br>";
+    }
+    $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
 
-                try {
-                                $mail = new PHPMailer();
-                                $mail->isSMTP();
-                                $mail->Host = 'smtp.gmail.com';
-                                $mail->SMTPAuth = true;
-                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
-                                $mail->Password = 'ppiz zylc bpod tczi';
-                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                                $mail->Port = 587;
+    try {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'notificacion@ldrsolutions.com.mx';
+        $mail->Password = 'ppiz zylc bpod tczi';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
-                                foreach ($correos as $correo) {
-                                    $mail->addAddress($correo);
-                                }
-                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+        $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+        foreach ($correos as $correo) {
+            $mail->addAddress($correo);
+        }
+        $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
-                                $mail->isHTML(true);
-                               $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad DEMO');
-$mail->Body = utf8_decode("
+        $mail->isHTML(true);
+        $mail->Subject = utf8_decode('Solicitud COMODATO para asignación unidad DEMO');
+        $mail->Body = utf8_decode("
     <p>Estimado colaborador del área jurídica,</p>
 
     <p>Por medio del presente, solicitamos la elaboración del <strong>COMODATO</strong> correspondiente a la asignación de la siguiente unidad vehicular <strong>DEMO</strong>:</p>
@@ -336,6 +313,11 @@ $mail->Body = utf8_decode("
         <tr><td style='padding: 6px;'><strong>Fecha préstamo:</strong></td><td style='padding: 6px;'>$fecha_prestamo</td></tr>
         <tr><td style='padding: 6px;'><strong>Fecha devolución:</strong></td><td style='padding: 6px;'>$fecha_devolucion</td></tr>
     </table>
+
+    <p><strong>Documentos disponibles para descarga:</strong></p>
+    $lista_enlaces
+
+    <hr>
 
      <p><strong>Autorizado por: $nombre_1_colaborador_autorizador $nombre_2_colaborador_autorizador $apellido_paterno_colaborador_autorizador $apellido_materno_colaborador_autorizador</strong></p>
 
@@ -375,44 +357,21 @@ $mail->Body = utf8_decode("
     <a href='https://ldrhsys.ldrhumanresources.com/default.php'>https://ldrhsys.ldrhumanresources.com/default.php</a></p>
 ");
 
-
-                                // Revisar tamaño ZIP
-                                $zipSize = filesize($zip_filename);
-                                if ($zipSize > 20 * 1024 * 1024) {
-                                    echo "El archivo ZIP es demasiado grande. No se puede enviar el correo.<br>";
-                                } else {
-                                    $mail->addAttachment($zip_filename, 'Documentos_Comodato.zip');
-                                }
-
-
-                                if ($mail->send()) {
-                                    echo "Correo enviado exitosamente.";
-                                } else {
-                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
-                                }
-
-                                if (!file_exists($zip_filename)) {
-                                    die("Error: El archivo ZIP temporal no existe.");
-                                }
-
-                                // Limpiar el ZIP temporal
-                                if (file_exists($zip_filename)) {
-                                    unlink($zip_filename);
-                                    echo "ZIP temporal eliminado.<br>";
-                                } else {
-                                    echo "No se recibieron los datos correctamente.";
-                                }
-
-                            } catch (Exception $e) {
-                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
-                            }
+        if ($mail->send()) {
+            echo "Correo enviado al área jurídica.<br>";
+        } else {
+            echo "Error al enviar correo jurídico: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Excepción al enviar correo jurídico: {$mail->ErrorInfo}<br>";
+    }
 
 
-                //enviamos correo a ADMINISTRADOR PRUEBAS DEMO (Abraham)
+    //enviamos correo a ADMINISTRADOR PRUEBAS DEMO (Abraham)
 
-                // Obtener correos de usuarios tipo 11 administrador pruebas demos
-                        $correosadminpruebademo = [];
-                        $correo_sql = "SELECT u.id_colaborador, 
+    // Obtener correos de usuarios tipo 11 administrador pruebas demos
+    $correosadminpruebademo = [];
+    $correo_sql = "SELECT u.id_colaborador, 
                                                 u.id_tipo_usuario,
                                                 cor.id_colaborador,
                                                 cor.email_corporativo
@@ -420,39 +379,39 @@ $mail->Body = utf8_decode("
                                         INNER JOIN colaboradores AS cor
                                         ON u.id_colaborador = cor.id_colaborador
                                         WHERE u.id_tipo_usuario = 11";
-                        $correo_result = $conexion->query($correo_sql);
-                        while ($correo_row = $correo_result->fetch_assoc()) {
-                            if (!empty($correo_row['email_corporativo'])) {
-                                $correosadminpruebademo[] = $correo_row['email_corporativo'];
-                            }
-                        }
+    $correo_result = $conexion->query($correo_sql);
+    while ($correo_row = $correo_result->fetch_assoc()) {
+        if (!empty($correo_row['email_corporativo'])) {
+            $correosadminpruebademo[] = $correo_row['email_corporativo'];
+        }
+    }
 
-                        //$correosadminpruebademo = ["uriel.cabello@ldrsolutions.com.mx"];
+    //$correosadminpruebademo = ["uriel.cabello@ldrsolutions.com.mx"];
 
-                        foreach ($correosadminpruebademo as $correo) {
-                            echo "Correo: $correo <br>";
-                        }
-                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
-        
-                try {
-                                $mail = new PHPMailer();
-                                $mail->isSMTP();
-                                $mail->Host = 'smtp.gmail.com';
-                                $mail->SMTPAuth = true;
-                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
-                                $mail->Password = 'ppiz zylc bpod tczi';
-                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                                $mail->Port = 587;
+    foreach ($correosadminpruebademo as $correo) {
+        echo "Correo: $correo <br>";
+    }
+    $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
 
-                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
-                                foreach ($correosadminpruebademo as $correo) {
-                                    $mail->addAddress($correo);
-                                }
-                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+    try {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'notificacion@ldrsolutions.com.mx';
+        $mail->Password = 'ppiz zylc bpod tczi';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-                                $mail->isHTML(true);
-                               $mail->Subject = utf8_decode('Autorización de unidad DEMO');
-$mail->Body = utf8_decode("
+        $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+        foreach ($correosadminpruebademo as $correo) {
+            $mail->addAddress($correo);
+        }
+        $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+
+        $mail->isHTML(true);
+        $mail->Subject = utf8_decode('Autorización de unidad DEMO');
+        $mail->Body = utf8_decode("
     <p>Estimado colaborador,</p>
 
     <p>Te notificamos que ha sido <strong>autorizada</strong> la asignación de la siguiente unidad vehicular <strong>DEMO</strong> por parte de:</p>
@@ -494,21 +453,21 @@ $mail->Body = utf8_decode("
 ");
 
 
-                                if ($mail->send()) {
-                                    echo "Correo enviado exitosamente.";
-                                } else {
-                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
-                                }
-                            } catch (Exception $e) {
-                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
-                            }
+        if ($mail->send()) {
+            echo "Correo enviado exitosamente.";
+        } else {
+            echo "Error al enviar el correo: " . $mail->ErrorInfo;
+        }
+    } catch (Exception $e) {
+        echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+    }
 
 
-                //enviamos correo a telematics para que habiliten la unidad
+    //enviamos correo a telematics para que habiliten la unidad
 
-                // Obtener correos de usuarios tipo 12 telematics
-                        $correostelematics = [];
-                        $correo_sql = "SELECT u.id_colaborador, 
+    // Obtener correos de usuarios tipo 12 telematics
+    $correostelematics = [];
+    $correo_sql = "SELECT u.id_colaborador, 
                                                 u.id_tipo_usuario,
                                                 cor.id_colaborador,
                                                 cor.email_corporativo
@@ -516,38 +475,38 @@ $mail->Body = utf8_decode("
                                         INNER JOIN colaboradores AS cor
                                         ON u.id_colaborador = cor.id_colaborador
                                         WHERE u.id_tipo_usuario = 12";
-                        $correo_result = $conexion->query($correo_sql);
-                        while ($correo_row = $correo_result->fetch_assoc()) {
-                            if (!empty($correo_row['email_corporativo'])) {
-                                $correostelematics[] = $correo_row['email_corporativo'];
-                            }
-                        }
+    $correo_result = $conexion->query($correo_sql);
+    while ($correo_row = $correo_result->fetch_assoc()) {
+        if (!empty($correo_row['email_corporativo'])) {
+            $correostelematics[] = $correo_row['email_corporativo'];
+        }
+    }
 
-                        //$correostelematics = ["uriel.cabello@ldrsolutions.com.mx"];
+    //$correostelematics = ["uriel.cabello@ldrsolutions.com.mx"];
 
-                        foreach ($correostelematics as $correo) {
-                            echo "Correo: $correo <br>";
-                        }
-                $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
-                try {
-                                $mail = new PHPMailer();
-                                $mail->isSMTP();
-                                $mail->Host = 'smtp.gmail.com';
-                                $mail->SMTPAuth = true;
-                                $mail->Username = 'notificacion@ldrsolutions.com.mx';
-                                $mail->Password = 'ppiz zylc bpod tczi';
-                                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                                $mail->Port = 587;
+    foreach ($correostelematics as $correo) {
+        echo "Correo: $correo <br>";
+    }
+    $ejecutarconsulta = mysqli_query($conexion, $queryautorizarunidademo);
+    try {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'notificacion@ldrsolutions.com.mx';
+        $mail->Password = 'ppiz zylc bpod tczi';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
 
-                                $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
-                                foreach ($correostelematics as $correo) {
-                                    $mail->addAddress($correo);
-                                }
-                                $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
+        $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+        foreach ($correostelematics as $correo) {
+            $mail->addAddress($correo);
+        }
+        $mail->addBCC('uriel.cabello@ldrsolutions.com.mx'); // Copia oculta
 
-                                $mail->isHTML(true);
-                                $mail->Subject = utf8_decode('Alta de unidad DEMO');
-$mail->Body = utf8_decode("
+        $mail->isHTML(true);
+        $mail->Subject = utf8_decode('Alta de unidad DEMO');
+        $mail->Body = utf8_decode("
     <p>Estimado colaborador,</p>
 
     <p>Por medio del presente te solicitamos el alta de la unidad <strong>DEMO</strong> autorizada por parte del siguiente colaborador:</p>
@@ -580,24 +539,23 @@ $mail->Body = utf8_decode("
 ");
 
 
-                                if ($mail->send()) {
-                                    echo "Correo enviado exitosamente.";
-                                } else {
-                                    echo "Error al enviar el correo: " . $mail->ErrorInfo;
-                                }
-                            } catch (Exception $e) {
-                                echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
-                            }
-
-
-        if ($ejecutarconsulta) {
-            echo "Unidad actualizada correctamente.";
+        if ($mail->send()) {
+            echo "Correo enviado exitosamente.";
         } else {
-            echo "Error al actualizar la unidad.";
+            echo "Error al enviar el correo: " . $mail->ErrorInfo;
         }
+    } catch (Exception $e) {
+        echo "Error al enviar el correo: {$mail->ErrorInfo}<br>";
+    }
 
-        echo "Fin de proceso con éxito.<br>";
-    
+
+    if ($ejecutarconsulta) {
+        echo "Unidad actualizada correctamente.";
     } else {
+        echo "Error al actualizar la unidad.";
+    }
+
+    echo "Fin de proceso con éxito.<br>";
+} else {
     echo "No se recibieron los datos correctamente.";
 }

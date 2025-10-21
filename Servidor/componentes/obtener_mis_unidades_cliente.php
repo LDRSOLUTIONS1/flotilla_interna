@@ -50,7 +50,7 @@ while ($fila = $resultado->fetch_assoc()) {
                     <h6 class="card-text"><strong>Asignación: </strong>' . $fila['fecha_asignacion'] . '</h6>
                     <h6 class="card-text"><strong>Devolución: </strong>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
                     <button type="button" class="btn btn-primary mt-3 btn-sm">Detalles de unidad</button>
-                    <button type="button" class="btn btn-danger mt-3 btn-sm">Reportar una incidencia</button>';
+                    <button type="button" class="btn btn-danger mt-3 btn-sm btn-incidencia">Reportar una incidencia</button>';
         echo ' </div>
             </div>';
     }
