@@ -102,6 +102,13 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
             <li ><a class="menulist" href="reportes_finales_demos.php">Reportes finales</a></li>
             <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>
+
+        <?php elseif ($id_tipo_usuario == 13): // PERFIL ADMINISTRADOR MANTENIMIENTOS DEMOS?>
+            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
+            <li ><a class="menulist" href="#">Unidades con mantenimientos</a></li>
+            <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>
+            
         <?php endif; ?>
         <li ><a class="menulist" href="http://localhost/intranet/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>
     </ul>

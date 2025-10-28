@@ -33,7 +33,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 <img src="../img/unidades/JETOUR_360_dashing_rojo.png" alt="img" class=" inicioimg2">
                 <img src="../img/unidades/aveoazul.png" alt="img" class=" inicioimg3">
             </div>
-            <?php elseif (in_array($id_tipo_usuario, [2, 4, 6, 7, 9, 10, 11, 12])): // Administrador DEMOS, Usuario DEMOS, Administrador Flotilla, Usuario Flotilla, Usuario Flotilla General ?>
+            <?php elseif (in_array($id_tipo_usuario, [2, 4, 6, 7, 9, 10, 11, 12, 13])): // Administrador DEMOS, Usuario DEMOS, Administrador Flotilla, Usuario Flotilla, Usuario Flotilla General ?>
             <!-- Imagen -->
             <div class="col-lg-5 text-center imagenlogo">
                 <img src="../img/unidades/Foton_GTL_EV.png" alt="img" class=" inicioimg1foton">

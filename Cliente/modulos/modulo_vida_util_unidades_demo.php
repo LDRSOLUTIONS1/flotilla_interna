@@ -1,3 +1,4 @@
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="contenedorvalidacionunidades">
@@ -54,7 +55,7 @@
       </div>
       <div class="col-md-8">
         <div class="table-responsive">
-          <table id="tablaVidaUtil" class="table table-hover align-middle w-100" style="background-color: #d4d4d4ff;">
+          <table id="tablaVidaUtil" class="table table-hover align-middle w-100" >
             <thead>
               <tr>
                 <th>Unidad</th>
@@ -139,10 +140,11 @@
             <td>{$meses_usados} meses</td>
             <td>
               <div class='progress'>
-                <div class='progress-bar {$colorBarra}' role='progressbar' style='width: {$porcentaje}%;'>
-                  ".max(0, $vida_util_meses - $meses_usados)." meses restantes
-                </div>
-              </div>
+  <div class='progress-bar <?php echo $colorBarra; ?>' role='progressbar' style='width: <?php echo $porcentaje; ?>%;'>
+    <?php echo max(0, $vida_util_meses - $meses_usados); ?> meses restantes
+  </div>
+</div>
+
               <div><small>".($vida_util_km - $kilometraje > 0 
                   ? number_format($vida_util_km - $kilometraje)." km restantes"
                   : "Vida útil de km agotada")."</small></div>
