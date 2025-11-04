@@ -19,7 +19,7 @@ if (!$id_colaborador) {
     exit;
 }
 
-// Consulta
+// Consulta: todas las unidades asignadas
 $query = "SELECT 
         u.id_unidad,
         m.nombre_modelo,
@@ -30,7 +30,6 @@ $query = "SELECT
     INNER JOIN unidades AS u ON auc.id_unidad = u.id_unidad
     INNER JOIN modelos AS m ON u.id_modelo = m.id_modelo
     WHERE auc.id_colaborador = ?
-    LIMIT 1
 ";
 
 $stmt = $conexion->prepare($query);
@@ -54,24 +53,32 @@ if (!$stmt->execute()) {
 // Vincular columnas a variables
 $stmt->bind_result($id_unidad, $nombre_modelo, $placa, $vin, $numero_motor);
 
-if ($stmt->fetch()) {
-    echo json_encode([
-        'status' => 'success',
-        'tiene_asignacion' => true,
-        'unidad' => [
-            'id_unidad' => $id_unidad,
-            'nombre_modelo' => $nombre_modelo,
-            'placa' => $placa,
-            'vin' => $vin,
-            'numero_motor' => $numero_motor
-        ]
-    ]);
-} else {
-    echo json_encode([
-        'status' => 'success',
-        'tiene_asignacion' => false
-    ]);
+$unidades = [];
+while ($stmt->fetch()) {
+    $unidades[] = [
+        'id_unidad' => $id_unidad,
+        'nombre_modelo' => $nombre_modelo,
+        'placa' => $placa,
+        'vin' => $vin,
+        'numero_motor' => $numero_motor
+    ];
 }
 
 $stmt->close();
 $conexion->close();
+
+// Respuesta
+if (count($unidades) > 0) {
+    echo json_encode([
+        'status' => 'success',
+        'tiene_asignacion' => true,
+        'total_asignaciones' => count($unidades),
+        'unidades' => $unidades
+    ]);
+} else {
+    echo json_encode([
+        'status' => 'success',
+        'tiene_asignacion' => false,
+        'total_asignaciones' => 0
+    ]);
+}

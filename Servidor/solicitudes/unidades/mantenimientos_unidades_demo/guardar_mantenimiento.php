@@ -39,22 +39,22 @@ try {
     $proximo_fecha = $_POST['proximo_fecha'] ?? null;
 
     // Estatus inicial
-    $id_estatus = 1; // Pendiente
+    $id_estatus = 2; // Pendiente
 
     // Preparar SQL
-    $sql = "INSERT INTO mantenimientos (
+    $sql = "INSERT INTO mantenimientos_demo (
                 id_unidad, id_tipo_mantenimiento, id_estatus_mantenimiento,
                 fecha_ingreso, fecha_salida, taller, costo_estimado,
                 descripcion_trabajo, proximo_km, proximo_fecha,
-                fecha_registro, id_usuario_registra
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+                fecha_registro, id_usuario_registra, km_manual
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)";
 
     $stmt = $conexion->prepare($sql);
     if (!$stmt) throw new Exception("Error al preparar la consulta: " . $conexion->error);
 
     // bind_param: i=int, d=double, s=string
     $stmt->bind_param(
-        "iiisssdissi",
+        "iiisssdissii",
         $id_unidad,
         $id_tipo_mantenimiento,
         $id_estatus,
@@ -65,7 +65,8 @@ try {
         $descripcion_trabajo,
         $proximo_km,
         $proximo_fecha,
-        $id_usuario
+        $id_usuario,
+        $km_actual
     );
 
     if ($stmt->execute()) {

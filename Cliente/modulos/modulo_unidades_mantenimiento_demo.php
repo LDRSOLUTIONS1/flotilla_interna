@@ -8,8 +8,11 @@
 
 <div class="contenedor_botones">
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary me-2" id="btnNewMaintenance" data-bs-toggle="modal" data-bs-target="#maintenanceModal"><i class="bi bi-plus-lg"></i> Nuevo mantenimiento</button>
+        <button class="btn btn-primary me-2" id="btnNewMaintenance">
+            <i class="bi bi-plus-lg"></i> Nuevo mantenimiento
+        </button>
     </div>
+
 </div>
 
 
@@ -39,16 +42,16 @@
         </div>
         <div class="col-md-3">
             <div class="card p-3">
-                <h6 class="mb-1">Promedio días taller</h6>
-                <h3 id="cardAvgDays">0</h3>
-                <p class="small-muted mb-0">Por mantenimiento</p>
+                <h6 class="mb-1">Preventivos vs Correctivos</h6>
+                <h5 id="cardAvgDays">0</h5>
+                <p class="small-muted mb-0">Porcentaje de mantenimientos</p>
             </div>
         </div>
     </div>
 
     <!-- Tabla mantenimientos -->
-    <div class="row">
-        <div class="col-lg-8 mb-3">
+    <div class="row mb-3">
+        <div class="col-12">
             <div class="p-3 border rounded">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h5 class="mb-0">Bitácora de mantenimientos</h5>
@@ -60,13 +63,15 @@
                     <table class="table table-hover" id="maintTable">
                         <thead class="table-light">
                             <tr>
-                                <th class="txtmantenimientos">Unidad</th>
-                                <th class="txtmantenimientos">Tipo</th>
+                                <th class="txtmantenimientos">Id</th>
+                                <th class="txtmantenimientos">Modelo</th>
+                                <th class="txtmantenimientos">VIN</th>
+                                <th class="txtmantenimientos">Tipo mantenimiento</th>
+                                <th class="txtmantenimientos">Estatus</th>
                                 <th class="txtmantenimientos">Ingreso</th>
                                 <th class="txtmantenimientos">Salida</th>
                                 <th class="txtmantenimientos">Kilometraje</th>
                                 <th class="txtmantenimientos">Taller</th>
-                                <th class="txtmantenimientos">Estatus</th>
                                 <th class="txtmantenimientos">Costo</th>
                                 <th class="txtmantenimientos">Acciones</th>
                             </tr>
@@ -76,19 +81,39 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Alertas y Chart -->
-        <div class="col-lg-4 mb-3">
-            <div class="card p-3 mb-3">
-                <h6>Alertas próximas</h6>
-                <ul id="alertsList" class="list-unstyled mb-0 small"></ul>
+
+
+
+    <!-- Gráficas -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-center mb-3 fw-semibold">Resumen de mantenimientos</h5>
             </div>
-            <div class="card p-3">
-                <h6 class="mb-3">Mantenimientos por tipo</h6>
-                <canvas id="chartTypes" height="200"></canvas>
+
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm p-3">
+                    <h6 class="text-center mb-3">Mantenimientos por tipo</h6>
+                    <div class="chart-container" style="position: relative; height:280px;">
+                        <canvas id="chartTypes"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm p-3">
+                    <h6 class="text-center mb-3">Mantenimientos por estatus</h6>
+                    <div class="chart-container" style="position: relative; height:280px;">
+                        <canvas id="chartStatus"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
 </div>
 
 <!-- Modal: Registrar / Editar mantenimiento -->
@@ -138,6 +163,13 @@
                             <label class="form-label">Descripción del trabajo</label>
                             <textarea name="descripcion_trabajo" id="descInput" class="form-control" rows="3"></textarea>
                         </div>
+                        <!-- Nuevo input para factura -->
+                        <div class="col-12" id="facturaContainer">
+                            <label class="form-label">Adjuntar factura</label>
+                            <input type="file" name="factura" id="facturaInput" class="form-control" accept=".pdf,.jpg,.png">
+                            <small class="text-muted">Solo se permiten archivos PDF, JPG o PNG.</small>
+                        </div>
+
                         <div class="col-12">
                             <label class="form-label">Programar próximo mantenimiento</label>
                             <div class="row g-2">
