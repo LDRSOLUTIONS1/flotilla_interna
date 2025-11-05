@@ -1,6 +1,6 @@
 <div class="contenedorvalidacionunidades">
     <h5 class="titulosletrasunidades text-nowrap">
-        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Demo)</a>
+        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Interno)</a>
     </h5>
     <h4 class="letravalidacionunidadresponsiva text-nowrap"></h4>
 </div>
@@ -110,6 +110,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card shadow-sm p-3">
+                    <h6 class="text-center mb-3">Unidades con y sin telemetria</h6>
+                    <div class="chart-container" style="position: relative; height:280px;">
+                        <canvas id="chartTelemetria" style="height:300px;"></canvas>
+                        <button class="btn btn-secondary" id="exportTelemetriaCsv">Exportar CSV Telemetría</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -163,13 +173,6 @@
                             <label class="form-label">Descripción del trabajo</label>
                             <textarea name="descripcion_trabajo" id="descInput" class="form-control" rows="3"></textarea>
                         </div>
-                        <!-- Nuevo input para factura -->
-                        <div class="col-12" id="facturaContainer">
-                            <label class="form-label">Adjuntar factura</label>
-                            <input type="file" name="factura" id="facturaInput" class="form-control" accept=".pdf,.jpg,.png">
-                            <small class="text-muted">Solo se permiten archivos PDF, JPG o PNG.</small>
-                        </div>
-
                         <div class="col-12">
                             <label class="form-label">Programar próximo mantenimiento</label>
                             <div class="row g-2">
@@ -192,9 +195,93 @@
     </div>
 </div>
 
+<!-- Modal: Editar mantenimiento -->
+<div class="modal fade" id="editMaintenanceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="editMaintenanceForm" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMaintenanceModalLabel">Editar mantenimiento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Unidad</label>
+                            <input type="text" id="editUnidadInput" class="form-control" readonly>
+                            <input type="hidden" name="id_unidad" id="editUnidadIdInput">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de mantenimiento</label>
+                            <select id="editTipoInput" name="id_tipo_mantenimiento" class="form-select" required>
+                                <option value="">-- Seleccionar tipo --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Kilometraje manual</label>
+                            <input type="number" name="km_manual" id="editKmInput" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha ingreso</label>
+                            <input type="date" name="fecha_ingreso" id="editFechaIngreso" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Fecha estimada salida</label>
+                            <input type="date" name="fecha_salida" id="editFechaSalida" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Taller</label>
+                            <input type="text" name="taller" id="editTallerInput" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Costo estimado</label>
+                            <input type="number" name="costo_estimado" id="editCostoInput" class="form-control" step="0.01">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Descripción del trabajo</label>
+                            <textarea name="descripcion_trabajo" id="editDescInput" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Factura (adjuntar archivo)</label>
+                            <input type="file" name="factura_file" id="editFacturaFile" class="form-control" accept=".pdf,.jpg,.png">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Estatus</label>
+                            <select name="estatus" id="editEstatus" class="form-select">
+                                <option value="">-- Seleccionar estatus --</option>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="En proceso">En proceso</option>
+                                <option value="Finalizado">Finalizado</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Programar próximo mantenimiento</label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <input type="number" name="proximo_km" id="editProximoKm" class="form-control" placeholder="Km (ej. 5000)">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" name="proximo_fecha" id="editProximoFecha" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar mantenimiento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!--js para realizar el modulo de los mantenimientos-->
 <script src="../js/modulo_mantenimientos_demos/modulo_mantenimientos_demo.js"></script>
+<!--js para realizar el modulo editar los mantenimientos-->
+<script src="../js/modulo_mantenimientos_demos/mantenimientos_demo_editar.js"></script>

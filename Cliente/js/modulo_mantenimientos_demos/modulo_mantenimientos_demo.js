@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const maintenanceForm = document.getElementById("maintenanceForm");
 
   let selectedUnidadId = null;
-  let editId = null;
   let dataTableInstance = null;
 
   // ---------------------------
@@ -31,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
           const item = document.createElement("button");
           item.type = "button";
           item.className = "list-group-item list-group-item-action";
-          item.textContent = `${u.vin || ""} - ${u.nombre_modelo || ""} - ${u.nombre_marca || ""} - ${u.placa || ""}`;
+          item.textContent = `${u.vin || ""} - ${u.nombre_modelo || ""} - ${
+            u.nombre_marca || ""
+          } - ${u.placa || ""}`;
           item.addEventListener("click", () => {
             unidadInput.value = item.textContent;
             selectedUnidadId = u.id_unidad;
@@ -86,8 +87,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }).length;
 
-    const outOfService = data.filter((m) => (m.estatus || "").toString().toLowerCase() === "en proceso").length;
-    const totalCost = data.reduce((acc, m) => acc + Number(m.costo_estimado || 0), 0);
+    const outOfService = data.filter(
+      (m) => (m.estatus || "").toString().toLowerCase() === "en proceso"
+    ).length;
+    const totalCost = data.reduce(
+      (acc, m) => acc + Number(m.costo_estimado || 0),
+      0
+    );
 
     const counts = { preventivo: 0, correctivo: 0, mixto: 0 };
     data.forEach((m) => {
@@ -96,8 +102,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const totalPrevCorr = (counts.preventivo || 0) + (counts.correctivo || 0);
-    const percentPreventivo = totalPrevCorr ? ((counts.preventivo / totalPrevCorr) * 100).toFixed(1) : 0;
-    const percentCorrectivo = totalPrevCorr ? ((counts.correctivo / totalPrevCorr) * 100).toFixed(1) : 0;
+    const percentPreventivo = totalPrevCorr
+      ? ((counts.preventivo / totalPrevCorr) * 100).toFixed(1)
+      : 0;
+    const percentCorrectivo = totalPrevCorr
+      ? ((counts.correctivo / totalPrevCorr) * 100).toFixed(1)
+      : 0;
 
     const elCardThisMonth = document.getElementById("cardThisMonth");
     const elCardOutOfService = document.getElementById("cardOutOfService");
@@ -107,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (elCardThisMonth) elCardThisMonth.textContent = thisMonth;
     if (elCardOutOfService) elCardOutOfService.textContent = outOfService;
     if (elCardCost) elCardCost.textContent = `$${totalCost.toLocaleString()}`;
-    if (elCardAvgDays) elCardAvgDays.innerHTML = `Prev: ${percentPreventivo}% <br> Corr: ${percentCorrectivo}%`;
+    if (elCardAvgDays)
+      elCardAvgDays.innerHTML = `Prev: ${percentPreventivo}% <br> Corr: ${percentCorrectivo}%`;
   }
 
   // ---------------------------
@@ -128,13 +139,20 @@ document.addEventListener("DOMContentLoaded", function () {
           labels: ["Preventivo", "Correctivo", "Mixto"],
           datasets: [
             {
-              data: [counts.preventivo || 0, counts.correctivo || 0, counts.mixto || 0],
+              data: [
+                counts.preventivo || 0,
+                counts.correctivo || 0,
+                counts.mixto || 0,
+              ],
               backgroundColor: ["#1d61a1ff", "#2db4aeff", "#dc7835ff"],
             },
           ],
         },
         options: {
-          plugins: { legend: { position: "bottom" }, title: { display: false } },
+          plugins: {
+            legend: { position: "bottom" },
+            title: { display: false },
+          },
           responsive: true,
           maintainAspectRatio: false,
         },
@@ -158,14 +176,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const colors = labelsFinal.map((label) => {
         const low = (label || "").toString().toLowerCase();
         if (low.includes("pendiente")) return "#b7ca4cff";
-        if (low.includes("finalizado") || low.includes("terminado")) return "#239e75ff";
-        if (low.includes("en taller") || low.includes("en curso") || low.includes("proceso")) return "#3183a3ff";
+        if (low.includes("finalizado") || low.includes("terminado"))
+          return "#239e75ff";
+        if (
+          low.includes("en taller") ||
+          low.includes("en curso") ||
+          low.includes("proceso")
+        )
+          return "#3183a3ff";
         return "#9E9E9E";
       });
 
       window.chartStatusInstance = new Chart(ctxStatus, {
         type: "bar",
-        data: { labels: labelsFinal, datasets: [{ label: "Cantidad", data: dataFinal, backgroundColor: colors, borderWidth: 1 }] },
+        data: {
+          labels: labelsFinal,
+          datasets: [
+            {
+              label: "Cantidad",
+              data: dataFinal,
+              backgroundColor: colors,
+              borderWidth: 1,
+            },
+          ],
+        },
         options: {
           indexAxis: "y",
           responsive: true,
@@ -208,14 +242,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (title.includes("acciones") || title === "") {
         filterTd.innerHTML = "";
-      } else if (title.includes("tipo mantenimiento") || title.includes("estatus")) {
+      } else if (
+        title.includes("tipo mantenimiento") ||
+        title.includes("estatus")
+      ) {
         const select = document.createElement("select");
         select.className = "form-select form-select-sm";
         select.innerHTML = `<option value="">Todos</option>`;
 
         const field = keyMap[title] || null;
         if (field) {
-          const uniqueValues = Array.from(new Set(data.map((d) => (d[field] !== undefined ? d[field] : ""))));
+          const uniqueValues = Array.from(
+            new Set(data.map((d) => (d[field] !== undefined ? d[field] : "")))
+          );
           uniqueValues
             .filter((v) => v !== null && v !== undefined && v !== "")
             .forEach((v) => {
@@ -228,7 +267,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         select.addEventListener("change", () => {
           if (!dataTableInstance) return;
-          dataTableInstance.column(colIndex).search(select.value ? "^" + select.value + "$" : "", true, false).draw();
+          dataTableInstance
+            .column(colIndex)
+            .search(select.value ? "^" + select.value + "$" : "", true, false)
+            .draw();
         });
 
         filterTd.appendChild(select);
@@ -254,7 +296,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Cargar mantenimientos y render
   // ---------------------------
   function loadMantenimientos() {
-    fetch("../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_mantenimientos.php")
+    fetch(
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_mantenimientos.php"
+    )
       .then((res) => res.json())
       .then((data) => {
         // Actualizar cards
@@ -287,25 +331,28 @@ document.addEventListener("DOMContentLoaded", function () {
         data.forEach((m) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-            <td class="txtmantenimientos">${m.id_unidad}</td>
-            <td class="txtmantenimientos">${m.modelo || "-"}</td>
-            <td class="txtmantenimientos">${m.vin || "-"}</td>
-            <td class="txtmantenimientos">${m.tipo || "-"}</td>
-            <td class="txtmantenimientos">${m.estatus || "-"}</td>
-            <td class="txtmantenimientos">${m.fecha_ingreso || "-"}</td>
-            <td class="txtmantenimientos">${m.fecha_salida || "-"}</td>
-            <td class="txtmantenimientos">${renderKilometraje(m)}</td>
-            <td class="txtmantenimientos">${m.taller || "-"}</td>
-            <td class="txtmantenimientos">$${m.costo_estimado || 0}</td>
-            <td class="txtmantenimientos">
-              <button class="btn btn-sm btn-outline-primary" onclick="editM(${m.id_mantenimiento})">
-                <i class="bi bi-pencil"></i>
-              </button>
-            </td>
-          `;
+    <td class="txtmantenimientos">${m.id_unidad}</td>
+    <td class="txtmantenimientos">${m.modelo || "-"}</td>
+    <td class="txtmantenimientos">${m.vin || "-"}</td>
+    <td class="txtmantenimientos">${m.tipo || "-"}</td>
+    <td class="txtmantenimientos">${m.estatus || "-"}</td>
+    <td class="txtmantenimientos">${m.fecha_ingreso || "-"}</td>
+    <td class="txtmantenimientos">${m.fecha_salida || "-"}</td>
+    <td class="txtmantenimientos">${renderKilometraje(m)}</td>
+    <td class="txtmantenimientos">${m.taller || "-"}</td>
+    <td class="txtmantenimientos">$${m.costo_estimado || 0}</td>
+    <td class="txtmantenimientos">
+      <button class="btn btn-sm btn-outline-primary" type="button" onclick='openEditModal(${JSON.stringify(
+        m
+      ).replace(/'/g, "&apos;")})'>
+        <i class="bi bi-pencil"></i>
+      </button>
+    </td>
+  `;
           if (maintTableBody) maintTableBody.appendChild(tr);
 
-          counts[m.tipo?.toLowerCase()] = (counts[m.tipo?.toLowerCase()] || 0) + 1;
+          counts[m.tipo?.toLowerCase()] =
+            (counts[m.tipo?.toLowerCase()] || 0) + 1;
           statusCounts[m.estatus] = (statusCounts[m.estatus] || 0) + 1;
         });
 
@@ -313,7 +360,9 @@ document.addEventListener("DOMContentLoaded", function () {
         crearFilaFiltros(data);
 
         // Inicializar tooltips
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll(".km-tooltip"));
+        const tooltipTriggerList = [].slice.call(
+          document.querySelectorAll(".km-tooltip")
+        );
         tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl);
         });
@@ -327,7 +376,9 @@ document.addEventListener("DOMContentLoaded", function () {
               [5, 10, 25, 50, 100, "Todos"],
             ],
             order: [[0, "desc"]],
-            language: { url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json" },
+            language: {
+              url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+            },
           });
         }
 
@@ -342,88 +393,72 @@ document.addEventListener("DOMContentLoaded", function () {
   // Cargar al inicio
   loadMantenimientos();
 
-  // ---------------------------
-  // Guardar / Editar mantenimiento
-  // ---------------------------
-  if (maintenanceForm) {
-    maintenanceForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!selectedUnidadId) {
-        alert("Por favor selecciona una unidad.");
-        return;
-      }
+  // -------------------------------
+  // Guardar mantenimiento
+  // -------------------------------
+  maintenanceForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      const formData = new FormData(maintenanceForm);
-      formData.append("id_unidad", selectedUnidadId);
+    if (!selectedUnidadId) {
+      alert("Por favor selecciona una unidad.");
+      return;
+    }
 
-      let url = editId
-        ? "../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/editar_mantenimiento.php"
-        : "../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/guardar_mantenimiento.php";
+    const formData = new FormData(maintenanceForm);
+    formData.append("id_unidad", selectedUnidadId);
 
-      if (editId) formData.append("id_mantenimiento", editId);
+    // Solo km_manual
+    const kmInput = document.getElementById("kmInput");
+    if (kmInput) {
+      formData.append("km_manual", kmInput.value || "");
+    }
 
-      // Manejo de km (manual vs actual) si existe kmInput con dataset.tipo
-      const kmInput = document.getElementById("kmInput");
-      if (kmInput) {
-        const tipoKm = kmInput.dataset.tipo || "";
-        if (tipoKm === "manual") {
-          formData.append("km_manual", kmInput.value || "");
-          formData.append("km_actual", "");
-        } else if (tipoKm === "actual") {
-          formData.append("km_actual", kmInput.value || "");
-          formData.append("km_manual", "");
+    const url =
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/guardar_mantenimiento.php";
+
+    fetch(url, { method: "POST", body: formData, credentials: "same-origin" })
+      .then((res) => res.json())
+      .then((resp) => {
+        if (resp.success) {
+          alert(resp.message || "Guardado correctamente");
+          maintenanceForm.reset();
+          selectedUnidadId = null;
+          unidadList.innerHTML = "";
+          loadMantenimientos();
+
+          const modalEl = document.getElementById("maintenanceModal");
+          const modalInstance =
+            bootstrap.Modal.getInstance(modalEl) ||
+            new bootstrap.Modal(modalEl);
+          modalInstance.hide();
+          document.body.classList.remove("modal-open");
+          document
+            .querySelectorAll(".modal-backdrop")
+            .forEach((el) => el.remove());
         } else {
-          formData.append("km_actual", "");
-          formData.append("km_manual", "");
+          alert("Error: " + (resp.message || "respuesta inválida"));
         }
-      }
-
-      fetch(url, { method: "POST", body: formData, credentials: "same-origin" })
-        .then((res) => res.json())
-        .then((resp) => {
-          if (resp.success) {
-            alert(resp.message || "Guardado correctamente");
-            maintenanceForm.reset();
-            selectedUnidadId = null;
-            editId = null;
-            if (unidadList) unidadList.innerHTML = "";
-            loadMantenimientos();
-
-            const modalEl = document.getElementById("maintenanceModal");
-            const modalInstance = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-            modalInstance.hide();
-            document.body.classList.remove("modal-open");
-            document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
-          } else {
-            alert("Error: " + (resp.message || "respuesta inválida"));
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          alert("Error al guardar mantenimiento");
-        });
-    });
-  }
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("Error al guardar mantenimiento");
+      });
+  });
 
   // ---------------------------
   // Nuevo mantenimiento (preparar modal)
   // ---------------------------
   const btnNewMaintenance = document.getElementById("btnNewMaintenance");
   if (btnNewMaintenance) {
-    btnNewMaintenance.addEventListener("click", function () {
-      editId = null;
-      if (maintenanceForm) maintenanceForm.reset();
+    btnNewMaintenance?.addEventListener("click", function () {
+      maintenanceForm.reset();
       selectedUnidadId = null;
-      if (unidadInput) unidadInput.readOnly = false;
-      const kmInput = document.getElementById("kmInput");
-      if (kmInput) kmInput.readOnly = false;
-      const unidadIdInput = document.getElementById("unidadIdInput");
-      if (unidadIdInput) unidadIdInput.value = "";
-      const facturaContainer = document.getElementById("facturaContainer");
-      if (facturaContainer) facturaContainer.style.display = "none";
-      const label = document.getElementById("maintenanceModalLabel");
-      if (label) label.textContent = "Registrar nuevo mantenimiento";
-
+      unidadInput.readOnly = false;
+      document.getElementById("kmInput").readOnly = false;
+      document.getElementById("unidadIdInput").value = "";
+      tipoSelect.selectedIndex = 0;
+      document.getElementById("maintenanceModalLabel").textContent =
+        "Registrar nuevo mantenimiento";
       new bootstrap.Modal(document.getElementById("maintenanceModal")).show();
     });
   }
@@ -434,74 +469,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadTiposMantenimiento() {
     return cargarTiposEnSelect();
   }
-
-  // ---------------------------
-  // Editar mantenimiento (expuesto globalmente)
-  // ---------------------------
-  window.editM = function (id) {
-    editId = id;
-    const facturaContainer = document.getElementById("facturaContainer");
-    if (facturaContainer) facturaContainer.style.display = "block";
-
-    fetch(
-      `../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_mantenimientos.php?id_mantenimiento=${id}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data || data.length === 0) return;
-        const m = data[0];
-
-        selectedUnidadId = m.id_unidad;
-        const unidadIdInput = document.getElementById("unidadIdInput");
-        if (unidadIdInput) unidadIdInput.value = m.id_unidad;
-
-        if (document.getElementById("unidadInput"))
-          document.getElementById("unidadInput").value = `${m.vin || ""} - ${m.modelo || ""} - ${m.marca || ""}`;
-        if (document.getElementById("unidadInput")) document.getElementById("unidadInput").readOnly = true;
-
-        const kmInput = document.getElementById("kmInput");
-        if (kmInput) {
-          if (m.km_manual && m.km_manual > 0) {
-            kmInput.value = m.km_manual;
-            kmInput.dataset.tipo = "manual";
-            kmInput.classList.add("text-warning");
-            kmInput.classList.remove("text-primary");
-            kmInput.setAttribute("title", "Kilometraje ingresado manualmente");
-          } else if (m.km_actual && m.km_actual > 0) {
-            kmInput.value = m.km_actual;
-            kmInput.dataset.tipo = "actual";
-            kmInput.classList.add("text-primary");
-            kmInput.classList.remove("text-warning");
-            kmInput.setAttribute("title", "Kilometraje obtenido de Telematics");
-          } else {
-            kmInput.value = "";
-            kmInput.dataset.tipo = "sin_dato";
-            kmInput.classList.remove("text-warning", "text-primary");
-            kmInput.setAttribute("title", "Sin dato de kilometraje");
-          }
-          kmInput.readOnly = true;
-        }
-
-        // Esperar a que tipos carguen
-        loadTiposMantenimiento().then(() => {
-          if (tipoSelect) tipoSelect.value = m.id_tipo_mantenimiento || "";
-        });
-
-        if (document.getElementById("fechaIngreso")) document.getElementById("fechaIngreso").value = m.fecha_ingreso || "";
-        if (document.getElementById("fechaSalida")) document.getElementById("fechaSalida").value = m.fecha_salida || "";
-        if (document.getElementById("tallerInput")) document.getElementById("tallerInput").value = m.taller || "";
-        if (document.getElementById("costoInput")) document.getElementById("costoInput").value = m.costo_estimado || "";
-        if (document.getElementById("descInput")) document.getElementById("descInput").value = m.descripcion_trabajo || "";
-        if (document.getElementById("proximoKm")) document.getElementById("proximoKm").value = m.proximo_km || "";
-        if (document.getElementById("proximoFecha")) document.getElementById("proximoFecha").value = m.proximo_fecha || "";
-
-        const label = document.getElementById("maintenanceModalLabel");
-        if (label) label.textContent = "Completar mantenimiento";
-
-        new bootstrap.Modal(document.getElementById("maintenanceModal")).show();
-      })
-      .catch((err) => console.error("Error al obtener mantenimiento para editar:", err));
-  };
 
   // ---------------------------
   // Exportar CSV
@@ -525,11 +492,17 @@ document.addEventListener("DOMContentLoaded", function () {
       ];
       if (maintTableBody) {
         maintTableBody.querySelectorAll("tr").forEach((tr) => {
-          const cols = Array.from(tr.querySelectorAll("td")).slice(0, 10).map((td) => td.textContent.trim());
+          const cols = Array.from(tr.querySelectorAll("td"))
+            .slice(0, 10)
+            .map((td) => td.textContent.trim());
           rows.push(cols);
         });
       }
-      const csv = rows.map((r) => r.map((c) => `"${(c || "").replace(/"/g, '""')}"`).join(",")).join("\n");
+      const csv = rows
+        .map((r) =>
+          r.map((c) => `"${(c || "").replace(/"/g, '""')}"`).join(",")
+        )
+        .join("\n");
       const blob = new Blob([csv], { type: "text/csv" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
@@ -541,24 +514,83 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------------------------
   // Limpiar modal al cerrarlo
   // ---------------------------
- // 🧹 Limpiar modal al cerrarla 
- const maintenanceModalEl = document.getElementById("maintenanceModal");
+  // 🧹 Limpiar modal al cerrarla
+  const maintenanceModalEl = document.getElementById("maintenanceModal");
 
- maintenanceModalEl.addEventListener("hidden.bs.modal", function () { 
-  const form = maintenanceForm; if (form) form.reset();
+  maintenanceModalEl.addEventListener("hidden.bs.modal", function () {
+    maintenanceForm.reset();
+    selectedUnidadId = null;
+    unidadInput.readOnly = false;
+    document.getElementById("kmInput").readOnly = false;
+    document.getElementById("unidadIdInput").value = "";
+    tipoSelect.selectedIndex = 0;
+  });
+  // ---------------------------
+  // Gráfica telemetría
+  // ---------------------------
+  function loadTelemetriaChart() {
+    fetch("../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_unidades_telemetria_demo.php")
+      .then(res => res.json())
+      .then(data => {
+        const counts = { con: 0, sin: 0 };
+        data.forEach(u => {
+          if (u.tiene_telemetria) counts.con += 1;
+          else counts.sin += 1;
+        });
 
-  // Limpiar variables de estado
-  selectedUnidadId = null; 
-  editId = null;
+        // Crear gráfico
+        const ctx = document.getElementById("chartTelemetria");
+        if (ctx) {
+          if (window.chartTelemetriaInstance) {
+            try { window.chartTelemetriaInstance.destroy(); } catch {}
+          }
+          window.chartTelemetriaInstance = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+              labels: ["Con telemetría", "Sin telemetría"],
+              datasets: [{
+                data: [counts.con, counts.sin],
+                backgroundColor: ["#1d61a1ff","#dc7835ff"]
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: "bottom" },
+                title: { display: true, text: "Unidades con / sin telemetría" }
+              }
+            }
+          });
+        }
 
-  // 🔓 Desbloquear campos que podrían estar en readOnly
-  unidadInput.readOnly = false; 
-  document.getElementById("kmInput").readOnly = false;
+        // Botón export CSV
+        const exportBtn = document.getElementById("exportTelemetriaCsv");
+        if (exportBtn) {
+          exportBtn.onclick = () => {
+            const rows = [["Unidad","Modelo","VIN","Km actual","Tiene telemetria"]];
+            data.forEach(u => {
+              rows.push([
+                u.id_unidad,
+                u.nombre_modelo || "",
+                u.vin || "",
+                u.ultimo_kilometraje || 0,
+                u.tiene_telemetria ? "Si" : "No"
+              ]);
+            });
+            const csv = rows.map(r => r.map(c => `"${(c||"").toString().replace(/"/g,'""')}"`).join(",")).join("\n");
+            const blob = new Blob([csv], { type: "text/csv" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "unidades_telemetria.csv";
+            a.click();
+          };
+        }
+      })
+      .catch(err => console.error("Error al cargar telemetría:", err));
+      
+  }
 
-  // Limpiar inputs ocultos
-  document.getElementById("unidadIdInput").value = "";
-
-  // Resetear selects
-  tipoSelect.selectedIndex = 0;
- });
+  // Llamar a telemetría independiente
+  loadTelemetriaChart();
 });
