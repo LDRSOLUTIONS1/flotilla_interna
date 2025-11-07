@@ -1,6 +1,6 @@
 <div class="contenedorvalidacionunidades">
     <h5 class="titulosletrasunidades text-nowrap">
-        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Interno)</a>
+        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Demo)</a>
     </h5>
     <h4 class="letravalidacionunidadresponsiva text-nowrap"></h4>
 </div>
@@ -113,7 +113,7 @@
 
             <div class="col-md-6 mb-3">
                 <div class="card shadow-sm p-3">
-                    <h6 class="text-center mb-3">Unidades con y sin telemetria</h6>
+                    <h6 class="text-center mb-3">Unidades con y sin telemetría</h6>
                     <div class="chart-container" style="position: relative; height:280px;">
                         <canvas id="chartTelemetria" style="height:300px;"></canvas>
                         <button class="btn btn-secondary" id="exportTelemetriaCsv">Exportar CSV Telemetría</button>

@@ -48,6 +48,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="unidades_asignadas.php">Unidades asignadas</a></li>
             <li ><a class="menulist" href="documentos.php">Documentos</a></li>
             <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
+            <li ><a class="menulist" href="mantenimientos_realizados_demos.php">mantenimiento realizados</a></li>
             <li ><a class="menulist" href="incidencias.php">Incidencias</a></li>
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
@@ -81,6 +82,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <?php endif; ?>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
             <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
+            <li ><a class="menulist" href="incidencias.php">Incidencias</a></li> 
             
 
 
@@ -108,7 +110,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
             <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
             <li ><a class="menulist" href="mantenimientos_realizados_demos.php">Unidades con mantenimientos</a></li>
-            <!-- <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li> -->
+            <li ><a class="menulist" href="administracion_incidencias_demo.php">Incidencias</a></li> 
             
         <?php endif; ?>
         <li ><a class="menulist" href="http://localhost/intranet/LDRHSystem/Cliente/interfaces/Inicio.php"><strong>INTRANET</strong></a></li>

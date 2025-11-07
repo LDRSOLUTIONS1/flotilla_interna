@@ -32,7 +32,7 @@
     ?>
     <div class="cuadroblancocontenido">
     <!-- INICIO BLOQUE PARA EL CUERPO -->
-        <?php include("../modulos/modulo_incidencias.php"); ?>
+        <?php include("../modulos/modulo_administracion_incidencias_demo.php"); ?>
     </div>
 
     <div class="contenedorspinner" id="contenedorspinner">
