@@ -1,6 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include("../../Servidor/conexion.php");
 header('Content-Type: application/json');
+
 
 // Obtener unidades demo con kilometraje de telematics
 $sql_unidades = "SELECT 

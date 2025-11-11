@@ -209,6 +209,8 @@
                         <div class="col-md-6">
                             <label class="form-label">Unidad</label>
                             <input type="text" id="editUnidadInput" class="form-control" readonly>
+                            <!-- Oculto: ID mantenimiento -->
+                            <input type="hidden" id="editIdMantenimiento" name="id_mantenimiento">
                             <input type="hidden" name="id_unidad" id="editUnidadIdInput">
                         </div>
                         <div class="col-md-6">
@@ -218,8 +220,8 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label">Kilometraje manual</label>
-                            <input type="number" name="km_manual" id="editKmInput" class="form-control" required>
+                            <label class="form-label">Kilometraje</label>
+                            <input type="number" name="km_manual" id="editKmInput" class="form-control" required disabled>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Fecha ingreso</label>

@@ -377,7 +377,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ],
             order: [[0, "desc"]],
             language: {
-              url: "//cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+              url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
             },
           });
         }
@@ -526,88 +526,103 @@ document.addEventListener("DOMContentLoaded", function () {
     tipoSelect.selectedIndex = 0;
   });
   // ---------------------------
-// Gráfica telemetría (Half Doughnut estilo medidor)
-// ---------------------------
-function loadTelemetriaChart() {
-  fetch("../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_unidades_telemetria_demo.php")
-    .then(res => res.json())
-    .then(data => {
-      const counts = { con: 0, sin: 0 };
-      data.forEach(u => {
-        if (u.tiene_telemetria) counts.con += 1;
-        else counts.sin += 1;
-      });
-
-      const total = counts.con + counts.sin;
-      const porcentajeCon = total ? ((counts.con / total) * 100).toFixed(1) : 0;
-
-      // Crear gráfico semicircular
-      const ctx = document.getElementById("chartTelemetria");
-      if (ctx) {
-        if (window.chartTelemetriaInstance) {
-          try { window.chartTelemetriaInstance.destroy(); } catch {}
-        }
-        window.chartTelemetriaInstance = new Chart(ctx, {
-          type: "doughnut",
-          data: {
-            labels: ["Con telemetría", "Sin telemetría"],
-            datasets: [{
-              data: [counts.con, counts.sin],
-              backgroundColor: ["#5a4d92ff", "#be2177ff"],
-              borderWidth: 0
-            }]
-          },
-          options: {
-            rotation: -90,          // inicia desde la parte inferior
-            circumference: 180,     // solo media circunferencia
-            cutout: "70%",          // grosor del anillo
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                position: "bottom",
-              },
-              title: {
-                display: true,
-                text: `Unidades con telemetría: ${porcentajeCon}%`,
-                font: { size: 16, weight: "bold" }
-              },
-              tooltip: {
-                callbacks: {
-                  label: (ctx) => `${ctx.label}: ${ctx.raw} unidades`
-                }
-              }
-            }
-          }
+  // Gráfica telemetría (Half Doughnut estilo medidor)
+  // ---------------------------
+  function loadTelemetriaChart() {
+    fetch(
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/obtener_unidades_telemetria_demo.php"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const counts = { con: 0, sin: 0 };
+        data.forEach((u) => {
+          if (u.tiene_telemetria) counts.con += 1;
+          else counts.sin += 1;
         });
-      }
 
-      // Botón export CSV
-      const exportBtn = document.getElementById("exportTelemetriaCsv");
-      if (exportBtn) {
-        exportBtn.onclick = () => {
-          const rows = [["Unidad","Modelo","VIN","Km actual","Tiene telemetria"]];
-          data.forEach(u => {
-            rows.push([
-              u.id_unidad,
-              u.nombre_modelo || "",
-              u.vin || "",
-              u.ultimo_kilometraje || 0,
-              u.tiene_telemetria ? "Si" : "No"
-            ]);
+        const total = counts.con + counts.sin;
+        const porcentajeCon = total
+          ? ((counts.con / total) * 100).toFixed(1)
+          : 0;
+
+        // Crear gráfico semicircular
+        const ctx = document.getElementById("chartTelemetria");
+        if (ctx) {
+          if (window.chartTelemetriaInstance) {
+            try {
+              window.chartTelemetriaInstance.destroy();
+            } catch {}
+          }
+          window.chartTelemetriaInstance = new Chart(ctx, {
+            type: "doughnut",
+            data: {
+              labels: ["Con telemetría", "Sin telemetría"],
+              datasets: [
+                {
+                  data: [counts.con, counts.sin],
+                  backgroundColor: ["#5a4d92ff", "#be2177ff"],
+                  borderWidth: 0,
+                },
+              ],
+            },
+            options: {
+              rotation: -90, // inicia desde la parte inferior
+              circumference: 180, // solo media circunferencia
+              cutout: "70%", // grosor del anillo
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                },
+                title: {
+                  display: true,
+                  text: `Unidades con telemetría: ${porcentajeCon}%`,
+                  font: { size: 16, weight: "bold" },
+                },
+                tooltip: {
+                  callbacks: {
+                    label: (ctx) => `${ctx.label}: ${ctx.raw} unidades`,
+                  },
+                },
+              },
+            },
           });
-          const csv = rows.map(r => r.map(c => `"${(c||"").toString().replace(/"/g,'""')}"`).join(",")).join("\n");
-          const blob = new Blob([csv], { type: "text/csv" });
-          const a = document.createElement("a");
-          a.href = URL.createObjectURL(blob);
-          a.download = "unidades_telemetria.csv";
-          a.click();
-        };
-      }
-    })
-    .catch(err => console.error("Error al cargar telemetría:", err));
-}
+        }
 
+        // Botón export CSV
+        const exportBtn = document.getElementById("exportTelemetriaCsv");
+        if (exportBtn) {
+          exportBtn.onclick = () => {
+            const rows = [
+              ["Unidad", "Modelo", "VIN", "Km actual", "Tiene telemetria"],
+            ];
+            data.forEach((u) => {
+              rows.push([
+                u.id_unidad,
+                u.nombre_modelo || "",
+                u.vin || "",
+                u.ultimo_kilometraje || 0,
+                u.tiene_telemetria ? "Si" : "No",
+              ]);
+            });
+            const csv = rows
+              .map((r) =>
+                r
+                  .map((c) => `"${(c || "").toString().replace(/"/g, '""')}"`)
+                  .join(",")
+              )
+              .join("\n");
+            const blob = new Blob([csv], { type: "text/csv" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "unidades_telemetria.csv";
+            a.click();
+          };
+        }
+      })
+      .catch((err) => console.error("Error al cargar telemetría:", err));
+  }
 
   // Llamar a telemetría independiente
   loadTelemetriaChart();
