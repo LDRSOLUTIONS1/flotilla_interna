@@ -1,6 +1,6 @@
 <div class="contenedorvalidacionunidades">
     <h5 class="titulosletrasunidades text-nowrap">
-        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Demo)</a>
+        <a class="navbar-brand" href="#"><i class="bi bi-tools"></i> Flotilla - Mantenimientos (Interno)</a>
     </h5>
     <h4 class="letravalidacionunidadresponsiva text-nowrap"></h4>
 </div>

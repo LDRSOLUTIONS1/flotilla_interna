@@ -39,7 +39,7 @@ INNER JOIN sedes AS sed ON ung.id_sede = sed.id_sede";
 // Filtrar si el usuario es ADMINISTRADOR DEMOS (id_tipo_usuario == 4)
 if ($id_tipo_usuario == 4) {
     $sql .= " WHERE tipunid.id_tipo_unidad = 3";
-}elseif ($id_tipo_usuario == 1){
+}elseif ($id_tipo_usuario == 1 || $id_tipo_usuario == 10){
     $sql .= " WHERE tipunid.id_tipo_unidad != 3";
 }
 
@@ -86,6 +86,45 @@ if ($resultado->num_rows > 0) {
                 </tr>";
         }
     elseif ($id_tipo_usuario == 4): // Administrador DEMOS
+        while ($fila = $resultado->fetch_assoc()) {
+            echo "<tr>
+                    <td class='sticky-left-0'>
+                        <button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
+                            <i class='fas fa-edit'></i> Editar
+                        </button>
+                    </td>
+                    <td class='titulostablaunidades sticky-left-25'>" . $fila['id_unidad'] . "</td>
+                    <td class='titulostablaunidades sticky-left-50'>" . $fila['nombre_marca'] . "</td>
+                    <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
+                    <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
+                    <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
+                    <td class='titulostablaunidades'>" . $fila['estado'] . "</td>
+                    <td class='titulostablaunidades'>" . $fila['tipo_unidad'] . "</td>
+                    <td class='titulostablaunidades'>" . $fila['ubicacion'] . "</td>
+                    <td class='titulostablaunidades'>" . ($fila['ultimo_kilometraje'] == 0.00 ? '<span class="text-danger">Unidad sin telemetría</span>' : number_format($fila['ultimo_kilometraje'], 2, '.', ',') . ' km') . "</td>
+                    <td>
+                        <button class='btn btn-sm btn-mapa btnubicacionunidad' data-vin='{$fila['vin']}'>
+                            <i class='fa-solid fa-location-dot'></i> 
+                        </button>
+                    </td>
+                    <td class='titulostablaunidades'>
+                        <button class='btn btn-sm btn-aseguradora btnpolizasunidades' data-id='{$fila['id_unidad']}'>
+                            <i class='fa-solid fa-file-pdf'></i> Aseguradora
+                        </button>
+                    </td>
+                    <td>
+                        <button class='btn btn-sm btn-tenencias btntenencias' data-id='{$fila['id_unidad']}'>
+                            <i class='fa-solid fa-file-pdf'></i> Tenencias
+                        </button>
+                    </td>
+                    <td>
+                        <button class='btn btn-sm btn-verificaciones btnverificaciones' data-id='{$fila['id_unidad']}'>
+                            <i class='fa-solid fa-file-pdf'></i> Verificaciones
+                        </button>
+                    </td>
+                </tr>";
+        }
+        elseif ($id_tipo_usuario == 10): // Administrador DEMOS
         while ($fila = $resultado->fetch_assoc()) {
             echo "<tr>
                     <td class='sticky-left-0'>

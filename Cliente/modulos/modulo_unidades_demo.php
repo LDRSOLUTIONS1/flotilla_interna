@@ -81,7 +81,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <th class="titulostablaunidades">Tenencias</th>
         <th class="titulostablaunidades">Verificaciones</th>
       </tr>
-      <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
+      <?php elseif ($id_tipo_usuario == 4 || $id_tipo_usuario == 10): // Administrador DEMOS ?>
       <tr>
         <th class="titulostablaunidades sticky-left-0"></th>
         <th class="titulostablaunidades sticky-left-25">ID</th>
@@ -101,7 +101,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
       <?php endif; ?>
     </thead>
     <tbody>
-      <?php include("../../Servidor/solicitudes/unidades/obtener_unidades.php"); ?>
+      <?php include("../../Servidor/solicitudes/unidades/obtener_unidades_demo.php"); ?>
     </tbody>
   </table>
 </div>

@@ -49,7 +49,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="documentos.php">Documentos</a></li>
             <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
             <li ><a class="menulist" href="mantenimientos_realizados_demos.php">mantenimiento realizados</a></li>
-            <li ><a class="menulist" href="incidencias.php">Incidencias</a></li>
+            <li ><a class="menulist" href="administracion_incidencias_demo.php">Incidencias</a></li>
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
