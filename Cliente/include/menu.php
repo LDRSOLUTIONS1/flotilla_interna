@@ -83,8 +83,19 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
             <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
             <li ><a class="menulist" href="incidencias.php">Incidencias</a></li> 
-            
 
+
+        <?php elseif ($id_tipo_usuario == 15): // GESTON DEMOS?>
+            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <?php if ($es_jefe_directo): ?>
+            <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
+            <?php endif; ?>
+            <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
+            <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
+            <li ><a class="menulist" href="incidencias.php">Incidencias</a></li> 
+            <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
+            <li ><a class="menulist" href="tablero_smart_conect.php">Tablero smart conect</a></li>
+            
 
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>

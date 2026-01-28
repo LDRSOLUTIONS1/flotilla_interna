@@ -15,7 +15,6 @@
                     <th scope="col">Tipo</th>
                     <th scope="col">Taller</th>
                     <th scope="col">Fecha de salida</th>
-                    <th scope="col">factura</th>
                 </tr>
             </thead>
             <tbody id="finalizedUnitsContainer">
@@ -49,11 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${m.tipo}</td>
                     <td>${m.taller || "-"}</td>
                     <td>${m.fecha_salida || "-"}</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary" onclick="location.href='../../Servidor/solicitudes/unidades/mantenimientos_unidades_demo/formulario_factura.php?vin=${m.vin}'">
-                            Generar factura
-                        </button>
-                    </td>
+                    
                 `;
                 container.appendChild(row);
             });
