@@ -81,12 +81,16 @@
   left: 0px;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.966) 75%, rgba(255, 255, 255, 0.884) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.966) 75%,
+    rgba(255, 255, 255, 0.884) 100%
+  );
   overflow-y: scroll;
 }
 /*cuandro blanco del incio*/
-.cuadroblancocontenidoinicio{
-    position: absolute;
+.cuadroblancocontenidoinicio {
+  position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -118,148 +122,146 @@
   border-color: #d39e00; /* Cambia el color del borde */
 }
 /* Estilo personalizado para darle un toque moderno */
-    .form-floating input[type="text"] {
-        border: 2px solid #6c757d; /* Borde gris oscuro */
-        border-radius: 0.5rem;     /* Bordes redondeados */
-        padding: 1rem;
-        font-size: 1rem;
-        background-color: #f8f9fa; /* Fondo gris claro */
-        transition: all 0.3s ease;
-    }
+.form-floating input[type="text"] {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 
-    .form-floating input[type="text"]:focus {
-        border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        background-color: #fff;
-    }
-    .form-select {
-        border: 2px solid #6c757d; /* Borde gris oscuro */
-        border-radius: 0.5rem;     /* Bordes redondeados */
-        padding: 1rem;
-        font-size: 1rem;
-        background-color: #f8f9fa; /* Fondo gris claro */
-        transition: all 0.3s ease;
-    }
+.form-floating input[type="text"]:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
+.form-select {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 .form-select-prueba {
-    display: block;
-    width: 100%;
-    padding: .500rem .75rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1.5;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 2px solid #ced4da;
-    border-radius: .25rem;
-
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.5;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #ced4da;
+  border-radius: 0.25rem;
 }
 .form-select-dashboard {
-    display: block;
-    width: 100%;
-    padding: .500rem .75rem;
-    font-size: 0.8rem;
-    font-weight: 400;
-    line-height: 1.2;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 2px solid #ced4da;
-    border-radius: .25rem;
-
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid #ced4da;
+  border-radius: 0.25rem;
 }
-    .form-select:focus {
-        border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-        background-color: #fff;
-    }
+.form-select:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
 
-    .form-floating label {
-        font-weight: 500;
-        color: #495057;
-    }
-    /*estilos de los input de tipo date*
+.form-floating label {
+  font-weight: 500;
+  color: #495057;
+}
+/*estilos de los input de tipo date*
     /* Estilo personalizado para darle un toque moderno */
-    .form-floating input[type="date"] {
-      border: 2px solid #6c757d; /* Borde gris oscuro */
-      border-radius: 0.5rem;     /* Bordes redondeados */
-      padding: 1rem;
-      font-size: 1rem;
-      background-color: #f8f9fa; /* Fondo gris claro */
-      transition: all 0.3s ease;
-  }
+.form-floating input[type="date"] {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 
-  .form-floating input[type="date"]:focus {
-      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-      background-color: #fff;
-  }
+.form-floating input[type="date"]:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
 
-  .form-floating label {
-      font-weight: 500;
-      color: #495057;
-  }
-    /*estilos de los input de tipo number*/
-    /* Estilo personalizado para darle un toque moderno */
-    .form-floating input[type="number"] {
-      border: 2px solid #6c757d; /* Borde gris oscuro */
-      border-radius: 0.5rem;     /* Bordes redondeados */
-      padding: 1rem;
-      font-size: 1rem;
-      background-color: #f8f9fa; /* Fondo gris claro */
-      transition: all 0.3s ease;
-  }
+.form-floating label {
+  font-weight: 500;
+  color: #495057;
+}
+/*estilos de los input de tipo number*/
+/* Estilo personalizado para darle un toque moderno */
+.form-floating input[type="number"] {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 
-  .form-floating input[type="number"]:focus {
-      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-      background-color: #fff;
-  }
+.form-floating input[type="number"]:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
 
-  .form-floating label {
-      font-weight: 500;
-      color: #495057;
-  }
-    /*estilos de los input de tipo file*/
-    /* Estilo personalizado para darle un toque moderno */
-    .form-floating input[type="file"] {
-      border: 2px solid #6c757d; /* Borde gris oscuro */
-      border-radius: 0.5rem;     /* Bordes redondeados */
-      padding: 1rem;
-      font-size: 1rem;
-      background-color: #f8f9fa; /* Fondo gris claro */
-      transition: all 0.3s ease;
-  }
+.form-floating label {
+  font-weight: 500;
+  color: #495057;
+}
+/*estilos de los input de tipo file*/
+/* Estilo personalizado para darle un toque moderno */
+.form-floating input[type="file"] {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 
-  .form-floating input[type="file"]:focus {
-      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-      background-color: #fff;
-  }
+.form-floating input[type="file"]:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
 
-  .form-floating label {
-      font-weight: 500;
-      color: #495057;
-  }
-    /*estilos de los select*/
-    /* Estilo personalizado para darle un toque moderno */
-    .form-floating select {
-      border: 2px solid #6c757d; /* Borde gris oscuro */
-      border-radius: 0.5rem;     /* Bordes redondeados */
-      padding: 1rem;
-      font-size: 1rem;
-      background-color: #f8f9fa; /* Fondo gris claro */
-      transition: all 0.3s ease;
-  }
+.form-floating label {
+  font-weight: 500;
+  color: #495057;
+}
+/*estilos de los select*/
+/* Estilo personalizado para darle un toque moderno */
+.form-floating select {
+  border: 2px solid #6c757d; /* Borde gris oscuro */
+  border-radius: 0.5rem; /* Bordes redondeados */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa; /* Fondo gris claro */
+  transition: all 0.3s ease;
+}
 
-  .form-floating select:focus {
-      border-color: #0d6efd;     /* Azul Bootstrap al enfocar */
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-      background-color: #fff;
-  }
+.form-floating select:focus {
+  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: #fff;
+}
 
-  .form-floating label {
-      font-weight: 500;
-      color: #495057;
-  }
+.form-floating label {
+  font-weight: 500;
+  color: #495057;
+}
 /*-----------------------------------------------------------estilos del spinner---------------------------------*/
 .contenedorspinner {
   display: none;
@@ -355,7 +357,7 @@ body {
   z-index: 1000;
 }
 .icono,
-.txtnombreusuario{
+.txtnombreusuario {
   position: relative;
 }
 .icono {
@@ -390,14 +392,14 @@ body {
   content: attr(data-url);
   display: none;
 }
-.txtnombreusuario{
+.txtnombreusuario {
   font-weight: bold;
   font-size: 0.8rem;
   padding-left: 70px;
   color: black;
   text-align: center;
 }
-.imgavatar{
+.imgavatar {
   width: 40px;
   height: 40px;
   object-fit: cover;
@@ -407,7 +409,6 @@ body {
   list-style: none;
   display: flex;
   gap: 5px;
-  
 }
 .menu li {
   list-style: none;
@@ -489,7 +490,6 @@ body {
     padding-left: 30px;
     padding-right: 30px;
   }
-  
 }
 .cuadroblancovideoindex {
   position: fixed;
@@ -500,12 +500,16 @@ body {
   background-color: rgba(214, 218, 223, 0.397); /*opacidad del fondo*/
   z-index: 1;
 }
-.imagenlogo{
+.imagenlogo {
   z-index: 100;
-
 }
 .contenedorformularioindex {
-  background-color: rgba(115, 121, 138, 0.534); /*cambio de colores para el contenedor de flotilla interna en el index*/
+  background-color: rgba(
+    115,
+    121,
+    138,
+    0.534
+  ); /*cambio de colores para el contenedor de flotilla interna en el index*/
   border-radius: 25px;
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.555);
   transition: 0.5s ease;
@@ -554,7 +558,6 @@ body {
     100% {
       transform: translateY(10px);
     }
-    
   }
 }
 
@@ -594,7 +597,7 @@ body {
     position: absolute;
     width: 100px;
   }
-/*azul*/
+  /*azul*/
   .inicioimg1 {
     top: 130%;
     left: 37%;
@@ -602,14 +605,14 @@ body {
     height: 140px;
     z-index: 10;
   }
-/*roja*/
+  /*roja*/
   .inicioimg2 {
     top: 130%;
     left: 18%;
     width: auto;
     height: 140px;
   }
-/*aveo*/
+  /*aveo*/
   .inicioimg3 {
     top: 139%;
     left: 60%;
@@ -624,7 +627,7 @@ body {
     position: absolute;
     width: 100px;
   }
-/*azul*/
+  /*azul*/
   .inicioimg1 {
     top: 130%;
     left: 13%;
@@ -632,14 +635,14 @@ body {
     height: 140px;
     z-index: 10;
   }
-/*roja*/
+  /*roja*/
   .inicioimg2 {
     top: 130%;
     left: -5%;
     width: auto;
     height: 140px;
   }
-/*aveo*/
+  /*aveo*/
   .inicioimg3 {
     top: 142%;
     left: 49%;
@@ -684,7 +687,7 @@ body {
     position: absolute;
     width: 100px;
   }
-/*azul*/
+  /*azul*/
   .inicioimg1foton {
     top: 130%;
     left: 37%;
@@ -692,14 +695,14 @@ body {
     height: 140px;
     z-index: 10;
   }
-/*roja*/
+  /*roja*/
   .inicioimg2foton {
     top: 130%;
     left: 18%;
     width: auto;
     height: 140px;
   }
-/*aveo*/
+  /*aveo*/
   .inicioimg3foton {
     top: 129%;
     left: 53%;
@@ -714,7 +717,7 @@ body {
     position: absolute;
     width: 100px;
   }
-/*azul*/
+  /*azul*/
   .inicioimg1foton {
     top: 130%;
     left: 35%;
@@ -722,14 +725,14 @@ body {
     height: 140px;
     z-index: 10;
   }
-/*roja*/
+  /*roja*/
   .inicioimg2foton {
     top: 130%;
     left: 3%;
     width: auto;
     height: 140px;
   }
-/*aveo*/
+  /*aveo*/
   .inicioimg3foton {
     top: 126%;
     left: 55%;
@@ -755,8 +758,8 @@ body {
   z-index: 10;
 }
 .contenedorinicioinformación {
-  padding-top: 90px;
-  position: relative;
+  width: 100%;
+  height: 100%;
 }
 @media (max-width: 768px) {
   .contenedorinicioinformación {
@@ -821,7 +824,7 @@ body {
 
 /* Contenedor principal donde está el contenido */
 .contenedoropcionesunidades {
-  padding-top: 60px;
+  padding-top: 100px;
   position: relative;
 }
 /*botones de la administracion de las unidades*/
@@ -887,16 +890,11 @@ body {
   position: absolute;
 }
 
-
 /*estilo de los titulos */
 .titulosletrasunidades {
-  padding-top: 50px;
-  padding-left: 30px;
-  font-weight: bold;
-  font-size: 1.8rem;
-  color: rgb(95, 95, 95);
-  font-weight: bold;
-  animation: slide-in 0.5s ease-out forwards;
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
 @media (max-width: 768px) {
   .titulosletrasunidades {
@@ -921,7 +919,7 @@ body {
 }
 /* botones responsivos*/
 @media (max-width: 768px) {
-  .contenedor_botones{
+  .contenedor_botones {
     padding-top: 140px;
     width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
@@ -950,7 +948,7 @@ body {
 }
 /* botones responsivos*/
 @media (max-width: 768px) {
-  .contenedor_botones_validacion_unidades{
+  .contenedor_botones_validacion_unidades {
     padding-top: 190px;
     width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
@@ -963,7 +961,7 @@ body {
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
   }
 }
-.titulosletrasunidadesasignadas{
+.titulosletrasunidadesasignadas {
   padding-top: 30px;
   padding-left: 30px;
   font-weight: bold;
@@ -973,31 +971,31 @@ body {
   animation: slide-in 0.5s ease-out forwards;
 }
 /*------------------------------------------------------------------------------estilos de los botones de asignacion de unidades*/
-.btn-asignarunidad{
+.btn-asignarunidad {
   background-color: #4ec087; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-agregarunidad{
+.btn-agregarunidad {
   background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-asignarexterno{
+.btn-asignarexterno {
   background-color: #f1ba04c7; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-asignarunidadmoral{
+.btn-asignarunidadmoral {
   background-color: #aa6060; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-asignarunidadfisica{
+.btn-asignarunidadfisica {
   background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
@@ -1034,14 +1032,14 @@ body {
   padding: 1px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.7rem;
 }
-.btn-mapa{
+.btn-mapa {
   background-color: #2ab8bd; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.6rem;
 }
-.titulostablaunidades{
-  font-size: 0.80rem;
+.titulostablaunidades {
+  font-size: 0.8rem;
 }
 
 /*----------------------------barra buscadora de la tabla unidades---------------------------------*/
@@ -1060,10 +1058,10 @@ body {
 .buscador input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
-.buscador{
-  padding-top: 250px;
-}
+@media (max-width: 768px) {
+  .buscador {
+    padding-top: 250px;
+  }
 }
 .buscadoresponsiva {
   margin-bottom: 20px;
@@ -1079,10 +1077,10 @@ body {
 .buscadoresponsiva input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
-.buscadoresponsiva{
-  padding-top: 200px;
-}
+@media (max-width: 768px) {
+  .buscadoresponsiva {
+    padding-top: 200px;
+  }
 }
 .buscadorcomodato {
   margin-bottom: 20px;
@@ -1098,7 +1096,7 @@ body {
 .buscadorcomodato input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorcomodato {
     padding-top: 10px;
     margin-bottom: 10px;
@@ -1119,15 +1117,14 @@ body {
 .buscadorunidadesasignadas input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorunidadesasignadas {
     padding-top: 10px;
     margin-bottom: 10px;
     max-width: 300px;
   }
-
 }
-.contenedorbuscador{
+.contenedorbuscador {
   padding-top: 30px;
   padding-bottom: 20px;
   padding-left: 30px;
@@ -1141,7 +1138,7 @@ body {
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .contenedorbuscadorvalidacionunidades {
     padding-top: 100px;
     padding-bottom: 20px;
@@ -1178,13 +1175,11 @@ body {
 }
 /* Debe ir después de bootstrap.css */
 .table {
-  --bs-table-bg: #f0f0f0;        /* fondo base de todas las celdas */
+  --bs-table-bg: #f0f0f0; /* fondo base de todas las celdas */
   /* Opcional, si usas .table-striped y .table-hover: */
   --bs-table-striped-bg: #e9e9e9; /* rayas */
-  --bs-table-hover-bg: #e3e3e3;   /* hover */
+  --bs-table-hover-bg: #e3e3e3; /* hover */
 }
-
-
 
 /*---------------------------------------------------------------------------------estilos registro de nuevas unidades---------------------------------------------------------------------------*/
 .contenedoropcionesregistrarunidades {
@@ -1198,13 +1193,12 @@ body {
   overflow-x: none;
   overflow-y: none;
 }
-@media  (max-width: 772px) {
+@media (max-width: 772px) {
   .contenedorformularioregistrounidades {
     padding: 60px;
   }
-  
 }
-.contenedormarcmodelo{
+.contenedormarcmodelo {
   padding-top: 30px;
   transition: background-color 0.3s ease;
 }
@@ -1217,19 +1211,19 @@ body {
 .contenedormarcmodelo:hover .tituloletraunidadmarmodel {
   color: white;
 }
-.tituloletraunidadmarmodel{
-    padding-left: 30px;
-    font-weight: bold;
-    font-size: 1.6rem;
-    color: rgb(95, 95, 95);
-    font-weight: bold;
-    animation: slide-in 0.5s ease-out forwards;
+.tituloletraunidadmarmodel {
+  padding-left: 30px;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: rgb(95, 95, 95);
+  font-weight: bold;
+  animation: slide-in 0.5s ease-out forwards;
 }
-  @media (max-width: 768px) {
-    .tituloletraunidadmarmodel {
-      font-size: 1.6rem;
-    }
+@media (max-width: 768px) {
+  .tituloletraunidadmarmodel {
+    font-size: 1.6rem;
   }
+}
 
 /*---------------------------------------------------------------------------------estilos edicion de nuevas unidades---------------------------------------------------------------------------*/
 
@@ -1240,17 +1234,16 @@ body {
   padding-top: 40px;
 }
 .contenedor_poliza_seguro {
-width: 100%;
-height: auto;
+  width: 100%;
+  height: auto;
 }
 .contenedor_poliza_tenencia {
-  
 }
 /*---------------------------------------------------------------------------Estilos modal de asignacion de unidades--------------------------------------------------------------------------*/
-.contenedorasignacionunidades{
+.contenedorasignacionunidades {
   padding-top: 20px;
 }
-.tablasignacionunidades{
+.tablasignacionunidades {
   padding: 50px;
   width: 100%;
   height: auto;
@@ -1259,9 +1252,8 @@ height: auto;
   margin-right: 0px;
   padding-top: 30px;
 }
-.contenedorinfounidadasignar{
+.contenedorinfounidadasignar {
   padding-top: 20px;
-  
 }
 .contenedorimgunidadasignacion {
   display: flex;
@@ -1269,7 +1261,7 @@ height: auto;
   align-items: center;
   padding: 20px 0;
 }
-.imgasignacionunidad{
+.imgasignacionunidad {
   max-width: 300px;
   max-height: 300px;
   text-align: center;
@@ -1277,80 +1269,79 @@ height: auto;
   border-radius: 15px;
   background-color: rgb(255, 255, 255);
 }
-.imgasignacionunidad:hover{
+.imgasignacionunidad:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 768px) {
   .imgasignacionunidad {
-  width: 200px;
+    width: 200px;
     height: 200px;
     padding-left: 0px;
   }
 }
 /*-------------------------------------------------------------------edicion de cards validacion comodato y carta responsiva*/
-.txteatlevalidacioncomodato{
+.txteatlevalidacioncomodato {
   font-size: 0.88rem;
 }
-.txtvalidacioncomodato{
+.txtvalidacioncomodato {
   font-size: 0.8rem;
 }
-.btnmosrarmodalunidadCOMODATO{
+.btnmosrarmodalunidadCOMODATO {
   background-color: #4ec087; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btntablaverificarcomodato{
+.btntablaverificarcomodato {
   background-color: #4ec087; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.6rem;
 }
-.btnmosrarmodalunidadcomodato{
+.btnmosrarmodalunidadcomodato {
   background-color: #736fb3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btnmosrarmodalunidadcomodatodemo{
+.btnmosrarmodalunidadcomodatodemo {
   background-color: #078899; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btnverarchivos{
+.btnverarchivos {
   background-color: #6d9aa3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btntablaverificarcomodatojuridico{
+.btntablaverificarcomodatojuridico {
   background-color: #7971e2; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.6rem;
 }
-.btntablaverificarcomodatodemojuridico{
+.btntablaverificarcomodatodemojuridico {
   background-color: #078899; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 .estadocomodato,
-.estadocomodatoimg{
+.estadocomodatoimg {
   position: absolute;
 }
-.imgalertasucces{
+.imgalertasucces {
   width: 35px;
   height: 35px;
 }
-.imgalertasuccestabla{
+.imgalertasuccestabla {
   width: 20px;
   height: 20px;
-
 }
-.contenedorcardunidadescomodatoresponsiva{
+.contenedorcardunidadescomodatoresponsiva {
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -1365,16 +1356,16 @@ height: auto;
     flex-direction: column;
   }
 }
-.imgcardverificarcomodato{
-     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 210px;
-    max-height: 240px;
-    border-radius: 15px;
-    transition: all 0.2s ease;
+.imgcardverificarcomodato {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 210px;
+  max-height: 240px;
+  border-radius: 15px;
+  transition: all 0.2s ease;
 }
-.imgcardverificarcomodato:hover{
+.imgcardverificarcomodato:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -1394,25 +1385,25 @@ height: auto;
     padding: 10px;
   }
 }
-.btn-cambiar_vista{
+.btn-cambiar_vista {
   background-color: #4eb8c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.titulostablaverificarcomodato{
+.titulostablaverificarcomodato {
   font-size: 0.9rem;
 }
-.titulostablaverificarcomodatodemo{
+.titulostablaverificarcomodatodemo {
   font-size: 0.79rem;
 }
-.btnmosrarmodalunidadsolicitud{
+.btnmosrarmodalunidadsolicitud {
   background-color: #eb7e35; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.btntablaverificarresponsiva{
+.btntablaverificarresponsiva {
   background-color: #eb7e35; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
@@ -1422,11 +1413,11 @@ height: auto;
 
 /*-------------------------------------------------------------------------modulo_mis_unidades-------------------------------------------------------------------*/
 
-.contenedormisunidades{
+.contenedormisunidades {
   position: relative;
   padding-top: 100px;
 }
-.titulosletrasunidadescliente{
+.titulosletrasunidadescliente {
   padding-top: 20px;
   padding-left: 30px;
   font-weight: bold;
@@ -1441,8 +1432,7 @@ height: auto;
   }
 }
 /*--------------------------------------edicion de las cards de las unidades vista del cliente------------------------------------------------------*/
-.contenedorcardunidadescliente{
-  padding-top: 20px;
+.contenedorcardunidadescliente {
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -1493,7 +1483,7 @@ height: auto;
     flex-direction: column;
   }
 }
-.card{
+.card {
   padding: 10px;
   padding-top: 20px;
   width: 17rem;
@@ -1501,20 +1491,20 @@ height: auto;
   transition: all 0.2s ease;
   border-radius: 15px;
 }
-.card-body{
+.card-body {
   transition: all 0.2s ease;
 }
-.card:hover{
+.card:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card:hover .imgcard{
+.card:hover .imgcard {
   transform: scale(1.1);
   animation: respirar 1.5s infinite;
 }
 
-.card:hover .card-body{
+.card:hover .card-body {
   border-radius: 15px;
   background-color: #91979e;
   color: white;
@@ -1527,20 +1517,20 @@ height: auto;
   padding: 1rem;
 }
 
-.imgcard{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 170px;
-    max-height: 180px;
-    border-radius: 15px;
+.imgcard {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 170px;
+  max-height: 180px;
+  border-radius: 15px;
 }
-#linkpolitica{
+#linkpolitica {
   margin-top: -10px;
   font-size: 0.75rem;
-  color: #007BFF;
+  color: #007bff;
 }
-.card:hover #linkpolitica{
+.card:hover #linkpolitica {
   color: white;
 }
 @media (max-width: 768px) {
@@ -1549,19 +1539,19 @@ height: auto;
   }
 }
 
-@keyframes respirar{
-  0%{
+@keyframes respirar {
+  0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.1);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
 /*------------------------------------------------------estilos mis unidades------------------------------------*/
-.cardmisunidades{
+.cardmisunidades {
   padding: 20px;
   padding-top: 40px;
   width: 18rem;
@@ -1570,44 +1560,43 @@ height: auto;
   border-radius: 15px;
   background-color: floralwhite;
 }
-.card-body{
+.card-body {
   transition: all 0.2s ease;
 }
-.cardmisunidades:hover{
+.cardmisunidades:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cardmisunidades:hover .imgcard{
+.cardmisunidades:hover .imgcard {
   transform: scale(1.1);
   animation: respirar 1.5s infinite;
 }
 
-.cardmisunidades:hover .card-body{
+.cardmisunidades:hover .card-body {
   border-radius: 15px;
   background-color: #91979e;
   color: white;
 }
 
-.cardmisunidades:hover #linkpolitica{
+.cardmisunidades:hover #linkpolitica {
   color: white;
 }
 
-@keyframes respirar{
-  0%{
+@keyframes respirar {
+  0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.1);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
 
-
 /*------------------------------informacion de la unidad, archivo de la responsiva y subir responsiva-------------------------------------*/
-.conetendorsubircartaresponsiva{
+.conetendorsubircartaresponsiva {
   padding-top: 20px;
   display: flex;
   align-items: center;
@@ -1621,24 +1610,23 @@ height: auto;
   }
 }
 /**------------------------------------estilos Validacion de unidades Administrador-----------------------------------------------*/
-.contenedorvalidacionunidades{
+.contenedorvalidacionunidades {
   padding-top: 60px;
   position: relative;
-  
 }
-.btn-comodato{
+.btn-comodato {
   background-color: #dbbe3a; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-responsiva{
+.btn-responsiva {
   background-color: #298bcc; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.letravalidacionunidad{
+.letravalidacionunidad {
   padding-top: 110px;
   padding-left: 50px;
   font-weight: bold;
@@ -1652,7 +1640,7 @@ height: auto;
     font-size: 0.9rem;
   }
 }
-.letravalidacionunidadresponsiva{
+.letravalidacionunidadresponsiva {
   padding-top: 110px;
   padding-left: 50px;
   font-weight: bold;
@@ -1661,7 +1649,7 @@ height: auto;
   font-weight: bold;
   animation: slide-in 0.5s ease-out forwards;
 }
-.contenedormenu{
+.contenedormenu {
   position: relative;
   padding-top: 20px;
   padding-left: 30px;
@@ -1672,7 +1660,7 @@ height: auto;
   flex-wrap: wrap;
   gap: 20px;
 }
-.contenedorcardunidades{
+.contenedorcardunidades {
   padding-top: 20px;
   padding-left: 30px;
   padding-right: 30px;
@@ -1687,7 +1675,7 @@ height: auto;
   }
 }
 /*-------------------------------------------------------------------denegar carta responsiva------------------------------------------------*/
-.textareamotivodenegacioncartaresponsiva{
+.textareamotivodenegacioncartaresponsiva {
   width: 100%;
   height: 200px;
   border-radius: 10px;
@@ -1695,14 +1683,14 @@ height: auto;
   padding: 5px;
   font-size: 16px;
 }
-.textmotivodenegacioncartaresponsiva{
+.textmotivodenegacioncartaresponsiva {
   font-size: 1.3rem;
 }
-.descripciondenegacion{
+.descripciondenegacion {
   font-size: 1.4rem;
 }
 /*---------------------------------------------------estilos validacion comodato-----------------------------------------------*/
-.textformulariocomodatofirmado{
+.textformulariocomodatofirmado {
   padding-left: 150px;
 }
 @media (max-width: 768px) {
@@ -1711,7 +1699,7 @@ height: auto;
   }
 }
 /*-----------------------------------------------------------------estilos juridico*/
-.contenedorcardunidadesjuridico{
+.contenedorcardunidadesjuridico {
   padding-top: 20px;
   padding-left: 30px;
   padding-right: 30px;
@@ -1726,16 +1714,16 @@ height: auto;
     flex-direction: column;
   }
 }
-.imgcomodato{
-     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 210px;
-    max-height: 240px;
-    border-radius: 15px;
-    transition: all 0.2s ease;
+.imgcomodato {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 210px;
+  max-height: 240px;
+  border-radius: 15px;
+  transition: all 0.2s ease;
 }
-.imgcomodato:hover{
+.imgcomodato:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -1762,7 +1750,7 @@ height: auto;
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .contenedorbuscadosubircomodato {
     padding-top: 100px;
     padding-bottom: 20px;
@@ -1784,19 +1772,19 @@ height: auto;
 .buscadorhistorialcomodato input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
-.buscadorhistorialcomodato{
-  padding-top: 250px;
-}
+@media (max-width: 768px) {
+  .buscadorhistorialcomodato {
+    padding-top: 250px;
+  }
 }
 /*estilo del boton*/
-.btn-comodato_interna{
+.btn-comodato_interna {
   background-color: #736fb3; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-comodato_demo{
+.btn-comodato_demo {
   background-color: #078899; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
@@ -1818,7 +1806,7 @@ height: auto;
     font-size: 1.6rem;
   }
 }
-.letrahistorialcomodato{
+.letrahistorialcomodato {
   padding-top: 80px;
   padding-left: 50px;
   font-weight: bold;
@@ -1853,7 +1841,7 @@ height: auto;
 }
 /* botones responsivos*/
 @media (max-width: 768px) {
-  .contenedor_botones_subir_comodato_demo{
+  .contenedor_botones_subir_comodato_demo {
     padding-top: 190px;
     width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
@@ -1892,7 +1880,7 @@ height: auto;
 .buscadorcomodatojuridico input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorcomodatojuridico {
     padding-top: 10px;
     margin-bottom: 10px;
@@ -1913,7 +1901,6 @@ height: auto;
   padding: 5px 8px; /* Adjust padding to make the button smaller */
 }
 
-
 /* Responsividad */
 @media (max-width: 768px) {
   .buscadorcomodatojuridico {
@@ -1932,72 +1919,74 @@ height: auto;
 }
 
 /*------------------------------------------------------------estilos de documentos */
-.contenedoropciones{
+.contenedoropciones {
   width: 100%;
-    margin-left: 50%;
-    padding-top: 180px;
-    height: auto;
-    transform: translate(-50%);
-    margin-top: 20px;
+  margin-left: 50%;
+  padding-top: 180px;
+  height: auto;
+  transform: translate(-50%);
+  margin-top: 20px;
 }
-.cuadrocontenedoropcionesinicio{
+.cuadrocontenedoropcionesinicio {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .contenedoropcioninicioimagen {
-    background: linear-gradient(135deg, #646a6d, #5c5e5f69);
-    width: 100%;
-    height: 100%;
-    padding: 30px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, #646a6d, #5c5e5f69);
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .contenedoropcioninicioimagen:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.titulocontenedoropcioninicio{
-      text-align: center;
-    font-size: 0.9rem;
-    margin-top: 2px;
-    font-weight: 600;
-    color: rgba(91, 121, 138, 0.721);
+.titulocontenedoropcioninicio {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 2px;
+  font-weight: 600;
+  color: rgba(91, 121, 138, 0.721);
 }
-.contenedoropcioninicio{
-      width: 130px;
-    height: 130px;
-    margin: 5px;
-    margin-bottom: 20px;
-    margin-top: 0;
-    color: aliceblue;
-    cursor: pointer;
-    border-radius: 15px;
-    transition: 0.3s ease;
-    overflow: ellipsis;
+.contenedoropcioninicio {
+  width: 130px;
+  height: 130px;
+  margin: 5px;
+  margin-bottom: 20px;
+  margin-top: 0;
+  color: aliceblue;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: 0.3s ease;
+  overflow: ellipsis;
 }
-.contenedoropcioninicioimagen{
+.contenedoropcioninicioimagen {
   background: linear-gradient(135deg, #bbbdbe, #36383869);
-    width: 100%;
-    height: 100%;
-    padding: 30px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /*--------------------------------------------------estilos tabla de documentos licencias, domicilios etc*/
-.titulostabladocumentos{
-  font-size: 0.80rem;
+.titulostabladocumentos {
+  font-size: 0.8rem;
 }
 /*--------------------------------------------------estilos de para unidades pool-------------------------------------*/
-.contenedorsolicitudunidadpool{
+.contenedorsolicitudunidadpool {
   position: absolute;
   padding-top: 120px;
   left: 100px;
@@ -2016,7 +2005,7 @@ height: auto;
   }
 }
 
-.contenedorunidadesdisponiblespool{
+.contenedorunidadesdisponiblespool {
   padding-top: 270px;
   padding-left: 30px;
   padding-right: 30px;
@@ -2031,28 +2020,28 @@ height: auto;
     padding-top: 650px;
   }
 }
-.conetenedortarjetaunidadpool{
+.conetenedortarjetaunidadpool {
   transition: all 0.2s ease;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.671);
 }
-.conetenedortarjetaunidadpool:hover{
+.conetenedortarjetaunidadpool:hover {
   background-color: rgba(174, 179, 184, 0.671);
   transition: all 0.2s ease;
 }
 
-.conetenedortarjetaunidadpool:hover .imgunidadpoolsolicitud{
+.conetenedortarjetaunidadpool:hover .imgunidadpoolsolicitud {
   transform: scale(1.1);
   animation: respirar 1.5s infinite;
 }
-@keyframes respirar{
-  0%{
+@keyframes respirar {
+  0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.1);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
@@ -2079,7 +2068,7 @@ height: auto;
   font-size: 0.8rem;
 }
 /*btn ines*/
-.btn-ine{
+.btn-ine {
   background-color: #2f8363; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
@@ -2093,53 +2082,53 @@ height: auto;
   font-size: 0.8rem;
 }
 /*btn domicilio*/
-.btn-domicilio{
+.btn-domicilio {
   background-color: #868f0b; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*btn escritura constitutiva*/
-.btn-constitutiva{
+.btn-constitutiva {
   background-color: #330b8f; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*btn escritura estatutos*/
-.btn-estatutos{
+.btn-estatutos {
   background-color: #8f4b0b; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*btn resguardo de la unidad*/
-.btn-resguardounidad{
+.btn-resguardounidad {
   background-color: #7a082ecc; /* tu color deseado */
   color: white; /* color del texto */
   padding: 9px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*btn editar persona fisica*/
-.btn-editar_persona_fisica{
+.btn-editar_persona_fisica {
   background-color: #e6ac10; /* tu color deseado */
   color: white; /* color del texto */
   padding: 7px 7px; /* Adjust padding to make the button smaller */
   font-size: 0.7rem;
 }
-.btn-resgistrar_moral{
+.btn-resgistrar_moral {
   background-color: #aa6060; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-asignar_demo_moral{
+.btn-asignar_demo_moral {
   background-color: #a00e2d; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.archivodocumentopersonafisica{
+.archivodocumentopersonafisica {
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -2149,18 +2138,17 @@ height: auto;
   }
 }
 /*contendedor de unidades demo asognadas*/
-.contenedorunidadesdemoasignadas{
+.contenedorunidadesdemoasignadas {
   padding-top: 60px;
 }
 
 /*---------------------------------------------------------------------estilos para solictar unidades demo desde la interfaz de usuario----------*/
-.contenedorsolicitudunidaddemo{
+.contenedorsolicitudunidaddemo {
   position: relative;
   padding-top: 100px;
 }
-.contenedorsolicitudemo{
+.contenedorsolicitudemo {
   position: absolute;
-  padding-top: 60px;
   left: 100px;
   right: 130px;
 }
@@ -2176,8 +2164,7 @@ height: auto;
     right: 20px;
   }
 }
-.letrasolicitudemo{
-  padding-top: 110px;
+.letrasolicitudemo {
   padding-left: 50px;
   font-weight: bold;
   font-size: 1.3rem;
@@ -2190,23 +2177,23 @@ height: auto;
     font-size: 0.9rem;
   }
 }
-.btn-verificar{
+.btn-verificar {
   background-color: #339c7d; /* tu color deseado */
   color: white; /* color del texto */
   padding: 1px 9px; /* Adjust padding to make the button smaller */
 }
-.btn-asignar_persona_fisica{
+.btn-asignar_persona_fisica {
   background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 4px 9px; /* Adjust padding to make the button smaller */
 }
-.btn-asignar-persona-moral{
+.btn-asignar-persona-moral {
   background-color: #aa6060; /* tu color deseado */
   color: white; /* color del texto */
   padding: 4px 9px; /* Adjust padding to make the button smaller */
 }
 /*------------------------------------contenedor de las cards de las unidades DEMO disponibles*/
-.contenedorunidadesdisponiblesdemo{
+.contenedorunidadesdisponiblesdemo {
   padding-top: 300px;
   padding-left: 30px;
   padding-right: 30px;
@@ -2221,32 +2208,32 @@ height: auto;
     padding-top: 650px;
   }
 }
-.conetenedortarjetauniddemo{
+.conetenedortarjetauniddemo {
   transition: all 0.2s ease;
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.671);
 }
-.conetenedortarjetauniddemo:hover{
+.conetenedortarjetauniddemo:hover {
   background-color: rgba(174, 179, 184, 0.671);
   transition: all 0.2s ease;
 }
 
-.conetenedortarjetauniddemo:hover .imgunidadpoolsolicitud{
+.conetenedortarjetauniddemo:hover .imgunidadpoolsolicitud {
   transform: scale(1.1);
   animation: respirar 1.5s infinite;
 }
-@keyframes respirar{
-  0%{
+@keyframes respirar {
+  0% {
     transform: scale(1);
   }
-  50%{
+  50% {
     transform: scale(1.1);
   }
-  100%{
+  100% {
     transform: scale(1);
   }
 }
-.textareaobjetivosdemosolicitud{
+.textareaobjetivosdemosolicitud {
   width: 100%;
   height: 100px;
   border-radius: 10px;
@@ -2254,7 +2241,7 @@ height: auto;
   padding: 5px;
   font-size: 16px;
 }
-.textareacomentariosdemosolicitud{
+.textareacomentariosdemosolicitud {
   width: 100%;
   height: 80px;
   border-radius: 10px;
@@ -2263,7 +2250,7 @@ height: auto;
   font-size: 16px;
 }
 /*boton ver la unidad demo fisica y moral para asignarla*/
-.btnasignarunidademo{
+.btnasignarunidademo {
   background-color: #d1930c; /* tu color deseado */
   color: white; /* color del texto */
   padding: 4px 9px; /* Adjust padding to make the button smaller */
@@ -2274,7 +2261,7 @@ height: auto;
   height: 400px;
 }
 /*-------------------------------------------------------------estilos para el autorizador de unidades demos personas fisicas------------------------------*/
-.contenedorautorizardemos{
+.contenedorautorizardemos {
   padding-top: 60px;
   position: relative;
 }
@@ -2315,7 +2302,7 @@ height: auto;
   min-width: auto; /* Puedes ajustar el tamaño mínimo */
   border-radius: 13px;
 }
-.letraautorizaciondemo{
+.letraautorizaciondemo {
   padding-top: 110px;
   padding-left: 50px;
   font-weight: bold;
@@ -2331,7 +2318,7 @@ height: auto;
 }
 /* botones responsivos*/
 @media (max-width: 768px) {
-  .contenedor_botones_validacion_unidades_demos{
+  .contenedor_botones_validacion_unidades_demos {
     padding-top: 190px;
     width: 100%; /* Los botones ocuparán el 100% del ancho en pantallas pequeñas */
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
@@ -2344,25 +2331,25 @@ height: auto;
     margin: 10px 0; /* Añadir margen entre los botones cuando estén apilados */
   }
 }
-.btn-persona-fisica{
+.btn-persona-fisica {
   background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-persona-moral{
+.btn-persona-moral {
   background-color: #bd7727; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 /*contnedor para el buscador de las unidades demos*/
-.contenedorbuscadorautorizaciondemosfisicas{
+.contenedorbuscadorautorizaciondemosfisicas {
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
-  .contenedorbuscadorautorizaciondemosfisicas{
+@media (max-width: 768px) {
+  .contenedorbuscadorautorizaciondemosfisicas {
     padding-top: 100px;
     padding-bottom: 20px;
     padding-left: 30px;
@@ -2383,7 +2370,7 @@ height: auto;
 .buscadorautorizaciondemosificas input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorautorizaciondemosificas {
     padding-top: 10px;
     margin-bottom: 10px;
@@ -2391,29 +2378,29 @@ height: auto;
   }
 }
 /*boton de cambio de vista cards a tabla*/
-.btn-cambiar_vista_fisicas{
+.btn-cambiar_vista_fisicas {
   background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 /*boton para verificar la unidad y autorizar*/
-.btn-verunidad_autorizar_fisicas{
+.btn-verunidad_autorizar_fisicas {
   background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
-.imgcardautorizardemo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 270px;
-    max-height: 300px;
-    border-radius: 15px;
-    transition: all 0.2s ease;
+.imgcardautorizardemo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 270px;
+  max-height: 300px;
+  border-radius: 15px;
+  transition: all 0.2s ease;
 }
-.imgcardautorizardemo:hover{
+.imgcardautorizardemo:hover {
   transform: scale(1.09);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -2426,7 +2413,7 @@ height: auto;
 }
 
 /*------------------------------------------------------------estilos para el alta de personas morales----------------------------------------*/
-.letrasaltapersonasmorales{
+.letrasaltapersonasmorales {
   font-size: 1.1rem;
   color: rgb(68, 67, 67);
 }
@@ -2436,7 +2423,7 @@ height: auto;
   }
 }
 /*------------------------------------------------------------estilos para el alta de personas fisicas----------------------------------------*/
-.letrasaltapersonasfisicas{
+.letrasaltapersonasfisicas {
   font-size: 1.1rem;
   color: rgb(68, 67, 67);
 }
@@ -2447,25 +2434,25 @@ height: auto;
 }
 
 /*-------------------------------------------------------------estilos para autorizar jefes directos------------------------------------------------------*/
-.btnMosrarModalUnidad{
+.btnMosrarModalUnidad {
   background-color: #4ea5c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.letratablajefedirecto{
+.letratablajefedirecto {
   font-size: 0.9rem;
 }
 
 /*-------------------------------------------------------------estilos para el autorizador de unidades demos personas morales------------------------------*/
 
 /*contnedor para el buscador de las unidades demos*/
-.contenedorbuscadorautorizaciondemosmorales{
+.contenedorbuscadorautorizaciondemosmorales {
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
-  .contenedorbuscadorautorizaciondemosmorales{
+@media (max-width: 768px) {
+  .contenedorbuscadorautorizaciondemosmorales {
     padding-top: 100px;
     padding-bottom: 20px;
     padding-left: 30px;
@@ -2486,7 +2473,7 @@ height: auto;
 .buscadorautorizaciondemosmorales input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorautorizaciondemosmorales {
     padding-top: 10px;
     margin-bottom: 10px;
@@ -2494,21 +2481,21 @@ height: auto;
   }
 }
 /*boton de cambio de vista cards a tabla*/
-.btn-cambiar_vista_morales{
+.btn-cambiar_vista_morales {
   background-color: #bd7727; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
 /*boton para verificar la unidad y autorizar*/
-.btn-verunidad_autorizar_morales{
+.btn-verunidad_autorizar_morales {
   background-color: #bd7727; /* tu color deseado */
   color: white; /* color del texto */
   padding: 5px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*estilos para las unidades autorizadas por parte del ususario que autoriza el prestamo de esas unidades*/
-.contenedorunidadesautorizadasdemos{
+.contenedorunidadesautorizadasdemos {
   padding-top: 60px;
   position: relative;
 }
@@ -2529,7 +2516,7 @@ height: auto;
   }
 }
 /*contnedor para el buscador de las unidades demos*/
-.contenedorbuscadorunidadautorizada{
+.contenedorbuscadorunidadautorizada {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -2538,8 +2525,8 @@ height: auto;
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
-  .contenedorbuscadorunidadautorizada{
+@media (max-width: 768px) {
+  .contenedorbuscadorunidadautorizada {
     padding-top: 100px;
     padding-bottom: 20px;
     padding-left: 30px;
@@ -2563,17 +2550,17 @@ height: auto;
 .buscadorunidadesdemoautorizadas input:focus {
   transform: scale(1.05);
 }
-@media(max-width: 768px){
+@media (max-width: 768px) {
   .buscadorunidadesdemoautorizadas {
     padding-top: 10px;
     margin-bottom: 10px;
     max-width: 300px;
   }
-  .btn-cambiar_vista_fisicas{
+  .btn-cambiar_vista_fisicas {
     width: 100%;
   }
 }
-.contenedorcardunidademoautorizada{
+.contenedorcardunidademoautorizada {
   padding-left: 30px;
   padding-right: 30px;
   display: flex;
@@ -2589,7 +2576,7 @@ height: auto;
   }
 }
 /*------------------------------------------------------------estilos de las pruebas unidades demos ----------------------------*/
-.contenedorpruebasunidadesdemos{
+.contenedorpruebasunidadesdemos {
   padding-top: 60px;
   position: relative;
 }
@@ -2609,7 +2596,7 @@ height: auto;
   }
 }
 /*contnedor para el buscador de las unidades demos*/
-.contenedorbuscadorpruebasunidademo{
+.contenedorbuscadorpruebasunidademo {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -2618,8 +2605,8 @@ height: auto;
   padding-bottom: 20px;
   padding-left: 80px;
 }
-@media(max-width: 768px){
-  .contenedorbuscadorpruebasunidademo{
+@media (max-width: 768px) {
+  .contenedorbuscadorpruebasunidademo {
     padding-top: 30px;
     padding-bottom: 20px;
     padding-left: 30px;
@@ -2658,11 +2645,11 @@ height: auto;
 }
 .contenedorrealizacionprueba {
   position: relative;
-  background-color: rgb(219, 217, 223);
+  background-color: #a4bae273;
   border-radius: 15px;
   padding: 15px 20px;
-  margin: 20px auto;           /* ← Centrado horizontalmente */
-  width: fit-content;          /* ← Se ajusta al contenido */
+  margin: 20px auto; /* ← Centrado horizontalmente */
+  width: fit-content; /* ← Se ajusta al contenido */
   max-width: 95%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
@@ -2752,7 +2739,7 @@ height: auto;
   }
 }
 /*contenedor que tiene la linea de estutus de la prueba*/
-.contenedorealizaciondeprueba{
+.contenedorealizaciondeprueba {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -2792,41 +2779,41 @@ height: auto;
     padding-top: 10px;
     font-size: 1.6rem;
   }
-  .titulosletraconteopruebas{
+  .titulosletraconteopruebas {
     padding-top: 10px;
     font-size: 0.9rem;
   }
 }
 /*estilo de la letra*/
-.letratablapruebademo{
+.letratablapruebademo {
   font-size: 0.8rem;
 }
 /*estilo de los botones para realizar primera. segunda y tercera prueba*/
-.btn-primera_prueba{
+.btn-primera_prueba {
   background-color: #629627; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-segunda_prueba{
+.btn-segunda_prueba {
   background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-tercera_prueba{
+.btn-tercera_prueba {
   background-color: #e51111; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-reporte_final{
+.btn-reporte_final {
   background-color: #11367a; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
   font-size: 0.9rem;
 }
-.btn-solicitar_prorroga{
+.btn-solicitar_prorroga {
   background-color: #a89912; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 9px; /* Adjust padding to make the button smaller */
@@ -2836,20 +2823,20 @@ height: auto;
   display: inline-block;
   margin: 10px;
 }
-.finalizar_prueba  {
+.finalizar_prueba {
   display: inline-block;
   margin: 10px;
 }
-.subir_reporte_final  {
+.subir_reporte_final {
   display: inline-block;
   margin: 10px;
 }
-.solicitar_prorroga  {
+.solicitar_prorroga {
   display: inline-block;
   margin: 10px;
 }
 /*estilo de el text area para comentarios de la prueba*/
-.textareacomenatiopruebasdemos{
+.textareacomenatiopruebasdemos {
   width: 100%;
   height: 200px;
   border-radius: 10px;
@@ -2858,65 +2845,63 @@ height: auto;
   font-size: 1.1rem;
 }
 /*estilos de los botones para mostrar las fotos de las pruebas*/
-.btn-tablero{
+.btn-tablero {
   background-color: #a87912; /* tu color deseado */
   color: white; /* color del texto */
   padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 
 /*estilos de los botones para mostrar las fotos de las pruebas*/
-.btn-bitacora{
+.btn-bitacora {
   background-color: #12a87e; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 6px; /* Adjust padding to make the button smaller */
 }
 
-
-.btn-odometro{
+.btn-odometro {
   background-color: #128aa8; /* tu color deseado */
   color: white; /* color del texto */
   padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 
-
-.btn-unidad-exterior{
+.btn-unidad-exterior {
   background-color: #4846b6; /* tu color deseado */
   color: white; /* color del texto */
   padding: 2px 6px; /* Adjust padding to make the button smaller */
 }
 /*---------------------------------------------estilos de los resultados de las pruebas*/
-.contenedor_grafica{
+.contenedor_grafica {
   padding-top: 70px;
 }
 
 /* Asegura que el canvas se escale bien */
 #graficaPruebas {
-    width: 100% !important;
-    height: auto !important;
+  width: 100% !important;
+  height: auto !important;
 }
 
 /* Contenedor para mantener aspecto 1:1 y evitar desbordamientos */
 .chart-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: auto;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
 }
 
 /* Responsive layout para contadores */
 .estado-prueba {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 .estado-prueba .item {
-    flex: 1 1 150px;
-    text-align: center;
+  flex: 1 1 150px;
+  text-align: center;
 }
 /*------------------------------------------------ESTILOS ASMINISTRADOR PRUEBAS DEMOS--------------------------------------------------*/
 /*subir los resultados finales de la prueba por unidad*/
-.contenedordesempeñosdemos{
+.contenedordesempeñosdemos {
   padding-top: 60px;
   position: relative;
 }
@@ -2936,18 +2921,18 @@ height: auto;
   }
 }
 /*estilos para asignar Master Driver a la unidad*/
-.contenedorasignarmasterdriver{
+.contenedorasignarmasterdriver {
   padding-top: 60px;
   position: relative;
 }
-.btasignarmasterdriver{
+.btasignarmasterdriver {
   background-color: #2c6ebd; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 8px; /* Adjust padding to make the button smaller */
   font-size: 0.8rem;
 }
 /*estilos solicitud de prorrogas unidades demo*/
-.textareasolicitarprorroga{
+.textareasolicitarprorroga {
   width: 100%;
   height: 100px;
   border-radius: 10px;
@@ -2957,23 +2942,23 @@ height: auto;
 }
 /*------------------------------------------------estilos monitoreo telematics unidades demo*/
 .cardTele {
-    background: rgba(0,0,0,0.7);
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin: 5px;
-    border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 5px;
 }
 .cardTele h3 {
-    font-weight: bold;
-    font-size: 1.8em;
+  font-weight: bold;
+  font-size: 1.8em;
 }
 .cardTele p {
-    margin: 0;
-    font-size: 0.9em;
+  margin: 0;
+  font-size: 0.9em;
 }
 /*estilos bitacoras de prueba diarias*/
-.cardontainer{
+.cardontainer {
   background-color: #91979e74;
   border-radius: 15px;
   padding: 20px;
@@ -3006,77 +2991,77 @@ height: auto;
 
 /*-----------------------------------------estilos para la interfaz publica de personas por fuera-----------------------*/
 /*btn para ver las unidades demo*/
-.btn_ver_unidades_demo:hover{
+.btn_ver_unidades_demo:hover {
   background-color: #89a0c4; /* tu color deseado */
 }
-.btn_ver_unidades_demo{
+.btn_ver_unidades_demo {
   background-color: #6a7c97; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 8px; /* Adjust padding to make the button smaller */
 }
 /*btn contacto*/
-.btn_contacto:hover{
+.btn_contacto:hover {
   background-color: #10a57b; /* tu color deseado */
 }
-.btn_contacto{
+.btn_contacto {
   background-color: #0e7a5c; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 6px; /* Adjust padding to make the button smaller */
   transition: background-color 0.3s ease-in-out;
 }
 /*btn contacto*/
-.btn-filtrar_demo_public:hover{
+.btn-filtrar_demo_public:hover {
   background-color: #476e7a; /* tu color deseado */
 }
-.btn-filtrar_demo_public{
+.btn-filtrar_demo_public {
   background-color: #476e7a; /* tu color deseado */
   color: white; /* color del texto */
   padding: 6px 6px; /* Adjust padding to make the button smaller */
   transition: background-color 0.3s ease-in-out;
 }
 /*estilos del navhe*/
-.navbar-brand, .nav-link {
-      color: rgb(0, 0, 0) !important;
-      font-weight: 500;
-    }
-    /*estilos del fondo de la imagen del inicio*/
-    .hero-section {
-      background: url('../img/unidades/banner_unid.jpg') no-repeat center center/cover;
-      color: white;
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-    .hero-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-    
+.navbar-brand,
+.nav-link {
+  color: rgb(0, 0, 0) !important;
+  font-weight: 500;
+}
+/*estilos del fondo de la imagen del inicio*/
+.hero-section {
+  background: url("../img/unidades/banner_unid.jpg") no-repeat center
+    center/cover;
+  color: white;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
 
-
-  .hero-content {
+.hero-content {
   position: relative;
   z-index: 2;
 }
 
-  .section-title {
+.section-title {
   font-weight: 600;
   color: rgb(75, 75, 75);
   margin-bottom: 1rem;
 }
 /*estilos del pie*/
-  footer {
+footer {
   background-color: #777777;
   color: white;
   padding: 1rem 0;
 }
 /*letras de las cards de las unidades disponibles*/
-.text-demo_public{
+.text-demo_public {
   font-weight: bold;
   font-size: 1.2rem;
   color: rgb(95, 95, 95);
@@ -3085,42 +3070,41 @@ height: auto;
 /*estilos de las cards de la sunidades public demo*/
 /* Imagen de unidad responsive */
 .img-unidad {
-    width: 100%;
-    height: 200px;       /* altura por defecto */
-    object-fit: cover;   /* mantiene proporción y recorta si es necesario */
+  width: 100%;
+  height: 200px; /* altura por defecto */
+  object-fit: cover; /* mantiene proporción y recorta si es necesario */
 }
 
 /* Ajustes para móviles */
 @media (max-width: 576px) {
-    .img-unidad {
-        max-width: 230px; /* reducir el ancho */
-        max-height: 110px; /* más pequeña en celulares */
-        object-fit: cover; /* mantiene proporción y recorta si es necesario */
-    }
+  .img-unidad {
+    max-width: 230px; /* reducir el ancho */
+    max-height: 110px; /* más pequeña en celulares */
+    object-fit: cover; /* mantiene proporción y recorta si es necesario */
+  }
 
-    .col-sm-12.d-flex {
-        margin-bottom: 15px; /* separación entre cards */
-    }
+  .col-sm-12.d-flex {
+    margin-bottom: 15px; /* separación entre cards */
+  }
 }
-
 
 /*---------------------estilos iframe tablero smart conect---------------------*/
 .iframe-container {
-    position: relative;
-    width: 100%;
-    height: calc(120vh - 130px); /* ajusta según tu header/topbar */
+  position: relative;
+  width: 100%;
+  height: calc(120vh - 130px); /* ajusta según tu header/topbar */
 }
 
 .iframe-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
-.contenedortablerosmartconect{
+.contenedortablerosmartconect {
   padding-top: 90px;
   display: flex;
   align-items: center;
@@ -3133,3 +3117,385 @@ height: auto;
     flex-direction: column;
   }
 }
+
+/*--------------------------TEMAS DEMO------------------------------*/
+/* =====================
+   TEMA DEMO - PREMIUM
+===================== */
+/* =====================
+   TEMA DEMO - CORPORATIVO
+===================== */
+
+.tema-demo {
+  background: linear-gradient(180deg, #eef2f7, #dde6f2);
+  color: #1f2933;
+  min-height: 100vh;
+}
+
+/* Fondo principal */
+.tema-demo .cuadroblancocontenidoinicio {
+  background: transparent;
+}
+
+/* Títulos */
+.demo-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.demo-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* Badge */
+.demo-badge span {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.bodyinicio {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenido */
+.demo-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Cards */
+.tema-demo .contenedorformularioinicio {
+  background: #cfd5e4d8;
+  border-radius: 18px;
+  padding: 35px;
+  box-shadow: 0 18px 35px rgba(15, 28, 63, 0.18);
+}
+.tema-demo .contenedorformularioindex {
+  background: #99a1b6d8;
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 18px 35px rgba(15, 28, 63, 0.18);
+}
+
+/* Textos */
+.tema-demo h1,
+.tema-demo h2,
+.tema-demo h3 {
+  color: #0f172a;
+}
+
+.tema-demo p,
+.tema-demo span,
+.tema-demo a {
+  color: #334155;
+}
+
+/* Botones */
+.tema-demo .btn {
+  background: linear-gradient(135deg, #1e3a8a, #0f1c3f);
+  border-radius: 10px;
+  color: #fff;
+}
+
+.tema-demo .btn:hover {
+  background: linear-gradient(135deg, #0f1c3f, #020617);
+}
+
+.demo-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+/* Ajuste layout DEMO */
+.tema-demo .contenedorinicioinformación {
+  padding-top: 25px;
+}
+.demo-wrapper {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-demos {
+  position: relative;
+  height: 85dvh;
+  width: 98vw;
+  background: #a4bae273;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-center {
+  text-align: center;
+  z-index: 3;
+}
+
+.hero-center h1 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.hero-center p {
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.btn-comenzar {
+  margin-top: 20px;
+  padding: 14px 40px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.btn-comenzar:hover {
+  transform: scale(1.05);
+  background: #000;
+}
+
+/* Imagenes flotantes */
+.float-img {
+    position: absolute;
+    width: 220px;       /* tamaño base */
+    max-width: 28vw;    /* responsive */
+    height: auto;
+    z-index: 1;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+.img-top {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.img-left {
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+}
+
+.img-right {
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+}
+
+.img-bottom-left {
+    bottom: 30px;
+    left: 40px;
+}
+
+.img-bottom-right {
+    bottom: 30px;
+    right: 40px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* =======================
+   HERO FLOTILLA
+======================= */
+
+.hero-flotilla {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-flotilla .container {
+    width: 100%;
+}
+
+.hero-flotilla-inner {
+    display: flex;
+    align-items: flex-end;       /* card y autos alineados al piso */
+    justify-content: flex-start;  /* card primero */
+    gap: 40px;                    /* espacio entre card y autos */
+}
+
+/* CARD */
+.flotilla-card {
+    background: rgba(120,120,120,.55);
+    backdrop-filter: blur(8px);
+    padding: 40px 60px;
+    border-radius: 25px;
+    color: #fff;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* AUTOS */
+.flotilla-autos {
+    display: flex;
+    align-items: flex-end;  /* todos al piso */
+}
+
+/* Autos individuales */
+.flotilla-autos img {
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,.25));
+    cursor: pointer;
+}
+
+/* Altura escalonada */
+.flotilla_auto_1 { max-height: 180px; z-index: 3; margin-left: 0; }
+.flotilla_auto_2 { max-height: 180px; z-index: 2; margin-left: -50px; }
+.flotilla_auto_3 { max-height: 140px; z-index: 1; margin-left: -50px; }
+
+/* Hover */
+.flotilla-autos img:hover {
+    transform: translateY(-8px) scale(1.05);
+    z-index: 10;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .hero-flotilla-inner {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .flotilla-card {
+        padding: 25px 40px;
+    }
+
+    .flotilla-autos {
+        gap: -15px;
+    }
+}
+/* ================= DEMOS PRO UI ================= */
+
+.demo-wrapper {
+  padding: 80px 40px;
+}
+
+.demo-panel {
+  max-width: 1300px;
+  margin: auto;
+  background: #a4bae273;
+  border-radius: 26px;
+  padding: 40px 50px 60px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.18);
+  backdrop-filter: blur(14px);
+}
+
+.demo-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.demo-header h2 {
+  position: relative;
+  padding: 0;
+  animation: none;
+  font-size: 2rem;
+}
+
+.demo-descripcion {
+  color: #666;
+  font-size: .95rem;
+}
+
+.demo-acciones {
+  margin-bottom: 35px;
+}
+
+.btn-demo-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#587fb9,#587fb9);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: .25s;
+}
+
+.btn-demo-action i {
+  font-size: 1.6rem;
+}
+
+.btn-demo-action:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 18px 35px rgba(0,0,0,.25);
+  color: #fff;
+}
+
+.demo-contenido {
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .demo-wrapper {
+    padding: 40px 15px;
+  }
+
+  .demo-panel {
+    padding: 30px 25px;
+  }
+}
+.demo-view-toggle {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.demo-view-toggle .active {
+  background: #0d6efd;
+  color: #fff;
+}
+
+
+
+
+

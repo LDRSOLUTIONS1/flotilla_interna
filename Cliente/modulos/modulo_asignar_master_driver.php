@@ -20,21 +20,32 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-------------------------------------------aqui comienza el contenedor Asignacion de mater driver porparte del ususario tipo 11 ----------------------------------------------------------->
-<div class="contenedorasignarmasterdriver">
-    <h5 class="titulosletrasunidademo text-nowrap">Asignación de Máster Driver</h5>
-    <h5 class="letraautorizaciondemo text-nowrap">
-    </h5>
-</div>
+<div class="contenedormisunidades demo-wrapper">
 
-<!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorautorizaciondemosfisicas">
-    <div class="buscadorautorizaciondemosificas">
-        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+    <div class="demo-panel">
+
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Asignación de Máster Driver</h2>
+            <p class="demo-descripcion">
+                Aquí puedes asignar Máster Driver a las unidades demo disponibles.
+            </p>
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="d-flex flex-wrap gap-2 mt-3">
+            <input type="text" id="filtroBusqueda" class="form-control flex-grow-1" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+        </div>
+
+        <!-- CONTENIDO DE LAS CARDS -->
+        <div class="demo-contenido mt-4">
+            <div class="contenedorcardunidadescliente demo-grid">
+                <?php include("../../Servidor/componentes/obtener_unidades_demo_asignar_master_driver.php"); ?>
+            </div>
+        </div>
+
     </div>
-</div>
-<!--contenedor de las cards de las unidades por asignar-->
-<div class="contenedorcardunidadescomodatoresponsiva">
-    <?php include("../../Servidor/componentes/obtener_unidades_demo_asignar_master_driver.php"); ?>
+
 </div>
 
 

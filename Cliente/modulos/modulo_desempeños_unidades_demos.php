@@ -20,33 +20,44 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-----------------aqui comienza el contenedor para subir el desempeño de las unidades demos por parte del usuario tipo 11 ADMINISTRADOR PRUEBA DEMO ---------------------------------->
-<div class="contenedordesempeñosdemos">
-    <h5 class="titulosletrasdesempeñodemos text-nowrap">Desempeños de las unidades demos</h5>
-</div>
+<div class="contenedormisunidades demo-wrapper">
 
-<!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorpruebasunidademo">
-    <div class="buscadorunidadesdemoautorizadas mb-3 col-md-8">
-        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
-    </div>
-    <!-- // Botón para alternar vista -->
-    <div class="d-flex justify-center" style="left: 130px;">
-        <!--boton para filtrar por tipo de solicitante-->
-        <div class="dropdown mx-2">
-            <button class="btn btn-secondary dropdown-toggle mb-3 mx-1" type="button" id="dropdownFiltroSolicitante" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrar por tipo de solicitante
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownFiltroSolicitante">
-                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="todos" href="#">Todas</a></li>
-                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="fisica" href="#">Personas Físicas</a></li>
-                <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="moral" href="#">Personas Morales</a></li>
-            </ul>
+    <div class="demo-panel">
+
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Desempeños de las unidades demos</h2>
+            <p class="demo-descripcion">
+                Aquí puedes consultar los desempeños de cada unidad demo y filtrar por tipo de solicitante.
+            </p>
         </div>
+
+        <!-- BUSCADOR Y FILTROS -->
+        <div class="d-flex flex-wrap gap-2 mt-3 align-items-center">
+            <input type="text" id="filtroBusqueda" class="form-control flex-grow-1" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+
+            <!-- Filtro tipo de solicitante -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFiltroSolicitante" data-bs-toggle="dropdown" aria-expanded="false">
+                    Filtrar por tipo de solicitante
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownFiltroSolicitante">
+                    <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="todos" href="#">Todas</a></li>
+                    <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="fisica" href="#">Personas Físicas</a></li>
+                    <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="moral" href="#">Personas Morales</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DE LAS CARDS -->
+        <div class="demo-contenido mt-4">
+            <div class="contenedorcardunidadescliente demo-grid">
+                <?php include("../../Servidor/componentes/obtener_desempeños_unidades_demo.php"); ?>
+            </div>
+        </div>
+
     </div>
-</div>
-<!--contenedor de las cards de las unidades por asignar-->
-<div class="contenedorcardunidademoautorizada">
-    <?php include("../../Servidor/componentes/obtener_desempeños_unidades_demo.php"); ?>
+
 </div>
 
 

@@ -253,7 +253,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
             echo "<div class='table-responsive'>
             <table class='table table-hover tablaunidades' id='tablaUnidades'>
-            <thead class='table-light'>
+            <thead class='table-light' style='background-color: #a4bae273'>
                 <tr>
                     <th class='letratablapruebademo'>#</th>
                     <th class='letratablapruebademo'>Fecha y Hora Prueba</th>

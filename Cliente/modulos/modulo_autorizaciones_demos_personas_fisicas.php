@@ -20,32 +20,44 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 ----------------------------------------------------------->
-<div class="contenedorautorizardemos">
-    <h5 class="titulosletrasunidademo text-nowrap">Autorización de vehículos demo</h5>
-    <h5 class="letraautorizaciondemo text-nowrap">
-        Personas Físicas
-    </h5>
-    <div class="container mt-4">
-        <div class="d-flex flex-wrap justify-content-center contenedor_botones_validacion_unidades_demos">
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_fisicas.php'" class="btn btn-persona-fisica m-2 "><i class="fa-solid fa-user"></i> Físicas</button>
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_morales.php'" class="btn btn-persona-moral m-2 "><i class="fa-solid fa-building-user"></i> Morales</button>
-        </div>
-    </div>
-</div>
+<div class="contenedormisunidades demo-wrapper">
 
-<!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorautorizaciondemosfisicas">
-    <div class="buscadorautorizaciondemosificas">
-        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+    <div class="demo-panel">
+
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Autorización de vehículos demo</h2>
+            <p class="demo-descripcion">
+                Personas Físicas: aquí puedes aprobar o denegar las solicitudes de vehículos demo de tus clientes.
+            </p>
+
+            <!-- BOTONES DE FILTRO POR TIPO DE SOLICITANTE -->
+            <div class="d-flex flex-wrap gap-2 mt-3 contenedor_botones_validacion_unidades_demos">
+                <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_fisicas.php'" class="btn btn-persona-fisica m-2">
+                    <i class="fa-solid fa-user"></i> Físicas
+                </button>
+                <button onclick="window.location.href='../interfaces/autorizaciones_demos_personas_morales.php'" class="btn btn-persona-moral m-2">
+                    <i class="fa-solid fa-building-user"></i> Morales
+                </button>
+            </div>
+
+            <!-- BUSCADOR Y TOGGLE -->
+            <div class="d-flex flex-wrap gap-2 mt-3">
+                <input type="text" id="filtroBusqueda" class="form-control flex-grow-1" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+
+                <button class="btn btn-outline-primary" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DE LAS CARDS -->
+        <div class="demo-contenido mt-4">
+            <div class="contenedorcardunidadescliente demo-grid">
+                <?php include("../../Servidor/componentes/obtener_autorizacion_unidades_demo_fisicas.php"); ?>
+            </div>
+        </div>
+
     </div>
-    <!-- // Botón para alternar vista -->
-    <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista_fisicas mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
-</div>
-<!--contenedor de las cards de las unidades por asignar-->
-<div class="contenedorcardunidadescomodatoresponsiva">
-    <?php include("../../Servidor/componentes/obtener_autorizacion_unidades_demo_fisicas.php"); ?>
+
 </div>
 
 

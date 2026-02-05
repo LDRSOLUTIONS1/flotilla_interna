@@ -37,8 +37,6 @@ error_reporting(E_ALL);
     <?php
     include("../include/menu.php");
     ?>
-    <!-- Video de fondo -->
-    <img class="imagenfondo" src="../img/fondohexagonal.png" alt="">
 
     <div class="cuadroblancocontenido">
 

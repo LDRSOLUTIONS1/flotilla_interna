@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once '../../Servidor/conexion.php';
 $colaborador = $_SESSION['id_colaborador'];
 
@@ -47,12 +50,12 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="validacion_unidades_comodato.php">Validación de unidades</a></li>
             <li ><a class="menulist" href="unidades_asignadas.php">Unidades asignadas</a></li>
             <li ><a class="menulist" href="documentos.php">Documentos</a></li>
-            <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
+            <li ><a class="menulist" href="unidades_mantenimiento_flotilla.php">Mantenimientos</a></li>
             <li ><a class="menulist" href="mantenimientos_realizados_demos.php">mantenimiento realizados</a></li>
             <li ><a class="menulist" href="administracion_incidencias_demo.php">Incidencias</a></li>
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="unidades_demo.php">Unidades</a></li>
             <!--<li ><a class="menulist" href="unidades_demo_asignadas.php">Unidades demo asignadas</a></li>-->
 
@@ -76,7 +79,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="#">Solicitar demos</a></li>
 
         <?php elseif ($id_tipo_usuario == 6): // Cliente solicitar demo?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <?php if ($es_jefe_directo): ?>
             <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
             <?php endif; ?>
@@ -86,7 +89,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
 
 
         <?php elseif ($id_tipo_usuario == 15): // GESTON DEMOS?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <?php if ($es_jefe_directo): ?>
             <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
             <?php endif; ?>
@@ -98,7 +101,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             
 
         <?php elseif ($id_tipo_usuario == 7): // AUTORIZACION DE UNIDADES?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <?php if ($es_jefe_directo): ?>
             <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
             <?php endif; ?>
@@ -106,19 +109,19 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
 
         <?php elseif ($id_tipo_usuario == 9): // PERFIL MASTER DRIVER?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="pruebas_demos.php">Pruebas</a></li>
            <!-- <li ><a class="menulist" href="estados_unidades_demos.php">Resultados finales</a></li>-->
 
         <?php elseif ($id_tipo_usuario == 11): // PERFIL ADMINISTRADOR PRUEBAS DEMOS?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="asignar_master_driver.php">Asignar Master Driver</a></li>
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
             <li ><a class="menulist" href="reportes_finales_demos.php">Reportes finales</a></li>
             <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>
 
         <?php elseif ($id_tipo_usuario == 13): // PERFIL ADMINISTRADOR MANTENIMIENTOS DEMOS?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="unidades_mantenimiento_demo.php">Mantenimientos</a></li>
             <li ><a class="menulist" href="mantenimientos_realizados_demos.php">Unidades con mantenimientos</a></li>
             <li ><a class="menulist" href="administracion_incidencias_demo.php">Incidencias</a></li> 

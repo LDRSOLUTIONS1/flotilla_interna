@@ -1,20 +1,43 @@
 <?php 
 include("./Servidor/conexion.php");
-if($_GET['idcolaborador']){
+session_start();
+
+if(isset($_GET['idcolaborador'])){
 
     $idcolaborador = base64_decode($_GET['idcolaborador']);
-    echo $idcolaborador;
+    $tipo = $_GET['tipo'] ?? 'asignacion';
 
-    $queryobtenerusuario = "SELECT * FROM usuarios WHERE id_colaborador = '$idcolaborador'"; //queryobtenerusuario
+    $query = "SELECT id_tipo_usuario FROM usuarios WHERE id_colaborador = '$idcolaborador'";
+    $result = $conectar->query($query);
 
-    $ejecutarobtenerusuario = $conectar->query($queryobtenerusuario);
+    if(mysqli_num_rows($result) > 0){
 
-    if(mysqli_num_rows($ejecutarobtenerusuario) > 0){
-        session_start();    
+        $row = mysqli_fetch_assoc($result);
+        $tipoUsuario = $row['id_tipo_usuario'];
+
         $_SESSION['id_colaborador'] = $idcolaborador;
-        header("Location: ./Cliente/interfaces/inicio.php");
+        $_SESSION['id_tipo_usuario'] = $tipoUsuario;
+        $_SESSION['tipo_flotilla'] = $tipo;
+
+        // ---- VALIDACIONES ----
+
+        // Solo 1 y 2 pueden flotilla
+        if($tipo == 'asignacion' && !in_array($tipoUsuario,[1,2,3])){
+            echo "No tienes permiso para acceder a Flotilla";
+            exit;
+        }
+
+        // Los demás solo demos
+        if($tipo == 'demo'){
+            header("Location: ./Cliente/interfaces/inicio_demos.php");
+        }if ($tipo == 'asignacion') {
+            header("Location: ./Cliente/interfaces/inicio.php");
+        } else {
+            echo "No tienes acceso a esta sección";
+        }
+
     }else{
-        echo "No tienes acceso a esta seccion";
+        echo "No tienes acceso a esta sección";
     }
 }
 ?>

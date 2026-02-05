@@ -2,7 +2,7 @@
 include("../../Servidor/conexion.php");
 
 //obtenemos el id del colaborador para saber quien es el que esta logeado
-if (!isset($_SESSION)) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -21,38 +21,55 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 <!--Aqui comienza el contenedor del inicio.php-->
 
+<?php if ($id_tipo_usuario == 4 || $id_tipo_usuario == 6 || $id_tipo_usuario == 7 || $id_tipo_usuario == 9 || $id_tipo_usuario == 10|| $id_tipo_usuario == 11 || $id_tipo_usuario == 13 || $id_tipo_usuario == 15 ) { // Administrador DEMOS 
+?>
+    <div class="hero-demos">
+        <!-- Imagenes flotantes -->
+        <img src="../img/unidades/Foton_GTL_EV.png" class="float-img img-top">
+        <img src="../img/unidades/Foton_Hi_Van.png" class="float-img img-left">
+        <img src="../img/unidades/Foton_Galaxy.png" class="float-img img-right">
+        <img src="../img/unidades/Foton_GTL_EV.png" class="float-img img-bottom-left">
+        <img src="../img/unidades/Foton_Hi_Van.png" class="float-img img-bottom-right">
 
-<div class="contenedorinicioinformación">
+        <div class="hero-center">
+            <h1>Plataforma DEMOS</h1>
+            <p>Gestión de préstamos, pruebas y monitoreo de unidades</p>
 
-    <div class="container p-4  mt-5 contenedorformularioinicio centrar">
-        <div class="row align-items-center">
-            <?php if ($id_tipo_usuario == 1): // Administrador ?>
-            <!-- Imagen -->
-            <div class="col-lg-5 text-center imagenlogo">
-                <img src="../img/unidades/JETOUR_360_x70_azul.png" alt="img" class=" inicioimg1">
-                <img src="../img/unidades/JETOUR_360_dashing_rojo.png" alt="img" class=" inicioimg2">
-                <img src="../img/unidades/aveoazul.png" alt="img" class=" inicioimg3">
-            </div>
-            <?php elseif (in_array($id_tipo_usuario, [2, 4, 6, 7, 9, 10, 11, 12, 13])): // Administrador DEMOS, Usuario DEMOS, Administrador Flotilla, Usuario Flotilla, Usuario Flotilla General ?>
-            <!-- Imagen -->
-            <div class="col-lg-5 text-center imagenlogo">
-                <img src="../img/unidades/Foton_GTL_EV.png" alt="img" class=" inicioimg1foton">
-                <img src="../img/unidades/Foton_Hi_Van.png" alt="img" class=" inicioimg2foton">
-                <img src="../img/unidades/Foton_Galaxy.png" alt="img" class=" inicioimg3foton">
-            </div>
-            <?php endif; ?>
-            <!-- Formulario -->
-            <div class="col-lg-7 contenedorformularioindex">
-                <h2 class="text-center titulosletrasinicio">FLOTILLA LDR</h2>
-                <h2 class="text-center titulosletrasinicionombre"><?php
-    include("../include/bienvenida.php");
-    ?></h2>
-                <br>
-
-            </div>
+            <h2 class="text-center">Bienvenido<?php
+                                                                        include("../include/bienvenida.php");
+                                                                        ?></h2>
         </div>
     </div>
+
+<?php } else { // FLOTILLA 
+?>
+
+<div class="hero-flotilla">
+  <div class="container">
+    <div class="hero-flotilla-inner">
+
+      <!-- CARD -->
+      <div class="flotilla-card">
+        <h2>FLOTILLA LDR</h2>
+        <h3 class="text-center">Bienvenido <?php include("../include/bienvenida.php"); ?></h3>
+      </div>
+
+      <!-- AUTOS -->
+      <div class="flotilla-autos">
+        <img src="../img/unidades/JETOUR_360_x70_azul.png" class="flotilla_auto_1">
+        <img src="../img/unidades/JETOUR_360_dashing_rojo.png" class="flotilla_auto_2">
+      </div>
+
+    </div>
+  </div>
 </div>
+
+
+
+
+<?php } ?>
+
+
 
 <!--jquery-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

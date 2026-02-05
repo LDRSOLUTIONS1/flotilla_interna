@@ -1,22 +1,52 @@
-<!-------------------------------------------aqui comienza el contenedor UNIDADES DEMO----------------------------------------------------------->
-<div class="contenedoropcionesunidades">
+<div class="contenedoropcionesunidades demo-wrapper">
 
-    <h2 class="titulosletrasunidades text-nowrap">Solicitud de unidades demo</h2>
+    <!-- PANEL -->
+    <div class="demo-panel">
 
-    <div class="container mt-4">
-        <div class="d-flex flex-wrap justify-content-center contenedor_botones">
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/personas_fisicas.php'" class="btn m-2 btn-asignarunidadfisica "> <i class="fa-solid fa-person"> </i> Personas físicas</button>
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/personas_morales.php'" class="btn m-2 btn-asignarunidadmoral "> <i class="fa-solid fa-building-user"> </i> Personas morales</button>
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Solicitud de unidades demo</h2>
+            <p class="demo-descripcion">
+                Registra al cliente y después asigna una unidad disponible para demostración.
+            </p>
         </div>
+
+        <!-- ACCIONES -->
+        <div class="demo-acciones">
+            <div class="row justify-content-center g-4">
+
+                <div class="col-md-3 col-sm-3">
+                    <button onclick="window.location.href='../interfaces/personas_fisicas.php'"
+                        class="btn btn-demo-action w-100">
+                        <i class="fa-solid fa-person"></i>
+                        <span>Personas físicas</span>
+                    </button>
+                </div>
+
+                <div class="col-md-3 col-sm-3">
+                    <button onclick="window.location.href='../interfaces/personas_morales.php'"
+                        class="btn btn-demo-action w-100">
+                        <i class="fa-solid fa-building-user"></i>
+                        <span>Personas morales</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="demo-descripcion text-center mt-4">
+            Una vez que se ha registrado correctamente a la persona física o moral, se asignará una unidad disponible para demostración.
+        </p>
+
+        <!-- LISTADO -->
+        <div class="demo-contenido">
+            <?php include("../../Servidor/componentes/solicitar_unidades_demo.php"); ?>
+        </div>
+
+        <div class="contenedorunidadesdisponiblesdemo" id="contenedorunidadesdisponiblesdemo"></div>
+
     </div>
-    <h1 class="letrasolicitudemo text-nowrap">Después de registrar a la persona física/moral, asigna una unidad</h1>
-    <!--contenedor de las cards de las unidades por asignar-->
-    <div class="">
-        <?php include("../../Servidor/componentes/solicitar_unidades_demo.php"); ?>
-    </div>
-    <div class="contenedorunidadesdisponiblesdemo" id="contenedorunidadesdisponiblesdemo"></div>
+
 </div>
 
 

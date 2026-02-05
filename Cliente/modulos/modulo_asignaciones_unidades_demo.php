@@ -1,12 +1,28 @@
  <!-------------------------------------------aqui comienza el contenedor mis unidades cliente----------------------------------------------------------->
-<div class="contenedormisunidades">
+<div class="contenedormisunidades demo-wrapper">
 
-    <h5 class="titulosletrasunidadescliente text-nowrap">Unidades demo autorizadas</h5>
-    <!--contenedor de las cards de las unidades por asignar-->
-    <div class="contenedorcardunidadescliente">
-        <?php include("../../Servidor/componentes/obtener_unidades_utorizadas_demos.php"); ?>
+    <div class="demo-panel">
+
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Unidades demo autorizadas</h2>
+            <p class="demo-descripcion">
+                Aquí puedes consultar tus unidades demo, solicitar prórrogas y revisar el avance de cada prueba.
+            </p>
+        </div>
+
+        <!-- CONTENIDO -->
+        <div class="demo-contenido">
+            
+            <div class="contenedorcardunidadescliente demo-grid">
+                <?php include("../../Servidor/componentes/obtener_unidades_utorizadas_demos.php"); ?>
+            </div>
+        </div>
+
     </div>
+
 </div>
+
 
 <!---------------------------------------modal para solicitar prorrogas---------------------------------->
 <!--modal-->

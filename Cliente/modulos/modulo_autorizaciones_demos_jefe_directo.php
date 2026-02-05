@@ -20,23 +20,32 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 ----------------------------------------------------------->
-<div class="contenedorautorizardemos">
-    <h5 class="titulosletrasunidademo text-nowrap">Autorización de vehículos demo jefe directo</h5>
-    <h5 class="letraautorizaciondemo text-nowrap">
-        
-    </h5>
+<div class="contenedormisunidades demo-wrapper">
 
-</div>
+    <div class="demo-panel">
 
-<!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorautorizaciondemosfisicas">
-    <div class="buscadorautorizaciondemosificas">
-        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+        <!-- HEADER -->
+        <div class="demo-header">
+            <h2 class="titulosletrasunidades">Autorización de vehículos demo</h2>
+            <p class="demo-descripcion">
+                Jefe Directo: aquí puedes revisar y aprobar o denegar las solicitudes de unidades demo de tu equipo.
+            </p>
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="d-flex flex-wrap gap-2 mt-3">
+            <input type="text" id="filtroBusqueda" class="form-control flex-grow-1" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+        </div>
+
+        <!-- CONTENIDO DE LAS CARDS -->
+        <div class="demo-contenido mt-4">
+            <div class="contenedorcardunidadescliente demo-grid">
+                <?php include("../../Servidor/componentes/obtener_autorizacion_unidades_demo_jefe_directo.php"); ?>
+            </div>
+        </div>
+
     </div>
-</div>
-<!--contenedor de las cards de las unidades por asignar-->
-<div class="contenedorcardunidadescomodatoresponsiva">
-    <?php include("../../Servidor/componentes/obtener_autorizacion_unidades_demo_jefe_directo.php"); ?>
+
 </div>
 
 
