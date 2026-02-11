@@ -45,8 +45,6 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
     $valorsuspension = $_POST['suspension'];
     $valornumero_ejes = $_POST['numero_ejes'];
     $valoruso_permitido = $_POST['uso_permitido'];
-    $valorcamara_reversa = $_POST['camara_reversa'];
-    $valorsensores_reversa = $_POST['sensores_reversa'];
 
     echo "marcaunidad: " . $valormarcaunidad . " ";
     echo "modelounidad: " . $valormodelounidad . " ";
@@ -77,8 +75,6 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
     echo "suspension: " . $valorsuspension . " ";
     echo "numero_ejes: " . $valornumero_ejes . " ";
     echo "uso_permitido: " . $valoruso_permitido . " ";
-    echo "camara_reversa: " . $valorcamara_reversa . " ";
-    echo "sensores_reversa: " . $valorsensores_reversa . " ";
 
 
 
@@ -121,9 +117,7 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
                                     id_tipo_freno,
                                     id_tipo_suspencion,
                                     numero_ejes,
-                                    id_tipo_uso,
-                                    camara_reversa,
-                                    sensores_reversa) 
+                                    id_tipo_uso) 
                 VALUES ('$creador_unidad',
                         '$valormodelounidad', 
                         '$valorestadounidad', 
@@ -152,9 +146,7 @@ if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POS
                         '$valortipo_frenos',
                         '$valorsuspension',
                         '$valornumero_ejes',
-                        '$valoruso_permitido',
-                        '$valorcamara_reversa',
-                        '$valorsensores_reversa')";
+                        '$valoruso_permitido')";
 
     $ejecutar = mysqli_query($conexion, $query);
 

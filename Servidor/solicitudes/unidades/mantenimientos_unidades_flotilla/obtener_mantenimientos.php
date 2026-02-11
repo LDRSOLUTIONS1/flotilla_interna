@@ -30,7 +30,7 @@ $sql = "SELECT
         INNER JOIN unidades u ON m.id_unidad = u.id_unidad
         INNER JOIN modelos mo ON u.id_modelo = mo.id_modelo
         INNER JOIN marcas ma ON mo.id_marca = ma.id_marca
-        WHERE 1=1";
+        WHERE u.id_tipo_unidad IN (1, 2, 4)";
 
 // Filtrar por unidad si se pasa
 if ($id_unidad) {

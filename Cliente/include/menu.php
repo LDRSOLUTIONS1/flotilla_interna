@@ -51,8 +51,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li ><a class="menulist" href="unidades_asignadas.php">Unidades asignadas</a></li>
             <li ><a class="menulist" href="documentos.php">Documentos</a></li>
             <li ><a class="menulist" href="unidades_mantenimiento_flotilla.php">Mantenimientos</a></li>
-            <li ><a class="menulist" href="mantenimientos_realizados_demos.php">mantenimiento realizados</a></li>
-            <li ><a class="menulist" href="administracion_incidencias_demo.php">Incidencias</a></li>
+            <li ><a class="menulist" href="mantenimientos_realizados_flotilla.php">Mantenimientos realizados</a></li>
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
@@ -66,9 +65,9 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
 
         <?php elseif ($id_tipo_usuario == 3): // Cliente solicitar pool?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
-            <li ><a class="menulist" href="mis_unidades.php">Mis unidades</a></li>
-            <li ><a class="menulist" href="solicitud_unidades.php">Solicitud de unidades</a></li>
             <li ><a class="menulist" href="solicitud_unidades_pool.php">Unidades pool</a></li>
+            <li ><a class="menulist" href="solicitud_unidades.php">Solicitud de unidades</a></li>
+            <li ><a class="menulist" href="mis_unidades.php">Mis unidades</a></li>
 
         <?php elseif ($id_tipo_usuario == 5): // Cliente solicitar pool y demo?>
             <li ><a class="menulist" href="inicio.php">Inicio</a></li>
@@ -90,12 +89,12 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
 
         <?php elseif ($id_tipo_usuario == 15): // GESTON DEMOS?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
+            <li ><a class="menulist" href="unidades_demo.php">Unidades</a></li>
             <?php if ($es_jefe_directo): ?>
             <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
             <?php endif; ?>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
             <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
-            <li ><a class="menulist" href="incidencias.php">Incidencias</a></li> 
             <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
             <li ><a class="menulist" href="tablero_smart_conect.php">Tablero smart conect</a></li>
             

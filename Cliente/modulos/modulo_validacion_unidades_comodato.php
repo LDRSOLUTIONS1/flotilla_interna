@@ -1,27 +1,47 @@
 <!-------------------------------------------aqui comienza el contenedor Validacion de los comodatos ----------------------------------------------------------->
-<div class="contenedorvalidacionunidades">
-    <h5 class="titulosletrasunidades text-nowrap">Vehículos exclusivos</h5>
-    <h5 class="letravalidacionunidad text-nowrap">
-        Asegúrate de que la unidad tenga firmado el comodato.
-    </h5>
-    <div class="container mt-4">
-        <div class="d-flex flex-wrap justify-content-center contenedor_botones_validacion_unidades">
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/validacion_unidades_comodato.php'" class="btn btn-comodato m-2 "><i class="fa-solid fa-file-contract"></i> Comodato</button>
-            <!-- Botón estilizado -->
-            <button onclick="window.location.href='../interfaces/validacion_unidades.php'" class="btn btn-responsiva m-2 "><i class="fa-solid fa-file-contract"></i> Carta Responsiva</button>
+<div class="container">
+    <div class="panel-validacion-comodato" style="padding-top: 100px;">
+
+        <!-- HEADER -->
+        <div class="header-validacion-comodato">
+            <div>
+                <h4 class="titulo-validacion">Validación de Unidades</h4>
+                <p class="subtitulo-validacion">Revisión de comodatos firmados</p>
+            </div>
+
+            <div class="acciones-validacion">
+                <button onclick="window.location.href='../interfaces/validacion_unidades_comodato.php'"
+                    class="btn btn-comodato m-2 ">
+                    <i class="fa-solid fa-file-contract"></i> Comodato
+                </button>
+
+                <button onclick="window.location.href='../interfaces/validacion_unidades.php'"
+                    class="btn btn-responsiva m-2">
+                    <i class="fa-solid fa-file-signature"></i> Carta Responsiva
+                </button>
+            </div>
         </div>
+
+
+        <!-- TOOLBAR -->
+        <div class="toolbar-validacion row align-items-center mt-3">
+            <div class="col-md-7 mb-2">
+                <input type="text" id="filtroBusqueda" class="form-control input-validacion"
+                    placeholder="Buscar por colaborador, placa, VIN o modelo..."
+                    onkeyup="filtrarCards(), filtrarTabla()">
+            </div>
+
+            <div class="col-md-3 mb-2">
+                <button class="btn btn-toggle-vista w-100" id="botonCambiarVista" onclick="toggleVista()">
+                    Cambiar a vista de tabla
+                </button>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<!-- Campo de búsqueda para filtrar la tabla -->
-<div class="contenedorbuscadorvalidacionunidades ">
-    <div class="buscadorcomodato mb-3 col-md-8">
-        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
-    </div>
-    <!-- // Botón para alternar vista -->
-    <div class="d-flex justify-center" style="left: 130px;"><button class="btn btn-cambiar_vista mb-3" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button> </div>
-</div>
+
 <!--contenedor de las cards de las unidades por asignar-->
 <div class="contenedorcardunidadescomodatoresponsiva">
     <?php include("../../Servidor/componentes/obtener_validacion_unidades_comodato.php"); ?>

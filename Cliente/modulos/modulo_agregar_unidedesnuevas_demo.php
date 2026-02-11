@@ -35,7 +35,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                         <option value="">Seleccionar</option>
                         <?php
                         include("../../Servidor/conexion.php");
-                        $sql = "SELECT id_marca, nombre_marca FROM marcas";
+                        $sql = "SELECT id_marca, nombre_marca FROM marcas WHERE id_marca = 1";
                         $result = $conectar->query($sql);
                         while ($row = $result->fetch_assoc()) {
                             echo '<option value="' . $row['id_marca'] . '">' . $row['nombre_marca'] . '</option>';
@@ -256,7 +256,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                 }
                 $conexion->close();
 
-            elseif ($id_tipo_usuario == 4): // Administrador DEMOS
+            elseif ($id_tipo_usuario == 4 || $id_tipo_usuario == 15): // Administrador DEMOS
                 // Realizar la consulta para obtener los estados de la unidad
                 $sql = "SELECT id_tipo_unidad, tipo_unidad FROM tipo_unidad WHERE id_tipo_unidad = 3";
                 $result = $conexion->query($sql);

@@ -26,8 +26,6 @@
 </head>
 
 <body >
-    <!-- Video de fondo -->
-    <img class="imagenfondo" src="../img/fondohexagonal.png" alt="">
 <?php
     include("../include/menu.php");
     ?>

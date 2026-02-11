@@ -20,69 +20,75 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 // Query base
 $sql = "SELECT 
     ung.id_unidad,
-    marc.nombre_marca,  
+    marc.nombre_marca,
     model.nombre_modelo,
     ung.placa,
-    ung.id_tipo_unidad,
     ung.vin,
     ung.ultimo_kilometraje,
-    ung.id_unidad,
     unest.estado,
     sed.ubicacion,
-    tipunid.id_tipo_unidad,
     tipunid.tipo_unidad
 FROM unidades AS ung
-INNER JOIN modelos AS model ON ung.id_modelo = model.id_modelo 
-INNER JOIN marcas AS marc ON model.id_marca = marc.id_marca  
+INNER JOIN modelos AS model ON ung.id_modelo = model.id_modelo
+INNER JOIN marcas AS marc ON model.id_marca = marc.id_marca
 INNER JOIN estado_unidad AS unest ON ung.id_estado_unidad = unest.id_estado_unidad
 INNER JOIN tipo_unidad AS tipunid ON ung.id_tipo_unidad = tipunid.id_tipo_unidad
 INNER JOIN sedes AS sed ON ung.id_sede = sed.id_sede
-WHERE ung.id_tipo_unidad = 3;";
+LEFT JOIN asignacion_unidad_demo AS asign ON ung.id_unidad = asign.id_unidad
+WHERE tipunid.id_tipo_unidad = 3"; // Solo unidades demo
 
 
 
 $resultado = $conexion->query($sql);
 
 if ($resultado->num_rows > 0) {
-        while ($fila = $resultado->fetch_assoc()) {
-            echo "<tr>
-                    <td class='sticky-left-0'>
-                        <button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
+    while ($fila = $resultado->fetch_assoc()) {
+
+        // Botón de edición según tipo de usuario
+        $btnEditar = "";
+        if ($id_tipo_usuario == 1) {
+            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidades' data-id='" . $fila['id_unidad'] . "'>
                             <i class='fas fa-edit'></i> Editar
-                        </button>
-                    </td>
-                    <td class='titulostablaunidades sticky-left-25'>" . $fila['id_unidad'] . "</td>
-                    <td class='titulostablaunidades sticky-left-50'>" . $fila['nombre_marca'] . "</td>
-                    <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['estado'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['tipo_unidad'] . "</td>
-                    <td class='titulostablaunidades'>" . $fila['ubicacion'] . "</td>
-                    <td class='titulostablaunidades'>" . ($fila['ultimo_kilometraje'] == 0.00 ? '<span class="text-danger">Unidad sin telemetría</span>' : number_format($fila['ultimo_kilometraje'], 2, '.', ',') . ' km') . "</td>
-                    <td>
-                        <button class='btn btn-sm btn-mapa btnubicacionunidad' data-vin='{$fila['vin']}'>
-                            <i class='fa-solid fa-location-dot'></i> 
-                        </button>
-                    </td>
-                    <td class='titulostablaunidades'>
-                        <button class='btn btn-sm btn-aseguradora btnpolizasunidades' data-id='{$fila['id_unidad']}'>
-                            <i class='fa-solid fa-file-pdf'></i> Aseguradora
-                        </button>
-                    </td>
-                    <td>
-                        <button class='btn btn-sm btn-tenencias btntenencias' data-id='{$fila['id_unidad']}'>
-                            <i class='fa-solid fa-file-pdf'></i> Tenencias
-                        </button>
-                    </td>
-                    <td>
-                        <button class='btn btn-sm btn-verificaciones btnverificaciones' data-id='{$fila['id_unidad']}'>
-                            <i class='fa-solid fa-file-pdf'></i> Verificaciones
-                        </button>
-                    </td>
-                </tr>";
+                          </button>";
+        } else { // Demo
+            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
+                            <i class='fas fa-edit'></i> Editar
+                          </button>";
         }
-        
+
+        echo "<tr>
+            <td class='sticky-left-0'>{$btnEditar}</td>
+            <td class='titulostablaunidades sticky-left-25'>" . $fila['id_unidad'] . "</td>
+            <td class='titulostablaunidades sticky-left-50'>" . $fila['nombre_marca'] . "</td>
+            <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['estado'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['tipo_unidad'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['ubicacion'] . "</td>
+            <td class='titulostablaunidades'>" . ($fila['ultimo_kilometraje'] == 0.00 ? '<span class="text-danger">Unidad sin telemetría</span>' : number_format($fila['ultimo_kilometraje'], 2, '.', ',') . ' km') . "</td>
+            <td>
+                <button class='btn btn-sm btn-mapa btnubicacionunidad' data-vin='{$fila['vin']}'>
+                    <i class='fa-solid fa-location-dot'></i> 
+                </button>
+            </td>
+            <td class='titulostablaunidades'>
+                <button class='btn btn-sm btn-aseguradora btnpolizasunidades' data-id='{$fila['id_unidad']}'>
+                    <i class='fa-solid fa-file-pdf'></i> Aseguradora
+                </button>
+            </td>
+            <td>
+                <button class='btn btn-sm btn-tenencias btntenencias' data-id='{$fila['id_unidad']}'>
+                    <i class='fa-solid fa-file-pdf'></i> Tenencias
+                </button>
+            </td>
+            <td>
+                <button class='btn btn-sm btn-verificaciones btnverificaciones' data-id='{$fila['id_unidad']}'>
+                    <i class='fa-solid fa-file-pdf'></i> Verificaciones
+                </button>
+            </td>
+        </tr>";
+    }
 } else {
-    echo "<tr><td colspan='12'>No se encontraron resultados.</td></tr>";
+    echo "<tr><td colspan='15'>No se encontraron resultados.</td></tr>";
 }

@@ -136,43 +136,6 @@
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
   background-color: #fff;
 }
-.form-select {
-  border: 2px solid #6c757d; /* Borde gris oscuro */
-  border-radius: 0.5rem; /* Bordes redondeados */
-  padding: 1rem;
-  font-size: 1rem;
-  background-color: #f8f9fa; /* Fondo gris claro */
-  transition: all 0.3s ease;
-}
-.form-select-prueba {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.5;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 2px solid #ced4da;
-  border-radius: 0.25rem;
-}
-.form-select-dashboard {
-  display: block;
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.2;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 2px solid #ced4da;
-  border-radius: 0.25rem;
-}
-.form-select:focus {
-  border-color: #0d6efd; /* Azul Bootstrap al enfocar */
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-  background-color: #fff;
-}
 
 .form-floating label {
   font-weight: 500;
@@ -1281,6 +1244,86 @@ body {
   }
 }
 /*-------------------------------------------------------------------edicion de cards validacion comodato y carta responsiva*/
+.panel-validacion-comodato {
+  background: transparent;
+  box-shadow: none;
+  padding: 10px 4px;
+}
+
+
+/* HEADER */
+.header-validacion-comodato {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.titulo-validacion {
+  margin: 0;
+  font-weight: 700;
+  color: #1f2933;
+}
+
+.subtitulo-validacion {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* TABS */
+.acciones-validacion {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-tab-activo {
+  background: linear-gradient(135deg,#1f3c88,#3f72af);
+  color: white;
+  border-radius: 12px;
+  padding: 8px 18px;
+}
+
+.btn-tab-inactivo {
+  background: #eef2f7;
+  color: #1f2933;
+  border-radius: 12px;
+  padding: 8px 18px;
+}
+
+.btn-tab-inactivo:hover {
+  background: #e2e8f0;
+}
+
+/* TOOLBAR */
+.toolbar-validacion {
+  margin-top: 10px;
+}
+
+.input-validacion {
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.btn-toggle-vista {
+  background: #111827;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.btn-toggle-vista:hover {
+  background: #1f2933;
+}
+
+/* PANEL CONTENIDO */
+.panel-contenido-validacion {
+  margin-top: 18px;
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 16px;
+}
+
 .txteatlevalidacioncomodato {
   font-size: 0.88rem;
 }
@@ -1342,15 +1385,11 @@ body {
   height: 20px;
 }
 .contenedorcardunidadescomodatoresponsiva {
-  padding-left: 30px;
-  padding-right: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  overflow-x: auto;
+  margin-top: 16px;
+  padding: 4px;
+  background: transparent;
 }
+
 @media (max-width: 768px) {
   .contenedorcardunidadescomodatoresponsiva {
     flex-direction: column;
@@ -1412,10 +1451,53 @@ body {
 /*--------------------------------------------------------------------------ESTILOS MIS UNIDADES CLIENTE-----------------------------------------------------------------*/
 
 /*-------------------------------------------------------------------------modulo_mis_unidades-------------------------------------------------------------------*/
+/* PANEL */
+.panel-unidades-asignadas {
+  padding-top: 100px;
+  padding-bottom: 15px;
+}
+
+/* HEADER */
+.header-unidades-asignadas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.titulo-unidades-asignadas {
+  margin: 0;
+  font-weight: 700;
+  color: #1f2933;
+}
+
+.subtitulo-unidades-asignadas {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* TOOLBAR */
+.input-unidades-asignadas {
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+/* SECCIONES */
+.seccion-mis-unidades {
+  margin-top: 22px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.contenedormisunidades {
+  padding: 0 25px 25px;
+}
 
 .contenedormisunidades {
   position: relative;
-  padding-top: 100px;
 }
 .titulosletrasunidadescliente {
   padding-top: 20px;
@@ -1431,6 +1513,15 @@ body {
     font-size: 1.2rem;
   }
 }
+#tablaUnidadesAsignadas th {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#tablaUnidadesAsignadas td {
+  font-size: 13px;
+}
+
 /*--------------------------------------edicion de las cards de las unidades vista del cliente------------------------------------------------------*/
 .contenedorcardunidadescliente {
   padding-left: 30px;

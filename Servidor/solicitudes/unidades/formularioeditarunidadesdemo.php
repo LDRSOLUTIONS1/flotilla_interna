@@ -307,7 +307,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 //---------------------------------------------------------------editar folio factura------------------------------------------------
             echo '<div class="col-md-6">
             <div class="form-floating">
-                <input type="text" class="form-control" id="editarfoliofacturaunidad" placeholder="editarfoliofacturaunidad" name="editarfechaadquisicionunidad" value="' . $data['folio_factura'] . '">
+                <input type="text" class="form-control" id="editarfoliofacturaunidad" placeholder="editarfoliofacturaunidad" name="editarfoliofacturaunidad" value="' . $data['folio_factura'] . '">
                 <label for="fechaadquisicionunidadldr">Folio de factura</label>
             </div>
             <label class="" style="color: white;">*Campo obligatorio</label>
@@ -384,7 +384,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 //-------------------------------------------------------------editar caracteristicas funcionales de las unidades demos
 
-if ($id_tipo_usuario == 4): // Administrador DEMOS
+if ($id_tipo_usuario == 4 || $id_tipo_usuario == 15): // Administrador DEMOS
             echo '<h3>Características funcionales</h3>
         <!-----------------------------------------------------------------Capacidad de carga (kg)-------------------------------------->
         <div class="col-md-6">
@@ -567,24 +567,6 @@ if ($id_tipo_usuario == 4): // Administrador DEMOS
         </div>
         <label class="" style="color: white;">*Campo obligatorio</label>
     </div>';
-
-    echo'
-        <!-----------------------------------------------------------------------editar checkboxes-------------------------------------->
-        <div class="col-md-6">
-            <!-- Extras tecnológicos -->
-                    <div class="col-md-6">
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="editar_camara_reversa" id="editar_camara_reversa" value="1" ' . ($data['camara_reversa'] == 1 ? 'checked' : '') . '>
-                            <label class="form-check-label" for="editar_camara_reversa">Cámara de reversa</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="editar_sensores_reversa" id="editar_sensores_reversa" value="1" ' . ($data['sensores_reversa'] == 1 ? 'checked' : '') . '>
-                            <label class="form-check-label" for="editar_sensores_reversa">Sensores de reversa</label>
-                        </div>
-                    </div>
-        </div>';
 
         endif;
 

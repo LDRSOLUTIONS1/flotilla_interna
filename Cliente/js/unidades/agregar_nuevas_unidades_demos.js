@@ -41,8 +41,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const suspension = document.getElementById("suspension");
   const numero_ejes = document.getElementById("numero_ejes");
   const uso_permitido = document.getElementById("uso_permitido");
-  const camara_reversa = document.getElementById("camara_reversa");
-  const sensores_reversa = document.getElementById("sensores_reversa");
 
   //declaracion del spinner de carga
   const contenedorspinner = document.getElementById("contenedorspinner");
@@ -77,8 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let valorsuspension;
   let valornumero_ejes;
   let valoruso_permitido;
-  let valorcamara_reversa;
-  let valorsensores_reversa;
 
   btnregistrarunidad.addEventListener("click", async function () {
     // Desactiva el botón para evitar múltiples clics
@@ -138,8 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
     valorsuspension = suspension.value;
     valornumero_ejes = numero_ejes.value;
     valoruso_permitido = uso_permitido.value;
-    valorcamara_reversa = camara_reversa.value;
-    valorsensores_reversa = sensores_reversa.value;
 
     console.log(valormarcaunidad);
     console.log(valormodelounidad);
@@ -173,8 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(valorsuspension);
     console.log(valornumero_ejes);
     console.log(valoruso_permitido);
-    console.log(valorcamara_reversa);
-    console.log(valorsensores_reversa);
   }
 
   //validar que todos los campos esten llenos con toastify
@@ -306,8 +298,6 @@ document.addEventListener("DOMContentLoaded", function () {
       caja.append("suspension", valorsuspension);
       caja.append("numero_ejes", valornumero_ejes);
       caja.append("uso_permitido", valoruso_permitido);
-      caja.append("camara_reversa", valorcamara_reversa);
-      caja.append("sensores_reversa", valorsensores_reversa);
 
       $.ajax({
         type: "POST",

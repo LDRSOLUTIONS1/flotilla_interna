@@ -19,6 +19,7 @@ $sqlobtenerunidadasignada = "SELECT unid.img_unidad,
                                     unidasigcolab.politica_aceptada,
                                     model.nombre_modelo,
                                     unid.placa,
+                                    unid.vin,
                                     unid.id_estado_unidad,
                                     unid.id_tipo_unidad,
                                     unidasigcolab.fecha_asignacion,
@@ -64,6 +65,7 @@ foreach ($arreglo_unidadespool as $fila) {
                 
                 <h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
                 <h6 class="card-text"><b>Placa: </b>' . $fila['placa'] . '</h6>
+                <h6 class="card-text"><b>VIN: </b>' . $fila['vin'] . '</h6>
                 <h6 class="card-text"><b>Asignación: </b>' . date('d-m-Y', strtotime($fila['fecha_asignacion'])) . '</h6>
                 <h6 class="text"><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? date('d-m-Y', strtotime($fila['fecha_devolucion'])) : '') . '</h6>
                 <button type="button" id="btnentregaunidad" data-id="' . $fila['id_unidad'] . '" data-idcolaborador="' . $fila['id_colaborador'] . '" class="btn btn-success btn-sm  btnentregaunidad">Asignación presencial</button>

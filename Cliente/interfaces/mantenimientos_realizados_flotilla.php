@@ -1,15 +1,11 @@
-<?php
-//session_start();
-?>
 <!doctype html>
 <html lang="es">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
 
-  <!-- Bootstrap -->
+    <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Toastify -->
@@ -31,18 +27,26 @@
   <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
 
-  <title>Vida Útil Unidades Demos</title>
+  <title>Módulo Mantenimientos - Demo (Prototipo)</title>
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
 </head>
 
 <body>
+      <!-- Fondo -->
+  <img class="imagenfondo" src="../img/fondohexagonal.png" alt="">
 
   <?php include("../include/menu.php"); ?>
-
+  
   <div class="cuadroblancocontenido">
     <!-- AQUÍ se carga el dashboard -->
-    <?php include("../modulos/modulo_vida_util_unidades_demo.php"); ?>
+    <?php include("../modulos/modulo_mantenimientos_realizados_flotilla.php"); ?>
   </div>
-
   <div class="contenedorspinner" id="contenedorspinner">
     <span class="loader"></span>
   </div>

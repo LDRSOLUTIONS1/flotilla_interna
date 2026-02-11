@@ -20,6 +20,7 @@ $sqlobtenerunidadvercartaresponsiva = "SELECT unid.img_unidad,
     usuexterno.apellido_materno AS apellidomaterno_usuario,
     model.nombre_modelo,
     unid.placa,
+    unid.vin,
     estatuscomodato.estatus_comodato,
     unidasigcolab.fecha_asignacion,
     unidasigcolab.fecha_devolucion
@@ -66,6 +67,7 @@ while ($fila = $resultado->fetch_assoc()) {
             '</b></h6>
             <h6 class="card-title txteatlevalidacioncomodato"><b>' . $fila['nombre_modelo'] . '</b></h6>
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
+            <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-info-circle me-2"></i><b>VIN: </b>' . $fila['vin'] . '</h6>
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_asignacion'] . '</h6>
             <h6 class="card-text txtvalidacioncomodato"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . 
             '</h6>
@@ -88,6 +90,7 @@ echo '<div id="vistaTabla" style="display: none;">
                     <th class="titulostablaverificarcomodato">Nombre del colaborador</th>
                     <th class="titulostablaverificarcomodato">Modelo</th>
                     <th class="titulostablaverificarcomodato">Placa</th>
+                    <th class="titulostablaverificarcomodato">VIN</th>
                     <th class="titulostablaverificarcomodato">Asignación</th>
                     <th class="titulostablaverificarcomodato">Devolución</th>
                     <th class="titulostablaverificarcomodato">Ver</th>
@@ -105,6 +108,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <td class="titulostablaverificarcomodato">' . $nombre . '</td>
             <td class="titulostablaverificarcomodato">' . $fila['nombre_modelo'] . '</td>
             <td class="titulostablaverificarcomodato">' . $fila['placa'] . '</td>
+            <td class="titulostablaverificarcomodato">' . $fila['vin'] . '</td>
             <td class="titulostablaverificarcomodato">' . $fila['fecha_asignacion'] . '</td>
             <td class="titulostablaverificarcomodato">' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</td>
             <td><button type="button" class="btn btn-sm  btnmosrarmodalunidadCOMODATO btntablaverificarcomodato" data-idunidad="' . $fila['id_unidad'] . '" data-id="' . $fila['id_asignaciones'] . '" data-idcolaborador="' . $fila['id_colaborador'] . '" data-idusuario="' . $fila['id_usuario_externo'] . '"> COMODATO</button></td>

@@ -33,8 +33,6 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
     $valoreditarSuspencion = $_POST['editarSuspencion'];
     $valoreditarEjes = $_POST['editarEjes'];
     $valoreditarUso = $_POST['editarUso'];
-    $valoreditar_camara_reversa = $_POST['editar_camara_reversa'];
-    $valoreditar_sensores_reversa = $_POST['editar_sensores_reversa'];
 
     if (isset($_FILES['imagen_unidad']['tmp_name'])) {
         $nombrearchivoimagenunidad = 'img_' . $valorPlacaeditar . '_' . basename($_FILES['imagen_unidad']['name']);
@@ -69,9 +67,7 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
                 id_tipo_freno = '$valoreditarFreno',
                 id_tipo_suspencion = '$valoreditarSuspencion',
                 numero_ejes = '$valoreditarEjes',
-                id_tipo_uso = '$valoreditarUso',
-                camara_reversa = '$valoreditar_camara_reversa',
-                sensores_reversa = '$valoreditar_sensores_reversa'
+                id_tipo_uso = '$valoreditarUso'
                 WHERE id_unidad = '$valorid_unidad'";
 
             $ejecutar = mysqli_query($conexion, $sql);
@@ -95,7 +91,7 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
             año_unidad = '$valoreditarañounidad',
             id_estado_unidad = '$valorEstadoUnidadeditar',
             id_estatus_unidad = '$valorEstatusUnidadeditar',
-            id_tipo_unidad = '$valorTipoUnidadeditar',
+            id_tipo_unidad = 3,
             id_sede = '$valorsedeunidadeditar',
             fecha_adquisicion = '$valorfechaadquisicionunidadeditar',
             id_tipo_adquisicion = '$valortipoadquisicionunidadeditar',
@@ -112,9 +108,7 @@ if (isset($_POST['id_unidad']) && isset($_POST['marcaeditarunidad'])  && isset($
             id_tipo_freno = '$valoreditarFreno',
             id_tipo_suspencion = '$valoreditarSuspencion',
             numero_ejes = '$valoreditarEjes',
-            id_tipo_uso = '$valoreditarUso',
-            camara_reversa = '$valoreditar_camara_reversa',
-            sensores_reversa = '$valoreditar_sensores_reversa'
+            id_tipo_uso = '$valoreditarUso'
             WHERE id_unidad = '$valorid_unidad'";
 
         $ejecutar = mysqli_query($conexion, $sql);

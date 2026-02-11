@@ -35,8 +35,6 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 </head>
 
 <body>
-    <!-- Video de fondo -->
-    <img class="imagenfondo" src="../img/fondohexagonal.png" alt="">
     <?php
     include("../include/menu.php");
     ?>
@@ -48,7 +46,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
         <?php
         if ($id_tipo_usuario == 1) {
             include("../modulos/modulo_agregar_unidadesnuevas.php");
-        } else if ($id_tipo_usuario == 4) {
+        } else if ($id_tipo_usuario == 4 || $id_tipo_usuario == 15) {
             include("../modulos/modulo_agregar_unidedesnuevas_demo.php");
         }
         ?>
