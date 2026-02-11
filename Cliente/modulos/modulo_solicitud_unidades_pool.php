@@ -1,21 +1,31 @@
 <!-------------------------------------------aqui comienza el contenedor mis unidades cliente----------------------------------------------------------->
-<div class="contenedormisunidades">
+<!------------------------------------------- CONTENEDOR PRINCIPAL ------------------------------------------->
+<div class="container-fluid py-4" style="padding-top: 90px;">
 
-    <h2 class="titulosletrasunidades text-nowrap">Solicitud de unidades pool</h2>
-    <!-- Campo de búsqueda para filtrar la tabla -->
-    <!-- <div class="contenedorbuscador">
-  <div class="buscador">
-    <input type="text" id="filtroBusqueda" class="form-control" placeholder="Buscar unidades..." onkeyup="filtrarCards()">
-  </div>
-  </div> -->
+    <div class="container" style="padding-top: 80px;">
 
-    <!--contenedor de las cards de las unidades por asignar-->
-    <div class="">
-        <?php //include("../../Servidor/componentes/obtener_unidades_pool.php"); ?>
-        <?php include("../../Servidor/componentes/solicitar_unidades_pool.php"); ?>
+        <div class="mb-4">
+            <h2 class="fw-bold mb-1">
+                Solicitud de Unidades Pool
+            </h2>
+            <small class="text-muted">
+                Selecciona fechas, horarios y ubicación para consultar disponibilidad.
+            </small>
+        </div>
+
+
+        <!-- ================= FORMULARIO ================= -->
+        <div class="mb-4">
+            <?php include("../../Servidor/componentes/solicitar_unidades_pool.php"); ?>
+        </div>
+
+        <!-- ================= RESULTADOS ================= -->
+        <div class="contenedorunidadesdisponiblespool mt-4" id="contenedorunidadesdisponiblespool"></div>
+
     </div>
-    <div class="contenedorunidadesdisponiblespool" id="contenedorunidadesdisponiblespool"></div>
+
 </div>
+
 
 
 <!-----------------------------------modal para ver los detalles de la unidad pool que el ususario cliente solicita-------------------------------->

@@ -58,7 +58,7 @@ if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
         echo '
         <div class="">
-        <div class="conetenedortarjetaunidadpool d-flex border  p-3 mb-3 align-items-start" style="max-width: 700px;">
+        <div class="conetenedortarjetaunidadpool d-flex border  p-3 mb-3 align-items-start" style="max-width: 800px;">
             <!-- Imagen del vehículo -->
             <img src="../../Servidor/archivos/imagenes/imagenes_unidades/' . $fila['img_unidad'] . '" alt="Imagen del vehículo" class="imgunidadpoolsolicitud" style="width: 180px; height: auto; border-radius: 8px; margin-right: 20px;" onerror="this.src=\'../../../Cliente/img/unidades/carro_desconocido.png\'">
 

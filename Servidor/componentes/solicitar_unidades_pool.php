@@ -1,103 +1,88 @@
-<div class="contenedorsolicitudunidadpool">
-    <div class="row">
-        <!------------------------------------------------------------------------ color --------------------------------------------------------------------->
+<div class="contenedorsolicitudunidadpool p-4 shadow-sm mb-4">
+
+    <h5 class="mb-3">Datos de la solicitud</h5>
+
+    <hr>
+
+    <!-- ================= RECOLECCIÓN ================= -->
+    <h6 class="text-primary mb-2">Recolección</h6>
+
+    <div class="row g-3">
         <?php
         include("../../Servidor/conexion.php");
-
-        // Realizar la consulta para obtener las sedes
         $sql = "SELECT id_sede, ubicacion FROM sedes";
         $result = $conectar->query($sql);
-        // Verificar si hay resultados
-        if ($result->num_rows > 0) {
-            // Recorrer los resultados y mostrar las opciones
-            echo '<div class="col-md-4">
-            <div class="form-floating">
-                <select class="form-control" id="sederecoleccionpool" placeholder="sederecoleccionpool" name="sederecoleccionunidades">
-                    <option value="">Seleccionar</option>'; // Opción predeterminada
-
-            while ($row = $result->fetch_assoc()) {
-                // Mostrar cada marca como una opción
-                echo '<option value="' . $row['id_sede'] . '">' . $row['ubicacion'] . '</option>';
-            }
-
-            echo '</select>
-            <label for="colorunidadldr">Ubicación de recolección</label>
-        </div>
-        <label class="" style="sederecoleccionldr: white;"> </label>
-    </div>';
-        } else {
-            echo "No hay marcas disponibles.";
-        }
-
-        $conectar->close();
         ?>
+
         <div class="col-md-4">
             <div class="form-floating">
-                <input type="date" class="form-control" id="fechasolicitudunidadpool" name="fechasolicitudunidadpool" placeholder="fechasolicitudunidadpool">
-                <label for="fechasolicitudunidadpool">Fecha de solicutud</label>
+                <select class="form-control" id="sederecoleccionpool">
+                    <option value="">Seleccionar</option>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                        <option value="<?= $row['id_sede'] ?>"><?= $row['ubicacion'] ?></option>
+                    <?php } ?>
+                </select>
+                <label>Ubicación de recolección</label>
             </div>
-            <label class="" style="color: white;"> </label>
         </div>
+
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="fechasolicitudunidadpool">
+                <label>Fecha de recolección</label>
+            </div>
+        </div>
+
         <div class="col-md-2">
             <div class="form-floating">
-                <input type="time" class="form-control" id="horasolicitudunidadpool" name="horasolicitudunidadpool" placeholder="horasolicitudunidadpool">
-                <label for="horasolicitudunidadpool">Hora de solicitud</label>
+                <input type="time" class="form-control" id="horasolicitudunidadpool">
+                <label>Hora</label>
             </div>
-            <label class="" style="color: white;"> </label>
         </div>
     </div>
 
-    <div class="row">
-        <!------------------------------------------------------------------------ color --------------------------------------------------------------------->
-        <?php
-        include("../../Servidor/conexion.php");
+    <hr>
 
-        // Realizar la consulta para obtener las sedes
-        $sql = "SELECT id_sede, ubicacion FROM sedes";
-        $result = $conectar->query($sql);
-        // Verificar si hay resultados
-        if ($result->num_rows > 0) {
-            // Recorrer los resultados y mostrar las opciones
-            echo '<div class="col-md-4">
-            <div class="form-floating">
-                <select class="form-control" id="sededevolucionunidadpool" placeholder="sededevolucionunidadpool" name="colorunidades">
-                    <option value="">Seleccionar</option>'; // Opción predeterminada
+    <!-- ================= DEVOLUCIÓN ================= -->
+    <h6 class="text-primary mb-2">Devolución</h6>
 
-            while ($row = $result->fetch_assoc()) {
-                // Mostrar cada marca como una opción
-                echo '<option value="' . $row['id_sede'] . '">' . $row['ubicacion'] . '</option>';
-            }
+    <div class="row g-3">
 
-            echo '</select>
-            <label for="sededevolucionunidadpooldr">Ubicación de devolución</label>
-        </div>
-        <label class="" style="color: white;"> </label>
-    </div>';
-        } else {
-            echo "No hay marcas disponibles.";
-        }
-
-        $conectar->close();
-        ?>
         <div class="col-md-4">
             <div class="form-floating">
-                <input type="date" class="form-control" id="fechadevolucionunidadpool" name="fechadevolucionunidadpool" placeholder="fechadevolucionunidadpool">
-                <label for="fechadevolucionunidadpool">Fecha de devolución</label>
+                <select class="form-control" id="sededevolucionunidadpool">
+                    <option value="">Seleccionar</option>
+                    <?php
+                    $result->data_seek(0);
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <option value="<?= $row['id_sede'] ?>"><?= $row['ubicacion'] ?></option>
+                    <?php } ?>
+                </select>
+                <label>Ubicación de devolución</label>
             </div>
-            <label class="" style="color: white;"> </label>
         </div>
+
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="date" class="form-control" id="fechadevolucionunidadpool">
+                <label>Fecha de devolución</label>
+            </div>
+        </div>
+
         <div class="col-md-2">
             <div class="form-floating">
-                <input type="time" class="form-control" id="horadevolucionunidadpool" name="horadevolucionunidadpool" placeholder="horadevolucionunidadpool">
-                <label for="horadevolucionunidadpool">Hora de devolución</label>
+                <input type="time" class="form-control" id="horadevolucionunidadpool">
+                <label>Hora</label>
             </div>
-            <label class="" style="color: white;"> </label>
         </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary btnsolicitudunidadpool" id="btnsolicitudunidadpool">Verificar unidades</button>
-            </div>
-            
-    </div>
 
+        <div class="col-md-2 d-flex align-items-end">
+            <button class="btn btn-primary w-100" id="btnsolicitudunidadpool">
+                Verificar unidades
+            </button>
+        </div>
+
+
+    </div>
 
 </div>
