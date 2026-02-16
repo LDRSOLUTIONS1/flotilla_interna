@@ -1,26 +1,30 @@
 <?php 
 include("../../conexion.php");
 
-if (!isset($_SESSION) && isset($_POST['id_unidad']) && isset($_POST['data_fecha_solicitudemo']) && isset($_POST['data_fecha_devoluciondemo'])) {
+// Iniciar sesión si no está iniciada
+if (!isset($_SESSION)) {
     session_start();
 }
 
+// Verificar que la sesión tenga los datos necesarios
+if (!isset($_SESSION['id_colaborador']) || !isset($_SESSION['id_tipo_usuario'])) {
+    echo "<div class='alert alert-danger'>Sesión inválida</div>";
+    exit;
+}
+
 $colaborador = $_SESSION['id_colaborador'];
-$id_unidad = $_POST['id_unidad'];
-$data_fecha_solicitudemo = $_POST['data_fecha_solicitudemo'];
-$data_fecha_devoluciondemo = $_POST['data_fecha_devoluciondemo'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$fila_usuario = $resultado->fetch_assoc();
-$id_usuario = $fila_usuario['id_usuario'] ?? null;
+// Validar variables POST
+$id_unidad = $_POST['id_unidad'] ?? null;
+$data_fecha_solicitudemo = $_POST['data_fecha_solicitudemo'] ?? null;
+$data_fecha_devoluciondemo = $_POST['data_fecha_devoluciondemo'] ?? null;
 
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$fila_tipo = $resultado->fetch_assoc();
-$id_tipo_usuario = $fila_tipo['id_tipo_usuario'] ?? null;
+// Si faltan datos obligatorios, detener ejecución
+if (!$id_unidad || !$data_fecha_solicitudemo || !$data_fecha_devoluciondemo) {
+    echo "<div class='alert alert-danger'>Faltan datos de la solicitud.</div>";
+    exit;
+}
 
 // Consulta de personas físicas
 $sql = "SELECT pf.id_persona_fisica, 
@@ -40,30 +44,31 @@ $sql = "SELECT pf.id_persona_fisica,
         FROM personas_fisicas pf
         LEFT JOIN colaboradores col ON pf.id_registrador_persona_fisica = col.id_colaborador";
 
-// Si no es tipo administrador (4), limitar a sus registros
-if ($id_tipo_usuario !== null && $id_tipo_usuario != 4) {
-    $sql .= " WHERE pf.id_registrador_persona_fisica = '$colaborador'
-            ORDER BY pf.id_persona_fisica DESC";
+// Si no es administrador (tipo 4), limitar registros a los que registró el colaborador
+if ($id_tipo_usuario != 4) {
+    $sql .= " WHERE pf.id_registrador_persona_fisica = '$colaborador'";
 }
+
+$sql .= " ORDER BY pf.id_persona_fisica DESC";
 
 $resultado = $conexion->query($sql);
 
 // Generar tabla
-if ($resultado->num_rows > 0) {
+if ($resultado && $resultado->num_rows > 0) {
     echo "
     <div class='table-responsive'>
-            <table class='table table-hover'>
-                <thead class='table-light'>
-                    <tr>
-                        <th class='titulostablaunidades'>ID</th>
-                        <th class='titulostablaunidades'>Nombre</th>
-                        <th class='titulostablaunidades'>CURP</th>
-                        <th class='titulostablaunidades'>RFC</th>
-                        <th class='titulostablaunidades'>Domicilio</th>
-                        <th class='titulostablaunidades'>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>";
+        <table class='table table-hover'>
+            <thead class='table-light'>
+                <tr>
+                    <th class='titulostablaunidades'>ID</th>
+                    <th class='titulostablaunidades'>Nombre</th>
+                    <th class='titulostablaunidades'>CURP</th>
+                    <th class='titulostablaunidades'>RFC</th>
+                    <th class='titulostablaunidades'>Domicilio</th>
+                    <th class='titulostablaunidades'>Acción</th>
+                </tr>
+            </thead>
+            <tbody>";
 
     while ($fila = $resultado->fetch_assoc()) {
         echo "<tr>
@@ -79,14 +84,14 @@ if ($resultado->num_rows > 0) {
                         data-id_colaborador='{$colaborador}' 
                         data-fecha_solicitudemo='{$data_fecha_solicitudemo}' 
                         data-fecha_devoluciondemo='{$data_fecha_devoluciondemo}'>
-                        </button>
+                    </button>
                 </td>
             </tr>";
     }
 
     echo "    </tbody>
-            </table>
-        </div>";
+        </table>
+    </div>";
 } else {
     echo "<div class='alert alert-warning'>No se encontraron resultados.</div>";
 }

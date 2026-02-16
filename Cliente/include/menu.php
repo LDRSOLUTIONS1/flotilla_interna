@@ -13,11 +13,15 @@ $id_usuario = $resultado->fetch_assoc()['id_usuario'];
 
 
 // Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario, avatar FROM usuarios WHERE id_usuario = $id_usuario";
+// Obtener avatar únicamente
+$sql = "SELECT avatar FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado = $conexion->query($sql);
 $datos_usuario = $resultado->fetch_assoc();
-$id_tipo_usuario = $datos_usuario['id_tipo_usuario'];
+
 $avatar = $datos_usuario['avatar'];
+
+// 🔥 EL ROL YA VIENE EN SESIÓN
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'] ?? 0;
 
 //saber si el usuario es jefe directo
 // Verificar si es jefe directo

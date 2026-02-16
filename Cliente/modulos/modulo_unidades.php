@@ -1,22 +1,22 @@
 <?php
 include("../../Servidor/conexion.php");
 
-//obtenemos el id del colaborador para saber quien es el que esta logeado
-if (!isset($_SESSION)) {
-  session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
+// 🔐 Validar sesión
+if (!isset($_SESSION['id_usuario']) || !isset($_SESSION['id_modulo'])) {
+    header("Location: ../../default.php");
+    exit;
+}
+
+// Datos desde sesión (ya vienen del login)
+$id_usuario = $_SESSION['id_usuario'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
+$id_modulo = $_SESSION['id_modulo'];
 $colaborador = $_SESSION['id_colaborador'];
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
-
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 <div class="container mt-4" style="padding-top: 80px;">

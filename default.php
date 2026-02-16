@@ -1,43 +1,68 @@
-<?php 
+<?php
 include("./Servidor/conexion.php");
 session_start();
 
-if(isset($_GET['idcolaborador'])){
+if (isset($_GET['idcolaborador'])) {
 
     $idcolaborador = base64_decode($_GET['idcolaborador']);
     $tipo = $_GET['tipo'] ?? 'asignacion';
 
-    $query = "SELECT id_tipo_usuario FROM usuarios WHERE id_colaborador = '$idcolaborador'";
-    $result = $conectar->query($query);
+    // 1️⃣ Obtener id_usuario
+    $queryUsuario = "SELECT id_usuario 
+                     FROM usuarios 
+                     WHERE id_colaborador = '$idcolaborador'";
 
-    if(mysqli_num_rows($result) > 0){
+    $resultUsuario = $conectar->query($queryUsuario);
 
-        $row = mysqli_fetch_assoc($result);
-        $tipoUsuario = $row['id_tipo_usuario'];
+    if (mysqli_num_rows($resultUsuario) > 0) {
 
-        $_SESSION['id_colaborador'] = $idcolaborador;
-        $_SESSION['id_tipo_usuario'] = $tipoUsuario;
-        $_SESSION['tipo_flotilla'] = $tipo;
+        $rowUsuario = mysqli_fetch_assoc($resultUsuario);
+        $idUsuario = $rowUsuario['id_usuario'];
 
-        // ---- VALIDACIONES ----
-
-        // Solo 1 y 2 pueden flotilla
-        if($tipo == 'asignacion' && !in_array($tipoUsuario,[1,2,3])){
-            echo "No tienes permiso para acceder a Flotilla";
+        // 2️⃣ Determinar id_modulo
+        if ($tipo == 'asignacion') {
+            $idModulo = 1; // flotilla
+        } elseif ($tipo == 'demo') {
+            $idModulo = 2; // demo
+        } else {
+            echo "Módulo inválido";
             exit;
         }
 
-        // Los demás solo demos
-        if($tipo == 'demo'){
-            header("Location: ./Cliente/interfaces/inicio_demos.php");
-        }if ($tipo == 'asignacion') {
-            header("Location: ./Cliente/interfaces/inicio.php");
+        // 3️⃣ Validar si el usuario tiene rol en ese módulo
+        $queryRol = "SELECT id_tipo_usuario 
+                     FROM usuario_modulo_tipo 
+                     WHERE id_usuario = '$idUsuario'
+                     AND id_modulo = '$idModulo'";
+
+        $resultRol = $conectar->query($queryRol);
+
+        if (mysqli_num_rows($resultRol) > 0) {
+
+            $rowRol = mysqli_fetch_assoc($resultRol);
+
+            // 🔐 Guardar en sesión
+            $_SESSION['id_colaborador'] = $idcolaborador;
+            $_SESSION['id_usuario'] = $idUsuario;
+            $_SESSION['id_modulo'] = $idModulo;
+            $_SESSION['id_tipo_usuario'] = $rowRol['id_tipo_usuario'];
+
+            // 🚀 Redireccionar según módulo
+            if ($idModulo == 1) {
+                header("Location: ./Cliente/interfaces/inicio.php");
+            } else {
+                header("Location: ./Cliente/interfaces/inicio_demos.php");
+            }
+            exit;
+
         } else {
             echo "No tienes acceso a esta sección";
+            exit;
         }
 
-    }else{
-        echo "No tienes acceso a esta sección";
+    } else {
+        echo "Usuario no encontrado";
+        exit;
     }
 }
 ?>

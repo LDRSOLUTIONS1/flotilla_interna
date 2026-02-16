@@ -5,17 +5,19 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$colaborador = $_SESSION['id_colaborador'];
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
+if (!isset($_SESSION['id_usuario']) || !isset($_SESSION['id_tipo_usuario'])) {
+    echo "Sesión no válida";
+    exit;
+}
 
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
+$id_usuario = $_SESSION['id_usuario'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
+$id_modulo = $_SESSION['id_modulo'];
+
 
 // Query base
 $sql = "SELECT 

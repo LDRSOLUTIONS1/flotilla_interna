@@ -9,17 +9,15 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Verificar que la sesión tenga los datos necesarios
+if (!isset($_SESSION['id_colaborador']) || !isset($_SESSION['id_tipo_usuario'])) {
+    echo "Sesión inválida";
+    exit;
+}
+
 $colaborador = $_SESSION['id_colaborador'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
-
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 
 
 
@@ -66,9 +64,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
                                 tf.tipo_freno,
                                 ts.tipo_suspencion,
                                 u.numero_ejes,
-                                tu.tipo_uso,
-                                u.camara_reversa,
-                                u.sensores_reversa
+                                tu.tipo_uso
                                 FROM unidades AS u 
                                 INNER JOIN modelos AS mode
                                 ON u.id_modelo = mode.id_modelo

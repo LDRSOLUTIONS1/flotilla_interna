@@ -6,23 +6,19 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$colaborador = $_SESSION['id_colaborador'];
+if (!isset($_SESSION['id_tipo_usuario']) || !isset($_SESSION['id_modulo'])) {
+    echo "Sesión inválida";
+    exit;
+}
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
-
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
+$id_modulo = $_SESSION['id_modulo'];
 ?>
 
 <!--Aqui comienza el contenedor del inicio.php-->
 
-<?php if ($id_tipo_usuario == 4 || $id_tipo_usuario == 6 || $id_tipo_usuario == 7 || $id_tipo_usuario == 9 || $id_tipo_usuario == 10|| $id_tipo_usuario == 11 || $id_tipo_usuario == 13 || $id_tipo_usuario == 15 ) { // Administrador DEMOS 
-?>
+<?php if ($id_modulo == 2) { // DEMOS ?>
+
     <div class="hero-demos">
         <!-- Imagenes flotantes -->
         <img src="../img/unidades/Foton_GTL_EV.png" class="float-img img-top">

@@ -2,22 +2,19 @@
 <?php
 include("../../Servidor/conexion.php");
 
-//obtenemos el id del colaborador para saber quien es el que esta logeado
 if (!isset($_SESSION)) {
     session_start();
 }
 
+// Verificar que la sesión tenga los datos necesarios
+if (!isset($_SESSION['id_colaborador']) || !isset($_SESSION['id_tipo_usuario'])) {
+    echo "Sesión inválida";
+    exit;
+}
+
 $colaborador = $_SESSION['id_colaborador'];
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
-
-// Obtener el tipo de usuario
-$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
 
 
@@ -26,7 +23,7 @@ $id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
   <h2 class="titulosletrasunidades text-nowrap">Personas físicas</h2>
   <div class="container mt-4">
     <div class="d-flex flex-wrap justify-content-center contenedor_botones">
-      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6): // tipos de usuario solicitantes demos ?>
+      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): // tipos de usuario solicitantes demos ?>
       <!-- Botón estilizado -->
       <button  class="btn btn-agregarunidad m-2 btnagregarpersonafisica"> <i class="fa-solid fa-user"> </i>   Registrar</button>
       <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i>   Regresar</button>

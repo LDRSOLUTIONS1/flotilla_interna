@@ -39,7 +39,6 @@
         <span class="loader"></span>
     </div>
 
-
     
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
