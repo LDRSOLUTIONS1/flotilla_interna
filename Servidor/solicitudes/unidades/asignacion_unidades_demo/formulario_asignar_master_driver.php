@@ -60,12 +60,18 @@ $sqlMasterDrivers = "SELECT
         colaboradores.apellido_paterno, 
         colaboradores.apellido_materno, 
         colaboradores.numero_colaborador,
-        usu.id_tipo_usuario
+        umt.id_tipo_usuario
     FROM usuarios AS usu
-    INNER JOIN colaboradores ON colaboradores.id_colaborador = usu.id_colaborador
-    INNER JOIN puestos AS pues ON pues.id_puesto = colaboradores.id_puesto
-    WHERE usu.id_tipo_usuario = 9
+    INNER JOIN usuario_modulo_tipo AS umt 
+        ON umt.id_usuario = usu.id_usuario
+    INNER JOIN colaboradores 
+        ON colaboradores.id_colaborador = usu.id_colaborador
+    INNER JOIN puestos AS pues 
+        ON pues.id_puesto = colaboradores.id_puesto
+    WHERE umt.id_tipo_usuario = 9
+      AND umt.id_modulo = 2
     ORDER BY colaboradores.numero_colaborador ASC";
+
 
 $resultado = $conexion->query($sqlMasterDrivers);
 

@@ -99,7 +99,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <?php endif; ?>
             <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
             <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
-            <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
+            <li ><a class="menulist" href="unidades_autorizadas.php">Asignaciones</a></li>
             <li ><a class="menulist" href="tablero_smart_conect.php">Tablero smart conect</a></li>
             
 
@@ -109,7 +109,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
             <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
             <?php endif; ?>
             <li ><a class="menulist" href="autorizaciones_demos_personas_fisicas.php">Autorizaciones</a></li>
-            <li ><a class="menulist" href="unidades_autorizadas.php">Unidades autorizadas</a></li>
+            <li ><a class="menulist" href="unidades_autorizadas.php">Asignaciones</a></li>
 
         <?php elseif ($id_tipo_usuario == 9): // PERFIL MASTER DRIVER?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
@@ -119,6 +119,7 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
         <?php elseif ($id_tipo_usuario == 11): // PERFIL ADMINISTRADOR PRUEBAS DEMOS?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="asignar_master_driver.php">Asignar Master Driver</a></li>
+            <li ><a class="menulist" href="pruebas_demos.php">Pruebas</a></li>
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
             <li ><a class="menulist" href="reportes_finales_demos.php">Reportes finales</a></li>
             <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>

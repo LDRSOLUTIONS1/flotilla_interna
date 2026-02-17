@@ -187,7 +187,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
             echo "<h2 class='text-center titulosletrarealizacionpruebademoestatus'>Realización de prueba demo</h2>";
             echo "<h2 class='titulosletraconteopruebas'><strong>Pruebas realizadas:</strong> $totalPruebas</h2>";
-            if ($id_tipo_usuario == 9): // tipos de usuario solicitantes demos
+            if ($id_tipo_usuario == 9 || $id_tipo_usuario == 11): // tipos de usuario solicitantes demos
                 // Mostrar botón según estado
                 if ($estado == 1 || $estado == null) { // NO SE HA REALIZADO
                     echo "<button type='button' class='btn btn-primera_prueba realizacion_prueba' data-idpruebademo='$id_asignacion'>

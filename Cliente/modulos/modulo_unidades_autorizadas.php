@@ -62,6 +62,24 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
 
 
+<!--modal para ver la prueba demo y la informacion de la unidad-->
+<!--modal-->
+<div class="modal fade modalresultadopruebademo" id="modalresultadopruebademo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Prueba unidad demo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalpruebademo"></button>
+            </div>
+            <div class="modal-body" id="modalresultadopruebademobody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btncerrarmodalpruebademo" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!---------------------------------------modal para ver los detalles de la unidad y el COMODATO que el usuario cliente firmo----------------------->
 <!--modal-->
 <div class="modal fade modalinfounidademofisica" id="modalinfounidademofisica" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -117,6 +135,8 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 </div>
 
 
+<!--js para vizualisar el reporte final de la prueba demo-->
+<script src="../js/reporte_final_prueba_demo/reportes_finales_demos.js"></script>
 <!--js para mandar a llamar el modal de informacion de la unidad y la carta responsiva de las unidades-->
 <script src="../js/unidades_demo_autorizadas/unidades_demo_autorizadas.js"></script>
 <!--js para filtrar las cards de unidades-->

@@ -55,7 +55,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
     ?>
 <!--------------------------------------mostramos el formulario del registro de la bitacora diaria solo a los master drivers------------------------------->
-    <?php if ($id_tipo_usuario == 9): ?>
+    <?php if ($id_tipo_usuario == 9 || $id_tipo_usuario == 11): ?>
     <div class="container py-4">
         <div class="row mb-3">
             <div class="col">
