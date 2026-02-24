@@ -22,13 +22,10 @@ $sql = "SELECT pm.*,
                col.apellido_paterno AS apellido_paterno_colaborador,
                col.apellido_materno AS apellido_materno_colaborador
         FROM personas_morales AS pm
-        LEFT JOIN colaboradores col ON pm.id_registrador_persona_moral = col.id_colaborador";
+        LEFT JOIN colaboradores col 
+        ON pm.id_registrador_persona_moral = col.id_colaborador
+        WHERE pm.id_registrador_persona_moral = '$colaborador'";
 
-// Aplicar condición según tipo
-if ($id_tipo_usuario !== null && $id_tipo_usuario != 4) {
-    // Usuarios comunes solo ven lo que registraron
-    $sql .= " WHERE pm.id_registrador_persona_moral = '$colaborador'";
-}
 
 $resultado = $conexion->query($sql);
 

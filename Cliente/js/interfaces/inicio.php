@@ -9,7 +9,7 @@ if (!isset($_SESSION['id_tipo_usuario'])) {
 }
 
 // Solo flotilla
-if (!in_array($_SESSION['id_tipo_usuario'], [1, 2, 3, 15])) {
+if (!in_array($_SESSION['id_tipo_usuario'], [1, 2, 3])) {
     echo "<h3 style='text-align:center;margin-top:50px;'>No tienes permiso para acceder a Flotilla</h3>";
     exit;
 }

@@ -60,6 +60,11 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="unidades_demo.php">Unidades</a></li>
+            <?php if ($es_jefe_directo): ?>
+            <li><a class="menulist" href="solicitudes_por_autorizar_jefe.php">Solicitudes por autorizar</a></li>
+            <?php endif; ?>
+            <li ><a class="menulist" href="solicitar_unidades_demo.php">Solicitar unidades demo</a></li>
+            <li ><a class="menulist" href="asignaciones_unidades_demo.php">Mis asignaciones</a></li>
             <!--<li ><a class="menulist" href="unidades_demo_asignadas.php">Unidades demo asignadas</a></li>-->
 
         <?php elseif ($id_tipo_usuario == 2): // juridico ?>

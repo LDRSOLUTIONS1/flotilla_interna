@@ -1,26 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['id_tipo_usuario'])) {
-    header("Location: ../../index.php");
-    exit;
-}
-
-// Solo flotilla
-if (!in_array($_SESSION['id_tipo_usuario'], [1, 2, 3, 15])) {
-    echo "<h3 style='text-align:center;margin-top:50px;'>No tienes permiso para acceder a Flotilla</h3>";
-    exit;
-}
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//session_start();
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
 
@@ -28,31 +8,33 @@ error_reporting(E_ALL);
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
-    <title>Flotilla</title>
+    <!--estilos de boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css?v=<?php echo time(); ?>">
     <!-- CDN para poder utilizar los toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
+    <!--estilos de FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!--estIlos de interfaz-->
+    <link rel="stylesheet" href="../css/estilos.css?v=1">
+    <!--cdn para icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+    integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Validación de unidades</title>
 
 </head>
 
 <body >
-    <!-- Video de fondo -->
-    <video autoplay muted loop playsinline poster="../videos/Video_fotograma.png" id="background-video">
-        <source src="../videos/videoLogo.mp4" type="video/mp4">
-    </video>
 <?php
     include("../include/menu.php");
     ?>
-    <div class="cuadroblancocontenidoinicio">
-
-    
-    
+    <div class="cuadroblancocontenido">
     <!-- INICIO BLOQUE PARA EL CUERPO -->
-        <?php include("../modulos/modulo_inicio.php"); ?>
-        
+        <?php include("../modulos/modulo_validacion_unidades_comodato.php"); ?>
+    </div>
 
+    <div class="contenedorspinner" id="contenedorspinner">
+        <span class="loader"></span>
     </div>
     
     <!--jquery-->

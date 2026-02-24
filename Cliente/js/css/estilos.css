@@ -295,27 +295,19 @@
   }
 }
 /*------------------------------------------------------------------------------ Menú superior ---------------------------------------------------------------*/
-/* =========================
-   RESET GENERAL
-   ========================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: Arial, sans-serif;
-  padding-top: 80px; /* espacio para navbar fijo */
-  background: #f9f9f9;
+  padding-top: 60px; /* Evita que el contenido se oculte debajo del menú */
 }
-
-/* =========================
-   NAVBAR PRINCIPAL
-   ========================= */
+/* Navbar */
 .navbar {
   width: 100%;
-  min-height: 80px; 
+  height: 80px;
   background: rgb(247, 247, 247);
   position: fixed;
   top: 0;
@@ -324,12 +316,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap; /* permite que items bajen si no caben */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
-
-/* ICONO / LOGO */
+.icono,
+.txtnombreusuario {
+  position: relative;
+}
 .icono {
   width: 55px;
   height: 50px;
@@ -337,12 +330,31 @@ body {
   background-size: cover;
   display: inline-block;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
-.icono:hover { opacity: 0.8; }
-.icono:active { transform: scale(0.95); }
 
-/* TEXTO USUARIO Y AVATAR */
+.icono:hover {
+  opacity: 0.8;
+}
+
+.icono:active {
+  transform: scale(0.95);
+}
+
+.icono:link,
+.icono:visited {
+  text-decoration: none;
+}
+
+.icono:link:after,
+.icono:visited:after {
+  content: attr(data-url);
+  display: none;
+}
+
+.icono[data-url]::before {
+  content: attr(data-url);
+  display: none;
+}
 .txtnombreusuario {
   font-weight: bold;
   font-size: 0.8rem;
@@ -354,21 +366,16 @@ body {
   width: 40px;
   height: 40px;
   object-fit: cover;
-  border-radius: 50%;
 }
-
-/* =========================
-   MENU HORIZONTAL
-   ========================= */
+/* Menú de navegación */
 .menu {
   list-style: none;
   display: flex;
   gap: 5px;
-  flex-wrap: wrap; /* items no se salen */
 }
-
-.menu li { list-style: none; }
-
+.menu li {
+  list-style: none;
+}
 .menu a {
   text-decoration: none;
   color: black;
@@ -376,15 +383,12 @@ body {
   padding: 10px 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  white-space: nowrap; /* evita quiebre de palabra */
 }
-
 .menu a:hover {
   background: #555;
   color: white;
 }
-
-/* BOTÓN HAMBURGUESA */
+/* Botón menú hamburguesa */
 .menu-toggle {
   font-size: 30px;
   background: none;
@@ -394,80 +398,39 @@ body {
   display: none;
   z-index: 10;
 }
-
-/* =========================
-   RESPONSIVE
-   ========================= */
-
-/* Desktop grande > 1366px */
-@media (min-width: 1367px) {
-  .menu { display: flex; flex-wrap: wrap; }
-  .menu-toggle { display: none; }
-  .menu a { font-size: 0.9rem; padding: 10px 15px; }
-  .txtnombreusuario { font-size: 0.9rem; padding-left: 70px; }
-}
-
-/* iPad Pro horizontal 1024px – 1366px */
-@media (max-width: 1366px) and (min-width: 1024px) {
-  .menu { display: flex; flex-wrap: wrap; gap: 5px; }
-  .menu-toggle { display: none; }
-  .menu a { font-size: 0.85rem; padding: 8px 12px; }
-  .txtnombreusuario { font-size: 0.85rem; padding-left: 60px; }
-}
-
-/* Tablets medianas 768px – 1023px */
-@media (max-width: 1150px) and (min-width: 768px) {
+/* Responsive */
+@media (max-width: 1011px) {
   .menu {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 80px;
+    top: 60px;
     left: 0;
     width: 100%;
     background: rgb(235, 234, 234);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     padding: 10px 0;
-    border-top: 1px solid #ddd;
   }
-  .menu.active { display: flex !important; }
-  .menu li a {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 0.9rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .menu.active {
+    display: flex !important; /* Asegura que el menú se muestre */
   }
-  .menu-toggle { display: block; font-size: 28px; }
-}
-
-/* Móviles <768px */
-@media (max-width: 767px) {
-  .menu {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background: rgb(235, 234, 234);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  .menu li {
+    text-align: center;
     padding: 10px 0;
-    border-top: 1px solid #ddd;
   }
-  .menu.active { display: flex !important; }
-  .menu li a {
-    width: 100%;
-    padding: 12px 18px;
-    font-size: 0.85rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .menu-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
   }
-  .menu-toggle { display: block; font-size: 28px; }
-  .txtnombreusuario { font-size: 0.75rem; padding-left: 50px; }
-  .icono { width: 45px; height: 45px; }
+  @media (max-width: 1082px) {
+    .menulist {
+      font-size: 1.3rem;
+    }
+  }
 }
-
-
 /* ----------------------------- --------------------------------------------------Estilos index -----------------------------------------------------  */
 /* Estilos para el video de fondo */
 #background-video {
@@ -3622,3 +3585,8 @@ footer {
   background: #0d6efd;
   color: #fff;
 }
+
+
+
+
+

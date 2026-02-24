@@ -1,60 +1,61 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+include("../../Servidor/conexion.php");
+
+//obtenemos el id del colaborador para saber quien es el que esta logeado
+if (!isset($_SESSION)) {
     session_start();
 }
 
-if (!isset($_SESSION['id_tipo_usuario'])) {
-    header("Location: ../../index.php");
-    exit;
-}
+$colaborador = $_SESSION['id_colaborador'];
 
-// Solo flotilla
-if (!in_array($_SESSION['id_tipo_usuario'], [1, 2, 3, 15])) {
-    echo "<h3 style='text-align:center;margin-top:50px;'>No tienes permiso para acceder a Flotilla</h3>";
-    exit;
-}
+// Obtener el id del usuario
+$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
+$resultado = $conexion->query($sql);
+$id_usuario = $resultado->fetch_assoc()['id_usuario'];
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Obtener el tipo de usuario
+$sql = "SELECT id_tipo_usuario FROM usuarios WHERE id_usuario = $id_usuario";
+$resultado = $conexion->query($sql);
+$id_tipo_usuario = $resultado->fetch_assoc()['id_tipo_usuario'];
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
-    <title>Flotilla</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/estilos.css?v=<?php echo time(); ?>">
     <!-- CDN para poder utilizar los toastify -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilos.css?v=1">
+    <title>Agregar nuevas unidades</title>
+    
 </head>
 
-<body >
-    <!-- Video de fondo -->
-    <video autoplay muted loop playsinline poster="../videos/Video_fotograma.png" id="background-video">
-        <source src="../videos/videoLogo.mp4" type="video/mp4">
-    </video>
-<?php
+<body>
+    <?php
     include("../include/menu.php");
     ?>
-    <div class="cuadroblancocontenidoinicio">
+    <div class="cuadroblancocontenido">
 
-    
-    
-    <!-- INICIO BLOQUE PARA EL CUERPO -->
-        <?php include("../modulos/modulo_inicio.php"); ?>
-        
 
+
+        <!-- INICIO BLOQUE PARA EL CUERPO -->
+        <?php
+        if ($id_tipo_usuario == 1) {
+            include("../modulos/modulo_agregar_unidadesnuevas.php");
+        } else if ($id_tipo_usuario == 4 || $id_tipo_usuario == 15) {
+            include("../modulos/modulo_agregar_unidedesnuevas_demo.php");
+        }
+        ?>
     </div>
-    
+
+    <div class="contenedorspinner" id="contenedorspinner">
+        <span class="loader"></span>
+    </div>
+
     <!--jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
