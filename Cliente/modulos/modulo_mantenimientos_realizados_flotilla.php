@@ -15,6 +15,7 @@
                     <th scope="col">Tipo</th>
                     <th scope="col">Taller</th>
                     <th scope="col">Fecha de salida</th>
+                    <th scope="col">Factura</th>
                 </tr>
             </thead>
             <tbody id="finalizedUnitsContainer">
@@ -25,38 +26,57 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("finalizedUnitsContainer");
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("finalizedUnitsContainer");
 
-    fetch("../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_mantenimientos.php")
-        .then(res => res.json())
-        .then(data => {
-            // Filtrar solo los finalizados
-            const finalized = data.filter(m => m.estatus.toLowerCase() === "finalizado");
+        fetch("../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_mantenimientos.php")
+            .then(res => res.json())
+            .then(data => {
+                // Filtrar solo los finalizados
+                const finalized = data.filter(m => m.estatus.toLowerCase() === "finalizado");
 
-            if(finalized.length === 0){
-                container.innerHTML = `<tr><td class="text-muted" colspan="5">No hay unidades finalizadas.</td></tr>`;
-                return;
-            }
+                if (finalized.length === 0) {
+                    container.innerHTML = `<tr><td class="text-muted" colspan="5">No hay unidades finalizadas.</td></tr>`;
+                    return;
+                }
 
-            finalized.forEach(m => {
-                const row = document.createElement("tr");
+                finalized.forEach(m => {
+                    const row = document.createElement("tr");
 
-                row.innerHTML = `
-                    <td>${m.vin}</td>
-                    <td>${m.modelo}</td>
-                    <td>${m.tipo}</td>
-                    <td>${m.taller || "-"}</td>
-                    <td>${m.fecha_salida || "-"}</td>
-                    
-                `;
-                container.appendChild(row);
+                    row.innerHTML = `
+                        <td>${m.vin}</td>
+                        <td>${m.modelo}</td>
+                        <td>${m.tipo}</td>
+                        <td>${m.taller || "-"}</td>
+                        <td>${m.fecha_salida || "-"}</td>
+                        <td>
+                            ${
+                                m.factura 
+                                ? `<button class="btn btn-sm btn-primary verFacturaBtn"
+                                        data-file="${m.factura}">
+                                        <i class="bi bi-file-earmark-pdf"></i> Ver
+                                </button>`
+                                : `<span class="text-muted">Sin archivo</span>`
+                            }
+                        </td>
+                    `;
+                    container.appendChild(row);
+                });
+                document.addEventListener("click", function(e) {
+                    if (e.target.closest(".verFacturaBtn")) {
+
+                        const btn = e.target.closest(".verFacturaBtn");
+                        const file = btn.dataset.file;
+
+                        const ruta = `../../Servidor/archivos/files/files_mantenimientos_flotilla/facturas_mantenimientos_flotilla/${file}`;
+
+                        window.open(ruta, "_blank");
+                    }
+                });
+            })
+            .catch(err => {
+                container.innerHTML = `<tr><td class="text-danger" colspan="5">Error al cargar unidades finalizadas.</td></tr>`;
+                console.error(err);
             });
-        })
-        .catch(err => {
-            container.innerHTML = `<tr><td class="text-danger" colspan="5">Error al cargar unidades finalizadas.</td></tr>`;
-            console.error(err);
-        });
-});
+    });
 </script>
-

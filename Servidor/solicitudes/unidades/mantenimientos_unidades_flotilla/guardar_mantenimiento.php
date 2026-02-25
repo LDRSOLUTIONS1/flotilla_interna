@@ -54,20 +54,20 @@ try {
 
     // bind_param: i=int, d=double, s=string
     $stmt->bind_param(
-        "iiisssdissii",
-        $id_unidad,
-        $id_tipo_mantenimiento,
-        $id_estatus,
-        $fecha_ingreso,
-        $fecha_salida,
-        $taller,
-        $costo_estimado,
-        $descripcion_trabajo,
-        $proximo_km,
-        $proximo_fecha,
-        $id_usuario,
-        $km_actual
-    );
+    "iiisssdssisi",
+    $id_unidad,
+    $id_tipo_mantenimiento,
+    $id_estatus,
+    $fecha_ingreso,
+    $fecha_salida,
+    $taller,
+    $costo_estimado,
+    $descripcion_trabajo,
+    $proximo_km,
+    $proximo_fecha,
+    $id_usuario,
+    $km_actual
+);
 
     if ($stmt->execute()) {
         $response = ["success" => true, "message" => "Mantenimiento registrado correctamente"];

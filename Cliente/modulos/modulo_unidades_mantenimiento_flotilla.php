@@ -126,7 +126,7 @@
 
 </div>
 
-<!-- Modal: Registrar / Editar mantenimiento -->
+<!-- Modal: Registrar mantenimiento -->
 <div class="modal fade" id="maintenanceModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -221,7 +221,7 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Kilometraje</label>
-                            <input type="number" name="km_manual" id="editKmInput" class="form-control" required disabled>
+                            <input type="number" name="km_manual" id="editKmInput" class="form-control" required readonly>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Fecha ingreso</label>
@@ -245,15 +245,12 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label">Factura (adjuntar archivo)</label>
-                            <input type="file" name="factura_file" id="editFacturaFile" class="form-control" accept=".pdf,.jpg,.png">
+                            <input type="file" name="factura" id="editFacturaFile" class="form-control" accept=".pdf,.jpg,.png">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Estatus</label>
-                            <select name="estatus" id="editEstatus" class="form-select">
+                            <select name="id_estatus_mantenimiento" id="editEstatus" class="form-select" required>
                                 <option value="">-- Seleccionar estatus --</option>
-                                <option value="Pendiente">Pendiente</option>
-                                <option value="En proceso">En proceso</option>
-                                <option value="Finalizado">Finalizado</option>
                             </select>
                         </div>
                         <div class="col-12">

@@ -41,7 +41,7 @@ while ($u = $res_unidades->fetch_assoc()) {
 
     // Verificar si ya existe mantenimiento pendiente o en proceso
     $check = $conexion->prepare("SELECT COUNT(*) 
-        FROM mantenimientos_demo 
+        FROM mantenimientos_flotilla 
         WHERE id_unidad = ? 
           AND id_estatus_mantenimiento IN (2,3)
     ");

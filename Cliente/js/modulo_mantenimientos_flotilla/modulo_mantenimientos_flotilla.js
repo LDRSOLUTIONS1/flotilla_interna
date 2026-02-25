@@ -389,6 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error al cargar mantenimientos:", err);
       });
   }
+  window.loadMantenimientos = loadMantenimientos;
 
   // Cargar al inicio
   loadMantenimientos();
@@ -626,4 +627,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Llamar a telemetría independiente
   loadTelemetriaChart();
+  
 });

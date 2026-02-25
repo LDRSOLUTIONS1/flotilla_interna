@@ -8,6 +8,7 @@ $id_mantenimiento = isset($_GET['id_mantenimiento']) ? intval($_GET['id_mantenim
 $sql = "SELECT 
             m.id_mantenimiento,
             m.id_unidad,
+            m.id_estatus_mantenimiento, -- 👈 ESTA ES LA QUE FALTA
             u.vin,
             u.ultimo_kilometraje,
             m.km_actual,
@@ -22,14 +23,20 @@ $sql = "SELECT
             m.taller,
             m.costo_estimado,
             m.descripcion_trabajo,
+            m.factura,
             m.proximo_km,
             m.proximo_fecha
         FROM mantenimientos_flotilla m
-        INNER JOIN tipo_mantenimiento tm ON m.id_tipo_mantenimiento = tm.id_tipo_mantenimiento
-        INNER JOIN estatus_mantenimiento em ON m.id_estatus_mantenimiento = em.id_estatus_mantenimiento
-        INNER JOIN unidades u ON m.id_unidad = u.id_unidad
-        INNER JOIN modelos mo ON u.id_modelo = mo.id_modelo
-        INNER JOIN marcas ma ON mo.id_marca = ma.id_marca
+        INNER JOIN tipo_mantenimiento tm 
+            ON m.id_tipo_mantenimiento = tm.id_tipo_mantenimiento
+        INNER JOIN estatus_mantenimiento em 
+            ON m.id_estatus_mantenimiento = em.id_estatus_mantenimiento
+        INNER JOIN unidades u 
+            ON m.id_unidad = u.id_unidad
+        INNER JOIN modelos mo 
+            ON u.id_modelo = mo.id_modelo
+        INNER JOIN marcas ma 
+            ON mo.id_marca = ma.id_marca
         WHERE u.id_tipo_unidad IN (1, 2, 4)";
 
 // Filtrar por unidad si se pasa
