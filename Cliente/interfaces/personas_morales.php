@@ -31,7 +31,7 @@ error_reporting(E_ALL);
     include("../include/menu.php");
     ?>
 
-    <div class="cuadroblancocontenido">
+    <div style="background-color: #a4bae273;">
 
 
         <?php include("../modulos/modulo_personas_morales.php"); ?>

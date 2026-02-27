@@ -1,15 +1,14 @@
-
 <?php
 include("../../Servidor/conexion.php");
 
 if (!isset($_SESSION)) {
-    session_start();
+  session_start();
 }
 
 // Verificar que la sesión tenga los datos necesarios
 if (!isset($_SESSION['id_colaborador']) || !isset($_SESSION['id_tipo_usuario'])) {
-    echo "Sesión inválida";
-    exit;
+  echo "Sesión inválida";
+  exit;
 }
 
 $colaborador = $_SESSION['id_colaborador'];
@@ -19,14 +18,19 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
 
 <!--Aqui comienza el contenedor de unidades-->
-<div class="contenedoropcionesunidades">
-  <h2 class="titulosletrasunidades text-nowrap">Personas físicas</h2>
-  <div class="container mt-4">
-    <div class="d-flex flex-wrap justify-content-center contenedor_botones">
-      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): // tipos de usuario solicitantes demos ?>
-      <!-- Botón estilizado -->
-      <button  class="btn btn-agregarunidad m-2 btnagregarpersonafisica"> <i class="fa-solid fa-user"> </i>   Registrar</button>
-      <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i>   Regresar</button>
+<div class="container mt-4" style="padding-top: 40px;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h4 class="titulo-validacion">Personas físicas</h4>
+      <p class="subtitulo-validacion">Alta de personas fisicas</p>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): // tipos de usuario solicitantes demos 
+      ?>
+        <!-- Botón estilizado -->
+        <button class="btn btn-agregarunidad m-2 btnagregarpersonafisica"> <i class="fa-solid fa-user"> </i> Registrar</button>
+        <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i> Regresar</button>
       <?php endif; ?>
     </div>
   </div>
@@ -50,8 +54,9 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
         <th class="titulostablaunidades">Domicilio</th>
         <th class="titulostablaunidades">Contacto</th>
         <th class="titulostablaunidades">Resguardo de unidad</th>
-        <?php if ($id_tipo_usuario == 4): // Administrador demos ?>
-        <th class="titulostablaunidades">Creador de la persona</th>
+        <?php if ($id_tipo_usuario == 4): // Administrador demos 
+        ?>
+          <th class="titulostablaunidades">Creador de la persona</th>
         <?php endif; ?>
         <th class="titulostablaunidades">Identificación o pasaporte</th>
         <th class="titulostablaunidades">CURP</th>
@@ -76,7 +81,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalregistrarpersonasfisicasbody">
-        
+
 
         <div>
           <div class="contenedor_tabla_polizas">
@@ -107,7 +112,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modaleditarpersonafisicabody">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -127,7 +132,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalasignarunidadesdemopersonafisicabody">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

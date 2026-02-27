@@ -73,6 +73,7 @@ while ($fila = $resultado->fetch_assoc()) {
             class="rounded-circle me-2" style="margin-top: 5px; width: 30px; height: 30px; object-fit: cover;" alt="avatar">
             ' . $fila['nombre1colaborador'] . ' ' . $fila['nombre2colaborador'] . ' ' . $fila['apellidopcolaborador'] . ' ' . $fila['apellidomcolaborador'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
+            <h6 class="card-text"><b>VIN: </b>' . $fila['vin'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') .
             '</h6>
@@ -100,6 +101,7 @@ echo '<div id="vistaTabla" style="display: none;">
                     <th>Devolución</th>
                     <th>Ubicación</th>
                     <th>Solicitante</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>';

@@ -1,13 +1,18 @@
 <!--Aqui comienza el contenedor de unidades-->
-<div class="contenedoropcionesunidades">
-  <h2 class="titulosletrasunidades text-nowrap">Personas morales</h2>
-  <div class="container mt-4">
-    <div class="d-flex flex-wrap justify-content-center contenedor_botones">
-      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): // tipos de usuario solicitantes demos ?>
-      <!-- Botón estilizado -->
-      <button  class="btn btn-resgistrar_moral m-2 btnagregarpersonamoral"> <i class="fa-solid fa-building-user"> </i>   Registrar</button>
-      <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i>   Regresar</button>
 
+<div class="container mt-4" style="padding-top: 40px;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h4 class="titulo-validacion">Personas morales</h4>
+      <p class="subtitulo-validacion">Alta de personas morales</p>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2">
+      <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): // tipos de usuario solicitantes demos 
+      ?>
+        <!-- Botón estilizado -->
+        <button class="btn btn-resgistrar_moral m-2 btnagregarpersonamoral"> <i class="fa-solid fa-building-user"> </i> Registrar</button>
+        <button class="btn btn-regresar m-2 " onclick="window.history.back()"> <i class="fa-solid fa-arrow-left"></i> Regresar</button>
       <?php endif; ?>
     </div>
   </div>
@@ -29,10 +34,10 @@
         <th class="titulostablaunidades">Domicilio</th>
         <th class="titulostablaunidades">Contacto</th>
         <th class="titulostablaunidades">Resguardo de unidad</th>
-        <?php if($id_tipo_usuario == 4): ?>
-        <th class="titulostablaunidades">Creador de la persona</th>
+        <?php if ($id_tipo_usuario == 4): ?>
+          <th class="titulostablaunidades">Creador de la persona</th>
         <?php endif; ?>
-         <th class="titulostablaunidades">Identificación o pasaporte</th>
+        <th class="titulostablaunidades">Identificación o pasaporte</th>
         <th class="titulostablaunidades">Poder representante legal</th>
         <th class="titulostablaunidades">Constancia situación fiscal</th>
         <th class="titulostablaunidades">Domicilio</th>
@@ -57,7 +62,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalregistrarpersonasmoralesbody">
-        
+
 
         <div>
           <div class="contenedor_tabla_polizas">
@@ -198,7 +203,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modaleditarpersonafisicabody">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -218,7 +223,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalasignarunidadesdemopersonafisicabody">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
