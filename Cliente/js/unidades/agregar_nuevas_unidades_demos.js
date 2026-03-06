@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const modelounidad = document.getElementById("modelounidad");
   const VIN = document.getElementById("VIN");
   const placaunidad = document.getElementById("placaunidad");
+  const paso_diferencial = document.getElementById("paso_diferencial");
   const motorunidad = document.getElementById("motorunidad");
   const añounidad = document.getElementById("añounidad");
   const colorunidad = document.getElementById("colorunidad");
@@ -77,21 +78,22 @@ document.addEventListener("DOMContentLoaded", function () {
   let valoruso_permitido;
 
   btnregistrarunidad.addEventListener("click", async function () {
-    // Desactiva el botón para evitar múltiples clics
+
     btnregistrarunidad.disabled = true;
     contenedorspinner.style.display = "flex";
 
     try {
         obtenervalores();
-        validarllenado();
 
-        await insertardatos(); // Asegúrate que esta función sea asincrónica si hace algo que tarda
+        if (!validarllenado()) {
+            return; // 🔥 si falla, no sigue
+        }
+
+        await insertardatos();
 
     } catch (error) {
         console.error("Ocurrió un error:", error);
-        // Aquí puedes mostrar un mensaje de error al usuario si lo deseas
     } finally {
-        // Siempre se ejecuta, con éxito o con error
         btnregistrarunidad.disabled = false;
         contenedorspinner.style.display = "none";
     }
@@ -104,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     valormodelounidad = modelounidad.value;
     valorVIN = VIN.value;
     valorplacaunidad = placaunidad.value;
+    valorpaso_diferencial = paso_diferencial.value;
     valormotorunidad = motorunidad.value;
     valorañounidad = añounidad.value;
     valorcolorunidad = colorunidad.value;
@@ -171,98 +174,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //validar que todos los campos esten llenos con toastify
   function validarllenado() {
-    const campos = [
-      {
-        campo: valormarcaunidad,
-        nombre: "marcaunidad",
-      },
-      {
-        campo: valormodelounidad,
-        nombre: "modelounidad",
-      },
-      {
-        campo: valorVIN,
-        nombre: "VIN",
-      },
-      {
-        campo: valorplacaunidad,
-        nombre: "placaunidad",
-      },
-      {
-        campo: valormotorunidad,
-        nombre: "motorunidad",
-      },
-      {
-        campo: valorañounidad,
-        nombre: "añounidad",
-      },
-      {
-        campo: valorcolorunidad,
-        nombre: "colorunidad",
-      },
-      {
-        campo: valortarjetacirculacionunidad,
-        nombre: "tarjetacirculacionunidad",
-      },
-      {
-        campo: valorestadounidad,
-        nombre: "estadounidad",
-      },
-      {
-        campo: valorestatusunidad,
-        nombre: "estatusunidad",
-      },
-      ...(typeof valortipounidad !== "undefined"
-        ? [
-            {
-              campo: valortipounidad,
-              nombre: "tipounidad",
-            },
-          ]
-        : []),
-      {
-        campo: valorsedeunidad,
-        nombre: "sedeunidad",
-      },
-      {
-        campo: valortipoadquisicionunidad,
-        nombre: "tipoadquisicionunidad",
-      },
-      {
-        campo: valorfechaadquisicionunidad,
-        nombre: "fechaadquisicionunidad",
-      },
-      {
-        campo: valorfoliofactura,
-        nombre: "foliofactura",
-      },
-      {
-        campo: valorarrendadora,
-        nombre: "arrendadora",
-      },
-    ];
+  let valido = true;
 
-    for (let i = 0; i < campos.length; i++) {
-      if (!campos[i].campo) {
-        Toastify({
-          text: "No obtuve " + campos[i].nombre,
-          duration: 3000,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background:
-              "linear-gradient(to right,rgb(0, 183, 255),rgb(0, 183, 255))",
-          },
-        }).showToast();
-      }
+  const camposObligatorios = [
+    { campo: valormarcaunidad, nombre: "Marca" },
+    { campo: valormodelounidad, nombre: "Modelo" },
+    { campo: valormotorunidad, nombre: "Motor" },
+    { campo: valorañounidad, nombre: "Año" },
+    { campo: valorcolorunidad, nombre: "Color" },
+    { campo: valortarjetacirculacionunidad, nombre: "Tarjeta de circulación" },
+    { campo: valorestadounidad, nombre: "Estado" },
+    { campo: valorestatusunidad, nombre: "Estatus" },
+    { campo: valorsedeunidad, nombre: "Sede" },
+    { campo: valortipoadquisicionunidad, nombre: "Tipo de adquisición" },
+    { campo: valortipounidad, nombre: "Tipo de unidad" },
+    { campo: valorfoliofactura, nombre: "Folio de factura" },
+    { campo: valorplacaunidad, nombre: "Placa" },
+    { campo: valorVIN, nombre: "VIN" }
+  ];
+
+  camposObligatorios.forEach(c => {
+    if (!c.campo) {
+      valido = false;
+      Toastify({
+        text: "Falta " + c.nombre,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        style: {
+          background: "linear-gradient(to right, red, red)"
+        }
+      }).showToast();
     }
+  });
 
-    return true;
-  }
+  return valido;
+}
 
   function insertardatos() {
-    if (validarllenado()) {
       console.log("entro a insertardatos");
       //meter en un formdata en este se puede meter informacion de todo tipo fyle, varchar etc etc
       const caja = new FormData();
@@ -272,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
       caja.append("modelounidad", valormodelounidad);
       caja.append("VIN", valorVIN);
       caja.append("placaunidad", valorplacaunidad);
+      caja.append("paso_diferencial", valorpaso_diferencial);
       caja.append("motorunidad", valormotorunidad);
       caja.append("añounidad", valorañounidad);
       caja.append("colorunidad", valorcolorunidad);
@@ -344,6 +294,6 @@ document.addEventListener("DOMContentLoaded", function () {
           contenedorspinner.style.display = "none";
         },
       });
-    }
+    
   }
 });

@@ -1,159 +1,175 @@
-<?php 
-
+<?php
 include("../../conexion.php");
-//------------------------------------------------------------------CODIGO PPARA OBTENER EL ID DEL USUARIO QUE ESTA HACIENDO EL REGISTRO
+
 if (!isset($_SESSION)) {
     session_start();
 }
 
+if (!isset($_SESSION['id_colaborador'])) {
+    echo "Sesión inválida";
+    exit;
+}
+
 $creador_unidad = $_SESSION['id_colaborador'];
 
-//------------------------------------------------------------------REALIZAMOS LA INSERCION DE LA UNIDAD OBENIENDO LOS PARAMETROS DEL JS 
-if (isset($_POST['marcaunidad']) && isset($_POST['modelounidad']) && isset($_POST['VIN']) 
-    && isset($_POST['placaunidad']) && isset($_POST['foliofactura'])&& isset($_POST['motorunidad']) && isset($_POST['colorunidad']) 
-    && isset($_POST['tarjetacirculacionunidad']) && isset($_POST['estadounidad']) && isset($_POST['estatusunidad']) 
-    && isset($_POST['tipounidad']) && isset($_POST['sedeunidad']) && isset($_POST['tipoadquisicionunidad']) && isset($_POST['fechaadquisicionunidad']) && isset($_POST['añounidad']) && isset($_POST['arrendadora'])) {
-    
+/* ==============================
+   1️⃣ OBTENER DATOS (permitir null)
+============================== */
 
-    $valormarcaunidad = $_POST['marcaunidad'];
-    $valormodelounidad = $_POST['modelounidad'];
-    $valorVIN = $_POST['VIN'];
-    $valorplacaunidad = $_POST['placaunidad'];
-    $valormotorunidad = $_POST['motorunidad'];
-    $valorañounidad = $_POST['añounidad'];
-    $valorcolorunidad = $_POST['colorunidad'];
-    $valortarjetacirculacionunidad = $_POST['tarjetacirculacionunidad'];
-    $valorestadounidad = $_POST['estadounidad'];
-    $valorestatusunidad = $_POST['estatusunidad'];
-    $valortipounidad = $_POST['tipounidad'];
-    $valorsedeunidad = $_POST['sedeunidad'];
-    $valortipoadquisicionunidad = $_POST['tipoadquisicionunidad'];
-    $valorfechaadquisicionunidad = $_POST['fechaadquisicionunidad'];
-    $valorfoliofactura = $_POST['foliofactura'];
-    $valorarrendadora = $_POST['arrendadora'];
-
-    //valores de unidades demos
-    $valorcapacidad_carga = $_POST['capacidad_carga'];
-    $valorcapacidad_pasajeros = $_POST['capacidad_pasajeros'];
-    $valortipo_combustible = $_POST['tipo_combustible'];
-    $valortraccion = $_POST['traccion'];
-    $valortipo_carroceria = $_POST['tipo_carroceria'];
-    $valornumero_puertas = $_POST['numero_puertas'];
-    $valornumero_asientos = $_POST['numero_asientos'];
-    $valortipo_caja = $_POST['tipo_caja'];
-    $valortipo_frenos = $_POST['tipo_frenos'];
-    $valorsuspension = $_POST['suspension'];
-    $valornumero_ejes = $_POST['numero_ejes'];
-    $valoruso_permitido = $_POST['uso_permitido'];
-
-    echo "marcaunidad: " . $valormarcaunidad . " ";
-    echo "modelounidad: " . $valormodelounidad . " ";
-    echo "VIN: " . $valorVIN . " ";
-    echo "placaunidad: " . $valorplacaunidad . " ";
-    echo "motorunidad: " . $valormotorunidad . " ";
-    echo "añounidad: " . $valorañounidad . " ";
-    echo "colorunidad: " . $valorcolorunidad . " ";
-    echo "tarjetacirculacionunidad: " . $valortarjetacirculacionunidad . " ";
-    echo "estadounidad: " . $valorestadounidad . " ";
-    echo "estatusunidad: " . $valorestatusunidad . " ";
-    echo "tipounidad: " . $valortipounidad . " ";
-    echo "sedeunidad: " . $valorsedeunidad . " ";
-    echo "tipoadquisicionunidad: " . $valortipoadquisicionunidad . " ";
-    echo "fechaadquisicionunidad: " . $valorfechaadquisicionunidad . " ";
-    echo "foliofactura: " . $valorfoliofactura . " ";
-    echo "arrendadora: " . $valorarrendadora . " ";
-
-    echo "capacidad_carga: " . $valorcapacidad_carga . " ";
-    echo "capacidad_pasajeros: " . $valorcapacidad_pasajeros . " ";
-    echo "tipo_combustible: " . $valortipo_combustible . " ";
-    echo "traccion: " . $valortraccion . " ";
-    echo "tipo_carroceria: " . $valortipo_carroceria . " ";
-    echo "numero_puertas: " . $valornumero_puertas . " ";
-    echo "numero_asientos: " . $valornumero_asientos . " ";
-    echo "tipo_caja: " . $valortipo_caja . " ";
-    echo "tipo_frenos: " . $valortipo_frenos . " ";
-    echo "suspension: " . $valorsuspension . " ";
-    echo "numero_ejes: " . $valornumero_ejes . " ";
-    echo "uso_permitido: " . $valoruso_permitido . " ";
-
-
-
-    //obtener documentos de la unidad  
-    $nombrearchivoimagenunidad = 'img_' . $valorplacaunidad . '_' . basename($_FILES['imagen_unidad']['name']);
-
-    $rutaarchivoimagenunidad = "../../archivos/imagenes/imagenes_unidades/";
-
-    move_uploaded_file($_FILES['imagen_unidad']['tmp_name'], $rutaarchivoimagenunidad . $nombrearchivoimagenunidad);  
-
-
-    //insertar la unidad
-
-    $query = "INSERT INTO unidades (
-                                    id_creador_unidad,
-                                    id_modelo, 
-                                    id_estado_unidad, 
-                                    id_estatus_unidad, 
-                                    id_tipo_unidad, 
-                                    id_tipo_adquisicion, 
-                                    id_sede, 
-                                    vin,
-                                    numero_motor, 
-                                    placa, 
-                                    costo_neto, 
-                                    id_color, 
-                                    img_unidad, 
-                                    fecha_adquisicion, 
-                                    año_unidad,
-                                    id_arrendadora,
-                                    folio_factura,
-                                    capacidad_carga,
-                                    capacidad_pasajeros,
-                                    id_tipo_combustible,
-                                    id_traccion,
-                                    tipo_carrceria,
-                                    numero_puertas,
-                                    numero_asientos,
-                                    id_tipo_caja,
-                                    id_tipo_freno,
-                                    id_tipo_suspencion,
-                                    numero_ejes,
-                                    id_tipo_uso) 
-                VALUES ('$creador_unidad',
-                        '$valormodelounidad', 
-                        '$valorestadounidad', 
-                        '$valorestatusunidad', 
-                        '$valortipounidad', 
-                        '$valortipoadquisicionunidad', 
-                        '$valorsedeunidad', 
-                        '$valorVIN', 
-                        '$valormotorunidad', 
-                        '$valorplacaunidad', 
-                        '$valortarjetacirculacionunidad', 
-                        '$valorcolorunidad', 
-                        '$nombrearchivoimagenunidad', 
-                        '$valorfechaadquisicionunidad', 
-                        '$valorañounidad',
-                        '$valorarrendadora',
-                        '$valorfoliofactura',
-                        '$valorcapacidad_carga',
-                        '$valorcapacidad_pasajeros',
-                        '$valortipo_combustible',
-                        '$valortraccion',
-                        '$valortipo_carroceria',
-                        '$valornumero_puertas',
-                        '$valornumero_asientos',
-                        '$valortipo_caja',
-                        '$valortipo_frenos',
-                        '$valorsuspension',
-                        '$valornumero_ejes',
-                        '$valoruso_permitido')";
-
-    $ejecutar = mysqli_query($conexion, $query);
-
-    if ($ejecutar) {
-        echo "Unidad insertada correctamente";
-    }
-} else {
-    echo "Faltan datos";
+function obtener($campo)
+{
+    return isset($_POST[$campo]) && $_POST[$campo] !== ''
+        ? $_POST[$campo]
+        : null;
 }
-?>
+
+$valores = [
+    "id_modelo" => obtener("modelounidad"),
+    "id_estado_unidad" => obtener("estadounidad"),
+    "id_estatus_unidad" => obtener("estatusunidad"),
+    "id_tipo_unidad" => obtener("tipounidad"),
+    "id_tipo_adquisicion" => obtener("tipoadquisicionunidad"),
+    "id_sede" => obtener("sedeunidad"),
+    "vin" => obtener("VIN"),
+    "numero_motor" => obtener("motorunidad"),
+    "placa" => obtener("placaunidad"),
+    "costo_neto" => obtener("tarjetacirculacionunidad"),
+    "id_color" => obtener("colorunidad"),
+    "fecha_adquisicion" => obtener("fechaadquisicionunidad"),
+    "año_unidad" => obtener("añounidad"),
+    "id_arrendadora" => obtener("arrendadora"),
+    "folio_factura" => obtener("foliofactura"),
+    "capacidad_carga" => obtener("capacidad_carga"),
+    "capacidad_pasajeros" => obtener("capacidad_pasajeros"),
+    "id_tipo_combustible" => obtener("tipo_combustible"),
+    "id_traccion" => obtener("traccion"),
+    "tipo_carrceria" => obtener("tipo_carroceria"),
+    "numero_puertas" => obtener("numero_puertas"),
+    "numero_asientos" => obtener("numero_asientos"),
+    "id_tipo_caja" => obtener("tipo_caja"),
+    "id_tipo_freno" => obtener("tipo_frenos"),
+    "id_tipo_suspencion" => obtener("suspension"),
+    "numero_ejes" => obtener("numero_ejes"),
+    "id_tipo_uso" => obtener("uso_permitido"),
+    "paso_diferencial" => obtener("paso_diferencial")
+];
+
+/* ==============================
+   2️⃣ VALIDAR SOLO LOS CAMPOS OBLIGATORIOS
+============================== */
+
+$obligatorios = [
+    "id_modelo",
+    "id_estado_unidad",
+    "id_estatus_unidad",
+    "id_tipo_unidad",
+    "id_tipo_adquisicion",
+    "id_sede",
+    "placa",
+    "costo_neto",
+    "id_color",
+    "numero_motor",
+    "año_unidad",
+    "folio_factura",
+    "vin"
+];
+
+foreach ($obligatorios as $campo) {
+    if (empty($valores[$campo])) {
+        echo "Falta campo obligatorio: " . $campo;
+        exit;
+    }
+}
+
+/* ==============================
+   3️⃣ MANEJO DE IMAGEN
+============================== */
+
+$nombreImagen = null;
+
+if (isset($_FILES['imagen_unidad']) && $_FILES['imagen_unidad']['error'] == 0) {
+
+    $nombreImagen = 'img_' . $valores["placa"] . '_' . basename($_FILES['imagen_unidad']['name']);
+    $ruta = "../../archivos/imagenes/imagenes_unidades/";
+    move_uploaded_file($_FILES['imagen_unidad']['tmp_name'], $ruta . $nombreImagen);
+}
+
+/* ==============================
+   4️⃣ PREPARED STATEMENT
+============================== */
+
+$stmt = $conexion->prepare("
+    INSERT INTO unidades (
+        id_creador_unidad,
+        id_modelo,
+        id_estado_unidad,
+        id_estatus_unidad,
+        id_tipo_unidad,
+        id_tipo_adquisicion,
+        id_sede,
+        vin,
+        numero_motor,
+        placa,
+        costo_neto,
+        id_color,
+        img_unidad,
+        fecha_adquisicion,
+        año_unidad,
+        id_arrendadora,
+        folio_factura,
+        capacidad_carga,
+        capacidad_pasajeros,
+        id_tipo_combustible,
+        id_traccion,
+        tipo_carrceria,
+        numero_puertas,
+        numero_asientos,
+        id_tipo_caja,
+        id_tipo_freno,
+        id_tipo_suspencion,
+        numero_ejes,
+        id_tipo_uso,
+        paso_diferencial
+    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+");
+
+/* tipos aproximados (ajusta si necesitas) */
+$stmt->bind_param(
+"iiiiiiissssisssissiiiiiiiiiiis",
+    $creador_unidad,
+    $valores["id_modelo"],
+    $valores["id_estado_unidad"],
+    $valores["id_estatus_unidad"],
+    $valores["id_tipo_unidad"],
+    $valores["id_tipo_adquisicion"],
+    $valores["id_sede"],
+    $valores["vin"],
+    $valores["numero_motor"],
+    $valores["placa"],
+    $valores["costo_neto"],
+    $valores["id_color"],
+    $nombreImagen,
+    $valores["fecha_adquisicion"],
+    $valores["año_unidad"],
+    $valores["id_arrendadora"],
+    $valores["folio_factura"],
+    $valores["capacidad_carga"],
+    $valores["capacidad_pasajeros"],
+    $valores["id_tipo_combustible"],
+    $valores["id_traccion"],
+    $valores["tipo_carrceria"],
+    $valores["numero_puertas"],
+    $valores["numero_asientos"],
+    $valores["id_tipo_caja"],
+    $valores["id_tipo_freno"],
+    $valores["id_tipo_suspencion"],
+    $valores["numero_ejes"],
+    $valores["id_tipo_uso"],
+    $valores["paso_diferencial"]
+);
+
+if ($stmt->execute()) {
+    echo "Unidad insertada correctamente";
+} else {
+    echo "Error al insertar la unidad";
+}

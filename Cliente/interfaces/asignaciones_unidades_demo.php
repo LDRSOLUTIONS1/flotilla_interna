@@ -26,12 +26,9 @@
     include("../include/menu.php");
     ?>
 
-    <div class="cuadroblancocontenido">
-
 
         <?php include("../modulos/modulo_asignaciones_unidades_demo.php"); ?>
 
-    </div>
 
     <div class="contenedorspinner" id="contenedorspinner">
         <span class="loader"></span>

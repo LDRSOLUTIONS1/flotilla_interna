@@ -27,6 +27,8 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 pm.organizacion_institucion,
                 model.nombre_modelo,
                 unid.placa,
+                unid.paso_diferencial,
+                unid.vin,
                 uda.fecha_prestamo,
                 uda.fecha_devolucion,
                 uda.id_colaborador_que_asigna,
@@ -122,6 +124,8 @@ while ($fila = $resultado->fetch_assoc()) {
         }
 
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
+            <h6 class="card-text"><i class="fas fa-barcode me-2"></i><strong>VIN:</strong> ' . $fila['vin'] . '</h6>
+            <h6 class="card-text"><i class="fas fa-road me-2"></i><strong>Paso dif.</strong> ' . $fila['paso_diferencial'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>
             <h6 class="card-text"><i class="fas fa-calendar-check me-2"></i><b>Asignación: </b>' . $fila['fecha_prestamo'] . '</h6>
             <h6 class="card-text"><i class="fas fa-undo-alt me-2"></i><b>Devolución: </b>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';

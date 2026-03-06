@@ -13,13 +13,9 @@ include("../../conexion.php");
 $id_usuario_demo = $_SESSION['id_colaborador'] ?? 'NO_SESSION';
 
 // Validar datos obligatorios
-if (isset($_POST['sederecolecciondemo']) 
-    && isset($_POST['sededevolucionunidademo']) 
-    && isset($_POST['fechasolicitudunidademo']) 
+if (isset($_POST['fechasolicitudunidademo']) 
     && isset($_POST['fechadevolucionunidademo'])) {
 
-    $sederecolecciondemo = $_POST['sederecolecciondemo'];
-    $sededevolucionunidademo = $_POST['sededevolucionunidademo'];
     $fechasolicitudunidademo = $_POST['fechasolicitudunidademo'];
     $fechadevolucionunidademo = $_POST['fechadevolucionunidademo'];
 
@@ -39,11 +35,11 @@ if (isset($_POST['sederecolecciondemo'])
     $uso_permitido       = $_POST['uso_permitido'] ?? '';
     $camara_reversa      = $_POST['camara_reversa'] ?? '';
     $sensores_reversa    = $_POST['sensores_reversa'] ?? '';
+    $busqueda_global = $_POST['busqueda_global'] ?? '';
 
     // Construcción dinámica del WHERE
     $filtros = "WHERE ung.id_estado_unidad = 1 
                 AND ung.id_estatus_unidad = 1 
-                AND ung.id_sede = '$sederecolecciondemo' 
                 AND ung.id_tipo_unidad = 3";
 
     if ($nombre_modelo !== '')          $filtros .= " AND ung.id_modelo = '$nombre_modelo'";
@@ -59,10 +55,20 @@ if (isset($_POST['sederecolecciondemo'])
     if ($suspension !== '')             $filtros .= " AND ung.id_tipo_suspencion = '$suspension'";
     if ($numero_ejes !== '')            $filtros .= " AND ung.numero_ejes = '$numero_ejes'";
     if ($uso_permitido !== '')          $filtros .= " AND ung.id_tipo_uso = '$uso_permitido'";
-    //if ($camara_reversa !== '')         $filtros .= " AND ung.camara_reversa = 1";
-    //if ($sensores_reversa !== '')       $filtros .= " AND ung.sensores_reversa = 1";
+    if ($busqueda_global !== '') {
 
-    $sql = "SELECT ung.id_unidad, marc.nombre_marca, model.nombre_modelo, ung.placa, ung.img_unidad,
+    $busqueda = $conexion->real_escape_string($busqueda_global);
+
+    $filtros .= " AND (
+        ung.vin LIKE '%$busqueda%' OR
+        ung.placa LIKE '%$busqueda%' OR
+        ung.paso_diferencial LIKE '%$busqueda%' OR
+        model.nombre_modelo LIKE '%$busqueda%' OR
+        marc.nombre_marca LIKE '%$busqueda%'
+    )";
+}
+
+    $sql = "SELECT ung.id_unidad, marc.nombre_marca, model.nombre_modelo, ung.placa, ung.vin, ung.paso_diferencial, ung.img_unidad,
                    ung.id_tipo_unidad, unest.estado, unestatus.id_estatus_unidad, sed.ubicacion
             FROM unidades AS ung
             INNER JOIN modelos AS model ON ung.id_modelo = model.id_modelo
@@ -95,6 +101,8 @@ if (isset($_POST['sederecolecciondemo'])
                 <div>
                     <h5><strong>' . $fila['nombre_marca'] . ' ' . $fila['nombre_modelo'] . '</strong></h5>
                     <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i><strong>Ubicación:</strong> ' . $fila['ubicacion'] . '</p>
+                    <p class="mb-1"><i class="fas fa-barcode me-2"></i><strong>VIN:</strong> ' . $fila['vin'] . '</p>
+                    <p class="mb-1"><i class="fas fa-road me-2"></i><strong>Paso dif.</strong> ' . $fila['paso_diferencial'] . '</p>
                     <p class="mb-1"><i class="fas fa-id-card me-2"></i><strong>Placa:</strong> ' . $fila['placa'] . '</p>
 
                     <button type="button" id="btnmostrarunidademofisicamoral" data-id="' . $fila['id_unidad'] . '"

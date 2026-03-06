@@ -1006,31 +1006,23 @@ body {
 .btn-aseguradora {
   background-color: #4e83c0; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
 }
 
 /*btn tenencias*/
 .btn-tenencias {
   background-color: #3b9b38; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
 }
 
 /*btn verificaciones*/
 .btn-verificaciones {
   background-color: #ce6b14; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
 }
 /*btn editar  unidades*/
 .btn-editarunidades {
   background-color: #e0bf01ec; /* tu color deseado */
   color: white; /* color del texto */
-  padding: 1px 9px; /* Adjust padding to make the button smaller */
-  font-size: 0.7rem;
 }
 .btn-mapa {
   background-color: #2ab8bd; /* tu color deseado */
@@ -1187,7 +1179,6 @@ body {
   padding-top: 90px;
 }
 .contenedorformularioregistrounidades {
-  padding: 80px;
   width: 100%;
   height: auto;
   overflow-x: none;
@@ -1198,18 +1189,24 @@ body {
     padding: 60px;
   }
 }
+
 .contenedormarcmodelo {
-  padding-top: 30px;
-  transition: background-color 0.3s ease;
+    background-color: #f1f5f9; /* gris muy claro */
+    padding-top: 30px;
+    border-radius: 10px;
+    padding: 25px;
+    transition: all 0.3s ease;
 }
+
 .contenedormarcmodelo:hover {
-  background-color: rgba(156, 156, 156, 0.541);
-  padding: 40px;
+    box-shadow: 0 6px 16px rgba(90, 139, 231, 0.767);
+    padding: 40px;
   border-radius: 18px;
 }
 
+
 .contenedormarcmodelo:hover .tituloletraunidadmarmodel {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .tituloletraunidadmarmodel {
   padding-left: 30px;
@@ -2174,6 +2171,194 @@ body {
   }
 }
 /*-------------------------------------------------------estilos para unidades demo Admin asignador de demos*/
+/* CONTENEDOR */
+
+.lista-pendientes-demo{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+
+/* ITEM */
+
+.pendiente-demo-item{
+
+    background:#ffffff;
+    border-radius:10px;
+    padding:14px 16px;
+
+    border:1px solid #e6e6e6;
+
+    box-shadow:0 2px 6px rgba(0,0,0,0.05);
+
+    transition:all .2s ease;
+
+}
+
+
+/* HOVER SUAVE */
+
+.pendiente-demo-item:hover{
+
+    transform:translateY(-2px);
+    box-shadow:0 6px 14px rgba(0,0,0,0.08);
+
+}
+
+
+/* HEADER */
+
+.pendiente-header{
+
+    font-weight:600;
+    font-size:14px;
+    margin-bottom:6px;
+
+}
+
+
+/* INFO */
+
+.pendiente-info{
+
+    font-size:13px;
+    color:#555;
+
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+
+    margin-bottom:8px;
+
+}
+
+
+/* FLUJO */
+
+.pendiente-flujo{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+
+/* BADGES */
+
+.badge-aprobado{
+
+    background:#28a745;
+    color:white;
+
+    font-size:11px;
+
+    padding:4px 8px;
+    border-radius:6px;
+
+}
+
+.badge-pendiente{
+
+    background:#ffc107;
+    color:#000;
+
+    font-size:11px;
+
+    padding:4px 8px;
+    border-radius:6px;
+
+}
+
+.badge-admin{
+
+    background:#6c757d;
+    color:white;
+
+    font-size:11px;
+
+    padding:4px 8px;
+    border-radius:6px;
+
+}
+
+
+/* FLECHA */
+
+.flecha-aprobacion{
+
+    font-size:11px;
+    color:#999;
+
+}
+/* Panel de acciones final */
+.panel-acciones-final {
+    background-color: #f1f5f9; /* gris muy claro */
+    border-radius: 10px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.panel-acciones-final:hover {
+    box-shadow: 0 6px 16px rgba(90, 139, 231, 0.767);
+}
+
+.panel-texto {
+    font-size: 1rem;
+    color: #141920; /* azul corporativo */
+}
+
+/* Botones dentro del panel */
+.btn-final-demo {
+    background-color: #5987cc;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-final-demo i {
+    font-size: 1.3rem;
+}
+
+.btn-final-demo:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+}
+
+/* Responsivo: botones se apilan en móviles */
+@media (max-width: 576px) {
+    .btn-final-demo {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.btn-accion-demo {
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 18px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.btn-accion-demo i {
+    font-size: 1.2rem;
+}
+
+.btn-accion-demo:hover {
+    background-color: #0d6efd;  /* azul corporativo */
+    color: #fff;
+    border-color: #0d6efd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
 /*btn CURP*/
 .btn-curp {
   background-color: #386e9b; /* tu color deseado */
@@ -2271,9 +2456,10 @@ body {
 }
 
 /*---------------------------------------------------------------------estilos para solictar unidades demo desde la interfaz de usuario----------*/
+
 .contenedorsolicitudunidaddemo {
   position: relative;
-  padding-top: 100px;
+  padding-top: 60px;
 }
 .contenedorsolicitudemo {
   position: absolute;
@@ -2322,9 +2508,6 @@ body {
 }
 /*------------------------------------contenedor de las cards de las unidades DEMO disponibles*/
 .contenedorunidadesdisponiblesdemo {
-  padding-top: 300px;
-  padding-left: 30px;
-  padding-right: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2333,17 +2516,45 @@ body {
 }
 @media (max-width: 768px) {
   .contenedorunidadesdisponiblesdemo {
-    padding-top: 650px;
   }
 }
 .conetenedortarjetauniddemo {
   transition: all 0.2s ease;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.671);
+  background-color: #f1f5f9;
 }
 .conetenedortarjetauniddemo:hover {
-  background-color: rgba(174, 179, 184, 0.671);
-  transition: all 0.2s ease;
+    box-shadow: 0 6px 16px rgba(90, 139, 231, 0.767);
+}
+
+.btn-accion-demo {
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 8px 20px;        /* más compacto que antes */
+    border-radius: 5px;       /* bordes suaves */
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;                 /* separación entre icono y texto */
+}
+
+.btn-accion-demo i {
+    font-size: 1.1rem;
+}
+
+.btn-accion-demo:hover {
+    background-color: #0d6efd; /* azul corporativo */
+    color: #fff;
+    border-color: #0d6efd;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Para versión activa (si quieres marcar cuál se seleccionó) */
+.btn-accion-demo.active {
+    background-color: #0d6efd;
+    color: #fff;
+    border-color: #0d6efd;
 }
 
 .conetenedortarjetauniddemo:hover .imgunidadpoolsolicitud {
@@ -3544,7 +3755,6 @@ footer {
 .demo-panel {
   max-width: 1300px;
   margin: auto;
-  background: #a4bae273;
   border-radius: 26px;
   padding: 40px 50px 60px;
   box-shadow: 0 25px 60px rgba(0,0,0,.18);

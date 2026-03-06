@@ -1,263 +1,122 @@
 document.addEventListener("DOMContentLoaded", function () {
-    //----------------------------------------------------------esto hace que todas las entradas de texto sean mayusculas
+  const modal = new bootstrap.Modal(
+    document.getElementById("modalEditarUnidadesdemo"),
+  );
+  const body = document.getElementById("modalEditarUnidadesBody");
+  const spinner = document.getElementById("contenedorspinner");
+
+  let idUnidad = null;
+
+  // 🔹 Mayúsculas automáticas
   document.addEventListener("input", function (e) {
-  const target = e.target;
-  if (target.tagName === "INPUT" && target.type === "text") {
-    target.value = target.value.toUpperCase();
-  }
-});
-
-
-
-  const modalEditarUnidadesdemo = new bootstrap.Modal(document.getElementById("modalEditarUnidadesdemo"));
-  const modalEditarUnidadesBody = document.getElementById("modalEditarUnidadesBody");
-
-  let id_unidad_seleccionado = 0;
-
-  document.body.addEventListener("click", function (e) {
-  if (e.target && e.target.id === "btnactualizarunidad") {
-    e.preventDefault();
-    actualizarUnidad();
-  }
-});
-
-function v(id) {
-  const el = document.getElementById(id);
-  if (!el) {
-    console.warn("No existe:", id);
-    return "";
-  }
-  return el.type === "checkbox" ? el.checked : el.value;
-}
-
-function f(id) {
-  const el = document.getElementById(id);
-  if (!el) {
-    console.warn("No existe:", id);
-    return null;
-  }
-  return el.files ? el.files[0] : null;
-}
-
-function actualizarUnidad() {
-
-  marcaeditarunidad = document.getElementById("marcaeditarunidad");
-  modeloeditarunidad = document.getElementById("modeloeditarunidad");
-  editarVIN = document.getElementById("editarVIN");
-  editarPlaca = document.getElementById("editarPlaca");
-  editarNumeroMotor = document.getElementById("editarNumeroMotor");
-  editarColor = document.getElementById("editarColor");
-  editarTarjetaCirculacion = document.getElementById("editarTarjetaCirculacion");
-  editarañounidad = document.getElementById("editarañounidad");
-  editarEstadoUnidad = document.getElementById("editarEstadoUnidad");
-  editarEstatusUnidad = document.getElementById("editarEstatusUnidad");
-  editarTipoUnidad = document.getElementById("editarTipoUnidad");
-  editsedeunidad = document.getElementById("editsedeunidad");
-  editarfechaadquisicionunidad = document.getElementById("editarfechaadquisicionunidad");
-  editartipoadquisicionunidad = document.getElementById("editartipoadquisicionunidad");
-  editartipoarrendadoraunidad = document.getElementById("editartipoarrendadoraunidad");
-  editarfoliofacturaunidad = document.getElementById("editarfoliofacturaunidad");
-  imagen_unidad = document.getElementById("imagen_unidad");
-
-  editarCarga = document.getElementById("editarCarga");
-  editarPasajeros = document.getElementById("editarPasajeros");
-  editarCombustible = document.getElementById("editarCombustible");
-  editarTraccion = document.getElementById("editarTraccion");
-  editarCarroceria = document.getElementById("editarCarroceria");
-  editarPuertas = document.getElementById("editarPuertas");
-  editarAsientos = document.getElementById("editarAsientos");
-  editarCaja = document.getElementById("editarCaja");
-  editarFreno = document.getElementById("editarFreno");
-  editarSuspencion = document.getElementById("editarSuspencion");
-  editarEjes = document.getElementById("editarEjes");
-  editarUso = document.getElementById("editarUso");
-
-  contenedorspinner.style.display = "flex";
-
-  obtenervalores();
-
-  if (validarllenado()) {
-    insertardatos();
-  } else {
-    contenedorspinner.style.display = "none";
-  }
-}
-
-
-  document.body.addEventListener("click", function (event) {
-    if (event.target.classList.contains("btneditarunidadesdemo")) {
-      id_unidad_seleccionado = event.target.getAttribute("data-id");
-      console.log(id_unidad_seleccionado);
-      
-      $.ajax({
-        type: "POST",
-        url: "../../Servidor/solicitudes/unidades/formularioeditarunidadesdemo.php",
-        data: { idunidad: id_unidad_seleccionado },
-        success: function (response) {
-          console.log(response);
-          modalEditarUnidadesBody.innerHTML = response;
-          modalEditarUnidadesdemo.show();
-        }
-      });
+    if (e.target.tagName === "INPUT" && e.target.type === "text") {
+      e.target.value = e.target.value.toUpperCase();
     }
   });
-  
-//realizamos la actualizacion
 
-  let marcaeditarunidad, modeloeditarunidad, editarVIN, editarPlaca, editarNumeroMotor, editarColor, editarTarjetaCirculacion;
-  let editarañounidad, editarEstadoUnidad, editarEstatusUnidad, editarTipoUnidad, editsedeunidad, editarfechaadquisicionunidad;
-  let editartipoadquisicionunidad, editartipoarrendadoraunidad, editarfoliofacturaunidad, imagen_unidad;
-  let editarCarga, editarPasajeros, editarCombustible, editarTraccion, editarCarroceria;
-  let editarPuertas, editarAsientos, editarCaja, editarFreno, editarSuspencion, editarEjes, editarUso;
+  // 🔹 Abrir modal
+  document.body.addEventListener("click", function (e) {
+    if (e.target.classList.contains("btneditarunidadesdemo")) {
+      idUnidad = e.target.dataset.id;
 
-  const contenedorspinner = document.getElementById("contenedorspinner");
+      $.post(
+        "../../Servidor/solicitudes/unidades/formularioeditarunidadesdemo.php",
+        { idunidad: idUnidad },
+        function (response) {
+          body.innerHTML = response;
+          modal.show();
+        },
+      );
+    }
+  });
 
-  let valormarcaeditarunidad, valormodeloeditarunidad, valorVINeditar, valorPlacaeditar, valorNumeroMotoreditar;
-  let valoreditarColor, valorTarjetaCirculacioneditar, valoreditarañounidad, valorEstadoUnidadeditar, valorEstatusUnidadeditar;
-  let valorTipoUnidadeditar, valorsedeunidadeditar, valorfechaadquisicionunidadeditar, valortipoadquisicionunidadeditar;
-  let valoreditartipoarrendadoraunidad, valoreditarfoliofacturaunidad, valorimagen_unidad;
+  // 🔹 Actualizar
+  document.body.addEventListener("click", function (e) {
+    if (e.target.id === "btnactualizarunidad") {
+      e.preventDefault();
+      actualizarUnidad();
+    }
+  });
 
-  let valoreditarCarga, valoreditarPasajeros, valoreditarCombustible, valoreditarTraccion, valoreditarCarroceria;
-  let valoreditarPuertas, valoreditarAsientos, valoreditarCaja, valoreditarFreno, valoreditarSuspencion, valoreditarEjes;
-  let valoreditarUso;
+  function actualizarUnidad() {
+    spinner.style.display = "flex";
 
+    const form = new FormData();
 
-function obtenervalores() {
-  valormarcaeditarunidad = v("marcaeditarunidad");
-  valormodeloeditarunidad = v("modeloeditarunidad");
-  valorVINeditar = v("editarVIN");
-  valorPlacaeditar = v("editarPlaca");
-  valorNumeroMotoreditar = v("editarNumeroMotor");
-  valoreditarColor = v("editarColor");
-  valorTarjetaCirculacioneditar = v("editarTarjetaCirculacion");
-  valoreditarañounidad = v("editarañounidad");
-  valorEstadoUnidadeditar = v("editarEstadoUnidad");
-  valorEstatusUnidadeditar = v("editarEstatusUnidad");
-  valorTipoUnidadeditar = v("editarTipoUnidad");
-  valorsedeunidadeditar = v("editsedeunidad");
-  valorfechaadquisicionunidadeditar = v("editarfechaadquisicionunidad");
-  valortipoadquisicionunidadeditar = v("editartipoadquisicionunidad");
-  valoreditartipoarrendadoraunidad = v("editartipoarrendadoraunidad");
-  valoreditarfoliofacturaunidad = v("editarfoliofacturaunidad");
-  valorimagen_unidad = f("imagen_unidad");
+    form.append("id_unidad", idUnidad);
 
-  valoreditarCarga = v("editarCarga");
-  valoreditarPasajeros = v("editarPasajeros");
-  valoreditarCombustible = v("editarCombustible");
-  valoreditarTraccion = v("editarTraccion");
-  valoreditarCarroceria = v("editarCarroceria");
-  valoreditarPuertas = v("editarPuertas");
-  valoreditarAsientos = v("editarAsientos");
-  valoreditarCaja = v("editarCaja");
-  valoreditarFreno = v("editarFreno");
-  valoreditarSuspencion = v("editarSuspencion");
-  valoreditarEjes = v("editarEjes");
-  valoreditarUso = v("editarUso");
-}
-
-
-  function validarllenado() {
+    // 🔹 Lista de campos
     const campos = [
+      "marcaeditarunidad",
+      "modeloeditarunidad",
+      "editarVIN",
+      "editarPlaca",
+      "editarNumeroMotor",
+      "editarCostoNeto",
+      "editarColor",
+      "editarañounidad",
+      "editarEstadoUnidad",
+      "editarEstatusUnidad",
+      "editarTipoUnidad",
+      "editsedeunidad",
+      "editartipoadquisicionunidad",
+      "editartipoarrendadoraunidad",
+      "editarfoliofacturaunidad",
+      "editarfechaadquisicionunidad",
+      "editarPasoDiferencial",
+      "editarCarga",
+      "editarPasajeros",
+      "editarCombustible",
+      "editarTraccion",
+      "editarCarroceria",
+      "editarPuertas",
+      "editarAsientos",
+      "editarCaja",
+      "editarFreno",
+      "editarSuspencion",
+      "editarEjes",
+      "editarUso",
     ];
 
-    for (let i = 0; i < campos.length; i++) {
-      if (!campos[i].campo) {
-        Toastify({
-          text: "No obtuve " + campos[i].nombre,
-          duration: 3000,
-          gravity: "top",
-          position: "right",
-          stopOnFocus: true,
-          style: {
-            background: "linear-gradient(to right,rgb(255, 230, 0),rgb(231, 208, 0))",
-          },
-        }).showToast();
-        return false;
+    for (let id of campos) {
+      const el = document.getElementById(id);
+      if (el) {
+        form.append(id, el.value);
       }
     }
-    return true;
-  }
 
-  function insertardatos() {
-    const formData = new FormData();
-    formData.append("id_unidad", id_unidad_seleccionado);
-    formData.append("marcaeditarunidad", valormarcaeditarunidad);
-    formData.append("modeloeditarunidad", valormodeloeditarunidad);
-    formData.append("editarVIN", valorVINeditar);
-    formData.append("editarPlaca", valorPlacaeditar);
-    formData.append("editarNumeroMotor", valorNumeroMotoreditar);
-    formData.append("editarColor", valoreditarColor);
-    formData.append("editarTarjetaCirculacion", valorTarjetaCirculacioneditar);
-    formData.append("editarañounidad", valoreditarañounidad);
-    formData.append("editarEstadoUnidad", valorEstadoUnidadeditar);
-    formData.append("editarEstatusUnidad", valorEstatusUnidadeditar);
-    formData.append("editarTipoUnidad", valorTipoUnidadeditar);
-    formData.append("editsedeunidad", valorsedeunidadeditar);
-    formData.append("editarfechaadquisicionunidad", valorfechaadquisicionunidadeditar);
-    formData.append("editartipoadquisicionunidad", valortipoadquisicionunidadeditar);
-    formData.append("editartipoarrendadoraunidad", valoreditartipoarrendadoraunidad);
-    formData.append("editarfoliofacturaunidad", valoreditarfoliofacturaunidad);
-    formData.append("imagen_unidad", valorimagen_unidad);
-
-    formData.append("editarCarga", valoreditarCarga);
-    formData.append("editarPasajeros", valoreditarPasajeros);
-    formData.append("editarCombustible", valoreditarCombustible);
-    formData.append("editarTraccion", valoreditarTraccion);
-    formData.append("editarCarroceria", valoreditarCarroceria);
-    formData.append("editarPuertas", valoreditarPuertas);
-    formData.append("editarAsientos", valoreditarAsientos);
-    formData.append("editarCaja", valoreditarCaja);
-    formData.append("editarFreno", valoreditarFreno);
-    formData.append("editarSuspencion", valoreditarSuspencion);
-    formData.append("editarEjes", valoreditarEjes);
-    formData.append("editarUso", valoreditarUso);
+    // 🔹 Imagen solo si existe
+    const img = document.getElementById("imagen_unidad");
+    if (img && img.files.length > 0) {
+      form.append("imagen_unidad", img.files[0]);
+    }
 
     $.ajax({
       type: "POST",
       url: "../../Servidor/solicitudes/unidades/actualizar_unidades_demo.php",
-      data: formData,
+      data: form,
       processData: false,
       contentType: false,
-      success: function (response) {
-        console.log("entro a success");
-        console.log(response);
-        contenedorspinner.style.display = "none";
+      success: function (res) {
+        spinner.style.display = "none";
 
-        if (response.includes("correctamente")) {
-          Toastify({
-            text: "Correctamente",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-            style: {
-              background: "linear-gradient(to right,rgb(255, 230, 0),rgb(231, 208, 0))",
-            },
-          }).showToast();
+        if (res.includes("OK")) {
+          Swal.fire({
+            title: "Unidad actualizada correctamente",
+            text: "La unidad ha sido actualizada correctamente",
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          });
 
-          window.location.href = "./unidades_demo.php?resultado=Unidadactualizada";
-          modalEditarUnidadesdemo.hide();
-        } else if (response.includes("Duplicate")) {
+          modal.hide();
+          setTimeout(() => location.reload(), 1000);
+        } else {
           Toastify({
-            text: "Unidad ya registrada",
-            duration: 3000,
+            text: res,
+            duration: 4000,
             gravity: "top",
             position: "right",
-            stopOnFocus: true,
-            style: {
-              background: "linear-gradient(to right,rgb(255, 230, 0),rgb(231, 208, 0))",
-            },
-          }).showToast();
-        } else if (response.includes("Error")) {
-          Toastify({
-            text: "Error al editar la poliza",
-            duration: 3000,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-            style: {
-              background: "linear-gradient(to right,rgb(255, 0, 0),rgb(255, 0, 0))",
-            },
+            style: { background: "red" },
           }).showToast();
         }
       },

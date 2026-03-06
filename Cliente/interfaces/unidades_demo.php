@@ -41,13 +41,8 @@
         <?php
         include("../include/menu.php");
         ?>
-
-        <div style="background-color: #a4bae273;">
-
-
             <?php include("../modulos/modulo_unidades_demo.php"); ?>
 
-        </div>
 
         <div class="contenedorspinner" id="contenedorspinner">
             <span class="loader"></span>

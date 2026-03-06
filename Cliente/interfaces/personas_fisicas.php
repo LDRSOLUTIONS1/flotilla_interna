@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="../img/LDR_LOGO.png" href="../img/LDR_LOGO.png">
     <!--estilos de boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,14 +31,8 @@ error_reporting(E_ALL);
     <?php
     include("../include/menu.php");
     ?>
-
-    <div style="background-color: #a4bae273;">
-
-
         <?php include("../modulos/modulo_personas_fisicas.php"); ?>
-
-    </div>
-
+        
     <div class="contenedorspinner" id="contenedorspinner">
         <span class="loader"></span>
     </div>

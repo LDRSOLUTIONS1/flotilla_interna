@@ -34,15 +34,104 @@ function toggleVista() {
     const button = document.getElementById("botonCambiarVista");
     const cards = document.getElementById("vistaCards");
     const tabla = document.getElementById("vistaTabla");
-    const boton = event.target;
 
-    if (cards.style.display === "none") {
-        cards.style.display = "flex";
-        tabla.style.display = "none";
-        boton.textContent = "Cambiar a vista de tabla";
-    } else {
-        cards.style.display = "none";
+    if (tabla.style.display === "none") {
         tabla.style.display = "block";
-        boton.textContent = "Cambiar a vista de cards";
+        cards.style.display = "none";
+        button.innerHTML = '<i class="fa-solid fa-table-cells me-2"></i> Cambiar a vista de cards';
+    } else {
+        tabla.style.display = "none";
+        cards.style.display = "flex";
+        button.innerHTML = '<i class="fa-solid fa-table me-2"></i> Cambiar a vista de tabla';
     }
 }
+
+
+    document.addEventListener("click", function (e) {
+
+    const boton = e.target.closest(".btn-devolver-unidad");
+    if (!boton) return;
+
+    const idAsignacion = boton.getAttribute("data-id_asignacion");
+    const idUnidad     = boton.getAttribute("data-id_unidad");
+
+    Swal.fire({
+        title: '¿Devolver unidad?',
+        text: "La unidad pasará a estado disponible.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#f59e0b',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, devolver',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+        if (!result.isConfirmed) return;
+
+        boton.disabled = true;
+
+        fetch("../../Servidor/solicitudes/unidades/asignacion_unidades_demo/devolver_unidad_demo.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "id_asignacion=" + idAsignacion + "&id_unidad=" + idUnidad
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.status) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unidad devuelta',
+                    text: data.msg,
+                    timer: 1800,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+
+            } else {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.msg
+                });
+
+                boton.disabled = false;
+            }
+
+        })
+        .catch(error => {
+
+            console.error(error);
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Error inesperado',
+                text: 'Ocurrió un problema al procesar la solicitud.'
+            });
+
+            boton.disabled = false;
+        });
+
+    });
+
+});
+
+document.getElementById("btnPendientes").addEventListener("click", function(){
+
+    let panel = new bootstrap.Offcanvas(document.getElementById('panelPendientes'));
+    panel.show();
+
+    fetch("../../Servidor/solicitudes/unidades/asignacion_unidades_demo/obtener_pendientes_demo.php")
+    .then(res => res.text())
+    .then(data => {
+
+        document.getElementById("listaPendientes").innerHTML = data;
+
+    });
+
+});

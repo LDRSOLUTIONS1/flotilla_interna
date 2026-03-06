@@ -66,7 +66,7 @@ if (
             LEFT JOIN personas_fisicas AS pf ON asig.id_persona_fisica = pf.id_persona_fisica
             LEFT JOIN personas_morales AS pm ON asig.id_persona_moral = pm.id_persona_moral
             WHERE asig.id_asignacion_unidad_demo = '$id_asignacion_demo'";
-    
+
     $resultado = mysqli_query($conexion, $query);
     if (!$resultado || mysqli_num_rows($resultado) === 0) {
         die("❌ No se encontraron datos de la asignación.");
@@ -95,34 +95,38 @@ if (
     $puesto = $data['nombre_puesto'];
 
     //cadena para ver si requiere master driver y mandarlo por correo
-                $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
-                $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
-                $resuiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
+    $requiere_master_driver = ($solicitar_master_driver == 1) ? 'SI REQUIERE MASTER DRIVER' : 'NO REQUIERE MASTER DRIVER';
+    $requiere_emplacamiento_ldr = ($solicitar_emplacamiento_ldr == 1) ? 'SI REQUIERE EMPLACAMIENTO' : 'NO REQUIERE EMPLACAMIENTO';
+    $resuiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
 
     // 1. Obtener jefe directo de la sesión
-$id_jefe_directo = $_SESSION['id_colaborador'] ?? null;
-$nombre_jefe_directo = "";
+    $id_jefe_directo = $_SESSION['id_colaborador'] ?? null;
+    $nombre_jefe_directo = "";
 
-// 2. Consultar su nombre
-if ($id_jefe_directo) {
-    $sql_jefe = "SELECT nombre_1, nombre_2, apellido_paterno, apellido_materno 
+    // 2. Consultar su nombre
+    if ($id_jefe_directo) {
+        $sql_jefe = "SELECT nombre_1, nombre_2, apellido_paterno, apellido_materno 
                  FROM colaboradores 
                  WHERE id_colaborador = '$id_jefe_directo'";
-    $res_jefe = $conexion->query($sql_jefe);
-    if ($res_jefe && $res_jefe->num_rows > 0) {
-        $row_jefe = $res_jefe->fetch_assoc();
-        $nombre_jefe_directo = trim($row_jefe['nombre_1'] . ' ' . $row_jefe['nombre_2'] . ' ' . 
-                                    $row_jefe['apellido_paterno'] . ' ' . $row_jefe['apellido_materno']);
+        $res_jefe = $conexion->query($sql_jefe);
+        if ($res_jefe && $res_jefe->num_rows > 0) {
+            $row_jefe = $res_jefe->fetch_assoc();
+            $nombre_jefe_directo = trim($row_jefe['nombre_1'] . ' ' . $row_jefe['nombre_2'] . ' ' .
+                $row_jefe['apellido_paterno'] . ' ' . $row_jefe['apellido_materno']);
+        }
     }
-}
 
 
     // 🔹 Obtener correos de usuarios tipo 7
     $correos = [];
     $correo_sql = "SELECT cor.email_corporativo
-                   FROM usuarios AS u 
-                   INNER JOIN colaboradores AS cor ON u.id_colaborador = cor.id_colaborador
-                   WHERE u.id_tipo_usuario = 7";
+               FROM usuarios u
+               INNER JOIN usuario_modulo_tipo umt 
+                    ON umt.id_usuario = u.id_usuario
+               INNER JOIN colaboradores cor 
+                    ON cor.id_colaborador = u.id_colaborador
+               WHERE umt.id_tipo_usuario = 7
+               AND umt.id_modulo = 2";
     $correo_result = $conexion->query($correo_sql);
     while ($row = $correo_result->fetch_assoc()) {
         if (!empty($row['email_corporativo'])) {

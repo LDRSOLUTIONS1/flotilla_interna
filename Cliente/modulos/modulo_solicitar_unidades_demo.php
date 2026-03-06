@@ -1,53 +1,48 @@
-<div class="contenedoropcionesunidades demo-wrapper">
-
+<div class="container mt-4" style="padding-top: 40px;">
     <!-- PANEL -->
-    <div class="demo-panel">
+    <div class="container mt-4" style="padding-top: 40px;">
 
         <!-- HEADER -->
-        <div class="demo-header">
-            <h2 class="titulosletrasunidades">Solicitud de unidades demo</h2>
-            <p class="demo-descripcion">
-                Registra al cliente y después asigna una unidad disponible para demostración.
-            </p>
+        <div class="mb-4">
+            <h4 class="titulo-validacion mb-1">Solicitud de unidades demo</h4>
+            <p class="subtitulo-validacion mb-0">Registra al cliente y después asigna una unidad disponible para demostración.</p>
         </div>
 
-        <!-- ACCIONES -->
-        <div class="demo-acciones">
-            <div class="row justify-content-center g-4">
+        <!-- PANEL DESTACADO -->
+        <div class="panel-acciones-final p-4 mb-4">
+            <!-- Call to Action -->
+            <p class="panel-texto fw-bold mb-3">
+                🔹 Aquí se registran las personas físicas y morales antes de asignarles una unidad demo
+            </p>
 
-                <div class="col-md-3 col-sm-3">
-                    <button onclick="window.location.href='../interfaces/personas_fisicas.php'"
-                        class="btn btn-demo-action w-100">
-                        <i class="fa-solid fa-person"></i>
-                        <span>Personas físicas</span>
-                    </button>
-                </div>
+            <!-- Botones -->
+            <div class="d-flex flex-wrap gap-3">
+                <button onclick="window.location.href='../interfaces/personas_fisicas.php'"
+                    class="btn btn-final-demo" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar persona física">
+                    <i class="fa-solid fa-person fa-xl me-2"></i>
+                    Alta Personas físicas
+                </button>
 
-                <div class="col-md-3 col-sm-3">
-                    <button onclick="window.location.href='../interfaces/personas_morales.php'"
-                        class="btn btn-demo-action w-100">
-                        <i class="fa-solid fa-building-user"></i>
-                        <span>Personas morales</span>
-                    </button>
-                </div>
-
+                <button onclick="window.location.href='../interfaces/personas_morales.php'"
+                    class="btn btn-final-demo" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar persona moral">
+                    <i class="fa-solid fa-building-user fa-xl me-2"></i>
+                    Alta Personas morales
+                </button>
             </div>
         </div>
 
-        <p class="demo-descripcion text-center mt-4">
-            Una vez que se ha registrado correctamente a la persona física o moral, se asignará una unidad disponible para demostración.
-        </p>
-
-        <!-- LISTADO -->
-        <div class="demo-contenido">
-            <?php include("../../Servidor/componentes/solicitar_unidades_demo.php"); ?>
-        </div>
-
-        <div class="contenedorunidadesdisponiblesdemo" id="contenedorunidadesdisponiblesdemo"></div>
-
     </div>
 
+
+    <!-- LISTADO -->
+    <div class="demo-contenido">
+        <?php include("../../Servidor/componentes/solicitar_unidades_demo.php"); ?>
+    </div>
+
+    <div class="contenedorunidadesdisponiblesdemo" id="contenedorunidadesdisponiblesdemo"></div>
+
 </div>
+
 
 
 <!-----------------------------------modal para ver los detalles de la unidad DEMO que el ususario cliente solicita-------------------------------->
@@ -56,7 +51,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Asignar</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Asignación</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btncerrarmodalinfounidadpool"></button>
             </div>
             <div class="modal-body" id="modalinfoformacionunidademobody">
@@ -86,8 +81,6 @@
         </div>
     </div>
 </div>
-
-
 
 <!--js para filtrar las cards de unidades-->
 <script src="../js/unidades/filtrar_cards.js"></script>

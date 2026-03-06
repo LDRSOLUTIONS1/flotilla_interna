@@ -19,48 +19,101 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
 <!-------------------------------------------aqui comienza el contenedor Autorizacion de unidades demos por parte del usuario tipo 7 ----------------------------------------------------------->
 <!-- CONTENEDOR PRINCIPAL -->
-<div class="contenedormisunidades demo-wrapper">
-
-    <div class="demo-panel">
+<div class="container mt-4" style="padding-top: 40px;">
+    <div class="container mt-4" style="padding-top: 40px;">
 
         <!-- HEADER -->
-        <div class="demo-header">
-            <h2 class="titulosletrasunidades">Unidades demo autorizadas</h2>
-            <p class="demo-descripcion">
-                Aquí puedes consultar tus unidades demo, aprobar o denegar solicitudes y revisar los detalles de cada unidad.
+        <div class="mb-4">
+            <h4 class="titulo-validacion mb-1">Unidades demo asignadas</h4>
+            <p class="subtitulo-validacion mb-0">
+                Consulta las unidades demo autorizadas y asignadas, revisa detalles y gestiona solicitudes activas.
+            </p>
+        </div>
+
+        <!-- PANEL DE ACCIONES -->
+        <div class="panel-acciones-final p-4 mb-4">
+
+            <p class="panel-texto fw-bold mb-3">
+                🔹 Desde aquí puedes buscar, filtrar y cambiar el tipo de visualización de las unidades demo
             </p>
 
-            <!-- BUSCADOR Y FILTROS -->
-            <div class="d-flex flex-wrap gap-2 mt-3">
-                <input type="text" id="filtroBusqueda" class="form-control flex-grow-1" placeholder="Buscar unidades..." onkeyup="filtrarCards(), filtrarTabla()">
+            <div class="d-flex flex-wrap gap-3 align-items-center">
 
-                <button class="btn btn-outline-primary" id="botonCambiarVista" onclick="toggleVista()">Cambiar a vista de tabla</button>
+                <!-- Buscador -->
+                <div class="flex-grow-1">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text"
+                            id="filtroBusqueda"
+                            class="form-control"
+                            placeholder="Buscar unidades..."
+                            onkeyup="filtrarCards(); filtrarTabla();">
+                    </div>
+                </div>
 
+                <!-- Botón cambiar vista -->
+                <button class="btn btn-outline-primary"
+                    id="botonCambiarVista"
+                    onclick="toggleVista()">
+                    <i class="fa-solid fa-table-cells me-2"></i>
+                    Cambiar vista
+                </button>
+
+                <!-- Filtro solicitante -->
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFiltroSolicitante" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filtrar por tipo de solicitante
+                    <button class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownFiltroSolicitante"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Filtrar solicitante
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownFiltroSolicitante">
+
+                    <ul class="dropdown-menu">
                         <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="todos" href="#">Todas</a></li>
                         <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="fisica" href="#">Personas Físicas</a></li>
                         <li><a class="dropdown-item opcion-filtro-solicitante" data-filtro="moral" href="#">Personas Morales</a></li>
                     </ul>
                 </div>
+                    <button class="btn btn-warning" id="btnPendientes">
+                        <i class="fas fa-clock"></i> Pendientes de asignación
+                    </button>
             </div>
         </div>
+    </div>
 
-        <!-- CONTENIDO DE LAS CARDS -->
-        <div class="demo-contenido mt-4">
-            <div class="contenedorcardunidadescliente demo-grid">
-                <?php include("../../Servidor/componentes/obtener_unidades_demo_autorizadas.php"); ?>
-            </div>
+    <!-- CONTENIDO -->
+    <div class="demo-contenido">
+        <div class="contenedorcardunidadescliente demo-grid">
+            <?php include("../../Servidor/componentes/obtener_unidades_demo_autorizadas.php"); ?>
+        </div>
+    </div>
+
+</div>
+
+<!--panel lateral-->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="panelPendientes" style="width:500px;">
+    
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">
+            <i class="fas fa-clock"></i> Solicitudes pendientes
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body">
+
+        <div id="listaPendientes">
+
+            <!-- aqui se cargaran -->
+
         </div>
 
     </div>
 
 </div>
-
-
 
 <!--modal para ver la prueba demo y la informacion de la unidad-->
 <!--modal-->
@@ -121,17 +174,17 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 <!--------------------------------------------------------------------------Modal para ver el Mapa y saber donde esta la unidad-->
 <!--modal-->
 <div class="modal fade" id="modalMapa" tabindex="-1" aria-labelledby="modalMapaLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Ultima actualización de la ubicación de la unidad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <div id="mapaUnidad" style="height: 500px;"></div>
-      </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ultima actualización de la ubicación de la unidad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="mapaUnidad" style="height: 500px;"></div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

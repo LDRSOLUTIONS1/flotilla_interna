@@ -63,12 +63,12 @@ if ($resultado->num_rows > 0) {
         // Botón de edición según tipo de usuario
         $btnEditar = "";
         if ($id_tipo_usuario == 1) {
-            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidades' data-id='" . $fila['id_unidad'] . "'>
-                            <i class='fas fa-edit'></i> Editar
+            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidades fas fa-edit' data-id='" . $fila['id_unidad'] . "'>
+                            
                           </button>";
         } else { // Demo
-            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
-                            <i class='fas fa-edit'></i> Editar
+            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidadesdemo fas fa-edit' data-id='" . $fila['id_unidad'] . "'>
+                            
                           </button>";
         }
 
@@ -92,18 +92,15 @@ if ($resultado->num_rows > 0) {
                 </button>
             </td>
             <td class='titulostablaunidades'>
-                <button class='btn btn-sm btn-aseguradora btnpolizasunidades' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Aseguradora
+                <button class='btn btn-sm btn-aseguradora btnpolizasunidades fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
             <td>
-                <button class='btn btn-sm btn-tenencias btntenencias' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Tenencias
+                <button class='btn btn-sm btn-tenencias btntenencias fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
             <td>
-                <button class='btn btn-sm btn-verificaciones btnverificaciones' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Verificaciones
+                <button class='btn btn-sm btn-verificaciones btnverificaciones fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
         </tr>";

@@ -1,30 +1,49 @@
 <?php
 if (!isset($_SESSION)) {
-    session_start();
+  session_start();
 }
 
 // Verificar que la sesión tenga los datos necesarios
 if (!isset($_SESSION['id_colaborador']) || !isset($_SESSION['id_tipo_usuario'])) {
-    echo "Sesión inválida";
-    exit;
+  echo "Sesión inválida";
+  exit;
 }
 
 $colaborador = $_SESSION['id_colaborador'];
 $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 ?>
 
-<div class="container mt-4" style="padding-top: 40px;">
+<div class="container mt-4" style="padding-top: 10px;">
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <div>
-      <h4 class="titulo-validacion">Administración de unidades demo</h4>
-      <p class="subtitulo-validacion">Alta y ediciones de registros</p>
+  <div class="panel-acciones-final p-4 mb-4">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+      <div>
+        <h4 class="titulo-validacion mb-1">
+          Administración de unidades demo
+        </h4>
+        <p class="subtitulo-validacion mb-0">
+          Alta, edición y gestión de registros de la flotilla demo
+        </p>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
+
+        <?php if ($id_tipo_usuario == 5 || $id_tipo_usuario == 6 || $id_tipo_usuario == 15 || $id_tipo_usuario == 4): ?>
+
+          <button onclick="window.location.href='../interfaces/agrega_nuevas_unidades.php'"
+            class="btn btn-success">
+            <i class="fa-solid fa-car-side me-2"></i>
+            Agregar unidad
+          </button>
+
+        <?php endif; ?>
+
+      </div>
+
     </div>
 
-    <div class="d-flex flex-wrap gap-2">
-            <button onclick="window.location.href='../interfaces/agrega_nuevas_unidades.php'" class="btn btn-agregarunidad m-2 "> <i class="fa-solid fa-car"> </i>   Agregar</button>
-
-    </div>
   </div>
 
   <hr>
@@ -32,21 +51,26 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
   <!-- Tabla -->
   <div class="row mb-3">
     <div class="col-12">
-      <div class="p-3 border rounded">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h5 class="mb-0">Listado</h5>
+
+      <div class="panel-acciones-final p-3">
+
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+          <h5 class="mb-0 fw-semibold">
+            Listado de unidades
+          </h5>
         </div>
 
         <div class="table-responsive">
           <table class="table table-hover" id="flotillaTable">
             <thead class="table-light">
               <tr>
-                <th>Btn</th>
+                <th>Editar</th>
                 <th>ID</th>
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Placa</th>
                 <th>VIN</th>
+                <th>Paso diferencial</th>
                 <th>Estatus</th>
                 <th>Tipo de unidad</th>
                 <th>Sede</th>
@@ -60,12 +84,12 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
             <tbody id="flotillaBody"></tbody>
           </table>
         </div>
-
       </div>
     </div>
   </div>
-
+  
 </div>
+
 
 
 <!----------------------------------------------------------------------- modal de edicion de unidades ------------------------------------------------------------------->

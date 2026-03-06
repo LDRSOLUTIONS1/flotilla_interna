@@ -41,8 +41,73 @@ error_reporting(E_ALL);
 
     <?php include("../include/menu.php"); ?>
 
-    <!-- CONTENIDO -->
-    <?php include("../modulos/modulo_inicio.php"); ?>
+    <div class="cuadroblancocontenido">
+
+            <!-- SECCIÓN HERO -->
+            <section id="inicio" class="hero-section">
+                <div class="hero-content">
+                    <h1 class="display-4 fw-bold">LDR Solutions</h1>
+                    <p class="lead">Innovando en movilidad y demostración automotriz</p>
+                    <h2 class="text-center">Bienvenido<?php
+                                        include("../include/bienvenida.php");
+                                        ?></h2>
+                </div>
+            </section>
+
+
+            <!-- SECCIÓN QUIÉNES SOMOS -->
+            <section id="empresa" class="py-5">
+                <div class="container text-center">
+                    <h2 class="section-title">¿Qué puedes hacer aquí?</h2>
+                    <p class="lead">En esta plataforma podra asignar unidades demo de alta calidad a personas físicas o morales.</p>
+                    <p class="lead">“Solicita, presta y prueba unidades demo con total transparencia y eficiencia.”</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN CARRUSEL DE UNIDADES -->
+            <section id="unidades" class="py-5 bg-light">
+                <div class="container">
+                    <h2 class="section-title text-center">Unidades que puedes asignar</h2>
+                    <div id="carouselUnidades" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner rounded-4 shadow">
+                            <div class="carousel-item active">
+                                <img src="../../Cliente/img/unidades/galaxy.jpg" class="d-block w-100" alt="Tractocamión Demo">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
+                                    <h5>AUMAN GALAXY</h5>
+                                    <p>Con el FOTON Super Power Train, combinado con el potente motor FOTON Cummins y la caja FOTON ZF AMT, garantizando eficiencia, economía y confiabilidad.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../Cliente/img/unidades/Banner.jpg" class="d-block w-100" alt="Pickup Demo">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
+                                    <h5>AUMAN R EST-A</h5>
+                                    <p>Robusta, confiable y preparada para cualquier terreno.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../../Cliente/img/unidades/aumark.jpg" class="d-block w-100" alt="Camión Demo">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3">
+                                    <h5>Aumark S8</h5>
+                                    <p>Eficiencia en transporte y tecnología avanzada.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselUnidades" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselUnidades" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="text-center">
+                <p class="mb-0">© 2026 LDR Solutions | Todos los derechos reservados</p>
+            </footer>
+
+        </div>
 
 
         <!--jquery-->

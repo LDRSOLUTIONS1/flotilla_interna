@@ -21,6 +21,7 @@ $sql = "SELECT
     model.nombre_modelo,
     ung.placa,
     ung.vin,
+    ung.paso_diferencial,
     ung.ultimo_kilometraje,
     unest.estado,
     sed.ubicacion,
@@ -44,12 +45,11 @@ if ($resultado->num_rows > 0) {
         // Botón de edición según tipo de usuario
         $btnEditar = "";
         if ($id_tipo_usuario == 1) {
-            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidades' data-id='" . $fila['id_unidad'] . "'>
-                            <i class='fas fa-edit'></i> Editar
+            $btnEditar = "<button class='btn btn-editarunidades btneditarunidades fas fa-edit' data-id='" . $fila['id_unidad'] . "'>
+                            
                           </button>";
         } else { // Demo
-            $btnEditar = "<button class='btn btn-editarunidades btn-sm btneditarunidadesdemo' data-id='" . $fila['id_unidad'] . "'>
-                            <i class='fas fa-edit'></i> Editar
+            $btnEditar = "<button class='btn btn-editarunidades btneditarunidadesdemo fas fa-edit' data-id='" . $fila['id_unidad'] . "'>
                           </button>";
         }
 
@@ -60,6 +60,7 @@ if ($resultado->num_rows > 0) {
             <td class='titulostablaunidades sticky-left-75'>" . $fila['nombre_modelo'] . "</td>
             <td class='titulostablaunidades'>" . $fila['placa'] . "</td>
             <td class='titulostablaunidades'>" . $fila['vin'] . "</td>
+            <td class='titulostablaunidades'>" . $fila['paso_diferencial'] . "</td>
             <td class='titulostablaunidades'>" . $fila['estado'] . "</td>
             <td class='titulostablaunidades'>" . $fila['tipo_unidad'] . "</td>
             <td class='titulostablaunidades'>" . $fila['ubicacion'] . "</td>
@@ -69,19 +70,16 @@ if ($resultado->num_rows > 0) {
                     <i class='fa-solid fa-location-dot'></i> 
                 </button>
             </td>
-            <td class='titulostablaunidades'>
-                <button class='btn btn-sm btn-aseguradora btnpolizasunidades' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Aseguradora
+            <td class='titulostablaunidades' style='text-align: center;'>
+                <button class='btn btn-aseguradora btnpolizasunidades fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-tenencias btntenencias' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Tenencias
+            <td class='titulostablaunidades' style='text-align: center;'>
+                <button class='btn btn-tenencias btntenencias fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
-            <td>
-                <button class='btn btn-sm btn-verificaciones btnverificaciones' data-id='{$fila['id_unidad']}'>
-                    <i class='fa-solid fa-file-pdf'></i> Verificaciones
+            <td class='titulostablaunidades' style='text-align: center;'>
+                <button class='btn btn-verificaciones btnverificaciones fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
         </tr>";

@@ -57,7 +57,7 @@ $colaborador = $_SESSION['id_colaborador'];
           <table class="table table-hover" id="flotillaTable">
             <thead class="table-light">
               <tr>
-                <th>Btn</th>
+                <th>Editar</th>
                 <th>ID</th>
                 <th>Marca</th>
                 <th>Modelo</th>

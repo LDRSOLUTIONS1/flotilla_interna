@@ -54,12 +54,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Inicializa DataTable
         dataTableInstance = $("#flotillaTable").DataTable({
-          pageLength: 10,
-          order: [[1, "desc"]],
-          language: {
-            url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
-          },
-        });
+
+  pageLength: 10,
+  order: [[1, "desc"]],
+
+  dom: 'Bfrtip',
+
+  buttons: [
+
+    {
+      extend: 'csvHtml5',
+      text: 'CSV',
+      className: 'btn btn-success btn-sm',
+      title: 'Reporte_Unidades_Demo',
+      exportOptions: {
+        columns: [1,2,3,4,5,6,7,8,9,10]
+      }
+    },
+
+    {
+      extend: 'pdfHtml5',
+      text: 'PDF',
+      className: 'btn btn-danger btn-sm',
+      title: 'Reporte_Flotilla_Demo',
+      orientation: 'landscape',
+      pageSize: 'A4',
+      exportOptions: {
+        columns: [1,2,3,4,5,6,7,8,9,10]
+      }
+    }
+
+  ],
+
+  language: {
+    url: "https://cdn.datatables.net/plug-ins/1.13.5/i18n/es-ES.json",
+  }
+
+});
 
         crearFiltros();
       })
