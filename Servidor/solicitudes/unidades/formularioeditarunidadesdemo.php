@@ -232,7 +232,8 @@
 
             //---------------------------------------------------------------editar estado de la unidad------------------------------------------------
             // Realizar la consulta para obtener el estado de la unidad
-            $sqlestadounidad = "SELECT id_estado_unidad, estado FROM estado_unidad";
+            $sqlestadounidad = "SELECT id_estado_unidad, estado FROM estado_unidad
+            WHERE id_estado_unidad = 2 OR id_estado_unidad = 5 OR id_estado_unidad = 6 OR id_estado_unidad = 7";
             $result = $conectar->query($sqlestadounidad);
             echo '
             <h3>Estado y estatus</h3>

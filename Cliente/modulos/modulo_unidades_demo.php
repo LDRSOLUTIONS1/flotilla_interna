@@ -79,6 +79,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
                 <th>Seguros</th>
                 <th>Tenencias</th>
                 <th>Verificaciones</th>
+                <th>Traslado</th>
               </tr>
             </thead>
             <tbody id="flotillaBody"></tbody>
@@ -87,7 +88,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
       </div>
     </div>
   </div>
-  
+
 </div>
 
 
@@ -107,6 +108,63 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" id="btnactualizarunidad">Actualizar</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!----------------------------------------------------------------------- modal traslado de unidades ------------------------------------------------------------------->
+<!--modal-->
+<div class="modal fade" id="modalTrasladoUnidad" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Solicitud de traslado de unidad</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label>Modelo</label>
+            <input type="text" class="form-control" id="traslado_modelo" readonly>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Placa</label>
+            <input type="text" class="form-control" id="traslado_placa" readonly>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6 mb-3">
+              <label>Ubicación actual</label>
+              <input type="text" class="form-control" id="traslado_origen">
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <label>Nueva ubicación</label>
+              <input type="text" class="form-control" id="traslado_destino">
+            </div>
+
+            <div class="col-12 mb-3">
+              <label>Motivo del traslado</label>
+              <textarea class="form-control" id="traslado_motivo"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" id="btnEnviarTraslado">Solicitar traslado</button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -355,6 +413,8 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
 
 <!--js para mandar a llamar el modal de edicion de unidades-->
 <script src="../js/unidades/modulo_demos.js"></script>
+<!--js para mandar a llamar el modal de edicion de unidades-->
+<script src="../js/unidades/solicitud_traslado.js"></script>
 <!--js para mandar a llamar el modal de edicion de unidades-->
 <script src="../js/unidades/editarunidadesdemo.js"></script>
 <!--js para mandar a llamar el modal de polizas aseguradoras-->

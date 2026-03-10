@@ -82,7 +82,17 @@ if ($resultado->num_rows > 0) {
                 <button class='btn btn-verificaciones btnverificaciones fa-solid fa-file-pdf' data-id='{$fila['id_unidad']}'>
                 </button>
             </td>
-        </tr>";
+            <td style='text-align:center'>
+    <button class='btn btn-warning btnsolicitartraslado'
+  data-id_unidad='{$fila['id_unidad']}'
+  data-modelo='{$fila['nombre_modelo']}'
+  data-placa='{$fila['placa']}'
+  data-sede='{$fila['ubicacion']}'>
+  <i class='fa-solid fa-truck'></i>
+</button>
+    </td>
+        </tr>
+";
     }
 } else {
     echo "<tr><td colspan='15'>No se encontraron resultados.</td></tr>";

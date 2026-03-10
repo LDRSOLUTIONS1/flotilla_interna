@@ -30,6 +30,7 @@ SELECT
     unid.paso_diferencial,
     uda.fecha_prestamo,
     uda.fecha_devolucion,
+    uda.impacto_atencion,
     uda.estado,
     ca.nombre_1 AS nombre1colaborador,
     ca.nombre_2 AS nombre2colaborador,
@@ -58,6 +59,8 @@ echo '<div id="vistaTabla">
 <table class="table table-hover tablaunidades" id="tablaUnidades">
 <thead class="table-light">
 <tr>
+    <th>Select impacto</th>
+    <th>Impacto</th>
     <th>Nombre</th>
     <th>Modelo</th>
     <th>Paso diferencial</th>
@@ -73,6 +76,25 @@ echo '<div id="vistaTabla">
 </thead>
 <tbody>';
 
+function obtenerSemaforo($impacto)
+{
+
+    switch ($impacto) {
+
+        case 1:
+            return '<span class="badge bg-success">Bajo</span>';
+
+        case 2:
+            return '<span class="badge bg-warning text-dark">Medio</span>';
+
+        case 3:
+            return '<span class="badge bg-danger">Alto</span>';
+
+        default:
+            return '<span class="badge bg-secondary">Sin definir</span>';
+    }
+}
+
 while ($fila = $resultado->fetch_assoc()) {
 
     if (($fila['id_persona_fisica'] || $fila['id_persona_moral']) && $fila['autorizacion'] === 'APROVADO') {
@@ -87,7 +109,19 @@ while ($fila = $resultado->fetch_assoc()) {
             ? "../../Cliente/img/default_avatar.png"
             : "https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/" . $fila["avatar_colaborador"] . ".png";
 
-        echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . '">
+        echo '
+        <tr class="fila-solicitante tipo-' . $tipo_solicitante . '">
+        <td>
+<select class="form-select form-select-sm cambiar-impacto"
+        data-id="' . $fila['id_asignacion_unidad_demo'] . '">
+
+<option value="1" ' . ($fila['impacto_atencion'] == 1 ? 'selected' : '') . '>🟢 Bajo</option>
+<option value="2" ' . ($fila['impacto_atencion'] == 2 ? 'selected' : '') . '>🟡 Medio</option>
+<option value="3" ' . ($fila['impacto_atencion'] == 3 ? 'selected' : '') . '>🔴 Alto</option>
+
+</select>
+</td>
+            <td class="col-impacto">' . obtenerSemaforo($fila['impacto_atencion']) . '</td>
             <td>' . $nombreSolicitante . '</td>
             <td>' . $fila['nombre_modelo'] . '</td>
             <td>' . $fila['paso_diferencial'] . '</td>

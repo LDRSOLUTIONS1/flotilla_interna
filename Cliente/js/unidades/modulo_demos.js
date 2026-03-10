@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     {
       extend: 'csvHtml5',
-      text: 'CSV',
+      text: 'EXCEL',
       className: 'btn btn-success btn-sm',
       title: 'Reporte_Unidades_Demo',
       exportOptions: {

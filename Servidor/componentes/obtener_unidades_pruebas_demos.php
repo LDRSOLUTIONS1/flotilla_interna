@@ -13,6 +13,7 @@ $sqlobtenerunidadsubircomodato = "SELECT unid.img_unidad,
                 uda.id_persona_fisica,
                 uda.autorizacion,
                 uda.id_estatus_comodato_demo,
+                uda.impacto_atencion,
                 pf.id_persona_fisica,
                 pf.nombre_1,
                 pf.nombre_2,
@@ -71,6 +72,7 @@ echo '<div class="table-responsive">
     <table class="table table-hover tablaunidades" id="tablaUnidades">
         <thead class="table-light">
             <tr>
+                <th class="titulostablaverificarcomodatodemo">Impacto</th>
                 <th class="titulostablaverificarcomodatodemo" style="text-align: center"><i class="fas fa-user me-2"></i></th>
                 <th class="titulostablaverificarcomodatodemo" style="text-align: center"><i class="fas fa-route me-2"></i></th>
                 <th class="titulostablaverificarcomodatodemo">Nombre del usuario/empresa</th>
@@ -88,6 +90,23 @@ echo '<div class="table-responsive">
         </thead>
         <tbody>';
 
+        function obtenerSemaforoImpacto($impacto){
+
+    if($impacto == 1){
+        return '<span class="badge bg-success">Bajo</span>';
+    }
+
+    if($impacto == 2){
+        return '<span class="badge bg-warning text-dark">Medio</span>';
+    }
+
+    if($impacto == 3){
+        return '<span class="badge bg-danger">Alto</span>';
+    }
+
+    return '<span class="badge bg-secondary">Sin evaluar</span>';
+}
+
 while ($fila = $resultado->fetch_assoc()) {
     $estado = "norealizado";
 if (!is_null($fila['id_estado_prueba_demo'])) {
@@ -103,6 +122,9 @@ if (!is_null($fila['id_estado_prueba_demo'])) {
 
         echo '<tr class="fila-solicitante tipo-' . $tipo_solicitante . ' tipo-' . $estado . '">';
         echo '
+            <td>
+            <div class="mb-2">' . obtenerSemaforoImpacto($fila['impacto_atencion']) . '</div>
+            </td>
             <td class="text-center">
                 <button type="button" class="fas fa-eye btn btn-sm btn-outline-green btnmostrarinfodemo" data-infodemo="' . $fila['id_unidad'] . '"></button>
             </td>

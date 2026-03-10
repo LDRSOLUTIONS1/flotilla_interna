@@ -31,6 +31,7 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
                 unid.vin,
                 uda.fecha_prestamo,
                 uda.fecha_devolucion,
+                uda.impacto_atencion,
                 uda.id_colaborador_que_asigna,
                 ca.nombre_1 AS nombre1colaborador,
                 ca.nombre_2 AS nombre2colaborador,
@@ -63,7 +64,22 @@ $sqlobtenerunidadesdemoautorizadas = "SELECT unid.img_unidad,
 $resultado = $conexion->query($sqlobtenerunidadesdemoautorizadas);
 
 
+function obtenerSemaforoImpacto($impacto){
 
+    if($impacto == 1){
+        return '<span class="badge bg-success">Impacto Bajo</span>';
+    }
+
+    if($impacto == 2){
+        return '<span class="badge bg-warning text-dark">Impacto Medio</span>';
+    }
+
+    if($impacto == 3){
+        return '<span class="badge bg-danger">Impacto Alto</span>';
+    }
+
+    return '<span class="badge bg-secondary">Sin evaluar</span>';
+}
 
 echo '<div id="vistaCards">';
 while ($fila = $resultado->fetch_assoc()) {
@@ -124,6 +140,7 @@ while ($fila = $resultado->fetch_assoc()) {
         }
 
         echo '<h6 class="card-title"><b>' . $fila['nombre_modelo'] . '</b></h6>
+            <div class="mb-2">'.obtenerSemaforoImpacto($fila['impacto_atencion']).'</div>
             <h6 class="card-text"><i class="fas fa-barcode me-2"></i><strong>VIN:</strong> ' . $fila['vin'] . '</h6>
             <h6 class="card-text"><i class="fas fa-road me-2"></i><strong>Paso dif.</strong> ' . $fila['paso_diferencial'] . '</h6>
             <h6 class="card-text"><i class="fas fa-car me-2"></i><b>Placa: </b>' . $fila['placa'] . '</h6>

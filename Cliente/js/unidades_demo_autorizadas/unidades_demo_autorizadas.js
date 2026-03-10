@@ -135,3 +135,54 @@ document.getElementById("btnPendientes").addEventListener("click", function(){
     });
 
 });
+
+document.addEventListener("change", function(e){
+
+    if(!e.target.classList.contains("cambiar-impacto")) return;
+
+    let select = e.target;
+    let impacto = select.value;
+    let id = select.dataset.id;
+
+    fetch("../../Servidor/solicitudes/unidades/asignacion_unidades_demo/actualizar_impacto_demo.php",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:`impacto=${impacto}&id=${id}`
+    })
+    .then(res=>res.json())
+    .then(data=>{
+
+        if(data.status){
+
+            // buscar la fila actual
+            let fila = select.closest("tr");
+
+            // buscar la columna impacto
+            let celdaImpacto = fila.querySelector(".col-impacto");
+
+            if(impacto == 1){
+                celdaImpacto.innerHTML = '<span class="badge bg-success">Bajo</span>';
+            }
+
+            if(impacto == 2){
+                celdaImpacto.innerHTML = '<span class="badge bg-warning text-dark">Medio</span>';
+            }
+
+            if(impacto == 3){
+                celdaImpacto.innerHTML = '<span class="badge bg-danger">Alto</span>';
+            }
+
+            Swal.fire({
+                icon:"success",
+                title:"Impacto actualizado",
+                timer:1000,
+                showConfirmButton:false
+            });
+
+        }
+
+    });
+
+});

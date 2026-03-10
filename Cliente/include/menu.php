@@ -124,7 +124,6 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
         <?php elseif ($id_tipo_usuario == 11): // PERFIL ADMINISTRADOR PRUEBAS DEMOS?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>
             <li ><a class="menulist" href="asignar_master_driver.php">Asignar Master Driver</a></li>
-            <li ><a class="menulist" href="pruebas_demos.php">Pruebas</a></li>
             <li ><a class="menulist" href="desempeños_unidades_demo.php">Desempeños</a></li>
             <li ><a class="menulist" href="reportes_finales_demos.php">Reportes finales</a></li>
             <li ><a class="menulist" href="vida_util_unidades_demo.php">Vida Útil Unidades</a></li>
