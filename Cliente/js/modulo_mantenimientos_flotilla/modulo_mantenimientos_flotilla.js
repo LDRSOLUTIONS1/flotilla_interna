@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let selectedUnidadId = null;
   let dataTableInstance = null;
+  let mantenimientosData = [];
 
   // ---------------------------
   // Buscar unidades (autocompletado)
@@ -20,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     fetch(
       `../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_unidades_mantenimiento_flotilla.php?q=${encodeURIComponent(
-        query
-      )}`
+        query,
+      )}`,
     )
       .then((res) => res.json())
       .then((data) => {
@@ -51,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------------------------
   function cargarTiposEnSelect() {
     return fetch(
-      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/tipo_mantenimiento.php"
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/tipo_mantenimiento.php",
     )
       .then((res) => res.json())
       .then((data) => {
@@ -88,11 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }).length;
 
     const outOfService = data.filter(
-      (m) => (m.estatus || "").toString().toLowerCase() === "en proceso"
+      (m) => (m.estatus || "").toString().toLowerCase() === "en proceso",
     ).length;
     const totalCost = data.reduce(
       (acc, m) => acc + Number(m.costo_estimado || 0),
-      0
+      0,
     );
 
     const counts = { preventivo: 0, correctivo: 0, mixto: 0 };
@@ -253,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const field = keyMap[title] || null;
         if (field) {
           const uniqueValues = Array.from(
-            new Set(data.map((d) => (d[field] !== undefined ? d[field] : "")))
+            new Set(data.map((d) => (d[field] !== undefined ? d[field] : ""))),
           );
           uniqueValues
             .filter((v) => v !== null && v !== undefined && v !== "")
@@ -297,12 +298,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------------------------
   function loadMantenimientos() {
     fetch(
-      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_mantenimientos.php"
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_mantenimientos.php",
     )
       .then((res) => res.json())
       .then((data) => {
         // Actualizar cards
         updateCards(data);
+
+        mantenimientosData = data; // 👈 guardar original completo
 
         // destruir DataTable previo
         if (dataTableInstance) {
@@ -341,9 +344,12 @@ document.addEventListener("DOMContentLoaded", function () {
     <td class="txtmantenimientos">${renderKilometraje(m)}</td>
     <td class="txtmantenimientos">${m.taller || "-"}</td>
     <td class="txtmantenimientos">$${m.costo_estimado || 0}</td>
+    <td class="txtmantenimientos" title="${m.descripcion_trabajo || ""}">
+  ${(m.descripcion_trabajo || "-").substring(0, 50)}...
+</td>
     <td class="txtmantenimientos">
       <button class="btn btn-sm btn-outline-primary" type="button" onclick='openEditModal(${JSON.stringify(
-        m
+        m,
       ).replace(/'/g, "&apos;")})'>
         <i class="bi bi-pencil"></i>
       </button>
@@ -361,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Inicializar tooltips
         const tooltipTriggerList = [].slice.call(
-          document.querySelectorAll(".km-tooltip")
+          document.querySelectorAll(".km-tooltip"),
         );
         tooltipTriggerList.map(function (tooltipTriggerEl) {
           return new bootstrap.Tooltip(tooltipTriggerEl);
@@ -489,25 +495,96 @@ document.addEventListener("DOMContentLoaded", function () {
           "Kilometraje",
           "Taller",
           "Costo",
+          "Descripción",
         ],
       ];
-      if (maintTableBody) {
-        maintTableBody.querySelectorAll("tr").forEach((tr) => {
-          const cols = Array.from(tr.querySelectorAll("td"))
-            .slice(0, 10)
-            .map((td) => td.textContent.trim());
-          rows.push(cols);
+
+      // 🔍 Obtener filtros de DataTable
+      let searchGlobal = dataTableInstance
+        ? dataTableInstance.search().toLowerCase()
+        : "";
+
+      // 🔍 Obtener filtros por columna (inputs y selects)
+      const filters = [];
+      document
+        .querySelectorAll("#maintTable thead tr.filters th")
+        .forEach((th, index) => {
+          const input = th.querySelector("input, select");
+          filters[index] = input ? input.value.toLowerCase() : "";
         });
-      }
+
+      // 🧠 Mapear columnas con tus datos reales
+      const columnMap = [
+        "id_unidad",
+        "modelo",
+        "vin",
+        "tipo",
+        "estatus",
+        "fecha_ingreso",
+        "fecha_salida",
+        "km_actual",
+        "taller",
+        "costo_estimado",
+        "descripcion_trabajo",
+      ];
+
+      // 🔥 FILTRAR SOBRE EL JSON ORIGINAL
+      const dataFiltrada = mantenimientosData.filter((m) => {
+        // 🔍 Filtro global
+        if (searchGlobal) {
+          const texto = Object.values(m).join(" ").toLowerCase();
+          if (!texto.includes(searchGlobal)) return false;
+        }
+
+        // 🔍 Filtros por columna
+        for (let i = 0; i < filters.length; i++) {
+          const val = filters[i];
+          if (!val) continue;
+
+          const field = columnMap[i];
+          if (!field) continue;
+
+          const dato = (m[field] || "").toString().toLowerCase();
+
+          if (!dato.includes(val)) return false;
+        }
+
+        return true;
+      });
+
+      // 🧾 Generar CSV (SIN recortes 🔥)
+      dataFiltrada.forEach((m) => {
+        rows.push([
+          m.id_unidad,
+          m.modelo || "",
+          m.vin || "",
+          m.tipo || "",
+          m.estatus || "",
+          m.fecha_ingreso || "",
+          m.fecha_salida || "",
+          m.km_manual || m.km_actual || 0,
+          m.taller || "",
+          m.costo_estimado || 0,
+          m.descripcion_trabajo || "", // 🔥 COMPLETO
+        ]);
+      });
+
       const csv = rows
         .map((r) =>
-          r.map((c) => `"${(c || "").replace(/"/g, '""')}"`).join(",")
+          r
+            .map((c) => `"${(c || "").toString().replace(/"/g, '""')}"`)
+            .join(","),
         )
         .join("\n");
-      const blob = new Blob([csv], { type: "text/csv" });
+
+      const BOM = "\uFEFF";
+      const blob = new Blob([BOM + csv], {
+        type: "text/csv;charset=utf-8;",
+      });
+
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "mantenimientos.csv";
+      a.download = "mantenimientos_filtrados.csv";
       a.click();
     });
   }
@@ -531,7 +608,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---------------------------
   function loadTelemetriaChart() {
     fetch(
-      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_unidades_telemetria_demo.php"
+      "../../Servidor/solicitudes/unidades/mantenimientos_unidades_flotilla/obtener_unidades_telemetria_demo.php",
     )
       .then((res) => res.json())
       .then((data) => {
@@ -611,10 +688,13 @@ document.addEventListener("DOMContentLoaded", function () {
               .map((r) =>
                 r
                   .map((c) => `"${(c || "").toString().replace(/"/g, '""')}"`)
-                  .join(",")
+                  .join(","),
               )
               .join("\n");
-            const blob = new Blob([csv], { type: "text/csv" });
+            const BOM = "\uFEFF";
+            const blob = new Blob([BOM + csv], {
+              type: "text/csv;charset=utf-8;",
+            });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = "unidades_telemetria.csv";
@@ -627,5 +707,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Llamar a telemetría independiente
   loadTelemetriaChart();
-  
 });

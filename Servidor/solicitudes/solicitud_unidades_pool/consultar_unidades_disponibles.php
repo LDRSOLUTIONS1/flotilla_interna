@@ -67,7 +67,7 @@ if ($resultado->num_rows > 0) {
                 <h5><strong>' . $fila['nombre_marca'] . ' ' . $fila['nombre_modelo'] . '</strong></h5>
                 <p class="mb-1"><i class="fas fa-map-marker-alt me-2"></i><strong>Ubicación:</strong> ' . $fila['ubicacion'] . '</p>
                 <p class="mb-1"><i class="fas fa-id-card me-2"></i><strong>Placa:</strong> ' . $fila['placa'] . '</p>
-                <button type="button" id="btnmostrarunidadpool" data-id="' . $fila['id_unidad'] . '" data-id-usuario-pool="' . $id_usuario_pool . '" class="btn btn-primary mt-2 btnmostrarunidadpool">Verificar</button>
+                <button type="button" id="btnmostrarunidadpool" data-id="' . $fila['id_unidad'] . '" class="btn btn-primary mt-2 btnmostrarunidadpool">Verificar</button>
             </div>
         </div>
         </div>';

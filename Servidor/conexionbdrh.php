@@ -1,11 +1,12 @@
 <?php
 
-$host = "193.203.166.27";
-$database = "u546825723_rhldrsolutions";
-$user = "u546825723_adminrh";
-$pass = "Felur1@n80";
+$host = "72.60.171.233";
+$port = "3307";
+$database = "dbldrsolutions";
+$user = "adminrh";
+$pass = "dbadminrh123";
 
-$conexion_rh = mysqli_connect($host, $user, $pass, $database);
+$conexion_rh = mysqli_connect($host, $user, $pass, $database, $port);
 
 if (mysqli_connect_errno()) {
     echo "Fallo al conectar a MySQL: " . mysqli_connect_error();

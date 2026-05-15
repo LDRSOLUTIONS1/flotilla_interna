@@ -64,6 +64,7 @@ $id_tipo_usuario = $_SESSION['id_tipo_usuario'];
                         <label for="modelounidad">Modelo <span style="color:red">*</span></label>
                     </div>
                 </div>
+                
 
                 <script>
                     document.getElementById('marcaunidad').addEventListener('change', function() {

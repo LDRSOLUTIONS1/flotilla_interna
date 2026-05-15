@@ -48,9 +48,7 @@ while ($fila = $resultado->fetch_assoc()) {
                 <h5 class="card-title"><strong>' . $fila['nombre_modelo'] . '</strong></h5>
                     <h6 class="card-text"><strong>Placa: </strong>' . $fila['placa'] . '</h6>
                     <h6 class="card-text"><strong>Asignación: </strong>' . $fila['fecha_asignacion'] . '</h6>
-                    <h6 class="card-text"><strong>Devolución: </strong>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>
-                    <button type="button" class="btn btn-primary mt-3 btn-sm">Detalles de unidad</button>
-                    <button type="button" class="btn btn-danger mt-3 btn-sm btn-incidencia">Reportar una incidencia</button>';
+                    <h6 class="card-text"><strong>Devolución: </strong>' . ($fila['fecha_devolucion'] != '0000-00-00' ? $fila['fecha_devolucion'] : '') . '</h6>';
         echo ' </div>
             </div>';
     }

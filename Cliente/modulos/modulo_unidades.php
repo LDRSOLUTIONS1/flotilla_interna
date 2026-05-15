@@ -50,6 +50,9 @@ $colaborador = $_SESSION['id_colaborador'];
     <div class="col-12">
       <div class="p-3 border rounded">
         <div class="d-flex justify-content-between align-items-center mb-2">
+          <button class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#panelValidaciones">
+    <i class="fa-solid fa-circle-check"></i> Validaciones
+  </button>
           <h5 class="mb-0">Listado</h5>
         </div>
 
@@ -82,6 +85,33 @@ $colaborador = $_SESSION['id_colaborador'];
     </div>
   </div>
 
+</div>
+
+<!-- PANEL VALIDACIONES -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="panelValidaciones">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Archivos pendientes</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+
+  <!-- 🔎 FILTROS -->
+  <div class="mb-3">
+    <select id="filtroTipo" class="form-select">
+      <option value="todos">Todos</option>
+      <option value="tenencia">Tenencias</option>
+      <option value="verificacion">Verificaciones</option>
+      <option value="licencia">Licencias</option>
+    </select>
+  </div>
+
+  <!-- CONTENEDOR -->
+  <div id="contenedorValidaciones">
+    <p class="text-muted">Cargando...</p>
+  </div>
+
+</div>
 </div>
 
 
@@ -350,6 +380,8 @@ $colaborador = $_SESSION['id_colaborador'];
 <script src="../js/unidades/modulo_flotilla.js"></script>
 <!--js para mandar a llamar el modal de edicion de unidades-->
 <script src="../js/unidades/editarunidades.js"></script>
+<!--js para mandar a llamar el modal de edicion de unidades-->
+<script src="../js/unidades/validacion_documentos_rh.js"></script>
 <!--js para mandar a llamar el modal de polizas aseguradoras-->
 <script src="../js/polizas/modulo_poliza_aseguradora.js"></script>
 <!--js para mandar a llamar el modal de polizas tenencias-->

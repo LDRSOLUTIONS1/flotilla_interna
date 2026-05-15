@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const contenedorspinner = document.getElementById("contenedorspinner");
   const modalinfoformacionunidadpool = new bootstrap.Modal(
     document.getElementById("modalinfoformacionunidadpool")
   );
@@ -11,18 +12,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnsolicitaruniadpool = document.getElementById("btnsolicitaruniadpool");
 
   let id_unidad = null;
-  let id_usuario_pool = null;
 
   // ================= EVENTO GLOBAL PARA VERIFICAR UNIDAD =================
   document.body.addEventListener("click", function (event) {
     if (event.target.classList.contains("btnmostrarunidadpool")) {
       id_unidad = event.target.getAttribute("data-id");
-      id_usuario_pool = event.target.getAttribute("data-id-usuario-pool");
 
       $.ajax({
         type: "POST",
         url: "../../Servidor/solicitudes/solicitud_unidades_pool/formularioinfounidadpool.php",
-        data: { id_unidad, id_usuario_pool },
+        data: { id_unidad: id_unidad },
         success: function (response) {
           modalinfoformacionunidadpoolbody.innerHTML = response;
           modalinfoformacionunidadpool.show();
@@ -118,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ================= BOTON SOLICITAR =================
   btnsolicitaruniadpool.addEventListener("click", function () {
-    const id_usuario_pool_input = document.getElementById("id_usuario_pool");
 
     if (!id_unidad) {
       Toastify({
@@ -134,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     contenedorspinner.style.display = "flex";
 
     const caja1 = new FormData();
-    caja1.append("id_usuario_pool", id_usuario_pool_input.value);
     caja1.append("id_unidad", id_unidad);
     caja1.append("sederecoleccionpool", document.getElementById("sederecoleccionpool").value);
     caja1.append("fechasolicitudunidadpool", document.getElementById("fechasolicitudunidadpool").value);

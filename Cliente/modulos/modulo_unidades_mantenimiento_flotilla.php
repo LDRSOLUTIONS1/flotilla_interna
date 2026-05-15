@@ -73,6 +73,7 @@
                                 <th class="txtmantenimientos">Kilometraje</th>
                                 <th class="txtmantenimientos">Taller</th>
                                 <th class="txtmantenimientos">Costo</th>
+                                <th class="txtmantenimientos">Descripción</th>
                                 <th class="txtmantenimientos">Acciones</th>
                             </tr>
                         </thead>

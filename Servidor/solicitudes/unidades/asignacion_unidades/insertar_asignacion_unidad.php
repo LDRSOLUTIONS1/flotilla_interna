@@ -266,21 +266,22 @@ if (!isset($_GET['imprimircartareponsiva'])) {
                         }
 
                         // Obtener correos de usuarios tipo 2 juridicos
-                         $correos = [];
-                         $correo_sql = "SELECT u.id_colaborador, 
-                                                 u.id_tipo_usuario,
-                                                 cor.id_colaborador,
-                                                 cor.email_corporativo
-                                         FROM usuarios AS u 
-                                         INNER JOIN colaboradores AS cor
-                                         ON u.id_colaborador = cor.id_colaborador
-                                         WHERE u.id_tipo_usuario = 2";
-                         $correo_result = $conexion->query($correo_sql);
-                         while ($correo_row = $correo_result->fetch_assoc()) {
-                             if (!empty($correo_row['email_corporativo'])) {
-                                 $correos[] = $correo_row['email_corporativo'];
-                             }
-                         }
+                        $correos = [];
+                        $correo_sql = "SELECT cor.email_corporativo
+                                        FROM usuarios u
+                                        INNER JOIN usuario_modulo_tipo umt 
+                                                ON umt.id_usuario = u.id_usuario
+                                        INNER JOIN colaboradores cor 
+                                                ON cor.id_colaborador = u.id_colaborador
+                                        WHERE umt.id_tipo_usuario = 2
+                                        AND umt.id_modulo = 1";
+                        $correo_result = $conexion->query($correo_sql);
+
+                        while ($correo_row = $correo_result->fetch_assoc()) {
+                            if (!empty($correo_row['email_corporativo'])) {
+                                $correos[] = $correo_row['email_corporativo'];
+                            }
+                        }
 
                         //$correos = ["uriel.cabello@ldrsolutions.com.mx"];
 

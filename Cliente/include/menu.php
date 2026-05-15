@@ -4,30 +4,51 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 include_once '../../Servidor/conexion.php';
-$colaborador = $_SESSION['id_colaborador'];
 
-// Obtener el id del usuario
-$sql = "SELECT id_usuario FROM usuarios WHERE id_colaborador = $colaborador";
-$resultado = $conexion->query($sql);
-$id_usuario = $resultado->fetch_assoc()['id_usuario'];
+$colaborador = $_SESSION['id_colaborador'] ?? null;
+$id_tipo_usuario = $_SESSION['id_tipo_usuario'] ?? 3;
 
+// 🔥 Valores por defecto (usuario pool)
+$id_usuario = null;
+$avatar = null;
 
-// Obtener el tipo de usuario
-// Obtener avatar únicamente
-$sql = "SELECT avatar FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado = $conexion->query($sql);
-$datos_usuario = $resultado->fetch_assoc();
+// ==========================================
+// 🔍 BUSCAR USUARIO (SI EXISTE)
+// ==========================================
+if ($colaborador) {
 
-$avatar = $datos_usuario['avatar'];
+    $sql = "SELECT id_usuario, avatar 
+            FROM usuarios 
+            WHERE id_colaborador = '$colaborador' 
+            LIMIT 1";
 
-// 🔥 EL ROL YA VIENE EN SESIÓN
-$id_tipo_usuario = $_SESSION['id_tipo_usuario'] ?? 0;
+    $resultado = $conexion->query($sql);
 
-//saber si el usuario es jefe directo
-// Verificar si es jefe directo
-$sql_jefe = "SELECT id_jefe_directo FROM jefes_directos WHERE id_colaborador = $colaborador LIMIT 1";
+    if ($resultado && $resultado->num_rows > 0) {
+        $row = $resultado->fetch_assoc();
+
+        $id_usuario = $row['id_usuario'];
+        $avatar = $row['avatar'];
+    }
+}
+
+// ==========================================
+// 👔 JEFE DIRECTO (SIEMPRE POR COLABORADOR)
+// ==========================================
+$sql_jefe = "SELECT id_jefe_directo 
+             FROM jefes_directos 
+             WHERE id_colaborador = '$colaborador' 
+             LIMIT 1";
+
 $result_jefe = $conexion->query($sql_jefe);
-$es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
+$es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0);
+
+// ==========================================
+// 🖼️ AVATAR DEFAULT SI NO EXISTE
+// ==========================================
+$avatarFinal = empty($avatar)
+    ? '../img/iconos/default_avatar.png.png'
+    : 'https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/' . $avatar . '.png';
 
 ?>
 
@@ -35,27 +56,28 @@ $es_jefe_directo = ($result_jefe && $result_jefe->num_rows > 0) ? true : false;
     <a href="inicio.php">
         <div class="icono">
             <h5 class="txtnombreusuario">
-            <img src="<?php echo empty($avatar) 
-                        ? '../img/iconos/default_avatar.png.png' 
-                        : 'https://ldrhsys.ldrhumanresources.com/Cliente/img/avatars/' . $avatar . '.png'; ?>"
-                        class="rounded-circle imgavatar" 
-                        alt="avatar">
-            <?php include("../include/nombre_icono.php"); ?>
-        </h5>
-    </div>
-</a>
+                <img src="<?php echo $avatarFinal; ?>"
+                     class="rounded-circle imgavatar" 
+                     alt="avatar">
+                <?php include("../include/nombre_icono.php"); ?>
+            </h5>
+        </div>
+    </a>
+
     <button class="menu-toggle">
         ☰ 
     </button>
+
     <ul class="menu">
-        <?php if ($id_tipo_usuario == 1): // Administrador Flotilla Interna?>
-            <li ><a class="menulist" href="inicio.php">Inicio</a></li>
-            <li ><a class="menulist" href="unidades.php">Unidades</a></li>
-            <li ><a class="menulist" href="validacion_unidades_comodato.php">Validación de unidades</a></li>
-            <li ><a class="menulist" href="unidades_asignadas.php">Unidades asignadas</a></li>
-            <li ><a class="menulist" href="documentos.php">Documentos</a></li>
-            <li ><a class="menulist" href="unidades_mantenimiento_flotilla.php">Mantenimientos</a></li>
-            <li ><a class="menulist" href="mantenimientos_realizados_flotilla.php">Mantenimientos realizados</a></li>
+
+        <?php if ($id_tipo_usuario == 1): ?>
+            <li><a class="menulist" href="inicio.php">Inicio</a></li>
+            <li><a class="menulist" href="unidades.php">Unidades</a></li>
+            <li><a class="menulist" href="validacion_unidades_comodato.php">Validación de unidades</a></li>
+            <li><a class="menulist" href="unidades_asignadas.php">Unidades asignadas</a></li>
+            <li><a class="menulist" href="documentos.php">Documentos</a></li>
+            <li><a class="menulist" href="unidades_mantenimiento_flotilla.php">Mantenimientos</a></li>
+            <li><a class="menulist" href="mantenimientos_realizados_flotilla.php">Mantenimientos realizados</a></li>
 
         <?php elseif ($id_tipo_usuario == 4): // Administrador DEMOS ?>
             <li ><a class="menulist" href="inicio_demos.php">Inicio</a></li>

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -7,24 +8,26 @@ require '../../lib/PHPMailer-master/src/Exception.php';
 require '../../lib/PHPMailer-master/src/PHPMailer.php';
 require '../../lib/PHPMailer-master/src/SMTP.php';
 
-include ("../../conexion.php");
+include("../../conexion.php");
 $nombre_archivo = "";
 $ruta_archivo = "";
 $id_asignaciones = 0;
 $valorcolaboradorasignacion = 0;
 
+session_start();
+$id_usuario = $_SESSION['id_usuario'];
+
 if (
-    isset($_POST['id_unidad']) && 
-    isset($_POST['id_usuario_pool']) && 
-    isset($_POST['sederecoleccionpool']) && 
-    isset($_POST['fechasolicitudunidadpool']) && 
-    isset($_POST['horasolicitudunidadpool']) && 
-    isset($_POST['sededevolucionunidadpool']) && 
-    isset($_POST['fechadevolucionunidadpool']) && 
+    isset($_POST['id_unidad']) &&
+    isset($_POST['sederecoleccionpool']) &&
+    isset($_POST['fechasolicitudunidadpool']) &&
+    isset($_POST['horasolicitudunidadpool']) &&
+    isset($_POST['sededevolucionunidadpool']) &&
+    isset($_POST['fechadevolucionunidadpool']) &&
     isset($_POST['horadevolucionunidadpool'])
 ) {
     $valoridunidad = mysqli_real_escape_string($conexion, $_POST['id_unidad']);
-    $id_colaborador = mysqli_real_escape_string($conexion, $_POST['id_usuario_pool']);
+    $id_colaborador = $_SESSION['id_colaborador'];
 
     $sederecoleccionpool = mysqli_real_escape_string($conexion, $_POST['sederecoleccionpool']);
     $fechasolicitudunidadpool = mysqli_real_escape_string($conexion, $_POST['fechasolicitudunidadpool']);
@@ -57,7 +60,7 @@ if (
         $queryActualizarEstadoUnidad = "UPDATE unidades SET id_estado_unidad = 4 WHERE id_unidad = '$valoridunidad'";
         if (mysqli_query($conexion, $queryActualizarEstadoUnidad)) {
             echo "Registro y actualización exitosos.";
-            
+
             $queryultimo = "SELECT asigpdf.id_asignaciones, col.nombre_1, col.nombre_2, col.apellido_paterno, col.apellido_materno, mar.nombre_marca, model.nombre_modelo, uni.id_unidad, uni.placa, uni.numero_motor, uni.VIN
                             FROM asignacion_unidad_colaborador AS asigpdf
                             INNER JOIN colaboradores AS col ON asigpdf.id_colaborador = col.id_colaborador
@@ -84,14 +87,17 @@ if (
 
                 require("../../lib/fpdf186/fpdf.php");
 
-                class PDF extends FPDF {
-                    function Header() {
+                class PDF extends FPDF
+                {
+                    function Header()
+                    {
                         $this->SetY(20);
-                        $this->Image('../../../Cliente/img/logos/ldr_logo.jpeg', 20, 10, 30);
-                        $this->Ln(25);
+                        $this->Image('../../../Cliente/img/logos/ldr_logo.jpeg', 10, 10, 20);
+                        $this->Ln(20);
                     }
 
-                    function Footer() {
+                    function Footer()
+                    {
                         $this->SetY(-25);
                         $this->SetFont('Arial', 'I', 8);
                         $this->Cell(0, 5, utf8_decode('LDR Solutions, S.A. de C.V.'), 0, 1, 'C');
@@ -134,7 +140,7 @@ if (
                 $pdf->MultiCell(0, 7, utf8_decode("Con las especificaciones e inventario que se detallan en la Responsiva de Vehículos correspondiente."));
                 $pdf->Ln(5);
 
-                $pdf->MultiCell(0, 7, utf8_decode("De igual manera manifiesto que me encuentro facultado para operar el vehículo con base a sus características y que cuento con la licencia tipo _________________, número ______________________, con fecha del vencimiento __________________________, expedida por ________________."));
+                $pdf->MultiCell(0, 7, utf8_decode("De igual manera manifiesto que me encuentro facultado para operar el vehículo con base a sus características y que cuento con la licencia tipo ______________, número __________________, con fecha del vencimiento ______________________, expedida por _____________."));
                 $pdf->Ln(5);
 
                 $pdf->MultiCell(0, 7, utf8_decode("Declaro estar conforme con el vehículo, el cual recibo en condiciones de uso, y con todos los accesorios necesarios para su operación con seguridad, mismo que utilizaré exclusivamente para la actividad indicada en la Responsiva de Vehículos."));
@@ -146,37 +152,17 @@ if (
                 $pdf->MultiCell(0, 7, utf8_decode("En todo momento el vehículo deberá ser utilizado para las actividades indicadas en la Responsiva de Vehículos, y nunca destinarse para otros usos, ni prestarse a otra persona, ya que, en caso de algún siniestro, de cualquier índole, el colaborador será responsable de cualquier gasto o costo que se origine por cualquier siniestro o percance, siendo el único responsable de los daños que se causen al vehículo, así como a cualquier tercero, en sus bienes o su persona."));
                 $pdf->Ln(5);
 
-                $pdf->MultiCell(0, 7, utf8_decode("En virtud de ello otorgo aLDR Solutions, S. A. de C.V., sus filiales o subsidiarias, así como empresas relacionadas, EL 
-FINIQUITO MÁS AMPLIO procedente conforme a derecho, renunciando en este acto en forma expresa a cualquier acción de 
-carácter civil, incluyendo la acción de responsabilidad objetiva y a la de daño moral, penal, administrativa o de cualquier 
-otra naturaleza, que tenga por objeto directo o indirecto exigir o constituir responsabilidad en contra de LDR Solutions, 
-S. A. de C.V. así como a todas sus filiales, subsidiarias y/o empresas relacionadas por cualquier hecho que se encuentre 
-relacionado directa o indirectamente con la utilización del vehículo. "));
+                $pdf->MultiCell(0, 7, utf8_decode("En virtud de ello otorgo a LDR Solutions, S. A. de C.V., sus filiales o subsidiarias, así como empresas relacionadas, EL FINIQUITO MÁS AMPLIO procedente conforme a derecho, renunciando en este acto en forma expresa a cualquier acción de carácter civil, incluyendo la acción de responsabilidad objetiva y a la de daño moral, penal, administrativa o de cualquier otra naturaleza, que tenga por objeto directo o indirecto exigir o constituir responsabilidad en contra de LDR Solutions, S. A. de C.V. así como a todas sus filiales, subsidiarias y/o empresas relacionadas por cualquier hecho que se encuentre relacionado directa o indirectamente con la utilización del vehículo. "));
                 $pdf->Ln(5);
 
 
-                $pdf->MultiCell(0, 7, utf8_decode("De igual manera me obligo a responder por los daños que se llegaran a ocasionar a cualquier persona o bienes, debiendo 
-absorber y liquidar en un plazo no mayor a 5 días, los costos que resulten de los daños derivados de la utilización del 
-vehículo, obligándome a sacar en paz a salvo a LDR Solutions, S. A. de C.V., así como a todas sus filiales, subsidiarias y/o 
-empresas relacionadas; de cualquier reclamo que se pretenda hacer en contra con tal motivo. Asimismo, me obligo a 
-resarcir cualquier daño y cumplir con cualquier obligación de pago que surja frente a terceros, frente a LDR Solutions, 
-S. A. de C.V. y frente a sus trabajadores, colaboradores, directivos o funcionarios, así como a pagar las erogaciones de 
-asesoría, consultoría, gastos y costas de procedimientos o litigios judiciales mediante los cuales esté involucrado el 
-vehículo, hasta la conclusión de dichos procedimientos. "));
+                $pdf->MultiCell(0, 7, utf8_decode("De igual manera me obligo a responder por los daños que se llegaran a ocasionar a cualquier persona o bienes, debiendo absorber y liquidar en un plazo no mayor a 5 días, los costos que resulten de los daños derivados de la utilización del vehículo, obligándome a sacar en paz a salvo a LDR Solutions, S. A. de C.V., así como a todas sus filiales, subsidiarias y/o empresas relacionadas; de cualquier reclamo que se pretenda hacer en contra con tal motivo. Asimismo, me obligo a resarcir cualquier daño y cumplir con cualquier obligación de pago que surja frente a terceros, frente a LDR Solutions, S. A. de C.V. y frente a sus trabajadores, colaboradores, directivos o funcionarios, así como a pagar las erogaciones de asesoría, consultoría, gastos y costas de procedimientos o litigios judiciales mediante los cuales esté involucrado el vehículo, hasta la conclusión de dichos procedimientos. "));
                 $pdf->Ln(5);
 
-                $pdf->MultiCell(0, 7, utf8_decode("HAGO CONSTAR y reconozco expresamente que el vehículo referido, lo recibo en buen estado, para la realización 
-de las actividades referidas en la Responsiva de Vehículos, obligándome a conservarlo en buen estado, utilizarlo para 
-lo que está destinado y a entregarlo al término de las actividades, responsabilizándome del mismo bajo cualquier 
-circunstancia, en términos de los artículos 134, fracción VI y 135, fracciones III y IX de la Ley Federal del Trabajo. En 
-consecuencia, cualquier contravención al correcto uso del vehículo, así como de las disposiciones y lineamientos 
-contenidos en la presente asignación, con independencia de las responsabilidades de carácter penal, administrativa, 
-civil o cualquier otra que se derive, podrá ser causal de rescisión de la relación laboral con mi Patrón, en términos de 
-las fracciones V, VI y XV del artículo 47 de la Ley Federal del Trabajo. "));
+                $pdf->MultiCell(0, 7, utf8_decode("HAGO CONSTAR y reconozco expresamente que el vehículo referido, lo recibo en buen estado, para la realización de las actividades referidas en la Responsiva de Vehículos, obligándome a conservarlo en buen estado, utilizarlo para lo que está destinado y a entregarlo al término de las actividades, responsabilizándome del mismo bajo cualquier circunstancia, en términos de los artículos 134, fracción VI y 135, fracciones III y IX de la Ley Federal del Trabajo. En consecuencia, cualquier contravención al correcto uso del vehículo, así como de las disposiciones y lineamientos contenidos en la presente asignación, con independencia de las responsabilidades de carácter penal, administrativa, civil o cualquier otra que se derive, podrá ser causal de rescisión de la relación laboral con mi Patrón, en términos de las fracciones V, VI y XV del artículo 47 de la Ley Federal del Trabajo. "));
                 $pdf->Ln(7);
 
-                $pdf->MultiCell(0, 7, utf8_decode("La firma de la presente Carta es válida para cada ocasión que sea utilizado el vehículo, en términos de la Responsiva 
-de Vehículos firmada al efecto. "));
+                $pdf->MultiCell(0, 7, utf8_decode("La firma de la presente Carta es válida para cada ocasión que sea utilizado el vehículo, en términos de la Responsiva de Vehículos firmada al efecto. "));
                 $pdf->Ln(20);
 
                 $pdf->SetFont('Arial', 'B', 11);
@@ -199,22 +185,31 @@ de Vehículos firmada al efecto. "));
                     $row = $result->fetch_assoc();
                     $correo = $row['correo'];
 
-                    $mail = new PHPMailer();
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'dscrgoficial@gmail.com';
-                    $mail->Password = 'qvfh ncuc iwci ypgq';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                    $mail->Port = 587;
+                    $mail = new PHPMailer(true);
 
-                    $mail->setFrom('dscrgoficial@gmail.com', 'Flotilla LDR');
-                    $mail->addAddress($correo);
-                    $mail->addBCC('uriel.cabello@ldrsolutions.com.mx');
+                    try {
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'notificacion@ldrsolutions.com.mx';
+                        $mail->Password = 'ppiz zylc bpod tczi';
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                        $mail->Port = 587;
 
-                    $mail->isHTML(true);
-                    $mail->Subject = utf8_decode('Responsiva de asignación de unidad');
-                    $mail->Body = utf8_decode("Estimado colaborador $nombre_1 $nombre_2 $apaterno $amaterno. Has recibido la carta responsiva correspondiente a la asignación de tu unidad vehicular.
+                        $mail->SMTPDebug = 2;
+                        $mail->Debugoutput = 'html';
+
+                        if (empty($correo)) {
+                            throw new Exception("Correo vacío");
+                        }
+
+                        $mail->setFrom('notificacion@ldrsolutions.com.mx', 'Flotilla LDR');
+                        $mail->addAddress($correo);
+                        $mail->addBCC('uriel.cabello@ldrsolutions.com.mx');
+
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Responsiva de asignación de unidad';
+                        $mail->Body = utf8_decode("Estimado colaborador $nombre_1 $nombre_2 $apaterno $amaterno. Has recibido la carta responsiva correspondiente a la asignación de tu unidad vehicular.
                                 <br><br>
                                 Sigue los siguientes pasos para realizar el proceso de adquisición de la unidad:
                                 <br>
@@ -235,12 +230,16 @@ de Vehículos firmada al efecto. "));
                                 Atentamente,
                                 <br>
                                 Equipo de Flotilla Interna LDR");
-                    $mail->addAttachment($ruta_archivo, $nombre_archivo);
+                        if (!file_exists($ruta_archivo)) {
+                            throw new Exception("No existe el archivo PDF");
+                        }
 
-                    if ($mail->send()) {
-                        echo "Correo enviado exitosamente.";
-                    } else {
-                        echo "Error al enviar el correo: " . $mail->ErrorInfo;
+                        $mail->addAttachment($ruta_archivo, $nombre_archivo);
+
+                        $mail->send();
+                        echo "Correo enviado correctamente";
+                    } catch (Exception $e) {
+                        echo "Error al enviar: " . $mail->ErrorInfo;
                     }
                 }
                 exit();
@@ -254,5 +253,3 @@ de Vehículos firmada al efecto. "));
         echo "Error al insertar la asignación: " . mysqli_error($conexion);
     }
 }
-?>
-

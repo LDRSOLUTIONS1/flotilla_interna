@@ -149,7 +149,7 @@ if (isset($_POST['id_unidad'], $_POST['id_asignacion_demo'], $_POST['id_persona_
     $requiere_seguro_ldr = ($solicitar_seguro_ldr == 1) ? 'SI REQUIERE SEGURO' : 'NO REQUIERE SEGURO';
 
     // Carpeta base de archivos en el servidor
-    $base_url = "http://localhost/flotilla_interna/Servidor/archivos/files/files_asignacion_demo/personas_morales/";
+    $base_url = "https://ldrflotillainterna.ldrhumanresources.com/Servidor/archivos/files/files_asignacion_demo/personas_morales/";
 
     // Construimos lista de enlaces principales
     $enlaces = [

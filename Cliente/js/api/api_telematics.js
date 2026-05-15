@@ -1,4 +1,4 @@
-const apiUrltelematics = 'https://www.telematicsadvance.com/api/v1/unit/list.json';
+const apiUrltelematics = 'https://portal.telematicsadvance.com.mx/api/v1/unit/list.json';
         const apiKey = '763fcd49ab3a7bc87060e21d822c37e45d1ab780'; 
 
         // Función para obtener el kilometraje y el VIN

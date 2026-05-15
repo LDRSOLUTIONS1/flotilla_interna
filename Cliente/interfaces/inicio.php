@@ -3,13 +3,19 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['id_tipo_usuario'])) {
-    header("Location: ../../index.php");
-    exit;
+// 🔥 DEBUG (solo cuando lo necesites)
+# var_dump($_SESSION);
+// exit;
+
+// 🔐 Asegurar tipo usuario
+if (!isset($_SESSION['id_tipo_usuario']) || $_SESSION['id_tipo_usuario'] == '' || $_SESSION['id_tipo_usuario'] == null) {
+    $_SESSION['id_tipo_usuario'] = 3;
 }
 
 // Solo flotilla
-if (!in_array($_SESSION['id_tipo_usuario'], [1, 2, 3, 15])) {
+$tipoUsuario = intval($_SESSION['id_tipo_usuario']);
+
+if (!in_array($tipoUsuario, [1, 2, 3, 15])) {
     echo "<h3 style='text-align:center;margin-top:50px;'>No tienes permiso para acceder a Flotilla</h3>";
     exit;
 }
